@@ -4,13 +4,13 @@ const mockSeriesList = [
       id: 0,
       name: 'Test 1',
       total_number: 17,
-      image: '/test/image_0.jpg'
+      image: 'https://dc4ef1i295q51.cloudfront.net/image_0.jpg'
     },
     {
       id: 1,
       name: 'Test 2',
       total_number: 17,
-      image: '/test/image_1.jpg'
+      image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
     },
   ];
 
@@ -25,7 +25,7 @@ const mockSeriesList = [
   export const GetVideo = (series_id, n) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(`/test/media_${n}.ts`);
+        resolve(`https://dc4ef1i295q51.cloudfront.net/media_${n}.ts`);
       }, 1000);
     });
   };

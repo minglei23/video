@@ -9,7 +9,7 @@ const Player = () => {
 
   useEffect(() => {
     const loadVideo = (index) => {
-      const videoPath = `/test/media_0.ts`;
+      const videoPath = `https://dc4ef1i295q51.cloudfront.net/media_0.ts`;
       setVideoSrc(videoPath);
     };
 
