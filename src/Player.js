@@ -9,23 +9,12 @@ const Player = () => {
 
   useEffect(() => {
     const loadVideo = (index) => {
-      const videoPath = `https://dc4ef1i295q51.cloudfront.net/media_0.ts`;
+      const videoPath = `https://dc4ef1i295q51.cloudfront.net/m_0.mp4`;
       setVideoSrc(videoPath);
     };
 
     loadVideo(videoIndex);
   }, [seriesId, videoIndex]);
-
-  const handleScroll = (e) => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      setVideoIndex(vi => vi + 1);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div>
