@@ -26,7 +26,7 @@ export default function Home() {
               <CardActionArea onClick={() => handleSeriesClick(series.id)}>
                 <CardMedia
                   component="img"
-                  height="140"
+                  height="200"
                   image={series.image}
                   alt={series.name}
                 />
