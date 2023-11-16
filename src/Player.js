@@ -1,35 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import { useGesture } from '@use-gesture/react';
+import { useSwipeable } from 'react-swipeable';
+import { GetSeries, GetVideo } from './service';
 
 const Player = () => {
-  const { seriesId } = useParams();
-  const [videoSrc, setVideoSrc] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const videoUrls = [
-    'https://dc4ef1i295q51.cloudfront.net/m_0.mp4',
-    'https://dc4ef1i295q51.cloudfront.net/m_1.mp4',
-    'https://dc4ef1i295q51.cloudfront.net/m_2.mp4',
-  ];
+  const { seriesId, episodeNumber: episodeNumberStr } = useParams();
+  const navigate = useNavigate();
+  const episodeNumber = parseInt(episodeNumberStr, 10);
 
-  const bind = useGesture({
-    onScroll: ({ direction }) => {
-      if (direction[1] > 0) { // 向下滚动
-        const nextIndex = Math.min(currentIndex + 1, videoUrls.length - 1);
-        if (nextIndex !== currentIndex) {
-          setCurrentIndex(nextIndex);
-          setVideoSrc(videoUrls[nextIndex]);
-        }
-      }
-    },
-  });
+  const [videoSrc, setVideoSrc] = useState('');
+  const [totalEpisodes, setTotalEpisodes] = useState(0);
 
   useEffect(() => {
-    setVideoSrc(videoUrls[currentIndex]);
-  }, [currentIndex]);
+    GetSeries(seriesId).then(seriesData => {
+      setTotalEpisodes(seriesData.total_number);
+    });
+
+    GetVideo(seriesId, episodeNumber).then(videoUrl => {
+      setVideoSrc(videoUrl);
+    });
+  }, [seriesId, episodeNumber]);
+
+  const handlers = useSwipeable({
+    onSwipedDown: () => {
+      if (episodeNumber > 0) {
+        navigate(`/player/${seriesId}/${episodeNumber - 1}`);
+      }
+    },
+    onSwipedUp: () => {
+      if (episodeNumber < totalEpisodes - 1) {
+        navigate(`/player/${seriesId}/${episodeNumber + 1}`);
+      }
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   return (
-    <div {...bind()} style={{
+    <div {...handlers} style={{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
