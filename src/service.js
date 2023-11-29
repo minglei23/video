@@ -7,13 +7,13 @@ const mockSeriesList = [
     {
       id: 0,
       name: 'Test 1',
-      total_number: 3,
+      total_number: 5,
       image: 'https://dc4ef1i295q51.cloudfront.net/image_0.jpg'
     },
     {
       id: 1,
       name: 'Test 2',
-      total_number: 3,
+      total_number: 5,
       image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
     },
   ];
