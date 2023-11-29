@@ -1,21 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Typography, Container, Box, TextField } from '@mui/material';
+import { login, register } from './service';
+import { UserContext } from './index.js';
 
 const Profile = () => {
-  const isLoggedIn = false;
+  const [isLoginView, setIsLoginView] = useState(true);
+  const { user, setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("login ", email, password);
+    if (isLoginView) {
+      try {
+        const userData = await login(email, password);
+        setUser(userData); // 更新用户状态
+      } catch (error) {
+        console.error('登录失败:', error);
+      }
+    } else {
+      try {
+        const userData = await register(email, password);
+        setUser(userData); // 更新用户状态
+      } catch (error) {
+        console.error('注册失败:', error);
+      }
+    }
+  };
+
+  const toggleView = () => {
+    setIsLoginView(!isLoginView); // 切换视图
   };
 
   const renderLoginForm = () => {
     return (
       <Container>
         <Box textAlign="center" marginTop={4}>
-          <Typography variant="h5">To Your Account</Typography>
+          <Typography variant="h5">{isLoginView ? 'Login' : 'Sign Up'}</Typography>
           <form onSubmit={handleSubmit}>
             <TextField
               label="Email"
@@ -39,12 +60,14 @@ const Profile = () => {
               color="primary"
               style={{ margin: '20px' }}
             >
-              login
+              {isLoginView ? 'Login' : 'Sign Up'}
             </Button>
             <Button
               variant="outlined"
-              color="primary">
-              signin
+              color="primary"
+              onClick={toggleView}
+            >
+              {isLoginView ? 'Go to Sign Up' : 'Go to Login'}
             </Button>
           </form>
         </Box>
@@ -56,7 +79,7 @@ const Profile = () => {
     return (
       <Container>
         <Box textAlign="center" marginTop={4}>
-          <Typography variant="h5">Welcome</Typography>
+          <Typography variant="h5">Welcome, {user.Email}</Typography>
         </Box>
       </Container>
     );
@@ -64,7 +87,7 @@ const Profile = () => {
 
   return (
     <div>
-      {isLoggedIn ? renderUserProfile() : renderLoginForm()}
+      {user ? renderUserProfile() : renderLoginForm()}
     </div>
   );
 };

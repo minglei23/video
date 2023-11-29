@@ -1,3 +1,7 @@
+import md5 from 'js-md5'
+import React from 'react';
+React.Component.prototype.$md5 = md5
+
 // Mock data for series list
 const mockSeriesList = [
     {
@@ -37,5 +41,38 @@ const mockSeriesList = [
       }, 1000);
     });
   };
+
+  const BASE_URL = 'http://18.188.120.153:8080';
+
+  export const login = async (email, password) => {
+    try {
+      const response = await fetch(`${BASE_URL}/login`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'email': email,
+          'password': md5(password)
+        })
+      })
+      return await response.json();
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
+  };
   
-  
+  export const register = async (email, password) => {
+    try {
+      const response = await fetch(`${BASE_URL}/register`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'email': email,
+          'password': md5(password)
+        })
+      })
+      return await response.json();
+    } catch (error) {
+      console.error('Register failed:', error);
+      throw error;
+    }
+  };
+   
