@@ -13,6 +13,7 @@ const Login = () => {
     try {
       const userData = isLoginView ? await login(email, password) : await register(email, password);
       setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       setError(error.message);
       console.error(isLoginView ? 'login failed:' : 'register failed:', error);

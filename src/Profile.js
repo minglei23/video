@@ -1,11 +1,18 @@
-import React, { useState, useContext } from 'react';
-import { Typography, Container, Box, Button, Modal } from '@mui/material';
+import React, { useState, useContext, useEffect } from 'react';
+import { Typography, Container, Box, Button, Modal, Grid } from '@mui/material';
 import { UserContext } from './index.js';
 import Login from './Login';
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [setUser]);
 
   const handleOpenVerifyModal = () => {
     setOpenVerifyModal(true);
@@ -22,15 +29,12 @@ const Profile = () => {
         onClose={handleCloseVerifyModal}
         aria-labelledby="verify-email-modal-title"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
+        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
           <Typography id="verify-email-modal-title" variant="h6" component="h2">
             Please Verify Your Email
           </Typography>
-          <Button onClick={handleCloseVerifyModal} style={{ marginTop: 20 }}>
+          <Button onClick={handleOpenVerifyModal} style={{ marginTop: 20 }}>
             Verify Email
-          </Button>
-          <Button onClick={handleCloseVerifyModal} style={{ marginTop: 20 }}>
-            Close
           </Button>
         </Box>
       </Modal>
@@ -39,26 +43,36 @@ const Profile = () => {
 
   const renderUserProfile = () => {
     return (
-      <Container>
-        <Box textAlign="center" marginTop={4}>
-          <Typography variant="h5">Welcome, {user.Email}</Typography>
+      <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100vh' }}>
+        <Grid container direction="column" alignItems="center" spacing={2}>
+          <Grid item>
+            <Typography variant="h5">Welcome, {user.Email}</Typography>
+          </Grid>
           {!user.Activated && (
-            <Button variant="contained" onClick={handleOpenVerifyModal} style={{ margin: 2 }}>
-              Verify Email
-            </Button>
+            <Grid item>
+              <Button variant="contained" style={{ width: '200px' }}>
+                Verify Email
+              </Button>
+            </Grid>
           )}
           {!user.VIP && (
-            <Button variant="contained" onClick={handleOpenVerifyModal} style={{ margin: 2 }}>
-              Become VIP
-            </Button>
+            <Grid item>
+              <Button variant="contained" onClick={handleOpenVerifyModal} style={{ width: '200px' }}>
+                Become VIP
+              </Button>
+            </Grid>
           )}
-          <Button variant="contained" onClick={handleOpenVerifyModal} style={{ margin: 2 }}>
-            History
-          </Button>
-          <Button variant="contained" onClick={handleOpenVerifyModal} style={{ margin: 2 }}>
-            Favorites
-          </Button>
-        </Box>
+          <Grid item>
+            <Button variant="outlined" onClick={handleOpenVerifyModal} style={{ width: '200px' }}>
+              History
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="outlined" onClick={handleOpenVerifyModal} style={{ width: '200px' }}>
+              Favorites
+            </Button>
+          </Grid>
+        </Grid>
         {renderVerifyEmailModal()}
       </Container>
     );
