@@ -16,12 +16,28 @@ const mockSeriesList = [
       total_number: 5,
       image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
     },
+    {
+      id: 2,
+      name: 'Test 3',
+      total_number: 10,
+      image: 'https://dc4ef1i295q51.cloudfront.net/image_0.jpg'
+    },
+    {
+      id: 3,
+      name: 'Test 4',
+      total_number: 10,
+      image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
+    },
   ];
 
   export const GetSeriesList = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(mockSeriesList);
+        resolve({
+          popular: mockSeriesList, 
+          type1: mockSeriesList, 
+          type2: mockSeriesList, 
+          type3: mockSeriesList});
       }, 1000);
     });
   };

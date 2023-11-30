@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Card, CardMedia, CardActionArea, CardContent, Modal, Box } from '@mui/material';
+import { Card, CardMedia, CardActionArea, CardContent, Modal, Box } from '@mui/material';
 import { GetSeriesList } from './service';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
   const navigate = useNavigate();
-  const [series, setSeries] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [currentSeries, setCurrentSeries] = useState(null);
+
+  const [seriesByType, setSeriesByType] = useState({
+    popular: [],
+    type1: [],
+    type2: [],
+    type3: []
+  });
+  
+  useEffect(() => {
+    GetSeriesList().then(data => {
+      setSeriesByType(data);
+    });
+  }, []);
+  
 
   const handleSeriesClick = (seriesItem) => {
     setCurrentSeries(seriesItem);
@@ -18,22 +31,16 @@ export default function Home() {
     navigate(`/player/${seriesId}/${episodeNumber}`);
   };
 
-  useEffect(() => {
-    GetSeriesList().then(data => {
-      setSeries(data);
-    });
-  }, []);
-
   const handleCloseModal = () => {
     setOpenModal(false);
     setCurrentSeries(null);
   };
 
-  return (
-    <div style={{ height: '90vh', overflow: 'auto' }}>
-      <Grid container spacing={2}>
-        {series.map((seriesItem) => (
-          <Grid item xs={12} sm={6} md={4} key={seriesItem.id}>
+  const renderSeriesByType = (type) => {
+    return (
+      <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px 0' }}>
+        {seriesByType[type].map((seriesItem) => (
+          <div style={{ display: 'inline-block', width: '250px', padding: '0 5px' }} key={seriesItem.id}>
             <Card>
               <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
                 <CardMedia
@@ -47,9 +54,26 @@ export default function Home() {
                 </CardContent>
               </CardActionArea>
             </Card>
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </div>
+    );
+  };
+  
+  return (
+    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px'}}>
+      <h3>Popular</h3>
+      {renderSeriesByType('popular')}
+  
+      <h3>Type 1</h3>
+      {renderSeriesByType('type1')}
+  
+      <h3>Type 2</h3>
+      {renderSeriesByType('type2')}
+  
+      <h3>Type 3</h3>
+      {renderSeriesByType('type3')}
+  
 
       <Modal
         open={openModal}
