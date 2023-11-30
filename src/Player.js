@@ -73,6 +73,7 @@ const Player = () => {
     }}>
       <video
         src={videoSrc}
+        autoPlay
         loop 
         controls
         playsInline
