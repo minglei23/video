@@ -19,17 +19,26 @@ const Player = () => {
     if (!videoElement) return;
 
     const handleFullScreenChange = () => {
-      if (!document.fullscreenElement) {
-        if (videoElement.paused) {
-          videoElement.play();
+      if (document.fullscreenElement === videoElement) {
+        // 如果视频是全屏的，立即退出全屏
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+          document.msExitFullscreen();
         }
       }
     };
 
-    videoElement.addEventListener('fullscreenchange', handleFullScreenChange);
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullScreenChange); // Safari
+    document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE11
 
     return () => {
-      videoElement.removeEventListener('fullscreenchange', handleFullScreenChange);
+      document.removeEventListener('fullscreenchange', handleFullScreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
+      document.removeEventListener('msfullscreenchange', handleFullScreenChange);
     };
   }, []);
 
@@ -100,7 +109,7 @@ const Player = () => {
         style={{
           maxWidth: '98%',
           maxHeight: '98vh',
-          zIndex: '1',
+          objectFit: 'contain',
         }}
       />
     </div>
