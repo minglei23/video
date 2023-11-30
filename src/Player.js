@@ -64,14 +64,6 @@ const Player = () => {
     return <div>Error: {error}</div>;
   }
 
-  const playerConfig = {
-    file: {
-      attributes: {
-        controlsList: 'nofullscreen'
-      }
-    }
-  };
-
   return (
     <div {...handlers} style={{
       display: 'flex',
@@ -80,14 +72,13 @@ const Player = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <div style={{ maxWidth: '100%', maxHeight: '90vh' }}>
+      <div>
         <ReactPlayer
           url={videoSrc}
-          playing
+          playing={true}
           controls
           width="100%"
           height="100%"
-          config={playerConfig}
         />
       </div>
     </div>
