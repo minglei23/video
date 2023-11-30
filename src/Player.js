@@ -8,12 +8,24 @@ const Player = () => {
   const { seriesId, episodeNumber: episodeNumberStr } = useParams();
   const navigate = useNavigate();
   const episodeNumber = parseInt(episodeNumberStr, 10);
-
+  const [user, setUser] = useState(null);
   const [videoSrc, setVideoSrc] = useState('');
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [setUser]);
+
+  useEffect(() => {
+    if (episodeNumber > 2 && (!user || !user.Activated || !user.VIP)) {
+      navigate('/profile');
+      return;
+    }
+
     setError('');
 
     GetSeries(seriesId)
@@ -27,7 +39,7 @@ const Player = () => {
         setVideoSrc(videoUrl);
       })
       .catch(err => setError('Error loading video'))
-  }, [seriesId, episodeNumber]);
+  }, [seriesId, episodeNumber, user, navigate]);
 
   const navigateToEpisode = useCallback((newEpisodeNumber) => {
     navigate(`/player/${seriesId}/${newEpisodeNumber}`);
@@ -52,6 +64,14 @@ const Player = () => {
     return <div>Error: {error}</div>;
   }
 
+  const playerConfig = {
+    file: {
+      attributes: {
+        controlsList: 'nofullscreen'
+      }
+    }
+  };
+
   return (
     <div {...handlers} style={{
       display: 'flex',
@@ -67,6 +87,7 @@ const Player = () => {
           controls
           width="100%"
           height="100%"
+          config={playerConfig}
         />
       </div>
     </div>
