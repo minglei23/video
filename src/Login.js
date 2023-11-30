@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Typography, Container, Box, TextField, Grid, Snackbar } from '@mui/material';
 import { login, register } from './service';
+import { UserContext } from './index.js';
 
 const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);
+  const { setUser } = useContext(UserContext);
   const [error, setError] = useState('');
 
   const handleSubmit = async (event, email, password) => {
     event.preventDefault();
     try {
       const userData = isLoginView ? await login(email, password) : await register(email, password);
+      setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       setError(error.message);

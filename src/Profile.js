@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Typography, Container, Box, Button, Modal, Grid } from '@mui/material';
+import { UserContext } from './index.js';
 import Login from './Login';
 
 const Profile = () => {
-  const [user, setUser] = useState(null);
+  const {user, setUser} = useContext(UserContext);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
 
   useEffect(() => {

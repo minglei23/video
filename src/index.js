@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
@@ -9,13 +9,17 @@ import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
 
+const UserContext = createContext();
+
 function PlayerWrapper() {
   let { seriesId = 0, episodeNumber = 0 } = useParams();
   return <Player seriesId={seriesId} episodeNumber={episodeNumber} />;
 }
 
 function App() {
+  const [user, setUser] = useState(null);
   return (
+    <UserContext.Provider value={{ user, setUser }}>
     <Router>
       <div>
         <Routes>
@@ -32,7 +36,10 @@ function App() {
         </BottomNavigation>
       </div>
     </Router>
+    </UserContext.Provider>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
+export { UserContext };
