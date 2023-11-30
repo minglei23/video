@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ReactPlayer from 'react-player';
 import { useSwipeable } from 'react-swipeable';
 import { GetSeries, GetVideo } from './service';
 
@@ -12,6 +11,27 @@ const Player = () => {
   const [videoSrc, setVideoSrc] = useState('');
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
+
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const handleFullScreenChange = () => {
+      if (!document.fullscreenElement) {
+        if (videoElement.paused) {
+          videoElement.play();
+        }
+      }
+    };
+
+    videoElement.addEventListener('fullscreenchange', handleFullScreenChange);
+
+    return () => {
+      videoElement.removeEventListener('fullscreenchange', handleFullScreenChange);
+    };
+  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -72,15 +92,17 @@ const Player = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <div>
-        <ReactPlayer
-          url={videoSrc}
-          playing={true}
-          controls
-          width="100%"
-          height="100%"
-        />
-      </div>
+      <video 
+        ref={videoRef}
+        src={videoSrc}
+        loop 
+        controls
+        style={{
+          maxWidth: '98%',
+          maxHeight: '98vh',
+          zIndex: '1',
+        }}
+      />
     </div>
   );
 };
