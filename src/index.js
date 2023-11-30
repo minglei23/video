@@ -1,4 +1,4 @@
-import React, { useState, useParams, createContext } from 'react';
+import React, { useParams } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
@@ -9,21 +9,13 @@ import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
 
-// 创建一个 Context 用于存储用户信息
-const UserContext = createContext();
-
-// PlayerWrapper 组件保持不变
 function PlayerWrapper() {
   let { seriesId = 0, n = 0 } = useParams();
   return <Player seriesId={seriesId} episodeNumber={n} />;
 }
 
 function App() {
-  // 使用 State Hook 来管理用户信息
-  const [user, setUser] = useState(null);
-
   return (
-    <UserContext.Provider value={{ user, setUser }}>
       <Router>
         <div>
           <Routes>
@@ -40,11 +32,7 @@ function App() {
           </BottomNavigation>
         </div>
       </Router>
-    </UserContext.Provider>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
-
-// 导出 UserContext 以便在其他组件中使用
-export { UserContext };
