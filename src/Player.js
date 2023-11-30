@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import { GetSeries, GetVideo } from './service';
@@ -11,36 +11,6 @@ const Player = () => {
   const [videoSrc, setVideoSrc] = useState('');
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
-
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    const handleFullScreenChange = () => {
-      if (document.fullscreenElement === videoElement) {
-        // 如果视频是全屏的，立即退出全屏
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) { /* Safari */
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) { /* IE11 */
-          document.msExitFullscreen();
-        }
-      }
-    };
-
-    document.addEventListener('fullscreenchange', handleFullScreenChange);
-    document.addEventListener('webkitfullscreenchange', handleFullScreenChange); // Safari
-    document.addEventListener('msfullscreenchange', handleFullScreenChange); // IE11
-
-    return () => {
-      document.removeEventListener('fullscreenchange', handleFullScreenChange);
-      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
-      document.removeEventListener('msfullscreenchange', handleFullScreenChange);
-    };
-  }, []);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -101,11 +71,11 @@ const Player = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <video 
-        ref={videoRef}
+      <video
         src={videoSrc}
         loop 
         controls
+        playsInline
         style={{
           maxWidth: '98%',
           maxHeight: '98vh',
