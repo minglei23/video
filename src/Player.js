@@ -80,7 +80,7 @@ const Player = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <div>
+      <div style={{ maxWidth: '100%', maxHeight: '90vh' }}>
         <ReactPlayer
           url={videoSrc}
           playing
