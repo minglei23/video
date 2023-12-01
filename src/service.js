@@ -2,63 +2,79 @@ import md5 from 'js-md5'
 import React from 'react';
 React.Component.prototype.$md5 = md5
 
-// Mock data for series list
-const mockSeriesList = [
-    {
-      id: 0,
-      name: 'Test 1',
-      total_number: 5,
-      image: 'https://dc4ef1i295q51.cloudfront.net/image_0.jpg'
-    },
-    {
-      id: 1,
-      name: 'Test 2',
-      total_number: 5,
-      image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
-    },
-    {
-      id: 2,
-      name: 'Test 3',
-      total_number: 10,
-      image: 'https://dc4ef1i295q51.cloudfront.net/image_0.jpg'
-    },
-    {
-      id: 3,
-      name: 'Test 4',
-      total_number: 10,
-      image: 'https://dc4ef1i295q51.cloudfront.net/image_1.jpg'
-    },
-  ];
+  const BASE_URL = 'http://18.188.120.153:8080';
 
-  export const GetSeriesList = () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          popular: mockSeriesList, 
-          type1: mockSeriesList, 
-          type2: mockSeriesList, 
-          type3: mockSeriesList});
-      }, 1000);
-    });
-  };
+  export const GetSeriesList = async () => {
+    try {
+      let data = {};
+      const cachedData = localStorage.getItem('seriesListCache');
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        if (new Date().getTime() - parsedData.timestamp < 3600000) {
+          data = parsedData.data;
+        }
+      }
+      if (!cachedData || Object.keys(data).length === 0) {
+        const response = await fetch(`${BASE_URL}/video-list`, {
+          method: 'GET',
+        });
+        data = await response.json();
+        localStorage.setItem('seriesListCache', JSON.stringify({
+          data: data,
+          timestamp: new Date().getTime()
+        }));
+      }
+      const seriesByType = {
+        type1: [],
+        type2: [],
+        type3: []
+      };
+  
+      data.VideoList.forEach(video => {
+        const typeKey = `type${video.Type}`;
+        if (seriesByType[typeKey]) {
+          seriesByType[typeKey].push(video);
+        }
+      });
+      return seriesByType;
+    } catch (error) {
+      console.error('Get Series List failed:', error);
+      throw error;
+    }
+  };  
 
-  export const GetSeries = (id) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(mockSeriesList[0]);
-      }, 1000);
-    });
+  export const GetSeries = async (id) => {
+    try {
+      let data = {};
+      const cachedData = localStorage.getItem('seriesListCache');
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        if (new Date().getTime() - parsedData.timestamp < 3600000) {
+          data = parsedData.data;
+        }
+      }
+      if (!cachedData || Object.keys(data).length === 0) {
+        const response = await fetch(`${BASE_URL}/video-list`, {
+          method: 'GET',
+        });
+        data = await response.json();
+        localStorage.setItem('seriesListCache', JSON.stringify({
+          data: data,
+          timestamp: new Date().getTime()
+        }));
+      }
+      for (const video of data.VideoList) {
+        if (String(id) === String(video.ID)) {
+          return video;
+        }
+      }
+      return null;
+    } catch (error) {
+      console.error('Get Series failed:', error);
+      throw error;
+    }
   };
   
-  export const GetVideo = (series_id, n) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(`https://dc4ef1i295q51.cloudfront.net/m_${n}.mp4`);
-      }, 1000);
-    });
-  };
-
-  const BASE_URL = 'http://18.188.120.153:8080';
 
   export const login = async (email, password) => {
     try {

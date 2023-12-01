@@ -31,7 +31,7 @@ function App() {
         </Routes>
         <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, width: '100%' }}>
           <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" />
-          <BottomNavigationAction label="Player" icon={<PlayCircleOutlineIcon />} component={Link} to="/player/0/0" />
+          <BottomNavigationAction label="Player" icon={<PlayCircleOutlineIcon />} component={Link} to="/player/1/0" />
           <BottomNavigationAction label="Profile" icon={<PersonOutlineIcon />} component={Link} to="/profile" />
         </BottomNavigation>
       </div>

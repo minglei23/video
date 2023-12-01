@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { GetSeries, GetVideo } from './service';
+import { GetSeries } from './service';
 
 const Player = () => {
   const { seriesId, episodeNumber: episodeNumberStr } = useParams();
@@ -29,15 +29,10 @@ const Player = () => {
 
     GetSeries(seriesId)
       .then(seriesData => {
-        setTotalEpisodes(seriesData.total_number);
+        setTotalEpisodes(seriesData.TotalNumber);
+        setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
       })
       .catch(err => setError('Error loading series data'));
-
-    GetVideo(seriesId, episodeNumber)
-      .then(videoUrl => {
-        setVideoSrc(videoUrl);
-      })
-      .catch(err => setError('Error loading video'))
   }, [seriesId, episodeNumber, user, navigate]);
 
   const navigateToEpisode = useCallback((newEpisodeNumber) => {

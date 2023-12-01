@@ -9,7 +9,6 @@ export default function Home() {
   const [currentSeries, setCurrentSeries] = useState(null);
 
   const [seriesByType, setSeriesByType] = useState({
-    popular: [],
     type1: [],
     type2: [],
     type3: []
@@ -46,11 +45,11 @@ export default function Home() {
                 <CardMedia
                   component="img"
                   height="200"
-                  image={seriesItem.image}
-                  alt={seriesItem.name}
+                  image={seriesItem.BaseURL+'/image.jpg'}
+                  alt={seriesItem.Name}
                 />
                 <CardContent>
-                  <h3>{seriesItem.name}</h3>
+                  <h3>{seriesItem.Name}</h3>
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -62,9 +61,6 @@ export default function Home() {
   
   return (
     <div style={{ height: '90vh', overflowY: 'auto', padding: '20px'}}>
-      <h3>Popular</h3>
-      {renderSeriesByType('popular')}
-  
       <h3>Type 1</h3>
       {renderSeriesByType('type1')}
   
@@ -83,8 +79,8 @@ export default function Home() {
       >
         <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
           <div id="modal-modal-description">
-            {currentSeries?.total_number && Array.from({ length: currentSeries.total_number }).map((_, index) => (
-              <p key={index} style={{ cursor: index < 3 ? 'pointer' : 'not-allowed' }} onClick={() => index < 3 && handleEpisodeClick(currentSeries.id, index)}>
+            {currentSeries?.TotalNumber && Array.from({ length: currentSeries.TotalNumber }).map((_, index) => (
+              <p key={index} style={{ cursor: index < 3 ? 'pointer' : 'not-allowed' }} onClick={() => index < 3 && handleEpisodeClick(currentSeries.ID, index)}>
                 Episode {index + 1} {index >= 3 && <span style={{color: 'red'}}>VIP</span>}
               </p>
             ))}
