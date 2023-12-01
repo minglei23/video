@@ -7,12 +7,20 @@ export default function Home() {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [currentSeries, setCurrentSeries] = useState(null);
+  const [user, setUser] = useState(null);
 
   const [seriesByType, setSeriesByType] = useState({
     type1: [],
     type2: [],
     type3: []
   });
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [setUser]);
   
   useEffect(() => {
     GetSeriesList().then(data => {
@@ -27,7 +35,26 @@ export default function Home() {
   };
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    navigate(`/player/${seriesId}/${episodeNumber}`);
+    if (user?.VIP || episodeNumber < 3) {
+      navigate(`/player/${seriesId}/${episodeNumber}`);
+    }
+  };
+
+  const renderModalContent = () => {
+    if (!currentSeries?.TotalNumber) return null;
+
+    return Array.from({ length: currentSeries.TotalNumber }).map((_, index) => {
+      const isAccessible = user?.VIP || index < 3;
+      return (
+        <p
+          key={index}
+          style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
+          onClick={() => isAccessible && handleEpisodeClick(currentSeries.ID, index)}
+        >
+          Episode {index + 1} {index >= 3 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
+        </p>
+      );
+    });
   };
 
   const handleCloseModal = () => {
@@ -70,7 +97,6 @@ export default function Home() {
       <h3>Type 3</h3>
       {renderSeriesByType('type3')}
   
-
       <Modal
         open={openModal}
         onClose={handleCloseModal}
@@ -79,11 +105,7 @@ export default function Home() {
       >
         <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
           <div id="modal-modal-description">
-            {currentSeries?.TotalNumber && Array.from({ length: currentSeries.TotalNumber }).map((_, index) => (
-              <p key={index} style={{ cursor: index < 3 ? 'pointer' : 'not-allowed' }} onClick={() => index < 3 && handleEpisodeClick(currentSeries.ID, index)}>
-                Episode {index + 1} {index >= 3 && <span style={{color: 'red'}}>VIP</span>}
-              </p>
-            ))}
+            {renderModalContent()}
           </div>
         </Box>
       </Modal>

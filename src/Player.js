@@ -7,33 +7,32 @@ const Player = () => {
   const { seriesId, episodeNumber: episodeNumberStr } = useParams();
   const navigate = useNavigate();
   const episodeNumber = parseInt(episodeNumberStr, 10);
-  const [user, setUser] = useState(null);
   const [videoSrc, setVideoSrc] = useState('');
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [setUser]);
 
-  useEffect(() => {
-    if (episodeNumber > 2 && (!user || !user.Activated || !user.VIP)) {
+    const checkAccess = (user) => {
+      return episodeNumber <= 2 || (user && user.VIP);
+    };
+
+    const fetchSeries = () => {
+      GetSeries(seriesId)
+        .then(seriesData => {
+          setTotalEpisodes(seriesData.TotalNumber);
+          setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
+        })
+        .catch(err => setError('Error loading series data'));
+    };
+
+    if (checkAccess(JSON.parse(storedUser))) {
+      fetchSeries();
+    } else {
       navigate('/profile');
-      return;
     }
-
-    setError('');
-
-    GetSeries(seriesId)
-      .then(seriesData => {
-        setTotalEpisodes(seriesData.TotalNumber);
-        setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
-      })
-      .catch(err => setError('Error loading series data'));
-  }, [seriesId, episodeNumber, user, navigate]);
+  }, [seriesId, episodeNumber, navigate]);
 
   const navigateToEpisode = useCallback((newEpisodeNumber) => {
     navigate(`/player/${seriesId}/${newEpisodeNumber}`);
