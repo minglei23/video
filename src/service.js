@@ -2,7 +2,7 @@ import md5 from 'js-md5'
 import React from 'react';
 React.Component.prototype.$md5 = md5
 
-  const BASE_URL = 'http://18.188.120.153:8080';
+  const BASE_URL = 'http://127.0.0.1:8080';
 
   export const GetSeriesList = async () => {
     try {
@@ -85,7 +85,9 @@ React.Component.prototype.$md5 = md5
           'password': md5(password)
         })
       })
-      return await response.json();
+      const data = await response.json()
+      localStorage.setItem('token', data.Token)
+      return data
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -101,7 +103,9 @@ React.Component.prototype.$md5 = md5
           'password': md5(password)
         })
       })
-      return await response.json();
+      const data = await response.json()
+      localStorage.setItem('token', data.Token)
+      return data
     } catch (error) {
       console.error('Register failed:', error);
       throw error;
@@ -110,9 +114,11 @@ React.Component.prototype.$md5 = md5
 
   export const RecordLike = async (userID, videoID) => {
     try {
+      const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video`, {
         method: 'POST',
         body: JSON.stringify({
+          'token': token,
           'userID': userID,
           'videoID': videoID,
           'code': 1,
@@ -127,9 +133,11 @@ React.Component.prototype.$md5 = md5
 
   export const RecordWatch = async (userID, videoID) => {
     try {
+      const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video`, {
         method: 'POST',
         body: JSON.stringify({
+          'token': token,
           'userID': userID,
           'videoID': videoID,
           'code': 2,
@@ -144,9 +152,11 @@ React.Component.prototype.$md5 = md5
 
   export const GetLikeList = async (userID, videoID) => {
     try {
+      const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video-list`, {
         method: 'POST',
         body: JSON.stringify({
+          'token': token,
           'userID': userID,
           'videoID': videoID,
           'code': 1,
@@ -161,9 +171,11 @@ React.Component.prototype.$md5 = md5
    
   export const GetWatchList = async (userID, videoID) => {
     try {
+      const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video-list`, {
         method: 'POST',
         body: JSON.stringify({
+          'token': token,
           'userID': userID,
           'videoID': videoID,
           'code': 2,
