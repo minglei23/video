@@ -150,7 +150,7 @@ React.Component.prototype.$md5 = md5
     }
   };
 
-  export const GetLikeList = async (userID, videoID) => {
+  export const GetLikeList = async (userID) => {
     try {
       const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video-list`, {
@@ -158,7 +158,6 @@ React.Component.prototype.$md5 = md5
         body: JSON.stringify({
           'token': token,
           'userID': userID,
-          'videoID': videoID,
           'code': 1,
         })
       })
@@ -169,7 +168,7 @@ React.Component.prototype.$md5 = md5
     }
   };
    
-  export const GetWatchList = async (userID, videoID) => {
+  export const GetWatchList = async (userID) => {
     try {
       const token = localStorage.getItem('token')
       const response = await fetch(`${BASE_URL}/user-video-list`, {
@@ -177,7 +176,6 @@ React.Component.prototype.$md5 = md5
         body: JSON.stringify({
           'token': token,
           'userID': userID,
-          'videoID': videoID,
           'code': 2,
         })
       })
