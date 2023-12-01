@@ -2,7 +2,7 @@ import md5 from 'js-md5'
 import React from 'react';
 React.Component.prototype.$md5 = md5
 
-  const BASE_URL = 'http://127.0.0.1:8080';
+  const BASE_URL = 'http://18.188.120.153:8080';
 
   export const GetSeriesList = async () => {
     try {
