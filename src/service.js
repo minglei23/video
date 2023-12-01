@@ -107,4 +107,71 @@ React.Component.prototype.$md5 = md5
       throw error;
     }
   };
+
+  export const RecordLike = async (userID, videoID) => {
+    try {
+      const response = await fetch(`${BASE_URL}/user-video`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'userID': userID,
+          'videoID': videoID,
+          'code': 1,
+        })
+      })
+      return await response.json()
+    } catch (error) {
+      console.error('Record Like Failed:', error);
+      throw error;
+    }
+  };
+
+  export const RecordWatch = async (userID, videoID) => {
+    try {
+      const response = await fetch(`${BASE_URL}/user-video`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'userID': userID,
+          'videoID': videoID,
+          'code': 2,
+        })
+      })
+      return await response.json()
+    } catch (error) {
+      console.error('Record Watch Failed:', error);
+      throw error;
+    }
+  };
+
+  export const GetLikeList = async (userID, videoID) => {
+    try {
+      const response = await fetch(`${BASE_URL}/user-video-list`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'userID': userID,
+          'videoID': videoID,
+          'code': 1,
+        })
+      })
+      return await response.json()
+    } catch (error) {
+      console.error('Get Favorit Failed:', error);
+      throw error;
+    }
+  };
    
+  export const GetWatchList = async (userID, videoID) => {
+    try {
+      const response = await fetch(`${BASE_URL}/user-video-list`, {
+        method: 'POST',
+        body: JSON.stringify({
+          'userID': userID,
+          'videoID': videoID,
+          'code': 2,
+        })
+      })
+      return await response.json()
+    } catch (error) {
+      console.error('Get History Failed:', error);
+      throw error;
+    }
+  };

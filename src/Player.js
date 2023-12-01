@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { GetSeries } from './service';
+import { GetSeries, RecordLike, RecordWatch } from './service';
+import { Button } from '@mui/material';
 
 const Player = () => {
   const { seriesId, episodeNumber: episodeNumberStr } = useParams();
@@ -10,30 +11,42 @@ const Player = () => {
   const [videoSrc, setVideoSrc] = useState('');
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
+  const [userID, setUserID] = useState(null);
+  const [verified, setVerified] = useState(false); 
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-
-    const checkAccess = (user) => {
-      return episodeNumber <= 2 || (user && user.VIP);
-    };
-
-    const fetchSeries = () => {
-      GetSeries(seriesId)
-        .then(seriesData => {
-          setTotalEpisodes(seriesData.TotalNumber);
-          setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
-        })
-        .catch(err => setError('Error loading series data'));
-    };
+      
+      const checkAccess = (user) => {
+        if (user && user.Activated) {
+          setUserID(user.ID)
+          setVerified(true)
+        }
+        return episodeNumber <= 2 || (user && user.VIP);
+      };
+  
+      const fetchSeries = () => {
+        GetSeries(seriesId)
+          .then(seriesData => {
+            setTotalEpisodes(seriesData.TotalNumber);
+            setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
+          })
+          .catch(err => setError('Error loading series data'));
+        if (verified) {
+          RecordWatch(userID, parseInt(seriesId))
+          .catch((error) => {
+            console.error('Error recording like:', error);
+          });
+        }
+};
 
     if (checkAccess(JSON.parse(storedUser))) {
       fetchSeries();
-    } else {
-      navigate('/profile');
-    }
+      } else {
+        navigate('/profile');
+      }
   }, [seriesId, episodeNumber, navigate]);
-
+  
   const navigateToEpisode = useCallback((newEpisodeNumber) => {
     navigate(`/player/${seriesId}/${newEpisodeNumber}`);
   }, [seriesId, navigate]);
@@ -45,10 +58,10 @@ const Player = () => {
       }
     },
     onSwipedUp: () => {
-      if (episodeNumber < totalEpisodes - 1) {
-        navigateToEpisode(episodeNumber + 1);
-      }
-    },
+    if (episodeNumber < totalEpisodes - 1) {
+      navigateToEpisode(episodeNumber + 1);
+    }
+  },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -56,6 +69,18 @@ const Player = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const handleCollectSeries = () => {
+    if (userID && verified) {
+      RecordLike(userID, parseInt(seriesId))
+        .then(() => {
+          setVerified(false);
+        })
+        .catch((error) => {
+          console.error('Error recording like:', error);
+        });
+    }
+  };
 
   return (
     <div {...handlers} style={{
@@ -77,6 +102,14 @@ const Player = () => {
           objectFit: 'contain',
         }}
       />
+      {verified && (
+        <Button 
+          variant="contained" 
+          onClick={handleCollectSeries}
+          style={{ position: 'absolute', right: 20, bottom: 100 }}>
+          Collect Series
+        </Button>
+      )}
     </div>
   );
 };
