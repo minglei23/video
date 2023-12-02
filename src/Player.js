@@ -12,41 +12,41 @@ const Player = () => {
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [error, setError] = useState('');
   const [userID, setUserID] = useState(null);
-  const [verified, setVerified] = useState(false); 
+  const [verified, setVerified] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
-      
-      const checkAccess = (user) => {
-        if (user && user.Activated) {
-          setUserID(user.ID)
-          setVerified(true)
-        }
-        return episodeNumber <= 2 || (user && user.VIP);
-      };
-  
-      const fetchSeries = () => {
-        GetSeries(seriesId)
-          .then(seriesData => {
-            setTotalEpisodes(seriesData.TotalNumber);
-            setVideoSrc(`${seriesData.BaseURL}/${episodeNumber+1}.mp4`);
-          })
-          .catch(err => setError('Error loading series data'));
-        if (verified) {
-          RecordWatch(userID, parseInt(seriesId))
+
+    const checkAccess = (user) => {
+      if (user && user.Activated) {
+        setUserID(user.ID)
+        setVerified(true)
+      }
+      return episodeNumber <= 2 || (user && user.VIP);
+    };
+
+    const fetchSeries = () => {
+      GetSeries(seriesId)
+        .then(seriesData => {
+          setTotalEpisodes(seriesData.TotalNumber);
+          setVideoSrc(`${seriesData.BaseURL}/${episodeNumber + 1}.mp4`);
+        })
+        .catch(err => setError('Error loading series data'));
+      if (verified) {
+        RecordWatch(userID, parseInt(seriesId))
           .catch((error) => {
             console.error('Error recording like:', error);
           });
-        }
-};
+      }
+    };
 
     if (checkAccess(JSON.parse(storedUser))) {
       fetchSeries();
-      } else {
-        navigate('/profile');
-      }
+    } else {
+      navigate('/profile');
+    }
   }, [seriesId, episodeNumber, navigate]);
-  
+
   const navigateToEpisode = useCallback((newEpisodeNumber) => {
     navigate(`/player/${seriesId}/${newEpisodeNumber}`);
   }, [seriesId, navigate]);
@@ -58,10 +58,10 @@ const Player = () => {
       }
     },
     onSwipedUp: () => {
-    if (episodeNumber < totalEpisodes - 1) {
-      navigateToEpisode(episodeNumber + 1);
-    }
-  },
+      if (episodeNumber < totalEpisodes - 1) {
+        navigateToEpisode(episodeNumber + 1);
+      }
+    },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
@@ -93,7 +93,7 @@ const Player = () => {
       <video
         src={videoSrc}
         autoPlay
-        loop 
+        loop
         controls
         playsInline
         style={{
@@ -103,8 +103,8 @@ const Player = () => {
         }}
       />
       {verified && (
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           onClick={handleCollectSeries}
           style={{ position: 'absolute', right: 20, bottom: 100 }}>
           Collect Series

@@ -21,13 +21,13 @@ export default function Home() {
       setUser(JSON.parse(storedUser));
     }
   }, [setUser]);
-  
+
   useEffect(() => {
     GetSeriesList().then(data => {
       setSeriesByType(data);
     });
   }, []);
-  
+
 
   const handleSeriesClick = (seriesItem) => {
     setCurrentSeries(seriesItem);
@@ -72,7 +72,7 @@ export default function Home() {
                 <CardMedia
                   component="img"
                   height="200"
-                  image={seriesItem.BaseURL+'/image.jpg'}
+                  image={seriesItem.BaseURL + '/image.jpg'}
                   alt={seriesItem.Name}
                 />
                 <CardContent>
@@ -85,18 +85,18 @@ export default function Home() {
       </div>
     );
   };
-  
+
   return (
-    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px'}}>
+    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px' }}>
       <h3>Type 1</h3>
       {renderSeriesByType('type1')}
-  
+
       <h3>Type 2</h3>
       {renderSeriesByType('type2')}
-  
+
       <h3>Type 3</h3>
       {renderSeriesByType('type3')}
-  
+
       <Modal
         open={openModal}
         onClose={handleCloseModal}
