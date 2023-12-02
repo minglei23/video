@@ -7,21 +7,13 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
-    "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@use-gesture/react": "^10.3.0",
-    "axios": "^1.6.2",
     "js-md5": "^0.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-player": "^2.13.0",
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1",
-    "react-swipeable": "^7.0.1",
-    "video-react": "^0.16.0",
-    "video.js": "^8.6.1",
-    "web-vitals": "^2.1.4"
+    "react-swipeable": "^7.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-react-app": "^7.0.1"
   }
 }
