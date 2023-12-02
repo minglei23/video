@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
-import { GetSeries, RecordLike, RecordWatch } from './service';
+import { GetSeries, RecordFavorites, RecordHistory } from './service';
 import { Button } from '@mui/material';
 
 const Player = () => {
@@ -33,9 +33,9 @@ const Player = () => {
         })
         .catch(err => setError('Error loading series data'));
       if (verified) {
-        RecordWatch(userID, parseInt(seriesId))
+        RecordHistory(userID, parseInt(seriesId), parseInt(episodeNumber))
           .catch((error) => {
-            console.error('Error recording like:', error);
+            console.error('Error Record History:', error);
           });
       }
     };
@@ -72,12 +72,12 @@ const Player = () => {
 
   const handleCollectSeries = () => {
     if (userID && verified) {
-      RecordLike(userID, parseInt(seriesId))
+      RecordFavorites(userID, parseInt(seriesId))
         .then(() => {
           setVerified(false);
         })
         .catch((error) => {
-          console.error('Error recording like:', error);
+          console.error('Error Record Favorites:', error);
         });
     }
   };

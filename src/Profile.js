@@ -3,7 +3,7 @@ import { Typography, Container, Box, Button, Modal, Grid, List, ListItem, ListIt
 import { UserContext } from './index.js';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
-import { GetLikeList, GetWatchList } from './service.js'; // 确保已经正确导入这两个函数
+import { Favorites, History } from './service.js';
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -30,14 +30,14 @@ const Profile = () => {
   };
 
   const handleHistoryClick = async () => {
-    const response = await GetWatchList(user.ID);
-    setHistoryList(response.VideoList);
+    const response = await History(user.ID);
+    setHistoryList(response.HistoryList);
     setOpenHistoryModal(true);
   };
 
   const handleFavoritesClick = async () => {
-    const response = await GetLikeList(user.ID);
-    setFavoritesList(response.VideoList);
+    const response = await Favorites(user.ID);
+    setFavoritesList(response.FavoritesList);
     setOpenFavoritesModal(true);
   };
 
