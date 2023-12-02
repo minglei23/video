@@ -38,7 +38,7 @@ export const GetSeriesList = async () => {
     });
     return seriesByType;
   } catch (error) {
-    console.error('Get Series List failed:', error);
+    console.error('Get Series List Failed:', error);
     throw error;
   }
 };
@@ -70,7 +70,7 @@ export const GetSeries = async (id) => {
     }
     return null;
   } catch (error) {
-    console.error('Get Series failed:', error);
+    console.error('Get Series Failed:', error);
     throw error;
   }
 };
@@ -89,7 +89,7 @@ export const login = async (email, password) => {
     localStorage.setItem('token', data.Token)
     return data
   } catch (error) {
-    console.error('Login failed:', error);
+    console.error('Login Failed:', error);
     throw error;
   }
 };
@@ -107,81 +107,78 @@ export const register = async (email, password) => {
     localStorage.setItem('token', data.Token)
     return data
   } catch (error) {
-    console.error('Register failed:', error);
+    console.error('Register Failed:', error);
     throw error;
   }
 };
 
-export const RecordLike = async (userID, videoID) => {
+export const RecordFavorites = async (userID, videoID) => {
   try {
     const token = localStorage.getItem('token')
-    const response = await fetch(`${BASE_URL}/user-video`, {
+    const response = await fetch(`${BASE_URL}/record-avorites`, {
+      method: 'POST',
+      body: JSON.stringify({
+        'token': token,
+        'userID': userID,
+        'videoID': videoID
+      })
+    })
+    return await response.json()
+  } catch (error) {
+    console.error('Record Favorites Failed:', error);
+    throw error;
+  }
+};
+
+export const RecordHistory = async (userID, videoID, episode) => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await fetch(`${BASE_URL}/record-history`, {
       method: 'POST',
       body: JSON.stringify({
         'token': token,
         'userID': userID,
         'videoID': videoID,
-        'code': 1,
+        'episode': episode,
       })
     })
     return await response.json()
   } catch (error) {
-    console.error('Record Like Failed:', error);
+    console.error('Record History Failed:', error);
     throw error;
   }
 };
 
-export const RecordWatch = async (userID, videoID) => {
+export const Favorites = async (userID) => {
   try {
     const token = localStorage.getItem('token')
-    const response = await fetch(`${BASE_URL}/user-video`, {
+    const response = await fetch(`${BASE_URL}/favorites`, {
       method: 'POST',
       body: JSON.stringify({
         'token': token,
         'userID': userID,
-        'videoID': videoID,
-        'code': 2,
       })
     })
     return await response.json()
   } catch (error) {
-    console.error('Record Watch Failed:', error);
+    console.error('Favorites Failed:', error);
     throw error;
   }
 };
 
-export const GetLikeList = async (userID) => {
+export const History = async (userID) => {
   try {
     const token = localStorage.getItem('token')
-    const response = await fetch(`${BASE_URL}/user-video-list`, {
+    const response = await fetch(`${BASE_URL}/history`, {
       method: 'POST',
       body: JSON.stringify({
         'token': token,
         'userID': userID,
-        'code': 1,
       })
     })
     return await response.json()
   } catch (error) {
-    console.error('Get Favorit Failed:', error);
-    throw error;
-  }
-};
-
-export const GetWatchList = async (userID) => {
-  try {
-    const token = localStorage.getItem('token')
-    const response = await fetch(`${BASE_URL}/user-video-list`, {
-      method: 'POST',
-      body: JSON.stringify({
-        'token': token,
-        'userID': userID,
-        'code': 2,
-      })
-    })
-    return await response.json()
-  } catch (error) {
-    console.error('Get History Failed:', error);
+    console.error('History Failed:', error);
     throw error;
   }
 };
