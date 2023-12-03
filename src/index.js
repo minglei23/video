@@ -10,6 +10,7 @@ import Player from './Player';
 import Profile from './Profile';
 import Favorites from './Favorites';
 import History from './History';
+import Recommend from './Recommend';
 
 const UserContext = createContext();
 
@@ -32,10 +33,11 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
+            <Route path="/recommend" element={<Recommend />} />
           </Routes>
           <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" />
-            <BottomNavigationAction label="Player" icon={<PlayCircleOutlineIcon />} component={Link} to="/player/1/0" />
+            <BottomNavigationAction label="Recommend" icon={<PlayCircleOutlineIcon />} component={Link} to="/recommend" />
             <BottomNavigationAction label="Profile" icon={<PersonOutlineIcon />} component={Link} to="/profile" />
           </BottomNavigation>
         </div>

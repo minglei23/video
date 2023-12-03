@@ -52,6 +52,19 @@ export const GetSeries = async (id) => {
   }
 };
 
+export const GetRecommendSeries = async () => {
+  try {
+    const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
+    if (data.VideoList && data.VideoList.length > 0) {
+      const randomIndex = Math.floor(Math.random() * data.VideoList.length);
+      return data.VideoList[randomIndex];
+    }
+    return null;
+  } catch (error) {
+    handleError(error, 'Get Recommend Series Failed:');
+  }
+};
+
 const postRequest = async (url, body) => {
   const response = await fetch(url, {
     method: 'POST',

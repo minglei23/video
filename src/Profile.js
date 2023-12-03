@@ -69,20 +69,20 @@ const Profile = () => {
             </Button>
           </Grid>
         )}
-        {user.Activated && (
+        {
           <Grid item>
             <Button variant="outlined" onClick={navigateToHistory} style={{ width: '200px' }}>
               History
             </Button>
           </Grid>
-        )}
-        {user.Activated && (
+        }
+        {
           <Grid item>
             <Button variant="outlined" onClick={navigateToFavorites} style={{ width: '200px' }}>
               Favorites
             </Button>
           </Grid>
-        )}
+        }
       </Grid>
       {renderVerifyEmailModal()}
     </Container>
