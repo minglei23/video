@@ -1,16 +1,16 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Button, List, ListItem, ListItemText } from '@mui/material';
-import { UserContext } from './index.js';
 import { useNavigate } from 'react-router-dom';
 import { GetHistory } from './service.js';
+import { GetUser } from './cache';
 
 const History = () => {
-  const { user } = useContext(UserContext);
   const [list, setList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchHistory = async () => {
+      const user = GetUser()
       if (user) {
         try {
           const response = await GetHistory(user.ID);
@@ -21,7 +21,7 @@ const History = () => {
       }
     };
     fetchHistory();
-  }, [user]);
+  }, []);
 
   return (
     <div style={{ height: '90vh', overflowY: 'auto', padding: '20px' }}>

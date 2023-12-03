@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardMedia, CardActionArea, CardContent, Modal, Box } from '@mui/material';
 import { GetSeriesList } from './service';
+import { GetUser } from './cache';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
@@ -16,11 +17,8 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [setUser]);
+    setUser(GetUser)
+  }, []);
 
   useEffect(() => {
     GetSeriesList().then(data => {

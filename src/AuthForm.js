@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { login, register } from './service';
-import { UserContext } from './index.js';
+import { SetUser} from './cache';
 
 const AuthForm = ({ isLogin, setError }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { setUser } = useContext(UserContext);
 
-  // 简单的输入验证
   const validateForm = () => {
     if (!email || !password) {
       setError('Please enter both email and password');
@@ -18,19 +16,17 @@ const AuthForm = ({ isLogin, setError }) => {
       setError('Invalid email format');
       return false;
     }
-    // 更多验证逻辑可以在这里添加
     return true;
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!validateForm()) return; // 前置验证
+    if (!validateForm()) return;
 
     try {
       const userData = isLogin ? await login(email, password) : await register(email, password);
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
+      SetUser(userData);
     } catch (error) {
       setError(error.message);
       console.error(isLogin ? 'login failed:' : 'register failed:', error);

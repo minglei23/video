@@ -1,20 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Container, Box, Button, Modal, Grid } from '@mui/material';
-import { UserContext } from './index.js';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
+import { GetUser } from './cache';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const [user, setUser] = useState(null);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, [setUser]);
+    setUser(GetUser)
+  }, []);
 
   const handleOpenVerifyModal = () => {
     setOpenVerifyModal(true);

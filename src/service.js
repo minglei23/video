@@ -1,4 +1,5 @@
 import md5 from 'js-md5';
+import { SetToken, GetToken } from './cache';
 
 const BASE_URL = 'http://18.188.120.153:8080';
 
@@ -79,7 +80,7 @@ export const login = async (email, password) => {
   try {
     const hashedPassword = md5(password);
     const data = await postRequest(`${BASE_URL}/login`, { email, password: hashedPassword });
-    localStorage.setItem('token', data.Token);
+    SetToken(data.Token);
     return data;
   } catch (error) {
     handleError(error, 'Login Failed:');
@@ -90,8 +91,7 @@ export const register = async (email, password) => {
   try {
     const hashedPassword = md5(password);
     const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword });
-    localStorage.setItem('token', data.Token);
-    return data;
+    SetToken(data.Token);
   } catch (error) {
     handleError(error, 'Register Failed:');
   }
@@ -99,7 +99,7 @@ export const register = async (email, password) => {
 
 export const RecordFavorites = async (userID, videoID) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = GetToken();
     return await postRequest(`${BASE_URL}/record-favorites`, { token, userID, videoID });
   } catch (error) {
     handleError(error, 'Record Favorites Failed:');
@@ -108,7 +108,7 @@ export const RecordFavorites = async (userID, videoID) => {
 
 export const RecordHistory = async (userID, videoID, episode) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = GetToken();
     return await postRequest(`${BASE_URL}/record-history`, { token, userID, videoID, episode });
   } catch (error) {
     handleError(error, 'Record History Failed:');
@@ -117,7 +117,7 @@ export const RecordHistory = async (userID, videoID, episode) => {
 
 export const GetFavorites = async (userID) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = GetToken();
     return await postRequest(`${BASE_URL}/favorites`, { token, userID });
   } catch (error) {
     handleError(error, 'Favorites Failed:');
@@ -126,7 +126,7 @@ export const GetFavorites = async (userID) => {
 
 export const GetHistory = async (userID) => {
   try {
-    const token = localStorage.getItem('token');
+    const token = GetToken();
     return await postRequest(`${BASE_URL}/history`, { token, userID });
   } catch (error) {
     handleError(error, 'History Failed:');
