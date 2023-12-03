@@ -102,7 +102,7 @@ export const RecordHistory = async (userID, videoID, episode) => {
   }
 };
 
-export const Favorites = async (userID) => {
+export const GetFavorites = async (userID) => {
   try {
     const token = localStorage.getItem('token');
     return await postRequest(`${BASE_URL}/favorites`, { token, userID });
@@ -111,7 +111,7 @@ export const Favorites = async (userID) => {
   }
 };
 
-export const History = async (userID) => {
+export const GetHistory = async (userID) => {
   try {
     const token = localStorage.getItem('token');
     return await postRequest(`${BASE_URL}/history`, { token, userID });

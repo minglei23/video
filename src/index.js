@@ -8,6 +8,8 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
+import Favorites from './Favorites';
+import History from './History';
 
 const UserContext = createContext();
 
@@ -28,6 +30,8 @@ function App() {
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/history" element={<History />} />
           </Routes>
           <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" />

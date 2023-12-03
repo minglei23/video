@@ -1,18 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Typography, Container, Box, Button, Modal, Grid, List, ListItem, ListItemText } from '@mui/material';
+import { Typography, Container, Box, Button, Modal, Grid } from '@mui/material';
 import { UserContext } from './index.js';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
-import { Favorites, History } from './service.js';
 
 const Profile = () => {
+  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
-  const [historyList, setHistoryList] = useState([]);
-  const [favoritesList, setFavoritesList] = useState([]);
-  const [openHistoryModal, setOpenHistoryModal] = useState(false);
-  const [openFavoritesModal, setOpenFavoritesModal] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -29,110 +24,71 @@ const Profile = () => {
     setOpenVerifyModal(false);
   };
 
-  const handleHistoryClick = async () => {
-    const response = await History(user.ID);
-    setHistoryList(response.HistoryList);
-    setOpenHistoryModal(true);
+  const navigateToHistory = () => {
+    navigate('/history');
   };
 
-  const handleFavoritesClick = async () => {
-    const response = await Favorites(user.ID);
-    setFavoritesList(response.FavoritesList);
-    setOpenFavoritesModal(true);
+  const navigateToFavorites = () => {
+    navigate('/favorites');
   };
 
-  const renderVerifyEmailModal = () => {
-    return (
-      <Modal
-        open={openVerifyModal}
-        onClose={handleCloseVerifyModal}
-        aria-labelledby="verify-email-modal-title"
-      >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
-          <Typography id="verify-email-modal-title" variant="h6" component="h2">
-            Please Verify Your Email
-          </Typography>
-          <Button onClick={handleOpenVerifyModal} style={{ marginTop: 20 }}>
-            Verify Email
-          </Button>
-        </Box>
-      </Modal>
-    );
-  };
-
-  const renderListModal = (open, handleClose, list, title) => (
+  const renderVerifyEmailModal = () => (
     <Modal
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="list-modal-title"
+      open={openVerifyModal}
+      onClose={handleCloseVerifyModal}
+      aria-labelledby="verify-email-modal-title"
     >
-      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
-        <Typography id="list-modal-title" variant="h6" component="h2">
-          {title}
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+        <Typography id="verify-email-modal-title" variant="h6" component="h2">
+          Please Verify Your Email
         </Typography>
-        <List>
-          {list.map((item) => (
-            <ListItem key={item.ID} secondaryAction={
-              <Button onClick={() => navigate(`/player/${item.ID}/0`)}>
-                Watch
-              </Button>
-            }>
-              <ListItemText primary={item.Name} />
-            </ListItem>
-          ))}
-        </List>
+        <Button onClick={handleOpenVerifyModal} style={{ marginTop: 20 }}>
+          Verify Email
+        </Button>
       </Box>
     </Modal>
   );
 
-  const renderUserProfile = () => {
-    return (
-      <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100vh' }}>
-        <Grid container direction="column" alignItems="center" spacing={2}>
-          <Grid item>
-            <Typography variant="h5">Welcome, {user.Email}</Typography>
-          </Grid>
-          {!user.Activated && (
-            <Grid item>
-              <Button variant="contained" style={{ width: '200px' }}>
-                Verify Email
-              </Button>
-            </Grid>
-          )}
-          {!user.VIP && (
-            <Grid item>
-              <Button variant="contained" onClick={handleOpenVerifyModal} style={{ width: '200px' }}>
-                Become VIP
-              </Button>
-            </Grid>
-          )}
-          {user.Activated && (
-            <Grid item>
-              <Button variant="outlined" onClick={handleHistoryClick} style={{ width: '200px' }}>
-                History
-              </Button>
-            </Grid>
-          )}
-          {user.Activated && (
-            <Grid item>
-              <Button variant="outlined" onClick={handleFavoritesClick} style={{ width: '200px' }}>
-                Favorites
-              </Button>
-            </Grid>
-          )}
+  const renderUserProfile = () => (
+    <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100vh' }}>
+      <Grid container direction="column" alignItems="center" spacing={2}>
+        <Grid item>
+          <Typography variant="h5">Welcome, {user.Email}</Typography>
         </Grid>
-        {renderVerifyEmailModal()}
-        {renderListModal(openHistoryModal, () => setOpenHistoryModal(false), historyList, 'History')}
-        {renderListModal(openFavoritesModal, () => setOpenFavoritesModal(false), favoritesList, 'Favorites')}
-      </Container>
-    );
-  };
-
-  return (
-    <div>
-      {user ? renderUserProfile() : <Login />}
-    </div>
+        {!user.Activated && (
+          <Grid item>
+            <Button variant="contained" style={{ width: '200px' }}>
+              Verify Email
+            </Button>
+          </Grid>
+        )}
+        {!user.VIP && (
+          <Grid item>
+            <Button variant="contained" onClick={handleOpenVerifyModal} style={{ width: '200px' }}>
+              Become VIP
+            </Button>
+          </Grid>
+        )}
+        {user.Activated && (
+          <Grid item>
+            <Button variant="outlined" onClick={navigateToHistory} style={{ width: '200px' }}>
+              History
+            </Button>
+          </Grid>
+        )}
+        {user.Activated && (
+          <Grid item>
+            <Button variant="outlined" onClick={navigateToFavorites} style={{ width: '200px' }}>
+              Favorites
+            </Button>
+          </Grid>
+        )}
+      </Grid>
+      {renderVerifyEmailModal()}
+    </Container>
   );
+
+  return <div>{user ? renderUserProfile() : <Login />}</div>;
 };
 
 export default Profile;
