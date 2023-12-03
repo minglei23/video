@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, TextField } from '@mui/material';
 import { login, register } from './service';
+import { UserContext } from './index.js'
 import { SetUser} from './cache';
 
 const AuthForm = ({ isLogin, setError }) => {
   const [email, setEmail] = useState('');
+  const { setUser } = useContext(UserContext);
   const [password, setPassword] = useState('');
 
   const validateForm = () => {
@@ -26,6 +28,7 @@ const AuthForm = ({ isLogin, setError }) => {
 
     try {
       const userData = isLogin ? await login(email, password) : await register(email, password);
+      setUser(userData);
       SetUser(userData);
     } catch (error) {
       setError(error.message);

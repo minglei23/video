@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Typography, Container, Box, Button, Modal, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Login from './Login';
+import { UserContext } from './index.js'
 import { GetUser } from './cache';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(UserContext);
   const [openVerifyModal, setOpenVerifyModal] = useState(false);
 
   useEffect(() => {
-    setUser(GetUser)
-  }, []);
+    const storedUser = GetUser();
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, [setUser]);
 
   const handleOpenVerifyModal = () => {
     setOpenVerifyModal(true);
