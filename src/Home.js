@@ -64,7 +64,7 @@ export default function Home() {
     return (
       <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px 0' }}>
         {seriesByType[type].map((seriesItem) => (
-          <div style={{ display: 'inline-block', width: '250px', padding: '0 5px' }} key={seriesItem.id}>
+          <div style={{ display: 'inline-block', width: '150px', padding: '0 5px' }} key={seriesItem.id}>
             <Card>
               <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
                 <CardMedia
@@ -85,7 +85,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px' }}>
+    <div style={{ height: '90vh', overflowY: 'auto'}}>
       <h3>Type 1</h3>
       {renderSeriesByType('type1')}
 

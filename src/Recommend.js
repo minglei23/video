@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
 import { GetUser } from './cache';
+import PlayerIcons from './PlayerIcons.js';
 
 const Recommend = () => {
   const [url, setUrl] = useState("");
@@ -11,7 +12,7 @@ const Recommend = () => {
     try {
       const series = await GetRecommendSeries();
       if (series) {
-        const episode = Math.floor(1+Math.random()*10)
+        const episode = Math.floor(1 + Math.random() * 10)
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setVideo(series);
         const user = GetUser()
@@ -59,6 +60,7 @@ const Recommend = () => {
           objectFit: 'contain',
         }}
       />}
+      {<PlayerIcons />}
     </div>
   );
 };
