@@ -1,63 +1,56 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { GetSeries, RecordHistory } from './service';
 import { useSwipeable } from 'react-swipeable';
-import { GetSeries, RecordFavorites, RecordHistory } from './service';
-import { Button } from '@mui/material';
+import { GetUser } from './cache';
+import PlayerIcons from './PlayerIcons.js';
 
 const Player = () => {
-  const { seriesId, episodeNumber: episodeNumberStr } = useParams();
   const navigate = useNavigate();
-  const episodeNumber = parseInt(episodeNumberStr, 10);
-  const [videoSrc, setVideoSrc] = useState('');
+  const { seriesId, episode } = useParams();
+  const [url, setUrl] = useState("");
+  const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
-  const [error, setError] = useState('');
-  const [userID, setUserID] = useState(null);
-  const [verified, setVerified] = useState(false);
+
+  const fetchVideo = useCallback(async () => {
+    try {
+      const user = GetUser();
+      const series = await GetSeries(seriesId);
+      if (series) {
+        setUrl(`${series.BaseURL}/${episode}.mp4`);
+        setTotalEpisodes(series.TotalNumber);
+        setVideo(series);
+        if (user) {
+          RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching video:', error);
+    }
+  }, [seriesId, episode]);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-
-    const checkAccess = (user) => {
-      if (user && user.Activated) {
-        setUserID(user.ID)
-        setVerified(true)
-      }
-      return episodeNumber <= 2 || (user && user.VIP);
-    };
-
-    const fetchSeries = () => {
-      GetSeries(seriesId)
-        .then(seriesData => {
-          setTotalEpisodes(seriesData.TotalNumber);
-          setVideoSrc(`${seriesData.BaseURL}/${episodeNumber + 1}.mp4`);
-        })
-        .catch(err => setError('Error loading series data'));
-      if (verified) {
-        RecordHistory(userID, parseInt(seriesId), parseInt(episodeNumber))
-          .catch((error) => {
-            console.error('Error Record History:', error);
-          });
-      }
-    };
-
-    if (checkAccess(JSON.parse(storedUser))) {
-      fetchSeries();
+    const user = GetUser();
+    if (parseInt(episode) <= 4 || (user && user.VIP)) {
+      fetchVideo();
     } else {
       navigate('/profile');
     }
-  }, [seriesId, episodeNumber, navigate]);
+  }, [seriesId, episode, navigate, fetchVideo]);
 
-  const navigateToEpisode = useCallback((newEpisodeNumber) => {
-    navigate(`/player/${seriesId}/${newEpisodeNumber}`);
+  const navigateToEpisode = useCallback((newEpisode) => {
+    navigate(`/player/${seriesId}/${newEpisode}`);
   }, [seriesId, navigate]);
 
   const handlers = useSwipeable({
     onSwipedDown: () => {
+      const episodeNumber = parseInt(episode);
       if (episodeNumber > 0) {
         navigateToEpisode(episodeNumber - 1);
       }
     },
     onSwipedUp: () => {
+      const episodeNumber = parseInt(episode);
       if (episodeNumber < totalEpisodes - 1) {
         navigateToEpisode(episodeNumber + 1);
       }
@@ -66,50 +59,31 @@ const Player = () => {
     trackMouse: true,
   });
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  const handleCollectSeries = () => {
-    if (userID && verified) {
-      RecordFavorites(userID, parseInt(seriesId))
-        .then(() => {
-          setVerified(false);
-        })
-        .catch((error) => {
-          console.error('Error Record Favorites:', error);
-        });
-    }
-  };
-
   return (
     <div {...handlers} style={{
       display: 'flex',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       height: '90vh',
       width: '100%',
     }}>
-      <video
-        src={videoSrc}
+      <h2>
+        {video ? video.Name : "Loading..."}
+      </h2>
+      {url && <video
+        src={url}
         autoPlay
         loop
         controls
         playsInline
         style={{
           maxWidth: '98%',
-          maxHeight: '98vh',
+          maxHeight: '80vh',
           objectFit: 'contain',
         }}
-      />
-      {verified && (
-        <Button
-          variant="contained"
-          onClick={handleCollectSeries}
-          style={{ position: 'absolute', right: 20, bottom: 100 }}>
-          Collect Series
-        </Button>
-      )}
+      />}
+      {<PlayerIcons />}
     </div>
   );
 };

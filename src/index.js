@@ -15,8 +15,8 @@ import Recommend from './Recommend';
 const UserContext = createContext();
 
 function PlayerWrapper() {
-  let { seriesId = 0, episodeNumber = 0 } = useParams();
-  return <Player seriesId={seriesId} episodeNumber={episodeNumber} />;
+  let { seriesId = 0, episode = 0 } = useParams();
+  return <Player seriesId={seriesId} episode={episode} />;
 }
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/player/:seriesId/:episodeNumber" element={<PlayerWrapper />} />
+            <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
             <Route path="/profile" element={<Profile />} />

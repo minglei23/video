@@ -33,7 +33,7 @@ export default function Home() {
   };
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if (user?.VIP || episodeNumber < 3) {
+    if (user?.VIP || episodeNumber < 5) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
     }
   };
@@ -42,14 +42,14 @@ export default function Home() {
     if (!currentSeries?.TotalNumber) return null;
 
     return Array.from({ length: currentSeries.TotalNumber }).map((_, index) => {
-      const isAccessible = user?.VIP || index < 3;
+      const isAccessible = user?.VIP || index < 5;
       return (
         <p
           key={index}
           style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
           onClick={() => isAccessible && handleEpisodeClick(currentSeries.ID, index)}
         >
-          Episode {index + 1} {index >= 3 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
+          Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
         </p>
       );
     });
@@ -64,7 +64,7 @@ export default function Home() {
     return (
       <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px 0' }}>
         {seriesByType[type].map((seriesItem) => (
-          <div style={{ display: 'inline-block', width: '150px', padding: '0 5px' }} key={seriesItem.id}>
+          <div style={{ display: 'inline-block', width: '160px', padding: '0 5px' }} key={seriesItem.id}>
             <Card>
               <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
                 <CardMedia
