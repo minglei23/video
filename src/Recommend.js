@@ -45,9 +45,9 @@ const Recommend = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <h2>
+      <h3>
         {video ? video.Name : "Loading..."}
-      </h2>
+      </h3>
       {url && <video
         src={url}
         autoPlay
@@ -60,7 +60,7 @@ const Recommend = () => {
           objectFit: 'contain',
         }}
       />}
-      {<PlayerIcons />}
+      {video && <PlayerIcons seriesId={video.ID} />}
     </div>
   );
 };

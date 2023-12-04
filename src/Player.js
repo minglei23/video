@@ -31,7 +31,7 @@ const Player = () => {
 
   useEffect(() => {
     const user = GetUser();
-    if (parseInt(episode) <= 4 || (user && user.VIP)) {
+    if (parseInt(episode) <= 5 || (user && user.VIP)) {
       fetchVideo();
     } else {
       navigate('/profile');
@@ -51,7 +51,7 @@ const Player = () => {
     },
     onSwipedUp: () => {
       const episodeNumber = parseInt(episode);
-      if (episodeNumber < totalEpisodes - 1) {
+      if (episodeNumber < totalEpisodes) {
         navigateToEpisode(episodeNumber + 1);
       }
     },
@@ -68,9 +68,9 @@ const Player = () => {
       height: '90vh',
       width: '100%',
     }}>
-      <h2>
-        {video ? video.Name : "Loading..."}
-      </h2>
+      <h3>
+        {video ? `${video.Name} episode ${episode}` : "Loading..."}
+      </h3>
       {url && <video
         src={url}
         autoPlay
@@ -83,7 +83,7 @@ const Player = () => {
           objectFit: 'contain',
         }}
       />}
-      {<PlayerIcons />}
+      {video && <PlayerIcons seriesId={video.ID} />}
     </div>
   );
 };

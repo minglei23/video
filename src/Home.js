@@ -34,7 +34,7 @@ export default function Home() {
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
     if (user?.VIP || episodeNumber < 5) {
-      navigate(`/player/${seriesId}/${episodeNumber}`);
+      navigate(`/player/${seriesId}/${episodeNumber+1}`);
     }
   };
 
