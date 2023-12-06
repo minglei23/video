@@ -68,10 +68,10 @@ export default function Home() {
 
   const renderSeriesByType = (type) => {
     return (
-      <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px 0' }}>
+      <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
         {seriesByType[type].map((seriesItem) => (
-          <div style={{ display: 'inline-block', width: '160px', padding: '0 5px' }} key={seriesItem.id}>
-            <Card>
+          <div style={{ display: 'inline-block', width: '160px', padding: '0 10px' }} key={seriesItem.id}>
+            <Card style={{ backgroundColor: 'black', color: 'white' }}>
               <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
                 <CardMedia
                   component="img"
@@ -79,8 +79,8 @@ export default function Home() {
                   image={seriesItem.BaseURL + '/image.jpg'}
                   alt={seriesItem.Name}
                 />
-                <CardContent>
-                  <h3>{seriesItem.Name}</h3>
+                <CardContent style={{ padding: '0px' }}>
+                  <h4>{seriesItem.Name}</h4>
                 </CardContent>
               </CardActionArea>
             </Card>
@@ -91,15 +91,18 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '90vh', overflowY: 'auto' }}>
-      <h3>Type 1</h3>
+    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white' }}>
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px', marginTop: '30px' }}>Popular</h3>
       {renderSeriesByType('type1')}
 
-      <h3>Type 2</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
       {renderSeriesByType('type2')}
 
-      <h3>Type 3</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
       {renderSeriesByType('type3')}
+
+      <h3>New Type</h3>
 
       <Modal
         open={openModal}
@@ -107,7 +110,21 @@ export default function Home() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
+        <Box sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 210,
+          maxHeight: '80vh',
+          overflowY: 'auto',
+          bgcolor: 'black',
+          border: '1px solid #ffffff',
+          borderRadius: '10px',
+          color: 'white',
+          boxShadow: 24,
+          p: 4
+        }}>
           <div id="modal-modal-description">
             {renderModalContent()}
           </div>

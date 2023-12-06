@@ -40,7 +40,7 @@ const Profile = () => {
       onClose={handleCloseVerifyModal}
       aria-labelledby="verify-email-modal-title"
     >
-      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '90vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
+      <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '100vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
         <Typography id="verify-email-modal-title" variant="h6" component="h2">
           Please Verify Your Email
         </Typography>
