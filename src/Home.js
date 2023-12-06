@@ -33,26 +33,32 @@ export default function Home() {
   };
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if (user?.VIP || episodeNumber < 3) {
-      navigate(`/player/${seriesId}/${episodeNumber}`);
+    if (user?.VIP || episodeNumber < 5) {
+      navigate(`/player/${seriesId}/${episodeNumber + 1}`);
     }
   };
 
   const renderModalContent = () => {
     if (!currentSeries?.TotalNumber) return null;
+    const image = currentSeries.BaseURL + '/image.jpg'
 
-    return Array.from({ length: currentSeries.TotalNumber }).map((_, index) => {
-      const isAccessible = user?.VIP || index < 3;
-      return (
-        <p
-          key={index}
-          style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
-          onClick={() => isAccessible && handleEpisodeClick(currentSeries.ID, index)}
-        >
-          Episode {index + 1} {index >= 3 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
-        </p>
-      );
-    });
+    return <div>
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <img src={image} alt="Series Cover" style={{ maxWidth: '100px', height: 'auto' }} />
+      </div>
+      {Array.from({ length: currentSeries.TotalNumber }).map((_, index) => {
+        const isAccessible = user?.VIP || index < 5;
+        return (
+          <p
+            key={index}
+            style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
+            onClick={() => isAccessible && handleEpisodeClick(currentSeries.ID, index)}
+          >
+            Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
+          </p>
+        );
+      })}
+    </div>
   };
 
   const handleCloseModal = () => {
@@ -64,7 +70,7 @@ export default function Home() {
     return (
       <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', padding: '20px 0' }}>
         {seriesByType[type].map((seriesItem) => (
-          <div style={{ display: 'inline-block', width: '150px', padding: '0 5px' }} key={seriesItem.id}>
+          <div style={{ display: 'inline-block', width: '160px', padding: '0 5px' }} key={seriesItem.id}>
             <Card>
               <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
                 <CardMedia
@@ -85,7 +91,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '90vh', overflowY: 'auto'}}>
+    <div style={{ height: '90vh', overflowY: 'auto' }}>
       <h3>Type 1</h3>
       {renderSeriesByType('type1')}
 

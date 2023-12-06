@@ -12,7 +12,7 @@ const Recommend = () => {
     try {
       const series = await GetRecommendSeries();
       if (series) {
-        const episode = Math.floor(1 + Math.random() * 10)
+        const episode = Math.floor(1 + Math.random() * 4)
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setVideo(series);
         const user = GetUser()
@@ -44,11 +44,10 @@ const Recommend = () => {
       alignItems: 'center',
       height: '90vh',
       width: '100%',
-      background: '#000'
     }}>
-      <h2 style={{color: '#fff'}}>
+      <h3>
         {video ? video.Name : "Loading..."}
-      </h2>
+      </h3>
       {url && <video
         src={url}
         autoPlay
@@ -61,7 +60,7 @@ const Recommend = () => {
           objectFit: 'contain',
         }}
       />}
-      {<PlayerIcons />}
+      {video && <PlayerIcons seriesId={video.ID} />}
     </div>
   );
 };

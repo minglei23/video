@@ -29,12 +29,12 @@ const History = () => {
         History
       </Typography>
       <List>
-        {list.map((item) => (
+        {list && list.map((item) => (
           <ListItem key={item.ID}>
             <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{ maxWidth: '50px', height: 'auto' }} />
             <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
             <Button onClick={() => navigate(`/player/${item.ID}/${item.Episode}`)}>
-              {`Episode ${item.Episode + 1}`}
+              {`Episode ${item.Episode}`}
             </Button>
           </ListItem>
         ))}

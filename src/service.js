@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken } from './cache';
+import { SetToken, GetToken, SetCache, GetCache } from './cache';
 
 const BASE_URL = 'http://18.188.120.153:8080';
 
@@ -132,3 +132,46 @@ export const GetHistory = async (userID) => {
     handleError(error, 'History Failed:');
   }
 };
+
+export const GetPoints = async (userID) => {
+  try {
+    const cached = GetCache("points");
+    if (cached) {
+      return cached.Points;
+    }
+    const token = GetToken();
+    const points = await postRequest(`${BASE_URL}/points`, { token, userID });
+    SetCache("points", points);
+    return points.Points
+  } catch (error) {
+    handleError(error, 'Get Points Failed:');
+  }
+};
+
+export const GetIfChecked = async (userID) => {
+  try {
+    const cached = GetCache("ifChecked");
+    if (cached) {
+      return cached.Checked;
+    }
+    const token = GetToken();
+    const points = await postRequest(`${BASE_URL}/already-checkin`, { token, userID });
+    SetCache("ifChecked", points);
+    return points.Checked
+  } catch (error) {
+    handleError(error, 'GetIfChecked Failed:');
+  }
+};
+
+export const Checkin = async (userID) => {
+  try {
+    const token = GetToken();
+    const points = await postRequest(`${BASE_URL}/checkin`, { token, userID });
+    SetCache("points", points);
+    SetCache("ifChecked", points);
+    return points.Points;
+  } catch (error) {
+    handleError(error, 'Checkin Failed:');
+  }
+};
+
