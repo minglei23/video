@@ -44,8 +44,9 @@ const Recommend = () => {
       alignItems: 'center',
       height: '90vh',
       width: '100%',
+      background: '#000'
     }}>
-      <h2>
+      <h2 style={{color: '#fff'}}>
         {video ? video.Name : "Loading..."}
       </h2>
       {url && <video

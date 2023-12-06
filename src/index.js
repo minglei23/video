@@ -11,6 +11,7 @@ import Profile from './Profile';
 import Favorites from './Favorites';
 import History from './History';
 import Recommend from './Recommend';
+import Video from "./video";
 
 const UserContext = createContext();
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
             <Route path="/recommend" element={<Recommend />} />
+            <Route path="/video" element={<Video />} />
           </Routes>
           <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, width: '100%' }}>
             <BottomNavigationAction label="Home" icon={<HomeIcon />} component={Link} to="/" />

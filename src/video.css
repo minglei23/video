@@ -1,0 +1,38 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    height: 100%;
+}
+.swiper-box {
+    width: 100%;
+    height: calc(100vh - 56px);
+    background-color: black;
+}
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+
+    /* Center slide text vertically */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-content {
+    width: 100%;
+    min-height: 300px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
