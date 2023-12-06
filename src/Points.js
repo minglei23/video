@@ -35,7 +35,16 @@ const Points = ({ user }) => {
           <Typography variant="h6">Your Points: {points}</Typography>
         </Grid>
         <Grid item style={{ marginBottom: '20px' }}>
-          <Button variant="contained" onClick={handleCheckin} disabled={checked} style={{ width: '200px' }}>
+          <Button 
+            variant="contained" 
+            onClick={handleCheckin} 
+            disabled={checked} 
+            style={{ 
+              width: '200px', 
+              backgroundColor: checked ? '#000' : '#a70',
+              color: checked ? '#fa0' : '#fff',
+            }}
+          >
             {checked ? 'Already Checked-in' : 'Check-in Today'}
           </Button>
         </Grid>

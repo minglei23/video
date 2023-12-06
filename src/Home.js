@@ -54,7 +54,7 @@ export default function Home() {
             style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
             onClick={() => isAccessible && handleEpisodeClick(currentSeries.ID, index)}
           >
-            Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: 'red' }}>VIP</span>}
+            Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: '#fa0' }}>VIP</span>}
           </p>
         );
       })}
@@ -119,7 +119,7 @@ export default function Home() {
           maxHeight: '80vh',
           overflowY: 'auto',
           bgcolor: 'black',
-          border: '1px solid #ffffff',
+          border: '1px solid #a70',
           borderRadius: '10px',
           color: 'white',
           boxShadow: 24,

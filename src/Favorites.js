@@ -33,7 +33,7 @@ const Favorites = () => {
           <ListItem key={item.ID}>
             <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{maxWidth: '50px', height: 'auto'}} />
             <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
-            <Button onClick={() => navigate(`/player/${item.ID}/1`)}>
+            <Button style={{ color: '#fa0' }} onClick={() => navigate(`/player/${item.ID}/1`)}>
               Play
             </Button>
           </ListItem>
