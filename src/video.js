@@ -1,31 +1,21 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React from 'react';
 // Import Swiper React components
-import { Swiper, SwiperSlide,useSwiper  } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
 
 import './video.css';
 
 // import required modules
-import { Pagination, Virtual } from 'swiper/modules';
+import { Virtual } from 'swiper/modules';
 
 export default function Video() {
-    const [swiperRef, setSwiperRef] = useState(null);
-    const videoRef = useRef()
     const slides = ['https://dc4ef1i295q51.cloudfront.net/9.mp4', 'https://dc4ef1i295q51.cloudfront.net/7.mp4']
-    const rgb = () =>{
-        let r = Math.floor(Math.random()*256);
-        let g = Math.floor(Math.random()*256);
-        let b = Math.floor(Math.random()*256);
-        return  'rgb('+r+','+g+','+b+')';
-    }
 
     return (
         <div className="swiper-box">
             <Swiper
-                onSwiper={setSwiperRef}
                 onSlidePrevTransitionEnd={(swiper) => {
                     const videoElement = document.getElementById(`video_${swiper.activeIndex + 1}`)
                     const _videoElement = document.getElementById(`video_${swiper.activeIndex}`)
@@ -48,9 +38,6 @@ export default function Video() {
                 //     }
                 // }}
                 direction={'vertical'}
-                pagination={{
-                    clickable: true,
-                }}
                 modules={[Virtual]}
                 className="mySwiper"
                 virtual
