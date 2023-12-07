@@ -13,7 +13,7 @@ const Recommend = () => {
       const series = await GetRecommendSeries();
       if (series) {
         const episode = Math.floor(1 + Math.random() * 4)
-        setUrl(`${series.BaseURL}/${episode}.mp4`);
+        setUrl(`${series.BaseURL}/1.mp4`);
         setVideo(series);
         const user = GetUser()
         if (user) {
