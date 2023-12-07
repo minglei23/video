@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Button, TextField } from '@mui/material';
 import { login, register } from './service';
 import { UserContext } from './index.js'
-import { SetUser} from './cache';
+import { SetUser } from './cache';
 
 const AuthForm = ({ isLogin, setError }) => {
   const [email, setEmail] = useState('');
@@ -45,6 +45,8 @@ const AuthForm = ({ isLogin, setError }) => {
         margin="normal"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        InputLabelProps={{ style: { color: '#fff' } }}
+        InputProps={{ style: { color: '#fff' } }}
       />
       <TextField
         label="Password"
@@ -53,13 +55,20 @@ const AuthForm = ({ isLogin, setError }) => {
         margin="normal"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        InputLabelProps={{ style: { color: '#fff' } }}
+        InputProps={{ style: { color: '#fff' } }}
       />
       <Button
         type="submit"
         variant="contained"
         color="primary"
         fullWidth
-        style={{ marginTop: 20 }}
+        style={{
+          marginTop: 20,
+          color: '#fff',
+          width: '200px',
+          backgroundColor: '#a70',
+        }}
       >
         {isLogin ? 'Login' : 'Sign Up'}
       </Button>
