@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardMedia, CardActionArea, CardContent, Modal, Box } from '@mui/material';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { GetSeriesList } from './service';
 import { GetUser } from './cache';
 import { useNavigate } from 'react-router-dom';
@@ -90,10 +93,38 @@ export default function Home() {
     );
   };
 
+  const renderCarouselByType = (type) => {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: false,
+    };
+
+    return (
+      <Slider {...settings}>
+        {seriesByType[type].map((seriesItem) => (
+          <div key={seriesItem.ID} style={{ textAlign: 'center', padding: '10px' }}>
+            <div onClick={() => handleSeriesClick(seriesItem)} style={{ cursor: 'pointer' }}>
+              <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
+              <h5 style={{ margin: '5px 10px' }}>{seriesItem.Name}</h5>
+            </div>
+          </div>
+        ))}
+      </Slider>
+    );
+  };
+
   return (
     <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white', paddingBottom: '60px' }}>
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px', marginTop: '30px' }}>Popular</h3>
+      {renderCarouselByType('type1')}
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Popular</h3>
       {renderSeriesByType('type1')}
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
