@@ -91,7 +91,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white', paddingBottom: '60px' }}>
+    <div style={{ height: '90vh', overflowY: 'auto', backgroundColor: 'black', color: 'white'}}>
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px', marginTop: '30px' }}>Popular</h3>
       {renderSeriesByType('type1')}

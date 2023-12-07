@@ -26,7 +26,7 @@ const Profile = () => {
   };
 
   const renderUserProfile = () => (
-    <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100vh', paddingBottom: '60px'}}>
+    <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '90vh'}}>
       <Points user={user} />
       <Grid container direction="column" alignItems="center" spacing={2}>
         {!user.Activated && (
