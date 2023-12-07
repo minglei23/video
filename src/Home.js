@@ -91,7 +91,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white' }}>
+    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white', paddingBottom: '60px' }}>
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px', marginTop: '30px' }}>Popular</h3>
       {renderSeriesByType('type1')}
@@ -101,8 +101,6 @@ export default function Home() {
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
       {renderSeriesByType('type3')}
-
-      <h3>New Type</h3>
 
       <Modal
         open={openModal}
