@@ -93,7 +93,7 @@ const PlayerIcons = ({ seriesId }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '92vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
+        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 250, maxHeight: '80vh', overflowY: 'auto', bgcolor: 'background.paper', boxShadow: 24, p: 4, }}>
           <div id="modal-modal-description">
             {episodeList}
           </div>

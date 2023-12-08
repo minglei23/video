@@ -42,7 +42,6 @@ const Recommend = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '92vh',
       width: '100%',
     }}>
       <h3>

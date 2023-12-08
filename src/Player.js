@@ -65,7 +65,6 @@ const Player = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '92vh',
       width: '100%',
     }}>
       <h3>
@@ -84,6 +83,7 @@ const Player = () => {
         }}
       />}
       {video && <PlayerIcons seriesId={video.ID} />}
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };
