@@ -60,7 +60,6 @@ const Profile = () => {
           }
         </Grid>
       </Container>
-      <div style={{ height: '8vh' }}></div>
     </div>
   );
 

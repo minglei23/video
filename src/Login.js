@@ -32,7 +32,6 @@ const Login = () => {
           )}
         </Box>
       </Container>
-      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };
