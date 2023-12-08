@@ -13,7 +13,7 @@ const Login = () => {
 
   return (
     <div>
-      <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column' }}>
+      <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '92vh' }}>
         <Box textAlign="center" marginTop={8}>
           <Typography variant="h5" margin={"25px"}>{isLoginView ? 'Login' : 'Sign Up'}</Typography>
           <AuthForm isLogin={isLoginView} setError={setError} />
