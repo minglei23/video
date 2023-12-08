@@ -41,7 +41,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '92vh', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
+    <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
       <SearchBar />
 
