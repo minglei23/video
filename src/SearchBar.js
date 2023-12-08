@@ -19,7 +19,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ height: '48px' }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ height: '50px' }}>
       <TextField
         fullWidth
         variant="outlined"
@@ -32,7 +32,7 @@ export default function SearchBar() {
               <SearchIcon style={{ color: '#a70' }} />
             </InputAdornment>
           ),
-          style: { color: '#fff', fontSize: '13px' },
+          style: { color: '#fff', fontSize: '14px' },
         }}
         sx={{
           backgroundColor: '#222'
