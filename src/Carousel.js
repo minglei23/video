@@ -21,7 +21,7 @@ export default function Carousel ({seriesList, handleSeriesClick}) {
         <div key={seriesItem.ID} style={{ textAlign: 'center', padding: '10px' }}>
           <div onClick={() => handleSeriesClick(seriesItem)} style={{ cursor: 'pointer' }}>
             <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '250px', objectFit: 'cover' }} />
-            <h4 style={{ margin: '5px 10px' }}>{seriesItem.Name}</h4>
+            <h5 style={{ margin: '5px 10px' }}>{seriesItem.Name}</h5>
           </div>
         </div>
       ))}
