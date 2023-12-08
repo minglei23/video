@@ -53,6 +53,17 @@ export const GetSeries = async (id) => {
   }
 };
 
+export const SearchSeries = async (name) => {
+  try {
+    const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
+    console.log(data)
+    console.log(name)
+    return data.VideoList.filter(video => video.Name.toLowerCase().includes(name)) || [];
+  } catch (error) {
+    handleError(error, 'Search Series Failed:');
+  }
+};
+
 export const GetRecommendSeries = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');

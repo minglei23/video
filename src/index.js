@@ -12,12 +12,18 @@ import Favorites from './Favorites';
 import History from './History';
 import Recommend from './Recommend';
 import Video from "./video";
+import Search from "./Search";
 
 const UserContext = createContext();
 
 function PlayerWrapper() {
   let { seriesId = 0, episode = 0 } = useParams();
   return <Player seriesId={seriesId} episode={episode} />;
+}
+
+function SearchWrapper() {
+  let { searchTerm = "" } = useParams();
+  return <Search searchTerm={searchTerm} />;
 }
 
 function App() {
@@ -35,7 +41,9 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
             <Route path="/recommend" element={<Recommend />} />
-<Route path="/video" element={<Video />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/search/:searchTerm" element={<SearchWrapper />} />
+            <Route path="/search" element={<SearchWrapper />} />
           </Routes>
           <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none' }}>
             <BottomNavigationAction label="Home" style={{ color: 'white' }} icon={<HomeIcon />} component={Link} to="/" />

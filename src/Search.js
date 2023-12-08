@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Modal, Box } from '@mui/material';
-import { GetSeriesList } from './service';
+import { SearchSeries } from './service';
 import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
-import Carousel from './Carousel';
 import SeriesList from './SeriesList';
 import SearchBar from './SearchBar';
-import PopularList from './PopularList';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
-export default function Home() {
+const Search = () => {
+  const { searchTerm } = useParams();
   const [openModal, setOpenModal] = useState(false);
   const [currentSeries, setCurrentSeries] = useState(null);
   const [user, setUser] = useState(null);
-
-  const [seriesByType, setSeriesByType] = useState({
-    type1: [],
-    type2: [],
-    type3: []
-  });
+  const [seriesList, setSeriesList] = useState([]);
 
   useEffect(() => {
     setUser(GetUser)
   }, []);
 
   useEffect(() => {
-    GetSeriesList().then(data => {
-      setSeriesByType(data);
-    });
-  }, []);
+    const performSearch = async () => {
+      const results = await SearchSeries(searchTerm);
+      setSeriesList(results);
+    };
+
+    performSearch();
+  }, [searchTerm]);
 
   const handleSeriesClick = (seriesItem) => {
     setCurrentSeries(seriesItem);
@@ -45,26 +42,8 @@ export default function Home() {
 
       <SearchBar />
 
-      <Carousel seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
-
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(#431, #111)',
-        padding: '10px',
-        margin: '10px 0'
-      }}>
-        <EmojiEventsIcon style={{ color: '#fc5' }} />
-        <h3 style={{ fontWeight: 'bold', color: '#fc5', margin: '0 10px' }}>Popular</h3>
-      </div>
-      <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
-
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
-      <SeriesList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
-
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
-      <SeriesList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Search Results</h3>
+      <SeriesList seriesList={seriesList} handleSeriesClick={handleSeriesClick} />
 
       <Modal
         open={openModal}
@@ -95,3 +74,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Search;
