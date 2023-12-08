@@ -6,6 +6,8 @@ import SeriesInfo from './SeriesInfo';
 import Carousel from './Carousel';
 import SeriesList from './SeriesList';
 import SearchBar from './SearchBar';
+import PopularList from './PopularList';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 export default function Home() {
   const [openModal, setOpenModal] = useState(false);
@@ -45,8 +47,18 @@ export default function Home() {
 
       <Carousel seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Popular</h3>
-      <SeriesList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(#431, #111)',
+        padding: '10px',
+        margin: '10px 0'
+      }}>
+        <EmojiEventsIcon style={{ color: '#fc5' }} />
+        <h3 style={{ fontWeight: 'bold', color: '#fc5', margin: '0 10px' }}>Popular</h3>
+      </div>
+      <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
       <SeriesList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />

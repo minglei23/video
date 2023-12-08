@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
 
-export default function SeriesList({ seriesList, handleSeriesClick }) {
+export default function PopularList({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem) => (
