@@ -6,7 +6,7 @@ export default function SeriesList({ seriesList, handleSeriesClick }) {
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem) => (
         <div style={{ display: 'inline-block', width: '160px', padding: '0 10px' }} key={seriesItem.id}>
-          <Card style={{ backgroundColor: 'black', color: 'white' }}>
+          <Card style={{ backgroundColor: '#111', color: 'white' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
                 component="img"

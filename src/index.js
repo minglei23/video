@@ -25,7 +25,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
-        <div style={{ backgroundColor: 'black', color: 'white' }}>
+        <div style={{ backgroundColor: '#111', color: 'white' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />
@@ -37,7 +37,7 @@ function App() {
             <Route path="/recommend" element={<Recommend />} />
 <Route path="/video" element={<Video />} />
           </Routes>
-          <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, width: '100%', backgroundColor: 'black', color: 'white', borderTop: 'none', boxShadow: 'none' }}>
+          <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none' }}>
             <BottomNavigationAction label="Home" style={{ color: 'white' }} icon={<HomeIcon />} component={Link} to="/" />
             <BottomNavigationAction label="Recommend" style={{ color: 'white' }} icon={<PlayCircleOutlineIcon />} component={Link} to="/recommend" />
             <BottomNavigationAction label="Profile" style={{ color: 'white' }} icon={<PersonOutlineIcon />} component={Link} to="/profile" />

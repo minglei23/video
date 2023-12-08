@@ -5,6 +5,7 @@ import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
 import Carousel from './Carousel';
 import SeriesList from './SeriesList';
+import SearchBar from './SearchBar';
 
 export default function Home() {
   const [openModal, setOpenModal] = useState(false);
@@ -38,7 +39,9 @@ export default function Home() {
   };
 
   return (
-    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: 'black', color: 'white', paddingBottom: '60px' }}>
+    <div style={{ height: '92vh', overflowY: 'auto', backgroundColor: '#111', color: 'white', paddingBottom: '60px' }}>
+
+      <SearchBar />
 
       <Carousel seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
@@ -65,7 +68,7 @@ export default function Home() {
           width: 210,
           maxHeight: '80vh',
           overflowY: 'auto',
-          bgcolor: 'black',
+          bgcolor: '#111',
           border: '1px solid #a70',
           borderRadius: '10px',
           color: 'white',

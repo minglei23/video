@@ -65,7 +65,7 @@ const Player = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '90vh',
+      height: '92vh',
       width: '100%',
     }}>
       <h3>
