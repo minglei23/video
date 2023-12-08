@@ -24,14 +24,14 @@ const Favorites = () => {
   }, []);
 
   return (
-    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px' }}>
+    <div style={{ height: '92vh', overflowY: 'auto', padding: '20px' }}>
       <Typography id="list-modal-title" variant="h6" component="h2" align="center">
         Favorites
       </Typography>
       <List>
         {list && list.map((item) => (
           <ListItem key={item.ID}>
-            <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{maxWidth: '50px', height: 'auto'}} />
+            <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{ maxWidth: '50px', height: 'auto' }} />
             <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
             <Button style={{ color: '#fa0' }} onClick={() => navigate(`/player/${item.ID}/1`)}>
               Play
@@ -39,6 +39,7 @@ const Favorites = () => {
           </ListItem>
         ))}
       </List>
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };

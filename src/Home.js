@@ -66,6 +66,8 @@ export default function Home() {
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
       <SeriesList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
+      <div style={{ height: '8vh' }}></div>
+
       <Modal
         open={openModal}
         onClose={handleCloseModal}

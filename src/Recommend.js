@@ -42,7 +42,7 @@ const Recommend = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '90vh',
+      height: '92vh',
       width: '100%',
     }}>
       <h3>
@@ -61,6 +61,7 @@ const Recommend = () => {
         }}
       />}
       {video && <PlayerIcons seriesId={video.ID} />}
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };

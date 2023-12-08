@@ -24,7 +24,7 @@ const History = () => {
   }, []);
 
   return (
-    <div style={{ height: '90vh', overflowY: 'auto', padding: '20px' }}>
+    <div style={{ height: '92vh', overflowY: 'auto', padding: '20px' }}>
       <Typography id="list-modal-title" variant="h6" component="h2" align="center">
         History
       </Typography>
@@ -39,6 +39,7 @@ const History = () => {
           </ListItem>
         ))}
       </List>
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };

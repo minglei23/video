@@ -45,6 +45,8 @@ const Search = () => {
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Search Results</h3>
       <SeriesList seriesList={seriesList} handleSeriesClick={handleSeriesClick} />
 
+      <div style={{ height: '8vh' }}></div>
+
       <Modal
         open={openModal}
         onClose={handleCloseModal}
