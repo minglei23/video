@@ -51,7 +51,7 @@ export default function Home() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(#431, #111)',
+        background: 'linear-gradient(#333, #111)',
         padding: '10px',
         margin: '10px 0'
       }}>
