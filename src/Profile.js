@@ -1,6 +1,13 @@
 import React, { useEffect, useContext } from 'react';
 import { Container, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import EmailIcon from '@mui/icons-material/Email';
+import StarIcon from '@mui/icons-material/Star';
+import HistoryIcon from '@mui/icons-material/History';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HelpIcon from '@mui/icons-material/Help';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Login from './Login';
 import Points from './Points';
 import { UserContext } from './index.js';
@@ -21,39 +28,41 @@ const Profile = () => {
     navigate(path);
   };
 
-  const handleSignOut = () => {
-    // Add sign out logic here
-    console.log('Signing out...');
-  };
-
   const renderUserProfile = () => (
     <div>
       <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '92vh' }}>
         <Points user={user} />
         <List>
           {!user.Activated && (
-            <ListItem button onClick={() => console.log('Verify Email')}>
+            <ListItem onClick={() => console.log('Verify Email')}>
+              <EmailIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Verify Email" />
             </ListItem>
           )}
           {!user.VIP && (
-            <ListItem button onClick={() => console.log('Become VIP')}>
+            <ListItem onClick={() => console.log('Become VIP')}>
+              <StarIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Become VIP" />
             </ListItem>
           )}
-          <ListItem button onClick={() => navigateTo('/history')}>
+          <ListItem onClick={() => navigateTo('/history')}>
+            <HistoryIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="History" />
           </ListItem>
-          <ListItem button onClick={() => navigateTo('/favorites')}>
+          <ListItem onClick={() => navigateTo('/favorites')}>
+            <FavoriteIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Favorites" />
           </ListItem>
-          <ListItem button onClick={() => console.log('Settings')}>
+          <ListItem onClick={() => console.log('Settings')}>
+            <SettingsIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Settings" />
           </ListItem>
-          <ListItem button onClick={() => console.log('Help')}>
+          <ListItem onClick={() => console.log('Help')}>
+            <HelpIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Help" />
           </ListItem>
-          <ListItem button onClick={handleSignOut}>
+          <ListItem onClick={() => console.log('Sign Out')}>
+            <ExitToAppIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Sign Out" />
           </ListItem>
         </List>
