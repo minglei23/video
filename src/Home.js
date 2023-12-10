@@ -57,14 +57,14 @@ export default function Home() {
         margin: '10px 0'
       }}>
         <EmojiEventsIcon style={{ color: '#fc5' }} />
-        <h3 style={{ fontWeight: 'bold', color: '#fc5', margin: '0 10px' }}>Popular</h3>
+        <h3 style={{ fontWeight: 'bold', color: '#fc5', margin: '0 10px' }}>Trending</h3>
       </div>
       <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Coming Soon</h3>
       <SeriesList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
       <SeriesRows seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{ height: '8vh' }}></div>
