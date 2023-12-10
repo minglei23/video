@@ -5,6 +5,7 @@ import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
 import Carousel from './Carousel';
 import SeriesList from './SeriesList';
+import SeriesRows from './SeriesRows';
 import SearchBar from './SearchBar';
 import PopularList from './PopularList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
@@ -64,7 +65,7 @@ export default function Home() {
       <SeriesList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Chinese Series</h3>
-      <SeriesList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+      <SeriesRows seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{ height: '8vh' }}></div>
 
