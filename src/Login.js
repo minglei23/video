@@ -18,7 +18,7 @@ const Login = () => {
           <Typography variant="h5" margin={"25px"}>{isLoginView ? 'Login' : 'Sign Up'}</Typography>
           <AuthForm isLogin={isLoginView} setError={setError} />
           <Grid container justifyContent="center" style={{ marginTop: 20 }}>
-            <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#fff', borderColor: '#d80' }}>
+            <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#fff', borderColor: '#fa0' }}>
               {isLoginView ? 'Go to Sign Up' : 'Go to Login'}
             </Button>
           </Grid>
