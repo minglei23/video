@@ -60,7 +60,7 @@ const Search = () => {
           maxHeight: '80vh',
           overflowY: 'auto',
           bgcolor: '#111',
-          border: '1px solid #a70',
+          border: '1px solid #d80',
           borderRadius: '10px',
           color: 'white',
           boxShadow: 24,

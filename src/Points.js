@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, Grid } from '@mui/material';
-import { GetPoints, GetIfChecked, Checkin } from './service.js'
+import { Typography, Button, Grid, Avatar } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { GetPoints, GetIfChecked, Checkin } from './service.js';
 
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
@@ -29,12 +31,18 @@ const Points = ({ user }) => {
     <div>
       <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
-          <Typography variant="h5">Welcome, {user.Email}</Typography>
+          <Avatar>
+            <AccountCircleIcon fontSize="large" />
+          </Avatar>
         </Grid>
         <Grid item>
-          <Typography variant="h6">Your Points: {points}</Typography>
+          <Typography variant="h5">Hi, {user.Email}</Typography>
         </Grid>
-        <Grid item style={{ marginBottom: '20px' }}>
+        <Grid item>
+          <MonetizationOnIcon />
+          <Typography variant="h6">{points}</Typography>
+        </Grid>
+        <Grid item>
           <Button 
             variant="contained" 
             onClick={handleCheckin} 
@@ -42,7 +50,7 @@ const Points = ({ user }) => {
             style={{ 
               width: '200px', 
               backgroundColor: checked ? '#000' : '#a70',
-              color: checked ? '#fa0' : '#fff',
+              color: checked ? '#d80' : '#fff',
             }}
           >
             {checked ? 'Already Checked-in' : 'Check-in Today'}

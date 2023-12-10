@@ -33,7 +33,7 @@ const History = () => {
           <ListItem key={item.ID}>
             <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{ maxWidth: '50px', height: 'auto' }} />
             <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
-            <Button style={{ color: '#fa0' }} onClick={() => navigate(`/player/${item.ID}/${item.Episode}`)}>
+            <Button style={{ color: '#d80' }} onClick={() => navigate(`/player/${item.ID}/${item.Episode}`)}>
               {`Episode ${item.Episode}`}
             </Button>
           </ListItem>

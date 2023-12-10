@@ -26,7 +26,7 @@ export default function SeriesInfo({user, series}) {
           style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
           onClick={() => isAccessible && handleEpisodeClick(series.ID, index)}
         >
-          Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: '#fa0' }}>VIP</span>}
+          Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: '#d80' }}>VIP</span>}
         </p>
       );
     })}

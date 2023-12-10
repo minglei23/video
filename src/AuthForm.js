@@ -64,10 +64,10 @@ const AuthForm = ({ isLogin, setError }) => {
         color="primary"
         fullWidth
         style={{
-          marginTop: 20,
+          marginTop: 30,
           color: '#fff',
           width: '200px',
-          backgroundColor: '#a70',
+          backgroundColor: '#d80',
         }}
       >
         {isLogin ? 'Login' : 'Sign Up'}
