@@ -12,6 +12,7 @@ const PlayerIcons = ({ seriesId }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchSeries = async () => {
@@ -22,9 +23,14 @@ const PlayerIcons = ({ seriesId }) => {
         console.error('Error fetching series:', error);
       }
     };
-
     fetchSeries();
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 500);
+
   }, [seriesId]);
+
+  if (!isVisible) return null;
 
   const clickFavorites = async () => {
     const user = GetUser();
