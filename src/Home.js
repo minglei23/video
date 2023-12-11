@@ -4,7 +4,6 @@ import { GetSeriesList } from './service';
 import Carousel from './Carousel';
 import SeriesList from './SeriesList';
 import SeriesRows from './SeriesRows';
-import SearchBar from './SearchBar';
 import PopularList from './PopularList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
@@ -29,8 +28,6 @@ export default function Home() {
 
   return (
     <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
-
-      <SearchBar />
 
       <Carousel seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
