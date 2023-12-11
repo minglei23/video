@@ -1,34 +1,60 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Grid, Typography, Box } from '@mui/material';
 
 export default function SeriesInfo({user, series}) {
 
   const navigate = useNavigate();
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if (user?.VIP || episodeNumber < 5) {
-      navigate(`/player/${seriesId}/${episodeNumber + 1}`);
+    if ((user && user.VIP) || episodeNumber <= 5) {
+      navigate(`/player/${seriesId}/${episodeNumber}`);
     }
   };
 
   if (!series?.TotalNumber) return null;
-  const image = series.BaseURL + '/image.jpg'
 
-  return <div>
-    <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-      <img src={image} alt="Series Cover" style={{ maxWidth: '100px', height: 'auto' }} />
-    </div>
-    {Array.from({ length: series.TotalNumber }).map((_, index) => {
-      const isAccessible = user?.VIP || index < 5;
-      return (
-        <p
-          key={index}
-          style={{ cursor: isAccessible ? 'pointer' : 'not-allowed' }}
-          onClick={() => isAccessible && handleEpisodeClick(series.ID, index)}
-        >
-          Episode {index + 1} {index >= 5 && !user?.VIP && <span style={{ color: '#d80' }}>VIP</span>}
-        </p>
-      );
-    })}
-  </div>
+  return (
+    <Box style={{ maxHeight: '50vh', padding: '15px' }}>
+      <Typography variant="h5" marginBottom="20px" color={'#fff'}>
+        {series && series.Name}
+      </Typography>
+      <Grid container spacing={1} justifyContent="flex-start">
+        {series && Array.from({ length: series.TotalNumber }).map((_, index) => {
+          const isAccessible = user?.VIP || index < 5;
+          return (
+            <Grid item key={index} style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                variant="outlined"
+                style={{
+                  color: '#fff',
+                  borderColor: '#444',
+                  backgroundColor: '#444',
+                  height: '45px',
+                  position: 'relative'
+                }}
+                onClick={() => handleEpisodeClick(series.ID, index + 1)}
+              >
+                {index + 1}
+                {!isAccessible && <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  backgroundColor: '#fa0',
+                  color: 'white',
+                  padding: '0px 3px',
+                  fontSize: '10px',
+                  fontWeight: 'bold',
+                  zIndex: 1,
+                  borderRadius: '5px'
+                }}>
+                  VIP
+                </div>}
+              </Button>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
+  )
 }

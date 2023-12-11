@@ -72,7 +72,7 @@ const Player = () => {
       width: '100%',
     }}>
       <h3>
-        {video ? `${video.Name} ${episode}` : "Loading..."}
+        {video ? `${video.Name} - ${episode}` : "Loading..."}
       </h3>
       {url && <video
         src={url}
