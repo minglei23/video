@@ -64,7 +64,6 @@ const Recommend = () => {
         }}
       />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
-      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };
