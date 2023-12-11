@@ -11,6 +11,7 @@ const Player = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
+  const [showPlayerIcons, setShowPlayerIcons] = useState(true);
 
   const fetchVideo = useCallback(async () => {
     try {
@@ -20,6 +21,7 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
+        setShowPlayerIcons(true);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
@@ -43,6 +45,7 @@ const Player = () => {
   }, [seriesId, navigate]);
 
   const handlers = useSwipeable({
+    onSwiped: () => setShowPlayerIcons(false),
     onSwipedDown: () => {
       const episodeNumber = parseInt(episode);
       if (episodeNumber > 0) {
@@ -69,7 +72,7 @@ const Player = () => {
       width: '100%',
     }}>
       <h3>
-        {video ? `${video.Name} episode ${episode}` : "Loading..."}
+        {video ? `${video.Name} ${episode}` : "Loading..."}
       </h3>
       {url && <video
         src={url}
@@ -78,12 +81,12 @@ const Player = () => {
         controls
         playsInline
         style={{
-          maxWidth: '98%',
-          maxHeight: '80vh',
+          maxWidth: '100%',
+          maxHeight: '85vh',
           objectFit: 'contain',
         }}
       />}
-      {video && <PlayerIcons seriesId={video.ID} />}
+      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       <div style={{ height: '8vh' }}></div>
     </div>
   );
