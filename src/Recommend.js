@@ -7,6 +7,7 @@ import PlayerIcons from './PlayerIcons.js';
 const Recommend = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
+  const [showPlayerIcons, setShowPlayerIcons] = useState(true);
 
   const fetchRecommend = async () => {
     try {
@@ -15,6 +16,7 @@ const Recommend = () => {
         const episode = Math.floor(1 + Math.random() * 4)
         setUrl(`${series.BaseURL}/1.mp4`);
         setVideo(series);
+        setShowPlayerIcons(true);
         const user = GetUser()
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), episode)
@@ -30,6 +32,7 @@ const Recommend = () => {
   }, []);
 
   const handlers = useSwipeable({
+    onSwiped: () => setShowPlayerIcons(false),
     onSwipedDown: fetchRecommend,
     onSwipedUp: fetchRecommend,
     preventDefaultTouchmoveEvent: true,
@@ -55,12 +58,12 @@ const Recommend = () => {
         controls
         playsInline
         style={{
-          maxWidth: '98%',
-          maxHeight: '80vh',
+          maxWidth: '100%',
+          maxHeight: '85vh',
           objectFit: 'contain',
         }}
       />}
-      {video && <PlayerIcons seriesId={video.ID} />}
+      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       <div style={{ height: '8vh' }}></div>
     </div>
   );
