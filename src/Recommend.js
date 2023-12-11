@@ -48,9 +48,9 @@ const Recommend = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h3>
+      <h5 style={{height: '5vh', lineHeight: '5vh', fontSize: '2.5vh', margin: 0, padding: 0}}>
         {video ? video.Name : "Loading..."}
-      </h3>
+      </h5>
       {url && <video
         src={url}
         autoPlay
