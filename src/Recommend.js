@@ -48,7 +48,7 @@ const Recommend = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{height: '5vh', lineHeight: '5vh', fontSize: '2.5vh', margin: 0, padding: 0}}>
+      <h5 style={{height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0}}>
         {video ? video.Name : "Loading..."}
       </h5>
       {url && <video
@@ -59,7 +59,7 @@ const Recommend = () => {
         playsInline
         style={{
           maxWidth: '100%',
-          maxHeight: '85vh',
+          maxHeight: '80vh',
           objectFit: 'contain',
         }}
       />}

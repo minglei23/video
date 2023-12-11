@@ -48,7 +48,7 @@ const Player = () => {
     onSwiped: () => setShowPlayerIcons(false),
     onSwipedDown: () => {
       const episodeNumber = parseInt(episode);
-      if (episodeNumber > 0) {
+      if (episodeNumber > 1) {
         navigateToEpisode(episodeNumber - 1);
       }
     },
@@ -71,7 +71,7 @@ const Player = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{height: '5vh', lineHeight: '5vh', fontSize: '2.5vh', margin: 0, padding: 0}}>
+      <h5 style={{height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0}}>
         {video ? `${video.Name} - ${episode}` : "Loading..."}
       </h5>
       {url && <video
@@ -82,11 +82,12 @@ const Player = () => {
         playsInline
         style={{
           maxWidth: '100%',
-          maxHeight: '85vh',
+          maxHeight: '80vh',
           objectFit: 'contain',
         }}
       />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };
