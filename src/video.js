@@ -11,7 +11,11 @@ import './video.css';
 import { Virtual } from 'swiper/modules';
 
 export default function Video() {
-    const slides = ['https://dc4ef1i295q51.cloudfront.net/9.mp4', 'https://dc4ef1i295q51.cloudfront.net/7.mp4']
+    const slides = ['https://dc4ef1i295q51.cloudfront.net/1.mp4',
+        'https://dc4ef1i295q51.cloudfront.net/2.mp4',
+        'https://dc4ef1i295q51.cloudfront.net/3.mp4',
+        'https://dc4ef1i295q51.cloudfront.net/4.mp4',
+        'https://dc4ef1i295q51.cloudfront.net/5.mp4']
 
     return (
         <div className="swiper-box">

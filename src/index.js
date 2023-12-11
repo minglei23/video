@@ -46,9 +46,9 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
-            <Route path="/recommend" element={<Recommend />} />
+            <Route path="/recommend" element={<Video />} />
             <Route path="/video" element={<Video />} />
-            <Route path="/search/:searchTerm" element={<SearchWrapper />} />
+            <Route path="/search/:searchTerm" element={<Video />} />
             <Route path="/search" element={<SearchWrapper />} />
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
           </Routes>
