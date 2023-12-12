@@ -69,6 +69,7 @@ const Recommend = () => {
         src={url}
         loop
         playsInline
+        autoPlay
         onClick={onVideo}
         ref={videoRef}
         style={{
