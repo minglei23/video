@@ -27,23 +27,23 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
         zIndex: 1,
         width: '100%',
         backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(0, 0, 0, 0.2)'
+        backgroundColor: 'rgba(0, 0, 0, 0.1)'
       }}>
-        <Grid container alignItems="center" spacing={1} >
+        <Grid container alignItems="center" spacing={0} >
           <Grid item marginLeft={2} marginRight={1}>
             <Typography style={{ fontWeight: 'bold', color: '#fc5' }}>MoReel</Typography>
           </Grid>
-          <Grid item xs>
+          <Grid item xs style={{ flexGrow: 1, flexShrink: 1 }}>
             <InputBase
               fullWidth
               placeholder="    Search"
               onClick={() => navigate('/search')}
-              style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '2px', paddingRight: '15px', borderRadius: '20px', color: '#fff' }}
-              endAdornment={<SearchIcon style={{ color: '#fc5', cursor: 'pointer' }} />}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', padding: '2px', paddingRight: '10px', borderRadius: '20px', color: '#fff', height: '26px', fontSize: '13px' }}
+              endAdornment={<SearchIcon style={{ color: '#ddd', cursor: 'pointer' }} />}
             />
           </Grid>
-          <Grid item >
-            <Button onClick={() => navigate('/rewards')}>
+          <Grid item style={{ flexGrow: 0, flexShrink: 0 }}>
+            <Button onClick={() => navigate('/rewards')} style={{ minWidth: 0, padding: 0, margin: 10 }} >
               <img src="/image/coin.gif" alt="Coin" style={{ width: 24, height: 24 }} />
             </Button>
           </Grid>
