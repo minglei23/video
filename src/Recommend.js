@@ -31,6 +31,7 @@ const Recommend = () => {
         setUrl(`${series.BaseURL}/1.mp4`);
         setVideo(series);
         setShowPlayerIcons(true);
+        videoRef.current.play();
         const user = GetUser()
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), episode)
@@ -69,7 +70,6 @@ const Recommend = () => {
         src={url}
         loop
         playsInline
-        autoPlay
         onClick={onVideo}
         ref={videoRef}
         style={{

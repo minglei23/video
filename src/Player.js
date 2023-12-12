@@ -12,9 +12,9 @@ const Player = () => {
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
-  
+
   const videoRef = useRef(null)
-  const [play, setPlay] = useState(false);
+  const [play, setPlay] = useState(true);
 
   const onVideo = () => {
     if (play) {
@@ -35,6 +35,7 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
+        videoRef.current.play();
         setShowPlayerIcons(true);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
