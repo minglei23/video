@@ -22,7 +22,7 @@ const Points = ({ user }) => {
 
   return (
     <div>
-      <Grid container direction="column" alignItems="center" spacing={2} marginBottom={"30px"}>
+      <Grid container direction="column" alignItems="center" spacing={2} marginBottom={"30px"} marginTop={"30px"}>
         <Grid item>
           <AccountCircleIcon style={{ color: '#fa0', fontSize: '3rem' }} />
         </Grid>

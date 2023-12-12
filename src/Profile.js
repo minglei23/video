@@ -30,7 +30,7 @@ const Profile = () => {
 
   const renderUserProfile = () => (
     <div>
-      <Container style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '92vh' }}>
+      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh'}}>
         <Points user={user} />
         <List>
           {!user.Activated && (
