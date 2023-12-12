@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
 import { GetUser } from './cache';
@@ -8,6 +8,20 @@ const Recommend = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
+
+  const videoRef = useRef(null)
+  const [play, setPlay] = useState(false);
+
+  const onVideo = () => {
+    if (play) {
+      videoRef.current.pause();
+      setPlay(false)
+    }
+    else {
+      videoRef.current.play();
+      setPlay(true)
+    }
+  }
 
   const fetchRecommend = async () => {
     try {
@@ -48,15 +62,15 @@ const Recommend = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0}}>
+      <h5 style={{ height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0 }}>
         {video ? video.Name : "Loading..."}
       </h5>
       {url && <video
         src={url}
-        autoPlay
         loop
-        controls
         playsInline
+        onClick={onVideo}
+        ref={videoRef}
         style={{
           maxWidth: '100%',
           maxHeight: '80vh',

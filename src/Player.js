@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GetSeries, RecordHistory } from './service';
 import { useSwipeable } from 'react-swipeable';
@@ -12,6 +12,20 @@ const Player = () => {
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
+  
+  const videoRef = useRef(null)
+  const [play, setPlay] = useState(false);
+
+  const onVideo = () => {
+    if (play) {
+      videoRef.current.pause();
+      setPlay(false)
+    }
+    else {
+      videoRef.current.play();
+      setPlay(true)
+    }
+  }
 
   const fetchVideo = useCallback(async () => {
     try {
@@ -71,15 +85,15 @@ const Player = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0}}>
+      <h5 style={{ height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0 }}>
         {video ? `${video.Name} - ${episode}` : "Loading..."}
       </h5>
       {url && <video
         src={url}
-        autoPlay
         loop
-        controls
         playsInline
+        onClick={onVideo}
+        ref={videoRef}
         style={{
           maxWidth: '100%',
           maxHeight: '80vh',
