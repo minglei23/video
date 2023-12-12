@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetSeriesList } from './service';
 import Carousel from './Carousel';
-import SeriesList from './SeriesList';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
@@ -34,18 +33,17 @@ export default function Home() {
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(#333, #111)',
+        background: 'linear-gradient(#444, #111)',
         padding: '10px',
         margin: '10px 0'
       }}>
-        <EmojiEventsIcon style={{ color: '#fc5' }} />
-        <h3 style={{ fontWeight: 'bold', color: '#fc5', margin: '0 10px' }}>Trending</h3>
+        <EmojiEventsIcon style={{ color: '#fda' }} />
+        <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>Trending</h3>
       </div>
       <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Coming Soon</h3>
-      <SeriesList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
+      <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
       <SeriesRows seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />

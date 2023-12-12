@@ -5,7 +5,7 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '0 1 155px', margin: '0px 10px' }} key={seriesItem.id}>
+        <div style={{ flex: '0 1 170px', margin: '0px 5px' }} key={seriesItem.id}>
           <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
