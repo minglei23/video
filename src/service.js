@@ -96,6 +96,17 @@ export const login = async (email, password) => {
   }
 };
 
+export const loginTest = async () => {
+  try {
+    const hashedPassword = md5("123456");
+    const data = await postRequest(`${BASE_URL}/login`, { email: "b@test.com", password: hashedPassword });
+    SetToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'Login Failed:');
+  }
+};
+
 export const register = async (email, password) => {
   try {
     const hashedPassword = md5(password);
