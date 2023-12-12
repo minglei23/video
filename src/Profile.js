@@ -8,6 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Login from './Login';
 import Points from './Points';
 import { UserContext } from './index.js';
@@ -37,33 +38,40 @@ const Profile = () => {
             <ListItem onClick={() => console.log('Verify Email')}>
               <EmailIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Verify Email" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}
           {!user.VIP && (
             <ListItem onClick={() => console.log('Become VIP')}>
               <StarIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Become VIP" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}
           <ListItem onClick={() => navigateTo('/history')}>
             <HistoryIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="History" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => navigateTo('/favorites')}>
             <FavoriteIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Favorites" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => console.log('Settings')}>
             <SettingsIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Settings" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => console.log('Help')}>
             <HelpIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Help" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => console.log('Sign Out')}>
             <ExitToAppIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Sign Out" />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
         </List>
       </Container>
