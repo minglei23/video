@@ -4,7 +4,6 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SearchIcon from '@mui/icons-material/Search';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { Grid, Button, Box, Typography, InputBase } from '@mui/material';
 
 export default function Carousel({ seriesList, handleSeriesClick }) {
@@ -23,8 +22,14 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
 
   return (
     <Box>
-      <Box sx={{ position: 'absolute', zIndex: 1, width: '100%' }}>
-        <Grid container alignItems="center" spacing={1} style={{ backgroundColor: 'rgba(0, 0, 0, 0.7)' }}>
+      <Box sx={{
+        position: 'absolute',
+        zIndex: 1,
+        width: '100%',
+        backdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(0, 0, 0, 0.2)'
+      }}>
+        <Grid container alignItems="center" spacing={1} >
           <Grid item marginLeft={2} marginRight={1}>
             <Typography style={{ fontWeight: 'bold', color: '#fc5' }}>MoReel</Typography>
           </Grid>
@@ -33,13 +38,13 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
               fullWidth
               placeholder="    Search"
               onClick={() => navigate('/search')}
-              style={{ backgroundColor: 'rgba(100, 100, 100, 0.5)', padding: '5px', paddingRight: '15px', borderRadius: '20px', color: '#fff' }}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '2px', paddingRight: '15px', borderRadius: '20px', color: '#fff' }}
               endAdornment={<SearchIcon style={{ color: '#fc5', cursor: 'pointer' }} />}
             />
           </Grid>
           <Grid item >
             <Button onClick={() => navigate('/rewards')}>
-              <MonetizationOnIcon style={{ color: '#fc5' }} />
+              <img src="/image/coin.gif" alt="Coin" style={{ width: 24, height: 24 }} />
             </Button>
           </Grid>
         </Grid>
