@@ -12,7 +12,7 @@ const Recommend = () => {
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
 
   const videoRef = useRef(null)
-  const [play, setPlay] = useState(true);
+  const [play, setPlay] = useState(false);
 
   const onVideo = () => {
     if (play) {
