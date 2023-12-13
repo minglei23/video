@@ -12,7 +12,6 @@ const PlayerIcons = ({ seriesId }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchSeries = async () => {
@@ -24,13 +23,7 @@ const PlayerIcons = ({ seriesId }) => {
       }
     };
     fetchSeries();
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 500);
-
   }, [seriesId]);
-
-  if (!isVisible) return null;
 
   const clickFavorites = async () => {
     const user = GetUser();
@@ -58,14 +51,14 @@ const PlayerIcons = ({ seriesId }) => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-        <IconButton style={{ fontSize: '2em', color: '#fff' }}>
-          <ShareIcon />
+        <IconButton >
+          <ShareIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
-        <IconButton onClick={clickFavorites} style={{ fontSize: '2em', color: '#fff' }}>
-          <FavoriteIcon style={{ color: isFavorited ? 'red' : '#fff' }} />
+        <IconButton onClick={clickFavorites} >
+          <FavoriteIcon style={{ fontSize: '1.5em', color: isFavorited ? 'red' : '#fff' }} />
         </IconButton>
-        <IconButton onClick={handleOpenModal} style={{ fontSize: '2em', color: '#fff' }}>
-          <StorageIcon />
+        <IconButton onClick={handleOpenModal} >
+          <StorageIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
       </div>
       <Modal

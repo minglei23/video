@@ -4,6 +4,8 @@ import { GetSeries, RecordHistory } from './service';
 import { useSwipeable } from 'react-swipeable';
 import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
+import SeriesName from './SeriesName.js';
+import StopIcons from './StopIcons.js';
 
 const Player = () => {
   const navigate = useNavigate();
@@ -25,6 +27,10 @@ const Player = () => {
       videoRef.current.play();
       setPlay(true)
     }
+  }
+
+  const onIcons = () => {
+    setShowPlayerIcons(!showPlayerIcons);
   }
 
   const fetchVideo = useCallback(async () => {
@@ -86,21 +92,20 @@ const Player = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{ height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0 }}>
-        {video ? `${video.Name} - ${episode}` : "Loading..."}
-      </h5>
       {url && <video
         src={url}
         loop
         playsInline
-        onClick={onVideo}
+        onClick={onIcons}
         ref={videoRef}
         style={{
           maxWidth: '100%',
-          maxHeight: '80vh',
+          maxHeight: '100%',
           objectFit: 'contain',
         }}
       />}
+      {video && showPlayerIcons && <StopIcons stop={play} click={onVideo} />}
+      {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       <div style={{ height: '8vh' }}></div>
     </div>

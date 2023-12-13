@@ -3,6 +3,8 @@ import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
 import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
+import SeriesName from './SeriesName.js';
+import StopIcons from './StopIcons.js';
 
 const Recommend = () => {
   const [url, setUrl] = useState("");
@@ -21,6 +23,10 @@ const Recommend = () => {
       videoRef.current.play();
       setPlay(true)
     }
+  }
+
+  const onIcons = () => {
+    setShowPlayerIcons(!showPlayerIcons);
   }
 
   const fetchRecommend = async () => {
@@ -63,21 +69,20 @@ const Recommend = () => {
       height: '92vh',
       width: '100%',
     }}>
-      <h5 style={{ height: '4vh', lineHeight: '4vh', fontSize: '2vh', margin: 0, padding: 0 }}>
-        {video ? video.Name : "Loading..."}
-      </h5>
       {url && <video
         src={url}
         loop
         playsInline
-        onClick={onVideo}
+        onClick={onIcons}
         ref={videoRef}
         style={{
           maxWidth: '100%',
-          maxHeight: '80vh',
+          maxHeight: '100%',
           objectFit: 'contain',
         }}
       />}
+      {video && showPlayerIcons && <StopIcons stop={play} click={onVideo} />}
+      {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
     </div>
   );
