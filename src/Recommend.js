@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
 import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
+
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const Recommend = () => {
   const [url, setUrl] = useState("");
@@ -63,6 +69,7 @@ const Recommend = () => {
 
   return (
     <div {...handlers} style={{
+      position: 'fixed',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -70,6 +77,7 @@ const Recommend = () => {
       height: '100vh',
       width: '100%',
       zIndex: 20,
+      backgroundColor: '#111',
     }}>
       {url && <video
         src={url}
@@ -86,6 +94,12 @@ const Recommend = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
+
+      {showPlayerIcons && <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none', zIndex: 10 }}>
+        <BottomNavigationAction label="Home" style={{ color: 'white' }} icon={<HomeIcon />} component={Link} to="/" />
+        <BottomNavigationAction label="Recommend" style={{ color: 'white' }} icon={<PlayCircleOutlineIcon />} component={Link} to="/recommend" />
+        <BottomNavigationAction label="Profile" style={{ color: 'white' }} icon={<PersonOutlineIcon />} component={Link} to="/profile" />
+      </BottomNavigation>}
     </div>
   );
 };
