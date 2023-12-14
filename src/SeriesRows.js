@@ -17,7 +17,7 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
                 />
               </div>
               <CardContent style={{ padding: '0px' }}>
-                <h4>{seriesItem.Name}</h4>
+                <h3>{seriesItem.Name}</h3>
               </CardContent>
             </CardActionArea>
           </Card>
