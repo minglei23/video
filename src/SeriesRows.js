@@ -3,17 +3,19 @@ import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
 
 export default function SeriesRows({ seriesList, handleSeriesClick }) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '0 1 175px', margin: '0px 5px' }} key={seriesItem.id}>
+        <div style={{ flex: '1 0 calc(50% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
           <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
-              <CardMedia
-                component="img"
-                height="200"
-                image={seriesItem.BaseURL + '/image.jpg'}
-                alt={seriesItem.Name}
-              />
+              <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
+                <CardMedia
+                  component="img"
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                  image={seriesItem.BaseURL + '/image.jpg'}
+                  alt={seriesItem.Name}
+                />
+              </div>
               <CardContent style={{ padding: '0px' }}>
                 <h4>{seriesItem.Name}</h4>
               </CardContent>
