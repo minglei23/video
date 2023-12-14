@@ -22,6 +22,7 @@ const Player = () => {
     if (play) {
       videoRef.current.pause();
       setPlay(false)
+      setShowPlayerIcons(true);
     }
     else {
       videoRef.current.play();
@@ -104,7 +105,7 @@ const Player = () => {
           objectFit: 'contain',
         }}
       />}
-      {video && showPlayerIcons && <StopIcons stop={play} click={onVideo} />}
+      {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       <div style={{ height: '8vh' }}></div>
