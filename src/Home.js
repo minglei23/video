@@ -5,6 +5,7 @@ import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import SeriesList from './SeriesList';
+import TrendingList from './TrendingList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 export default function Home() {
@@ -41,7 +42,7 @@ export default function Home() {
         <EmojiEventsIcon style={{ color: '#fda' }} />
         <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>Trending</h3>
       </div>
-      <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+      <TrendingList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>New Release</h3>
       <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
