@@ -37,7 +37,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
-        <div style={{ fontFamily: 'sans-serif', backgroundColor: '#111', color: 'white' }}>
+        <div style={{ fontFamily: 'Poppins', backgroundColor: '#111', color: 'white' }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />
