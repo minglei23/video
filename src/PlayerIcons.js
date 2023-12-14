@@ -46,7 +46,7 @@ const PlayerIcons = ({ seriesId }) => {
       <div style={{
         position: 'absolute',
         right: 10,
-        bottom: 100,
+        bottom: 240,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
