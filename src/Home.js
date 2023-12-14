@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetSeriesList } from './service';
+import { GetHistory } from './cache';
 import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
@@ -24,7 +25,12 @@ export default function Home() {
   }, []);
 
   const handleSeriesClick = (seriesItem) => {
-    navigate(`/series/${seriesItem.ID}`);
+    const history = GetHistory(seriesItem.ID);
+    if (history) {
+      navigate(`/player/${seriesItem.ID}/${history}`);
+    } else {
+      navigate(`/player/${seriesItem.ID}/1`);
+    }
   };
 
   return (

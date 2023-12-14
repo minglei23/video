@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams, useNavigate, Link} from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { GetSeries, RecordHistory } from './service';
+import { SetHistory } from './cache';
 import { useSwipeable } from 'react-swipeable';
 import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
@@ -49,6 +50,7 @@ const Player = () => {
         setVideo(series);
         videoRef.current.play();
         setShowPlayerIcons(true);
+        SetHistory(series.ID, episode);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
