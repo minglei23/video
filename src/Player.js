@@ -90,8 +90,9 @@ const Player = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '92vh',
+      height: '100vh',
       width: '100%',
+      zIndex: 20,
     }}>
       {url && <video
         src={url}
@@ -108,7 +109,6 @@ const Player = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
-      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };

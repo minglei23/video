@@ -18,6 +18,7 @@ const Recommend = () => {
     if (play) {
       videoRef.current.pause();
       setPlay(false)
+      setShowPlayerIcons(true);
     }
     else {
       videoRef.current.play();
@@ -66,8 +67,9 @@ const Recommend = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '92vh',
+      height: '100vh',
       width: '100%',
+      zIndex: 20,
     }}>
       {url && <video
         src={url}
@@ -81,7 +83,7 @@ const Recommend = () => {
           objectFit: 'contain',
         }}
       />}
-      {video && showPlayerIcons && <StopIcons stop={play} click={onVideo} />}
+      {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
     </div>
