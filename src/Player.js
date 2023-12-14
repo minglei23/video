@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { GetSeries, RecordHistory } from './service';
 import { SetHistory } from './cache';
 import { useSwipeable } from 'react-swipeable';
@@ -7,11 +7,7 @@ import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
-
-import { BottomNavigation, BottomNavigationAction } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import Menu from './Menu.js';
 
 const Player = () => {
   const navigate = useNavigate();
@@ -118,12 +114,7 @@ const Player = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
-
-      {showPlayerIcons && <BottomNavigation showLabels style={{ position: 'fixed', bottom: 0, height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none', zIndex: 10 }}>
-        <BottomNavigationAction label="Home" style={{ color: 'white' }} icon={<HomeIcon />} component={Link} to="/" />
-        <BottomNavigationAction label="Recommend" style={{ color: 'white' }} icon={<PlayCircleOutlineIcon />} component={Link} to="/recommend" />
-        <BottomNavigationAction label="Profile" style={{ color: 'white' }} icon={<PersonOutlineIcon />} component={Link} to="/profile" />
-      </BottomNavigation>}
+      {showPlayerIcons && <Menu />}
     </div>
   );
 };
