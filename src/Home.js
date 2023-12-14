@@ -4,6 +4,7 @@ import { GetSeriesList } from './service';
 import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
+import SeriesList from './SeriesList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 export default function Home() {
@@ -42,7 +43,16 @@ export default function Home() {
       </div>
       <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
 
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>New Release</h3>
+      <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
+
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Coming Soon</h3>
+      <SeriesList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Love After Marriage</h3>
+      <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Dating My Boss</h3>
       <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
