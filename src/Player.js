@@ -8,6 +8,7 @@ import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
 import Menu from './Menu.js';
+import LastEpisodeModal from './LastEpisodeModal.js';
 
 const Player = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Player = () => {
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
+  const [lastEpisodeModal, setLastEpisodeModal] = useState(false);
 
   const videoRef = useRef(null)
   const [play, setPlay] = useState(false);
@@ -81,6 +83,8 @@ const Player = () => {
       const episodeNumber = parseInt(episode);
       if (episodeNumber < totalEpisodes) {
         navigateToEpisode(episodeNumber + 1);
+      } else {
+        setLastEpisodeModal(true);
       }
     },
     preventDefaultTouchmoveEvent: true,
@@ -115,6 +119,7 @@ const Player = () => {
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       {showPlayerIcons && <Menu />}
+      <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)}/>
     </div>
   );
 };
