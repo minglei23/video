@@ -39,11 +39,15 @@ const Recommend = () => {
         setUrl(`${series.BaseURL}/1.mp4`);
         setVideo(series);
         setShowPlayerIcons(true);
-        videoRef.current.play();
         const user = GetUser()
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), episode)
         }
+        videoRef.current.play().then(() => {
+          setPlay(true);
+        }).catch(() => {
+          setPlay(false);
+        });
       }
     } catch (error) {
       console.error('Error fetching recommend:', error);

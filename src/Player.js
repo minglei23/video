@@ -48,12 +48,16 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
-        videoRef.current.play();
         setShowPlayerIcons(true);
         SetHistory(series.ID, episode);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
+        videoRef.current.play().then(() => {
+          setPlay(true);
+        }).catch(() => {
+          setPlay(false);
+        });
       }
     } catch (error) {
       console.error('Error fetching video:', error);
