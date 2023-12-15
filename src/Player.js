@@ -17,12 +17,12 @@ const Player = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
-  const [showPlayerIcons, setShowPlayerIcons] = useState(false);
+  const [showPlayerIcons, setShowPlayerIcons] = useState(true);
   const [lastEpisodeModal, setLastEpisodeModal] = useState(false);
   const [vipEpisodeModal, setVipEpisodeModal] = useState(false);
 
   const videoRef = useRef(null)
-  const [play, setPlay] = useState(false);
+  const [play, setPlay] = useState(true);
 
   const onVideo = () => {
     if (play) {

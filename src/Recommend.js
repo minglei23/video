@@ -10,10 +10,10 @@ import Menu from './Menu.js';
 const Recommend = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
-  const [showPlayerIcons, setShowPlayerIcons] = useState(false);
+  const [showPlayerIcons, setShowPlayerIcons] = useState(true);
 
   const videoRef = useRef(null)
-  const [play, setPlay] = useState(false);
+  const [play, setPlay] = useState(true);
 
   const onVideo = () => {
     if (play) {
