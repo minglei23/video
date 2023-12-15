@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Grid, Typography, Box } from '@mui/material';
+import { Button, Grid, Typography, Box, Paper } from '@mui/material';
 
-export default function SeriesInfo({user, series}) {
+export default function SeriesInfo({ user, series }) {
 
   const navigate = useNavigate();
 
@@ -16,10 +16,24 @@ export default function SeriesInfo({user, series}) {
 
   return (
     <Box style={{ maxHeight: '50vh', padding: '15px' }}>
-      <Typography variant="h5" marginBottom="20px" color={'#fff'}>
-        {series && series.Name}
-      </Typography>
-      <Grid container spacing={1} justifyContent="flex-start">
+      <Grid container alignItems="center" spacing={1}>
+        <Grid item>
+          <img src={series.BaseURL + '/image.jpg'} alt="Series" style={{ maxHeight: '120px', maxWidth: '120px' }} />
+        </Grid>
+
+        <Grid item xs>
+          <Typography variant="h6" marginBottom="10px" color={'#fff'}>
+            {series && series.Name}
+          </Typography>
+          <Paper style={{ maxHeight: 50, overflowY: 'auto', padding: '10px', backgroundColor: '#444', color: '#fff' }}>
+            <Typography variant="body2">
+              {'...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ......'}
+            </Typography>
+          </Paper>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={1} justifyContent="flex-start" style={{ marginTop: '20px' }}>
         {series && Array.from({ length: series.TotalNumber }).map((_, index) => {
           const isAccessible = user?.VIP || index < 5;
           return (
