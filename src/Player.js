@@ -9,6 +9,7 @@ import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
 import Menu from './Menu.js';
 import LastEpisodeModal from './LastEpisodeModal.js';
+import VipEpisodeModal from './VipEpisodeModal.js';
 
 const Player = () => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Player = () => {
   const [totalEpisodes, setTotalEpisodes] = useState(0);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
   const [lastEpisodeModal, setLastEpisodeModal] = useState(false);
+  const [vipEpisodeModal, setVipEpisodeModal] = useState(false);
 
   const videoRef = useRef(null)
   const [play, setPlay] = useState(false);
@@ -82,7 +84,15 @@ const Player = () => {
     onSwipedUp: () => {
       const episodeNumber = parseInt(episode);
       if (episodeNumber < totalEpisodes) {
-        navigateToEpisode(episodeNumber + 1);
+        if (episodeNumber < 5) {
+          navigateToEpisode(episodeNumber + 1);
+        } else {
+          const user = GetUser();
+          if (user && user.VIP) {
+            navigateToEpisode(episodeNumber + 1);
+          }
+          setVipEpisodeModal(true);
+        }
       } else {
         setLastEpisodeModal(true);
       }
@@ -120,6 +130,7 @@ const Player = () => {
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       {showPlayerIcons && <Menu />}
       <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)}/>
+      <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)}/>
     </div>
   );
 };
