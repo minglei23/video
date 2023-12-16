@@ -1,5 +1,8 @@
 import React from 'react';
 import { Modal, Box, Button } from '@mui/material';
+import VipButton from './VipButton';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CoinIcon from '@mui/icons-material/MonetizationOn';
 
 const VipEpisodeModal = ({ open, onClose }) => {
   return (
@@ -24,94 +27,25 @@ const VipEpisodeModal = ({ open, onClose }) => {
         display: 'flex',
         flexDirection: 'column',
       }}>
+        <Button sx={{
+          position: 'absolute',
+          top: 30,
+          right: 35,
+          color: '#fff',
+        }}
+        >
+          <CoinIcon style={{ color: '#fa0', width: '20px', marginRight: '5px' }} />
+          Store
+          <ArrowForwardIosIcon style={{ width: '15px', marginLeft: '5px' }} />
+        </Button>
         <h5 style={{ margin: '3px 20px' }}>
           Price: 1 Coins
         </h5>
         <h5 style={{ margin: '3px 20px' }}>
           Balance: 0 Coins
         </h5>
-        <Button
-          style={{
-            margin: '10px 20px',
-            display: 'flex',
-            alignItems: 'stretch',
-            border: '2px solid #c70',
-            borderRadius: '10px',
-            padding: 0,
-          }}
-        >
-          <div
-            style={{
-              width: '70%',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-            }}
-          >
-            <h4 style={{ margin: '8px 0 0 0', color: '#fff', lineHeight: '1.2' }}>
-              100 Coins
-            </h4>
-            <h5 style={{ margin: '0', color: '#c70', lineHeight: '1.2' }}>
-              + 20 Coins
-            </h5>
-          </div>
-          <div
-            style={{
-              width: '30%',
-              backgroundColor: '#c70',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: '0 5px 5px 0',
-              height: '45px',
-            }}
-          >
-            <h3 style={{ margin: '0', color: '#fff' }}>
-              $ 1.99
-            </h3>
-          </div>
-        </Button>
-        <Button
-          style={{
-            margin: '10px 20px',
-            display: 'flex',
-            alignItems: 'stretch',
-            border: '2px solid #fa0',
-            borderRadius: '10px',
-            padding: 0,
-          }}
-        >
-          <div
-            style={{
-              width: '70%',
-              display: 'flex',
-              flexDirection: 'column',
-              height: '100%',
-            }}
-          >
-            <h4 style={{ margin: '8px 0 0 0', color: '#fff', lineHeight: '1.2' }}>
-              Become VIP
-            </h4>
-            <h5 style={{ margin: '0', color: '#fa0', lineHeight: '1.2' }}>
-              Free for all series
-            </h5>
-          </div>
-          <div
-            style={{
-              width: '30%',
-              backgroundColor: '#fa0',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: '0 5px 5px 0',
-              height: '45px',
-            }}
-          >
-            <h3 style={{ margin: '0', color: '#fff' }}>
-              $ 9.99
-            </h3>
-          </div>
-        </Button>
+        <VipButton border={'2px solid #c70'} color={'#c70'} content1={'100 Coins'} content2={'+ 20 Coins'} content3={'$ 1.99'} />
+        <VipButton border={'2px solid #fa0'} color={'#fa0'} content1={'200 Coins'} content2={'+ 50 Coins'} content3={'$ 3.99'} />
       </Box>
     </Modal>
   );
