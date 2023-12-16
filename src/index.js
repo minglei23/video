@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-
 import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
-import Favorites from './Favorites';
+import NewFavorites from './NewFavorites';
 import History from './History';
 import Recommend from './Recommend';
 import Video from "./video";
 import Search from "./Search";
-import Series from "./Series";
+import NewSeries from "./NewSeries";
 import Menu from "./Menu";
 
 const UserContext = createContext();
@@ -26,7 +26,7 @@ function SearchWrapper() {
 
 function SeriesWrapper() {
   let { seriesId = 0 } = useParams();
-  return <Series seriesId={seriesId} />;
+  return <NewSeries seriesId={seriesId} />;
 }
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/favorites" element={<NewFavorites />} />
             <Route path="/history" element={<History />} />
             <Route path="/recommend" element={<Recommend />} />
             <Route path="/video" element={<Video />} />
