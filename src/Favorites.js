@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, List, ListItem, ListItemText } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getFavorites } from './service.js';
-import { GetUser } from './cache';
+import { GetUser, GetHistory } from './cache';
+import FavoritesRows from './FavoritesRows';
 
 const Favorites = () => {
   const [list, setList] = useState([]);
@@ -23,23 +24,21 @@ const Favorites = () => {
     fetchFavoriteList();
   }, []);
 
+  const handleSeriesClick = (seriesItem) => {
+    const history = GetHistory(seriesItem.ID);
+    if (history) {
+      navigate(`/player/${seriesItem.ID}/${history}`);
+    } else {
+      navigate(`/player/${seriesItem.ID}/1`);
+    }
+  };
+
   return (
-    <div style={{ height: '92vh', overflowY: 'auto', padding: '20px' }}>
-      <Typography id="list-modal-title" variant="h6" component="h2" align="center">
+    <div style={{ position: 'absolute', height: '92vh', overflowY: 'auto', backgroundColor: '#111', padding: '20px'}}>
+      <Typography id="list-modal-title" variant="h6" component="h2" align="center" marginBottom={"10px"}>
         Favorites
       </Typography>
-      <List>
-        {list && list.map((item) => (
-          <ListItem key={item.ID}>
-            <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{ maxWidth: '50px', height: 'auto' }} />
-            <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
-            <Button style={{ color: '#d80' }} onClick={() => navigate(`/player/${item.ID}/1`)}>
-              Play
-            </Button>
-          </ListItem>
-        ))}
-      </List>
-      <div style={{ height: '8vh' }}></div>
+      {list && <FavoritesRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
     </div>
   );
 };

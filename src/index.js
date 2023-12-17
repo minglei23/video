@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-
 import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
-import NewFavorites from './NewFavorites';
+import Favorites from './Favorites';
 import History from './History';
 import Recommend from './Recommend';
 import Video from "./video";
@@ -41,7 +41,7 @@ function App() {
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/favorites" element={<NewFavorites />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
             <Route path="/recommend" element={<Recommend />} />
             <Route path="/video" element={<Video />} />
