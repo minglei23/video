@@ -39,7 +39,7 @@ const Favorites = () => {
         Favorites
       </Typography>
       {list && <FavoritesRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
-      <div style={{ height: '8vh' }}></div>
+      <div style={{ height: '20vh' }}></div>
     </div>
   );
 };
