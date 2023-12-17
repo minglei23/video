@@ -3,18 +3,19 @@ import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
 import { GetHistory } from './cache';
 
 export default function FavoritesRows({ seriesList, handleSeriesClick }) {
-  const isOdd = seriesList.length % 2 !== 0;
+  const numberOfPlaceholders = (3 - (seriesList.length % 3)) % 3;
   const toAddOn = (seriesItem) => {
     const history = GetHistory(seriesItem.ID);
     if (history) {
       return `EP.${history} / EP.${seriesItem.TotalNumber}`;
     }
-    return `EP.1/EP.${seriesItem.TotalNumber}`;
+    return `EP.1 / EP.${seriesItem.TotalNumber}`;
   };
+
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
+        <div style={{ flex: '1 0 calc(33% - 10px)', maxWidth: 'calc(33% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
           <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
@@ -33,8 +34,9 @@ export default function FavoritesRows({ seriesList, handleSeriesClick }) {
           </Card>
         </div>
       ))}
-      {isOdd && <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px', visibility: 'hidden' }}></div>}
+      {[...Array(numberOfPlaceholders)].map((_, index) => (
+        <div key={`placeholder-${index}`} style={{ flex: '1 0 calc(33% - 10px)', maxWidth: 'calc(33% - 10px)', margin: '0 5px', visibility: 'hidden' }}></div>
+      ))}
     </div>
   );
 }
-
