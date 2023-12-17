@@ -185,7 +185,7 @@ export const getFavorites = async (userID) => {
   }
 };
 
-export const GetHistory = async (userID) => {
+export const getHistory = async (userID) => {
   try {
     const token = GetToken();
     return await postRequest(`${BASE_URL}/history`, { token, userID });

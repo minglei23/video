@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Button, List, ListItem, ListItemText } from '@mui/material';
+import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { GetHistory } from './service.js';
+import { getHistory } from './service.js';
 import { GetUser } from './cache';
+import HistoryRows from './HistoryRows';
 
 const History = () => {
   const [list, setList] = useState([]);
@@ -13,7 +14,7 @@ const History = () => {
       const user = GetUser()
       if (user) {
         try {
-          const response = await GetHistory(user.ID);
+          const response = await getHistory(user.ID);
           setList(response.HistoryList);
         } catch (error) {
           console.error('Error fetching history:', error);
@@ -23,22 +24,16 @@ const History = () => {
     fetchHistory();
   }, []);
 
+  const handleSeriesClick = (seriesItem) => {
+    navigate(`/player/${seriesItem.ID}/${seriesItem.Episode}`);
+  };
+
   return (
-    <div style={{ height: '92vh', overflowY: 'auto', padding: '20px' }}>
-      <Typography id="list-modal-title" variant="h6" component="h2" align="center">
+    <div style={{ position: 'absolute', height: '92vh', width: '100%', overflowY: 'auto', backgroundColor: '#111' }}>
+      <Typography id="list-modal-title" variant="h6" component="h2" align="center" margin={"10px"}>
         History
       </Typography>
-      <List>
-        {list && list.map((item) => (
-          <ListItem key={item.ID}>
-            <img src={`${item.BaseURL}/image.jpg`} alt={item.Name} style={{ maxWidth: '50px', height: 'auto' }} />
-            <ListItemText primary={item.Name} primaryTypographyProps={{ align: 'center' }} />
-            <Button style={{ color: '#d80' }} onClick={() => navigate(`/player/${item.ID}/${item.Episode}`)}>
-              {`Episode ${item.Episode}`}
-            </Button>
-          </ListItem>
-        ))}
-      </List>
+      {list && <HistoryRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
       <div style={{ height: '8vh' }}></div>
     </div>
   );
