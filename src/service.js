@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory } from './cache';
 
 const BASE_URL = 'http://18.188.120.153:8080';
 
@@ -90,6 +90,22 @@ export const login = async (email, password) => {
     const hashedPassword = md5(password);
     const data = await postRequest(`${BASE_URL}/login`, { email, password: hashedPassword });
     SetToken(data.Token);
+    try {
+      const favorites = await postRequest(`${BASE_URL}/favorites`, { token: data.Token, userID: data.ID });
+      if (favorites.FavoritesList) {
+        favorites.FavoritesList.forEach(item => {
+          SetFavorites(item.ID);
+        });
+      }
+      const history = await postRequest(`${BASE_URL}/history`, { token: data.Token, userID: data.ID });
+      if (history.HistoryList) {
+        history.HistoryList.forEach(item => {
+          SetHistory(item.ID, item.Episode);
+        });
+      }
+    } catch (error) {
+      console.log(error, 'Login Failed:');
+    }
     return data;
   } catch (error) {
     handleError(error, 'Login Failed:');
@@ -101,6 +117,22 @@ export const loginTest = async () => {
     const hashedPassword = md5("123456");
     const data = await postRequest(`${BASE_URL}/login`, { email: "b@test.com", password: hashedPassword });
     SetToken(data.Token);
+    try {
+      const favorites = await postRequest(`${BASE_URL}/favorites`, { token: data.Token, userID: data.ID });
+      if (favorites.FavoritesList) {
+        favorites.FavoritesList.forEach(item => {
+          SetFavorites(item.ID);
+        });
+      }
+      const history = await postRequest(`${BASE_URL}/history`, { token: data.Token, userID: data.ID });
+      if (history.HistoryList) {
+        history.HistoryList.forEach(item => {
+          SetHistory(item.ID, item.Episode);
+        });
+      }
+    } catch (error) {
+      console.log(error, 'Login Failed:');
+    }
     return data;
   } catch (error) {
     handleError(error, 'Login Failed:');
