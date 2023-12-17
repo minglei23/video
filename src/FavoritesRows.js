@@ -1,8 +1,16 @@
 import React from 'react';
 import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
+import { GetHistory } from './cache';
 
 export default function FavoritesRows({ seriesList, handleSeriesClick }) {
   const isOdd = seriesList.length % 2 !== 0;
+  const toAddOn = (seriesItem) => {
+    const history = GetHistory(seriesItem.ID);
+    if (history) {
+      return `EP.${history} / EP.${seriesItem.TotalNumber}`;
+    }
+    return `EP.1/EP.${seriesItem.TotalNumber}`;
+  };
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
@@ -17,8 +25,9 @@ export default function FavoritesRows({ seriesList, handleSeriesClick }) {
                   alt={seriesItem.Name}
                 />
               </div>
-              <CardContent style={{ padding: '0px' }}>
-                <h3>{seriesItem.Name}</h3>
+              <CardContent style={{ padding: '0' }}>
+                <h5 style={{ margin: '5px 0', lineHeight: '1.2' }}>{seriesItem.Name}</h5>
+                <h5 style={{ margin: '5px 0', lineHeight: '1.2', color: '#aaa' }}>{toAddOn(seriesItem)}</h5>
               </CardContent>
             </CardActionArea>
           </Card>

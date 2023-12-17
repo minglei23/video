@@ -34,11 +34,12 @@ const Favorites = () => {
   };
 
   return (
-    <div style={{ position: 'absolute', height: '92vh', overflowY: 'auto', backgroundColor: '#111', padding: '20px'}}>
+    <div style={{ position: 'absolute', height: '92vh', width: '100%', overflowY: 'auto', backgroundColor: '#111'}}>
       <Typography id="list-modal-title" variant="h6" component="h2" align="center" marginBottom={"10px"}>
         Favorites
       </Typography>
       {list && <FavoritesRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
+      <div style={{ height: '8vh' }}></div>
     </div>
   );
 };
