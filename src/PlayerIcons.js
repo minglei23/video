@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton, Modal, Box } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import StorageIcon from '@mui/icons-material/Storage';
-import { recordFavorites, removeFavorites, GetSeries } from './service';
-import { SetFavorites, RemoveFavorites, GetFavorites } from './cache';
+import { GetSeries } from './service';
 import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
+import FavoritesIcon from './FavoritesIcon';
 
 const PlayerIcons = ({ seriesId }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
@@ -21,37 +19,12 @@ const PlayerIcons = ({ seriesId }) => {
         setUser(user)
         const fetchedSeries = await GetSeries(seriesId);
         setSeries(fetchedSeries);
-        const favorite = GetFavorites(seriesId)
-        setIsFavorited(favorite)
       } catch (error) {
         console.error('Error fetching series:', error);
       }
     };
     fetchSeries();
   }, [seriesId]);
-
-  const clickFavorites = async () => {
-    setIsFavorited(!isFavorited);
-    if (isFavorited) {
-      RemoveFavorites(seriesId)
-      if (user) {
-        try {
-          await removeFavorites(user.ID, parseInt(seriesId));
-        } catch (error) {
-          console.error('Error removing favorite:', error);
-        }
-      }
-    } else {
-      SetFavorites(seriesId)
-      if (user) {
-        try {
-          await recordFavorites(user.ID, parseInt(seriesId));
-        } catch (error) {
-          console.error('Error recording favorite:', error);
-        }
-      }
-    }
-  };
 
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
@@ -69,9 +42,7 @@ const PlayerIcons = ({ seriesId }) => {
         <IconButton >
           <ShareIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
-        <IconButton onClick={clickFavorites} >
-          <FavoriteIcon style={{ fontSize: '1.5em', color: isFavorited ? 'red' : '#fff' }} />
-        </IconButton>
+        <FavoritesIcon seriesId={seriesId} user={user} />
         <IconButton onClick={handleOpenModal} >
           <StorageIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
