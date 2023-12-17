@@ -117,12 +117,21 @@ export const register = async (email, password) => {
   }
 };
 
-export const RecordFavorites = async (userID, videoID) => {
+export const recordFavorites = async (userID, videoID) => {
   try {
     const token = GetToken();
     return await postRequest(`${BASE_URL}/record-favorites`, { token, userID, videoID });
   } catch (error) {
     handleError(error, 'Record Favorites Failed:');
+  }
+};
+
+export const removeFavorites = async (userID, videoID) => {
+  try {
+    const token = GetToken();
+    return await postRequest(`${BASE_URL}/remove-favorites`, { token, userID, videoID });
+  } catch (error) {
+    handleError(error, 'Remove Favorites Failed:');
   }
 };
 
@@ -135,7 +144,7 @@ export const RecordHistory = async (userID, videoID, episode) => {
   }
 };
 
-export const GetFavorites = async (userID) => {
+export const getFavorites = async (userID) => {
   try {
     const token = GetToken();
     return await postRequest(`${BASE_URL}/favorites`, { token, userID });

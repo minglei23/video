@@ -3,7 +3,8 @@ import { IconButton, Modal, Box } from '@mui/material';
 import ShareIcon from '@mui/icons-material/Share';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import StorageIcon from '@mui/icons-material/Storage';
-import { RecordFavorites, GetSeries } from './service';
+import { recordFavorites, removeFavorites, GetSeries } from './service';
+import { SetFavorites, RemoveFavorites, GetFavorites } from './cache';
 import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
 
@@ -16,8 +17,12 @@ const PlayerIcons = ({ seriesId }) => {
   useEffect(() => {
     const fetchSeries = async () => {
       try {
+        const user = GetUser();
+        setUser(user)
         const fetchedSeries = await GetSeries(seriesId);
         setSeries(fetchedSeries);
+        const favorite = GetFavorites(seriesId)
+        setIsFavorited(favorite)
       } catch (error) {
         console.error('Error fetching series:', error);
       }
@@ -26,14 +31,24 @@ const PlayerIcons = ({ seriesId }) => {
   }, [seriesId]);
 
   const clickFavorites = async () => {
-    const user = GetUser();
-    if (user) {
-      try {
-        setUser(user)
-        await RecordFavorites(user.ID, parseInt(seriesId));
-        setIsFavorited(!isFavorited);
-      } catch (error) {
-        console.error('Error recording favorite:', error);
+    setIsFavorited(!isFavorited);
+    if (isFavorited) {
+      RemoveFavorites(seriesId)
+      if (user) {
+        try {
+          await removeFavorites(user.ID, parseInt(seriesId));
+        } catch (error) {
+          console.error('Error removing favorite:', error);
+        }
+      }
+    } else {
+      SetFavorites(seriesId)
+      if (user) {
+        try {
+          await recordFavorites(user.ID, parseInt(seriesId));
+        } catch (error) {
+          console.error('Error recording favorite:', error);
+        }
       }
     }
   };

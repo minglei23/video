@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Button, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { GetFavorites } from './service.js';
+import { getFavorites } from './service.js';
 import { GetUser } from './cache';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
@@ -14,7 +14,7 @@ const NewFavorites = () => {
       const user = GetUser()
       if (user) {
         try {
-          const response = await GetFavorites(user.ID);
+          const response = await getFavorites(user.ID);
           setList(response.FavoritesList);
         } catch (error) {
           console.error('Error fetching favorites:', error);

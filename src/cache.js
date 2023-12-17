@@ -61,6 +61,26 @@ export const GetHistory = (key) => {
   return item.value;
 };
 
+export const SetFavorites = (key) => {
+  const item = {
+    value: true
+  };
+  localStorage.setItem("favorites" + key, JSON.stringify(item));
+};
+
+export const RemoveFavorites = (key) => {
+  localStorage.removeItem("favorites" + key);
+};
+
+export const GetFavorites = (key) => {
+  const itemStr = localStorage.getItem("favorites" + key);
+  if (!itemStr) {
+    return false;
+  }
+  const item = JSON.parse(itemStr);
+  return item.value;
+};
+
 export const SetCache = (key, value) => {
   const now = new Date();
   const item = {
