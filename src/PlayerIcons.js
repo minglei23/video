@@ -11,12 +11,13 @@ const PlayerIcons = ({ seriesId }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchSeries = async () => {
       try {
         const user = GetUser();
-        setUser(user)
+        setUser(user);
         const fetchedSeries = await GetSeries(seriesId);
         setSeries(fetchedSeries);
       } catch (error) {
@@ -26,8 +27,20 @@ const PlayerIcons = ({ seriesId }) => {
     fetchSeries();
   }, [seriesId]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
+
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <div>
@@ -39,11 +52,11 @@ const PlayerIcons = ({ seriesId }) => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-        <IconButton >
+        <IconButton>
           <ShareIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
         <FavoritesIcon seriesId={seriesId} user={user} />
-        <IconButton onClick={handleOpenModal} >
+        <IconButton onClick={handleOpenModal}>
           <StorageIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
       </div>
