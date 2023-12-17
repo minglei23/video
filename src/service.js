@@ -32,12 +32,14 @@ export const GetSeriesList = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
     const seriesByType = { type1: [], type2: [], type3: [] };
-    data.VideoList.forEach(video => {
-      const typeKey = `type${video.Type}`;
-      if (seriesByType[typeKey]) {
-        seriesByType[typeKey].push(video);
-      }
-    });
+    if (data.VideoList) {
+      data.VideoList.forEach(video => {
+        const typeKey = `type${video.Type}`;
+        if (seriesByType[typeKey]) {
+          seriesByType[typeKey].push(video);
+        }
+      });
+    }
     return seriesByType;
   } catch (error) {
     handleError(error, 'Get Series List Failed:');
@@ -144,6 +146,7 @@ export const register = async (email, password) => {
     const hashedPassword = md5(password);
     const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword });
     SetToken(data.Token);
+    return data;
   } catch (error) {
     handleError(error, 'Register Failed:');
   }
