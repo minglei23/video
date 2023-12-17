@@ -29,7 +29,7 @@ const History = () => {
   };
 
   return (
-    <div style={{ position: 'absolute', height: '92vh', width: '100%', overflowY: 'auto', backgroundColor: '#111' }}>
+    <div style={{ position: 'fixed', height: '100vh', width: '100%', overflowY: 'auto', backgroundColor: '#111' }}>
       <Typography id="list-modal-title" variant="h6" component="h2" align="center" margin={"10px"}>
         History
       </Typography>
