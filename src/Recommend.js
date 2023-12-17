@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
-import { GetUser } from './cache';
+import { GetUser, SetHistory } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
@@ -35,13 +35,13 @@ const Recommend = () => {
     try {
       const series = await GetRecommendSeries();
       if (series) {
-        const episode = Math.floor(1 + Math.random() * 4)
         setUrl(`${series.BaseURL}/1.mp4`);
         setVideo(series);
         setShowPlayerIcons(true);
+        SetHistory(series.ID, 1);
         const user = GetUser()
         if (user) {
-          RecordHistory(user.ID, parseInt(series.ID), episode)
+          RecordHistory(user.ID, parseInt(series.ID), 1)
         }
         videoRef.current.play().then(() => {
           setPlay(true);

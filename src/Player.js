@@ -133,8 +133,8 @@ const Player = () => {
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
       {showPlayerIcons && <Menu />}
-      <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)}/>
-      <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)}/>
+      <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)} />
+      <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
     </div>
   );
 };
