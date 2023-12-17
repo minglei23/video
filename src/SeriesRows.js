@@ -2,10 +2,11 @@ import React from 'react';
 import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
 
 export default function SeriesRows({ seriesList, handleSeriesClick }) {
+  const isOdd = seriesList.length % 2 !== 0;
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '1 0 calc(50% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
+        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
           <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
@@ -23,6 +24,7 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
           </Card>
         </div>
       ))}
+      {isOdd && <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px', visibility: 'hidden' }}></div>}
     </div>
   );
 }
