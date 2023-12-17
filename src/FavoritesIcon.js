@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import StarIcon from '@mui/icons-material/Star';
 import { recordFavorites, removeFavorites } from './service';
 import { SetFavorites, RemoveFavorites, GetFavorites } from './cache';
 
@@ -40,7 +40,7 @@ const FavoritesIcons = ({ seriesId, user }) => {
 
   return (
     <IconButton onClick={clickFavorites} >
-      <FavoriteIcon style={{ fontSize: '1.5em', color: isFavorited ? 'red' : '#fff' }} />
+      <StarIcon style={{ fontSize: '1.5em', color: isFavorited ? '#fa0' : '#fff' }} />
     </IconButton>
   );
 };

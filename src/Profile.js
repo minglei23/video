@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
 import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import SettingsIcon from '@mui/icons-material/Settings';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -43,7 +43,7 @@ const Profile = () => {
           )}
           {!user.VIP && (
             <ListItem onClick={() => console.log('Become VIP')}>
-              <StarIcon style={{ marginRight: '10px' }} />
+              <MonetizationOnIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Become VIP" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
@@ -54,7 +54,7 @@ const Profile = () => {
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => navigateTo('/favorites')}>
-            <FavoriteIcon style={{ marginRight: '10px' }} />
+            <StarIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Favorites" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
