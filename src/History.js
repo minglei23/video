@@ -34,7 +34,7 @@ const History = () => {
         History
       </Typography>
       {list && <HistoryRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
-      <div style={{ height: '20vh' }}></div>
+      <div style={{ height: '20vh', backgroundColor: '#777' }}></div>
     </div>
   );
 };
