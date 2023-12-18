@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
+import { Card, CardMedia, CardActionArea } from '@mui/material';
+import SeriesCardContent from './SeriesCardContent';
 
 export default function ComingSoonList({ seriesList, handleSeriesClick }) {
   return (
@@ -28,9 +29,7 @@ export default function ComingSoonList({ seriesList, handleSeriesClick }) {
                 image={seriesItem.BaseURL + '/image.jpg'}
                 alt={seriesItem.Name}
               />
-              <CardContent style={{ padding: '0px' }}>
-                <h3>{seriesItem.Name}</h3>
-              </CardContent>
+              <SeriesCardContent name={seriesItem.Name} />
             </CardActionArea>
           </Card>
         </div>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Card, CardMedia, CardActionArea, CardContent } from '@mui/material';
+import { Card, CardMedia, CardActionArea } from '@mui/material';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import SeriesCardContent from './SeriesCardContent';
 
 export default function TrendingList({ seriesList, handleSeriesClick }) {
   const getBackgroundColor = (index) => {
-    switch(index) {
+    switch (index) {
       case 0: return '#fa0';
       case 1: return '#999';
       default: return '#c73';
@@ -36,13 +37,11 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
                 image={seriesItem.BaseURL + '/image.jpg'}
                 alt={seriesItem.Name}
               />
-              <CardContent style={{ padding: '0px' }}>
-                <h3 style={{ marginLeft: '3px', marginBottom: '3px' }}>{seriesItem.Name}</h3>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.5em', marginRight: '5px' }} />
-                  <span>3.45k</span>
-                </div>
-              </CardContent>
+              <SeriesCardContent name={seriesItem.Name} />
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.5em', marginRight: '5px' }} />
+                <span>3.45k</span>
+              </div>
             </CardActionArea>
           </Card>
         </div>
