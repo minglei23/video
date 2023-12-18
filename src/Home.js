@@ -13,9 +13,10 @@ export default function Home() {
   const navigate = useNavigate();
 
   const [seriesByType, setSeriesByType] = useState({
-    type1: [],
-    type2: [],
-    type3: []
+    type3: [],
+    type5: [],
+    type6: [],
+    type7: [],
   });
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function Home() {
   return (
     <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
-      <Carousel seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+      <Carousel seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
@@ -48,22 +49,30 @@ export default function Home() {
         <EmojiEventsIcon style={{ color: '#fda' }} />
         <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>Trending</h3>
       </div>
-      <TrendingList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+      <TrendingList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>New Release</h3>
-      <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
+      <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Coming Soon</h3>
-      <ComingSoonList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+      <ComingSoonList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Love After Marriage</h3>
-      <PopularList seriesList={seriesByType['type1']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Revenge</h3>
+      <PopularList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Fantasy</h3>
+      <PopularList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Ancient Times</h3>
+      <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Dating My Boss</h3>
-      <PopularList seriesList={seriesByType['type2']} handleSeriesClick={handleSeriesClick} />
+      <PopularList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
+
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
-      <SeriesRows seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+      <SeriesRows seriesList={[...seriesByType['type3'], ...seriesByType['type5']]} handleSeriesClick={handleSeriesClick} />
 
       <div style={{ height: '8vh' }}></div>
     </div>

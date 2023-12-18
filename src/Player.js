@@ -94,8 +94,9 @@ const Player = () => {
           const user = GetUser();
           if (user && user.VIP) {
             navigateToEpisode(episodeNumber + 1);
+          } else {
+            setVipEpisodeModal(true);
           }
-          setVipEpisodeModal(true);
         }
       } else {
         setLastEpisodeModal(true);

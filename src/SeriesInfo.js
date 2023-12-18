@@ -27,7 +27,7 @@ export default function SeriesInfo({ user, series }) {
           </Typography>
           <Paper style={{ maxHeight: 50, overflowY: 'auto', padding: '10px', backgroundColor: '#444', color: '#fff' }}>
             <Typography variant="body2">
-              {'...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ...... ......'}
+              Year 2023
             </Typography>
           </Paper>
         </Grid>
