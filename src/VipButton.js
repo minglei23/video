@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-const VipButton = ({ border, color, content1, content2, content3 }) => {
+const VipButton = ({ url, border, color, content1, content2, content3 }) => {
   return (
-    <Button
+    <Button onClick={() => {
+      window.open(url, "_blank");
+    }}
       style={{
         margin: '10px 20px',
         display: 'flex',
