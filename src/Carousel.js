@@ -6,9 +6,27 @@ import "slick-carousel/slick/slick-theme.css";
 import SearchIcon from '@mui/icons-material/Search';
 import { Grid, Button, Box, Typography, InputBase } from '@mui/material';
 
-export default function Carousel({ seriesList, handleSeriesClick }) {
+export default function Carousel({ handleSeriesClick }) {
 
   const navigate = useNavigate();
+  const seriesList = [
+    {
+      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/6',
+      Name: 'Lord, Your Princess'
+    },
+    {
+      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/7',
+      Name: 'Unparalleled Crown Princess'
+    },
+    {
+      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/12',
+      Name: 'Cinderella Running Away'
+    },
+    {
+      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/13',
+      Name: 'Please Come Into My Lovesickness'
+    },
+  ]
 
   const settings = {
     infinite: true,
@@ -53,7 +71,7 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
         {seriesList.map((seriesItem) => (
           <div key={seriesItem.ID} style={{ textAlign: 'center', padding: '10px' }}>
             <div onClick={() => handleSeriesClick(seriesItem)} style={{ cursor: 'pointer' }}>
-              <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '260px', objectFit: 'cover' }} />
+              <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '340px', objectFit: 'cover' }} />
               <h4 style={{ margin: '10px 10px 0px 10px' }}>{seriesItem.Name}</h4>
             </div>
           </div>

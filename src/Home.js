@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
-      <Carousel seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
+      <Carousel handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
