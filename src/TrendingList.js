@@ -11,6 +11,11 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
       default: return '#c73';
     }
   };
+
+  const formatViews = (index) => {
+    return (100 * Math.exp(-0.3 * index - 1)).toFixed(2) + 'k';
+  };
+
   return (
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem, i) => (
@@ -25,7 +30,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
             fontSize: '15px',
             fontWeight: 'bold',
             zIndex: 1,
-            borderRadius: '0 6px'
+            borderRadius: '0 6px 6px 6px'
           }}>
             {i + 1}
           </div>
@@ -40,7 +45,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
               <SeriesCardContent name={seriesItem.Name} />
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.5em', marginRight: '5px' }} />
-                <span>3.45k</span>
+                <span>{formatViews(i)}</span>
               </div>
             </CardActionArea>
           </Card>
