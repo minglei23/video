@@ -5,7 +5,7 @@ import { GetHistory } from './cache';
 import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
-import ComingSoonList from './ComingSoonList';
+import NewList from './NewList';
 import TrendingList from './TrendingList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
@@ -52,22 +52,18 @@ export default function Home() {
       <TrendingList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>New Release</h3>
-      <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
+      <NewList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Coming Soon</h3>
-      <ComingSoonList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
-
-
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Revenge</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Revenge & Counterattack</h3>
       <PopularList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Fantasy</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Ancient Times</h3>
       <PopularList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Ancient Times</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Billionaires & Tycoons</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Dating My Boss</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Action & Kung Fu</h3>
       <PopularList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
 
 
