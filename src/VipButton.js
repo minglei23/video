@@ -1,39 +1,35 @@
 import React from 'react';
 import { Button } from '@mui/material';
-// import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
-// // Test public key
-// const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
+// Test public key
+const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
 
-// const VipButton = ({ border, color, content1, content2, content3 }) => {
-//   const handleCheckout = async () => {
-//     try {
-//       const stripe = await stripePromise;
-//       const response = await fetch('http://127.0.0.1:8080/create-checkout-session', { method: 'POST' });
+const VipButton = ({ border, color, content1, content2, content3 }) => {
+  const handleCheckout = async () => {
+    try {
+      const stripe = await stripePromise;
+      const response = await fetch('http://18.188.120.153:8080/create-checkout-session', { method: 'POST' });
 
-//       if (!response.ok) {
-//         throw new Error('Network response was not OK');
-//       }
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
 
-//       const { sessionId } = await response.json();
+      const { sessionId } = await response.json();
 
-//       const result = await stripe.redirectToCheckout({
-//         sessionId,
-//       });
+      const result = await stripe.redirectToCheckout({
+        sessionId,
+      });
 
-//       if (result.error) {
-//         alert(result.error.message);
-//       }
-//     } catch (error) {
-//       console.error('There was a problem with the fetch operation:', error);
-//     }
-//   };  
-
-const VipButton = ({ url, border, color, content1, content2, content3 }) => {
+      if (result.error) {
+        alert(result.error.message);
+      }
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  };  
   return (
-    <Button onClick={() => {
-      window.open(url, "_blank");
-    }}
+    <Button onClick={handleCheckout}
       style={{
         margin: '10px 20px',
         display: 'flex',
