@@ -5,7 +5,6 @@ import { GetHistory } from './cache';
 import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
-import NewList from './NewList';
 import TrendingList from './TrendingList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
@@ -51,8 +50,8 @@ export default function Home() {
       </div>
       <TrendingList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>New Release</h3>
-      <NewList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Popular</h3>
+      <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Revenge & Counterattack</h3>
       <PopularList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
