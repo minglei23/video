@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -30,6 +30,26 @@ const CheckoutBox = ({ content1, content2, content3 }) => {
     }
   };
 
+  useEffect(() => {
+    window.paypal.Buttons({
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '1.99'
+            }
+          }]
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then((details) => {
+          alert('Transaction completed by ' + details.payer.name.given_name);
+          // Handle post-transaction logic here
+        });
+      }
+    }).render('#paypal-button-container');
+  }, []);
+
   const modalStyle = {
     fontFamily: 'Poppins',
     position: 'absolute',
@@ -43,15 +63,29 @@ const CheckoutBox = ({ content1, content2, content3 }) => {
     borderRadius: 2,
     color: '#fff',
     width: '70%',
+    maxWidth: '280px',
     textAlign: 'center',
   };
+
+  const buttonStyle = {
+    background: '#6772e5',
+    borderRadius: '4px',
+    color: '#fff',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '35px',
+    marginBottom: '15px',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  }
 
   return (
     <Box sx={modalStyle}>
       <h5>{`${content1} ${content2}`}</h5>
       <h5>{`${content3} pay by`}</h5>
-      <Button onClick={handleCheckout} style={{ background: '#6772e5', borderRadius: '10px', color: '#fff', margin: '5px 20px 20px 0', width: '90px' }}>Stripe</Button>
-      <Button style={{ background: '#009cde', borderRadius: '10px', color: '#fff', margin: '5px 0 20px 0', width: '90px' }}>Paypal</Button>
+      <Button onClick={handleCheckout} style={buttonStyle}>Stripe</Button>
+      <div id="paypal-button-container"></div>
     </Box>
   );
 };
