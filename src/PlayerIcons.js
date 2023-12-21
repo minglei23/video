@@ -6,6 +6,7 @@ import { GetSeries } from './service';
 import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
 import FavoritesIcon from './FavoritesIcon';
+import copy from 'copy-to-clipboard';
 
 const PlayerIcons = ({ seriesId, showVipMotal }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -40,13 +41,8 @@ const PlayerIcons = ({ seriesId, showVipMotal }) => {
 
   const handleShareClick = () => {
     const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: http://18.188.120.153/player/${seriesId}/1`;
-    navigator.clipboard.writeText(linkToCopy)
-      .then(() => {
-        alert("Link copied to your clipboard!");
-      })
-      .catch(err => {
-        console.error('Could not copy text:', err);
-      });
+    copy(linkToCopy);
+    alert('Link copied to clipboard!');
   };
 
   if (!isVisible) {

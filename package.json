@@ -8,6 +8,7 @@
     "@mui/icons-material": "^5.14.16",
     "@mui/material": "^5.14.17",
     "@stripe/stripe-js": "^2.2.1",
+    "copy-to-clipboard": "^3.3.3",
     "js-md5": "^0.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
