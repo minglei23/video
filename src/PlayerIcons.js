@@ -38,6 +38,17 @@ const PlayerIcons = ({ seriesId, showVipMotal }) => {
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+  const handleShareClick = () => {
+    const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: http://18.188.120.153/player/${seriesId}/1`;
+    navigator.clipboard.writeText(linkToCopy)
+      .then(() => {
+        alert("Link copied to your clipboard!");
+      })
+      .catch(err => {
+        console.error('Could not copy text:', err);
+      });
+  };
+
   if (!isVisible) {
     return null;
   }
@@ -52,7 +63,7 @@ const PlayerIcons = ({ seriesId, showVipMotal }) => {
         flexDirection: 'column',
         alignItems: 'center',
       }}>
-        <IconButton>
+        <IconButton onClick={handleShareClick}>
           <ShareIcon style={{ fontSize: '1.5em', color: '#fff' }} />
         </IconButton>
         <FavoritesIcon seriesId={seriesId} user={user} />
