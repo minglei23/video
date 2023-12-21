@@ -7,7 +7,7 @@ import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
 import FavoritesIcon from './FavoritesIcon';
 
-const PlayerIcons = ({ seriesId }) => {
+const PlayerIcons = ({ seriesId, showVipMotal }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
@@ -78,7 +78,7 @@ const PlayerIcons = ({ seriesId }) => {
           p: 3,
           borderRadius: '50px 50px 0 0',
         }}>
-          <SeriesInfo user={user} series={series} />
+          <SeriesInfo user={user} series={series} showVipMotal={showVipMotal} />
         </Box>
       </Modal>
     </div>

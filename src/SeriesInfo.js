@@ -2,13 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography, Box, Paper } from '@mui/material';
 
-export default function SeriesInfo({ user, series }) {
+export default function SeriesInfo({ user, series, showVipMotal }) {
 
   const navigate = useNavigate();
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
     if ((user && user.VIP) || episodeNumber <= 5) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
+    } else {
+      showVipMotal();
     }
   };
 
