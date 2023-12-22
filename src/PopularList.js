@@ -7,7 +7,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem) => (
         <div style={{ display: 'inline-block', width: '150px', padding: '0 10px', position: 'relative' }} key={seriesItem.id}>
-          <div style={{
+          {seriesItem.Hot && <div style={{
             position: 'absolute',
             top: 0,
             left: 10,
@@ -20,7 +20,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
             borderRadius: '6px'
           }}>
             HOT
-          </div>
+          </div>}
           <Card style={{ backgroundColor: '#111', color: 'white' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
@@ -29,7 +29,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
                 image={seriesItem.BaseURL + '/image.jpg'}
                 alt={seriesItem.Name}
               />
-              <SeriesCardContent name={seriesItem.Name}/>
+              <SeriesCardContent name={seriesItem.Name} />
             </CardActionArea>
           </Card>
         </div>
