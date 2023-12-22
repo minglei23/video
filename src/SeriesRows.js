@@ -6,7 +6,21 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
+        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px', position: 'relative' }} key={seriesItem.id}>
+          {seriesItem.Hot && <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            backgroundColor: 'red',
+            color: 'white',
+            padding: '4px 8px',
+            fontSize: '12px',
+            fontWeight: 'bold',
+            zIndex: 2,
+            borderRadius: '6px'
+          }}>
+            HOT
+          </div>}
           <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
