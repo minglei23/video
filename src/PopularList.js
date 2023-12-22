@@ -6,7 +6,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ display: 'inline-block', width: '150px', padding: '0 10px', position: 'relative' }} key={seriesItem.id}>
+        <div style={{ display: 'inline-block', width: '150px', padding: '0 10px', position: 'relative', verticalAlign: 'top' }} key={seriesItem.id}>
           {seriesItem.Hot && <div style={{
             position: 'absolute',
             top: 0,
