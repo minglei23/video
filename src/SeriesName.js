@@ -5,7 +5,7 @@ const SeriesName = ({ name }) => {
     <div style={{
       position: 'absolute',
       left: 20,
-      bottom: 120,
+      top: 5,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
