@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-
 import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
+import Help from './help/Help';
+import TermsofService from './help/components/TermsofService';
+import PrivacyPolicy from './help/components/PrivacyPolicy';
 import Favorites from './Favorites';
 import History from './History';
 import Recommend from './Recommend';
@@ -41,6 +44,9 @@ function App() {
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/termsofService" element={<TermsofService />} />
+            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
             <Route path="/recommend" element={<Recommend />} />

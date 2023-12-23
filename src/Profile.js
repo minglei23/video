@@ -63,7 +63,7 @@ const Profile = () => {
             <ListItemText primary="Settings" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
-          <ListItem onClick={() => console.log('Help')}>
+          <ListItem onClick={() => navigateTo('/help')}>
             <HelpIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Help" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
