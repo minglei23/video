@@ -1,0 +1,6 @@
+.store-page {
+    height: 100vh;
+}
+.store-page #store-page-title {
+    margin-top: 0;
+}

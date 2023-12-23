@@ -11,6 +11,7 @@ import Video from "./video";
 import Search from "./Search";
 import NewSeries from "./NewSeries";
 import Menu from "./Menu";
+import Store from './Store/Store';
 
 const UserContext = createContext();
 
@@ -48,6 +49,7 @@ function App() {
             <Route path="/search/:searchTerm" element={<SearchWrapper />} />
             <Route path="/search" element={<SearchWrapper />} />
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
+            <Route path="/store" element={<Store />} />
           </Routes>
           <Menu />
         </div>
