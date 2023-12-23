@@ -10,7 +10,7 @@ const Help = () => {
   return(
     <div>
         <NavBar title={'Help'} onBack={()=>{navigate('/profile')}}/>
-      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh',paddingTop:'44px'}}>
+      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh'}}>
         <List>
           <ListItem onClick={() => {navigate('/termsofService')}}>
             <ListItemText primary="Terms of Service" />

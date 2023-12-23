@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 
@@ -7,9 +6,9 @@ const PrivacyPolicy = () => {
     const navigate = useNavigate();
 
   return(
-    <div>
+    <div style={{height:'100vh',display: 'flex',flexDirection: 'column'}}>
         <NavBar title={'Privacy Policy'} onBack={()=>{navigate('/help')}}/>
-      <Container style={{ height: '100%',paddingBottom:'60px',paddingTop:'44px'}}>
+      <div style={{ flex:1,overflow:'auto',padding: '0 0.8rem',paddingBottom:'3rem'}}>
         <p>Privacy Policy for FunTV<br />
 In the course of and for the performance of our service of “FunTV” (the “Service”, the “Company”, “we”, “our” or, “us”) processes various information about our customers who use the Service (“Customer”, “you”, or “your”). FunTV recognizes the importance of the data protection for our Customers and establishes this Privacy Policy for the Service (the “Policy”) to provide you with our data protection policy and your rights concerning your Personal Data (as defined below). Please read this Policy carefully to understand our views and practices regarding your Personal Data and click a button to show your consent to this Policy to agree to our processing of your Personal Data.<br />
 
@@ -75,7 +74,7 @@ You also have the right to lodge a complaint with the data protection supervisor
 8. Contact Us<br />
 If you have any questions or comments about this Policy, the ways in which we collect and use your information described above, or wish to exercise your rights provided in the Section 7 (Your Rights and Choices under the Applicable Law), please do not hesitate to contact us at: admin@funbl.com
 </p>
-      </Container>
+      </div>
     </div>
   );
 };

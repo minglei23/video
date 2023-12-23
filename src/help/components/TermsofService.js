@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 
@@ -7,9 +6,9 @@ const TermsofService = () => {
     const navigate = useNavigate();
 
   return(
-    <div>
+    <div style={{height:'100vh',display: 'flex',flexDirection: 'column'}}>
         <NavBar title={'Terms of Service'} onBack={()=>{navigate('/help')}}/>
-      <Container style={{ height: '100%',paddingBottom:'60px',paddingTop:'44px'}}>
+      <div style={{ flex:1,overflow:'auto',padding: '0 0.8rem',paddingBottom:'3rem'}}>
         <p>FunTV is an online platform offering online videos. The services, including but not limited to the mobile application, websites and associated software and content as well as the services provided therein (collectively, “FunTV” or "Services"), are provided by FunTV.<br />
 
 This agreement (the "Agreement" or the “Terms”) is a binding agreement between the individual or the entity identified in your account ("you", “your” or "user") and FunTV.<br />
@@ -141,7 +140,7 @@ The contact information for the Service is as follow:<br />
 
 Email: admin@funtv.com<br />
 </p>
-      </Container>
+      </div>
     </div>
   );
 };
