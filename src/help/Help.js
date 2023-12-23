@@ -2,13 +2,15 @@ import React from 'react';
 import { Container, List, ListItem, ListItemText } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 const Help = () => {
   const navigate = useNavigate();
 
   return(
     <div>
-      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh'}}>
+        <NavBar title={'Help'} onBack={()=>{navigate('/profile')}}/>
+      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh',paddingTop:'44px'}}>
         <List>
           <ListItem onClick={() => {navigate('/termsofService')}}>
             <ListItemText primary="Terms of Service" />
