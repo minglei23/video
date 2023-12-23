@@ -1,6 +1,120 @@
 .store-page {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+
 }
-.store-page #store-page-title {
-    margin-top: 0;
+.store-page .store-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 0.8rem;
+}
+.store-page .recharge {
+    margin-bottom: 10px;
+}
+.store-page .card-title{
+    margin: 16px 0;
+}
+.store-page .subs-swiper{
+    width: 100%;
+}
+.store-page .subs-swiper-slide{
+    width: calc(100% - 24px);
+}
+.store-page .subs-swiper-slide:first-child {
+    margin-left: -18px;
+}
+.store-page .subscriptions-item{
+    width: 100%;
+    height: 120px;
+}
+.store-page .recharge-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+/* recharge */
+.store-page .recharge-item {
+    position: relative;
+    width: 48%;
+    background-color: #1F1E23;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    /* overflow: hidden; */
+    border: 1px solid transparent;
+}
+.store-page .recharge-item-content {
+    padding: 24px 0 14px;
+    height: 80px;
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.store-page .recharge-item .discount-num{
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    font-size: 12px;
+    display: block;
+    width: 48px;
+    line-height: 22px;
+    text-align: center;
+    border: 1px solid transparent;
+    background-color: #C03641;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.store-page .recharge-item .recharge-bonus{
+    font-size: 12px;
+    color: #BA3D52;
+}
+.store-page .recharge-item .recharge-coins{
+    font-size: 14px;
+    line-height: 18px;
+}
+.store-page .recharge-item .recharge-coins-num{
+    font-size: 18px;
+}
+.store-page .recharge-item .recharge-item-bottom{
+    text-align: center;
+    padding: 4px;
+    color: #ED6433;
+    background-color: #37241E;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.store-page .recharge-item.active {
+    border-color: #DF6534;
+    background-color: #1E1D22;
+}
+.store-page .recharge-item.active .recharge-item-bottom{
+    background-color: #DF6534;
+    color: #fff;
+}
+.store-page .recharge-item.active .discount-num{
+    border-color: #C03641;
+}
+.store-page .store-footer{
+    margin-bottom: 68px;
+}
+.store-page .footer-links{
+    padding: 20px 0;
+    text-align: center;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    
+}
+.store-page .footer-links .divider-line {
+    display: inline-block;
+    height: 10px;
+    width: 1px;
+    margin: 0 6px;
+    background-color: #676767;
 }
