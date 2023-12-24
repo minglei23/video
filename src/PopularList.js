@@ -25,7 +25,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
                 component="img"
-                height="200"
+                style={{  width: '100%', height: '200px' }}
                 image={seriesItem.BaseURL + '/image.jpg'}
                 alt={seriesItem.Name}
               />

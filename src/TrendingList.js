@@ -19,7 +19,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem, i) => (
-        <div style={{ display: 'inline-block', width: '140px', padding: '0 10px', position: 'relative' }} key={seriesItem.id}>
+        <div style={{ display: 'inline-block', width: '140px', padding: '0 10px', position: 'relative', }} key={seriesItem.id}>
           <div style={{
             position: 'absolute',
             top: 0,
@@ -38,7 +38,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
                 component="img"
-                height="190"
+                style={{ width: '100%', height: '190px' }}
                 image={seriesItem.BaseURL + '/image.jpg'}
                 alt={seriesItem.Name}
               />
