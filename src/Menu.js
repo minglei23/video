@@ -7,11 +7,15 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 const noop = () => {}
 const Menu = (props) => {
-  const {onChangeMenu = noop} = props;
+  const {onChangeMenu} = props;
 
   const navigate = useNavigate();
 
  const handleClick = (key, pathname) => {
+  if(!onChangeMenu) {
+      navigate(pathname)
+    return
+  }
   new Promise((resolve) => {
     onChangeMenu(key, resolve)
   }).then(() => {
