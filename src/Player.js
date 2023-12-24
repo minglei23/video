@@ -13,7 +13,6 @@ import LastEpisodeModal from './LastEpisodeModal.js';
 import VipEpisodeModal from './VipEpisodeModal.js';
 
 const Player = () => {
-  let timer = null;
   const navigate = useNavigate();
   const { seriesId, episode } = useParams();
   const [url, setUrl] = useState("");
@@ -32,7 +31,6 @@ const Player = () => {
       videoRef.current.pause();
       setPlay(false)
       setShowPlayerIcons(true);
-      clearInterval(timer);
     }
     else {
       videoRef.current.play();

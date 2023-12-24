@@ -6,11 +6,13 @@ import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
 import Menu from './Menu.js';
+import PlayerSlider from './PlayerSlider.js';
 
 const Recommend = () => {
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
 
   const videoRef = useRef(null)
   const [play, setPlay] = useState(true);
@@ -54,6 +56,11 @@ const Recommend = () => {
     }
   };
 
+  const handleTimeUpdate = () => {
+    // console.log('当前播放时间', videoRef.current.currentTime);
+    setCurrentTime(videoRef.current.currentTime)
+  }
+
   useEffect(() => {
     fetchRecommend();
   }, []);
@@ -65,6 +72,11 @@ const Recommend = () => {
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
+
+  // change currenttime
+  const handleOnChangeTime = (value) => {
+    videoRef.current.currentTime = value
+  }
 
   return (
     <div {...handlers} style={{
@@ -83,6 +95,7 @@ const Recommend = () => {
         loop
         playsInline
         onClick={onIcons}
+        onTimeUpdate={handleTimeUpdate}
         ref={videoRef}
         style={{
           maxWidth: '100%',
@@ -93,6 +106,7 @@ const Recommend = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
+      {video && showPlayerIcons && <PlayerSlider currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/>}
       {showPlayerIcons && <Menu />}
     </div>
   );
