@@ -21,10 +21,10 @@ const PlayerSlider = (props) => {
 
     const handleChange = (value) => {
       console.log('进度条', value);
-      onChangeTime(value)
+      const slideTimer = value / duration * allTime
+      onChangeTime(slideTimer)
       setPosition(value)
     }
-
     return (
       <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:'4rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
         <span style={{width:'4rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(currentTime)}</span>
@@ -35,6 +35,7 @@ const PlayerSlider = (props) => {
           min={0}
           step={1}
           max={duration}
+          // getAriaValueText={valuetext}
           onChange={(_, value) => handleChange(value)}
           sx={{
             color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(255,255,255,0.87)',
