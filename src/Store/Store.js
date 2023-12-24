@@ -6,8 +6,10 @@ import { Typography, Link } from "@mui/material";
 import "swiper/css";
 
 import NavBar from "../components/NavBar";
-import money1 from '../assets/image/money1.png'
-import money2 from '../assets/image/money2.png'
+import money1 from "../assets/image/money1.png";
+import money2 from "../assets/image/money2.png";
+import freeAccess from "../assets/image/free-access.png";
+import vipImg from "../assets/image/vip.png";
 import "./Store.css";
 const Store = () => {
   const navigate = useNavigate();
@@ -73,44 +75,114 @@ const Store = () => {
               centeredSlides
             >
               <SwiperSlide className="subs-swiper-slide">
-                <div
-                  className="subscriptions-item purple"
-                >
+                <div className="subscriptions-item purple">
                   <div className="subscript-discount">
-                      +120<small>%</small>
+                    +120<small>%</small>
                   </div>
-                  <div className="subscriptions-item-content flex">
+                  <div className="absolute top-0 right-0 text-xs text-[#7C6A92] w-36 font-light leading-6 bg-[#2C1356] rounded-tr-lg rounded-bl-full">
+                    Daily Rewards PacK
+                  </div>
+                  <div className="subscriptions-item-content flex px-4 py-5 justify-between items-center">
                     <div className="subscriptions-item-info">
-                      <div className="subscriptions-item-total">
-                        <span className="">3025</span> in total/week
+                      <div className="subscriptions-item-total text-sm text-left ml-5 font-light">
+                        <span className="text-xl text-[#F4B14A] font-semibold">
+                          3025
+                        </span>{" "}
+                        in total/week
                       </div>
-                      <div className="subscriptions-item-coins flex">
-                        <img className="money-icon" src={money1} alt="money"/>
-                        Obtain <span>1800 Coins</span> (instantly)
+                      <div className="subscriptions-item-coins flex text-xs items-center font-light">
+                        <img
+                          className="money-icon mr-1"
+                          src={money1}
+                          alt="money"
+                        />
+                        Obtain
+                        <span className="text-[#F4B14A] mx-1">1800 Coins</span>
+                        (instantly)
                       </div>
-                      <div className="subscriptions-item-bouns flex">
-                      <img className="money-icon" src={money2} alt="money"/>
-                        Obtain <span>1225 Bonus</span> (daily check-in)
+                      <div className="subscriptions-item-bouns flex text-xs items-center font-light">
+                        <img
+                          className="money-icon mr-1"
+                          src={money2}
+                          alt="money"
+                        />
+                        Obtain
+                        <span className="text-[#F4B14A] mx-1">1225 Bonus</span>
+                        (daily check-in)
                       </div>
                     </div>
-                    <div className="subscriptions-item-price"></div>
+                    <div className="subscriptions-item-price w-28 font-semibold leading-8 text-sm text-[#280612] rounded-full bg-gradient-to-r from-[#F6C673] to-[#EFB556]">
+                      US$14.99<small>/W</small>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="subs-swiper-slide">
-                <div
-                  className="subscriptions-item"
-                  style={{ backgroundColor: "red" }}
-                >
-                  2
+                <div className="subscriptions-item bg-gradient-to-r from-[#7A2B58] to-[#610F3A]">
+                  <div className="subscript-discount">
+                    +142<small>%</small>
+                  </div>
+                  <div className="absolute top-0 right-0 text-xs text-[#955760] w-36 font-light leading-6 bg-[#3C0F28] rounded-tr-lg rounded-bl-full">
+                    Daily Rewards PacK
+                  </div>
+                  <div className="subscriptions-item-content flex px-4 py-5 justify-between items-center">
+                    <div className="subscriptions-item-info">
+                      <div className="subscriptions-item-total text-sm text-left ml-5 font-light">
+                        <span className="text-xl text-[#F4B14A] font-semibold">
+                          6300
+                        </span>{" "}
+                        in total/month
+                      </div>
+                      <div className="subscriptions-item-coins flex text-xs items-center font-light">
+                        <img
+                          className="money-icon mr-1"
+                          src={money1}
+                          alt="money"
+                        />
+                        Obtain
+                        <span className="text-[#F4B14A] mx-1">3600 Coins</span>
+                        (instantly)
+                      </div>
+                      <div className="subscriptions-item-bouns flex text-xs items-center font-light">
+                        <img
+                          className="money-icon mr-1"
+                          src={money2}
+                          alt="money"
+                        />
+                        Obtain
+                        <span className="text-[#F4B14A] mx-1">2700 Bonus</span>
+                        (daily check-in)
+                      </div>
+                    </div>
+                    <div className="subscriptions-item-price w-28 font-semibold leading-8 text-sm text-[#280612] rounded-full bg-gradient-to-r from-[#F6C673] to-[#EFB556]">
+                      US$25.99<small>/M</small>
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="subs-swiper-slide">
-                <div
-                  className="subscriptions-item"
-                  style={{ backgroundColor: "blue" }}
-                >
-                  3
+              <div className="subscriptions-item bg-[#D9B385]">
+                  <div className="w-28 absolute -top-2 left-0">
+                   <img src={freeAccess} alt="freeAccess"/>
+                  </div>
+                  
+                  <div className="subscriptions-item-content flex px-4 py-5 justify-between items-center">
+                    <div className="subscriptions-item-info flex">
+                      <img className="vip-icon mt-[4px] mr-[6px]" src={vipImg} alt="vip"/>
+                      <div className="subscriptions-item-total text-sm text-left font-light">
+                        <span className="text-lg text-[#5D360E] font-semibold">
+                        All mini-series for free for 1 month(s)
+                        </span>
+
+                      </div>
+                    </div>
+                    <div className="subscriptions-item-right">
+                      <div className="subscriptions-item-price shrink-0 w-28 font-semibold leading-8 text-sm text-white rounded-full bg-gradient-to-r from-[#4A3E36] to-[#322A24]">
+                        US$25.99<small>/M</small>
+                      </div>
+                      <span className="text-sm text-[#7B6143] line-through">US$109</span>
+                    </div>
+                  </div>
                 </div>
               </SwiperSlide>
             </Swiper>
@@ -210,7 +282,7 @@ const Store = () => {
             >
               Privacy Policy
             </Link>
-            <br/>
+            <br />
             <Link
               component="button"
               variant="body2"
@@ -221,7 +293,6 @@ const Store = () => {
             >
               Renewal Agreement
             </Link>
-            
           </div>
         </footer>
       </main>

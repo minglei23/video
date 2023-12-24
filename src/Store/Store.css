@@ -35,7 +35,7 @@
 .store-page .subscriptions-item .subscript-discount{
     position: absolute;
     top: -16px;
-    left: -12px;
+    left: -6px;
     width: 48px;
     height: 48px;
     font-size: 12px;
@@ -56,7 +56,10 @@
     flex-wrap: wrap;
 }
 .store-page .subscriptions .money-icon{
-    width: 20px;
+    width: 14px;
+}
+.store-page .subscriptions .vip-icon{
+    width: 24px;
 }
 /* .store-page .subscriptions-item-content, .subscriptions-item-coins, .subscriptions-item-bouns{
    display: flex;
