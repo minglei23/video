@@ -3,11 +3,10 @@ import { useTheme } from '@mui/material/styles';
 import Slider from '@mui/material/Slider';
 
 const PlayerSlider = (props) => {
+  const {currentTime = 0, allTime = 0, onChangeTime} = props
     const theme = useTheme();
     const duration = 100; // seconds
-    const [position, setPosition] = useState(32);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [allTime, setAllTime] = useState(0);
+    const [position, setPosition] = useState(0);
     
     const convertSecondsToTime = (seconds = 0) => {
       let minutes = Math.floor(seconds / 60);
@@ -17,14 +16,17 @@ const PlayerSlider = (props) => {
     }
 
     useEffect(()=>{
-      console.log(props);
-      setCurrentTime(props.currentTime);
-      setAllTime(props.allTime);
-      setPosition( Math.floor((props.currentTime / props.allTime)* duration) );
-    },[props.currentTime])
+      setPosition( Math.floor((currentTime / allTime)* duration) );
+    },[currentTime, allTime])
+
+    const handleChange = (value) => {
+      console.log('进度条', value);
+      onChangeTime(value)
+      setPosition(value)
+    }
 
     return (
-      <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:'3rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
+      <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:'4rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
         <span style={{width:'4rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(currentTime)}</span>
         <Slider
           aria-label="time-indicator"
@@ -33,7 +35,7 @@ const PlayerSlider = (props) => {
           min={0}
           step={1}
           max={duration}
-          onChange={(_, value) => setPosition(value)}
+          onChange={(_, value) => handleChange(value)}
           sx={{
             color: theme.palette.mode === 'dark' ? '#fff' : 'rgba(255,255,255,0.87)',
             height: 4,

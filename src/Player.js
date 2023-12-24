@@ -37,7 +37,6 @@ const Player = () => {
     else {
       videoRef.current.play();
       setPlay(true)
-      onTimeUpdate(video);
     }
   }
 
@@ -61,7 +60,6 @@ const Player = () => {
         }
         videoRef.current.play().then(() => {
           setPlay(true);
-          onTimeUpdate(series);
         }).catch(() => {
           setPlay(false);
         });
@@ -71,17 +69,9 @@ const Player = () => {
     }
   }, [seriesId, episode]);
 
-  const onTimeUpdate = (data) => {
-    if(timer){
-      clearInterval(timer);
-    }
-    timer = setInterval(()=>{
-      if(videoRef.current?.currentTime < data.TotalNumber){
-        setCurrentTime(videoRef.current.currentTime);
-      }else{
-        clearInterval(timer);
-      }
-    },1000)
+  const handleTimeUpdate = () => {
+    // console.log('当前播放时间', videoRef.current.currentTime);
+    setCurrentTime(videoRef.current.currentTime)
   }
 
   useEffect(() => {
@@ -125,6 +115,10 @@ const Player = () => {
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
+  // change currenttime
+  const handleOnChangeTime = (value) => {
+    videoRef.current.currentTime = value
+  }
 
   return (
     <div {...handlers} style={{
@@ -143,6 +137,7 @@ const Player = () => {
         loop
         playsInline
         onClick={onIcons}
+        onTimeUpdate={handleTimeUpdate}
         ref={videoRef}
         style={{
           maxWidth: '100%',
@@ -153,7 +148,7 @@ const Player = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
-      {video && showPlayerIcons && <PlayerSlider currentTime={currentTime} allTime={video.TotalNumber} />}
+      {video && showPlayerIcons && <PlayerSlider currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/>}
       {showPlayerIcons && <Menu />}
       <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)} />
       <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
