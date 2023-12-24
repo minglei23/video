@@ -5,7 +5,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
-const noop = () => {}
 const Menu = (props) => {
   const {onChangeMenu} = props;
 

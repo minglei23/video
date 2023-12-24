@@ -5,7 +5,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import SettingsIcon from '@mui/icons-material/Settings';
+// import SettingsIcon from '@mui/icons-material/Settings';
 import HelpIcon from '@mui/icons-material/Help';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -58,11 +58,11 @@ const Profile = () => {
             <ListItemText primary="Favorites" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
-          <ListItem onClick={() => console.log('Settings')}>
+          {/* <ListItem onClick={() => console.log('Settings')}>
             <SettingsIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Settings" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
-          </ListItem>
+          </ListItem> */}
           <ListItem onClick={() => navigateTo('/help')}>
             <HelpIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Help" />

@@ -38,7 +38,7 @@ const Search = () => {
   };
 
   return (
-    <div style={{ height: '92vh', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
+    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
       <SearchBar />
 

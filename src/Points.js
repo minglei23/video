@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Typography, Button, Grid } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -6,6 +7,7 @@ import { GetPoints } from './service.js';
 
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const loadData = async () => {
@@ -34,6 +36,9 @@ const Points = ({ user }) => {
           <Typography variant="h6" style={{ color: '#fa0', marginLeft: '5px', marginRight: '20px' }}>{points}</Typography>
           <Button variant="contained" onClick={handleCheckin} style={{ backgroundColor: '#fa0', color: '#000', fontSize: '0.8rem', padding: '3px 6px' }}>
             Rewards
+          </Button>
+          <Button variant="contained" onClick={() => {navigate('/store')}} style={{ backgroundColor: '#fa0', color: '#000', marginLeft: '10px',  fontSize: '0.8rem', padding: '3px 6px' }}>
+            TOP UP
           </Button>
         </Grid>
       </Grid>
