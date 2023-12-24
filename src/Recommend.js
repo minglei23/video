@@ -68,12 +68,12 @@ const Recommend = () => {
 
   return (
     <div {...handlers} style={{
-      position: 'fixed',
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      height: '100%',
       width: '100%',
       zIndex: 20,
       backgroundColor: '#111',
@@ -93,7 +93,7 @@ const Recommend = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
-      {showPlayerIcons && <Menu />}
+      {/* {showPlayerIcons && <Menu />} */}
     </div>
   );
 };
