@@ -37,7 +37,7 @@ const Player = () => {
     else {
       videoRef.current.play();
       setPlay(true)
-      onTimeUpdate();
+      onTimeUpdate(video);
     }
   }
 
@@ -61,7 +61,7 @@ const Player = () => {
         }
         videoRef.current.play().then(() => {
           setPlay(true);
-          onTimeUpdate();
+          onTimeUpdate(series);
         }).catch(() => {
           setPlay(false);
         });
@@ -71,12 +71,12 @@ const Player = () => {
     }
   }, [seriesId, episode]);
 
-  const onTimeUpdate = () => {
+  const onTimeUpdate = (data) => {
     if(timer){
       clearInterval(timer);
     }
     timer = setInterval(()=>{
-      if(videoRef.current.currentTime < video.TotalNumber){
+      if(videoRef.current?.currentTime < data.TotalNumber){
         setCurrentTime(videoRef.current.currentTime);
       }else{
         clearInterval(timer);

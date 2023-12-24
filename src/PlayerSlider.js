@@ -24,7 +24,8 @@ const PlayerSlider = (props) => {
     },[props.currentTime])
 
     return (
-      <div style={{width: '100%',position:'absolute',left:'0',bottom:'3rem',padding:'0rem 1rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)'}}>
+      <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:'3rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
+        <span style={{width:'4rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(currentTime)}</span>
         <Slider
           aria-label="time-indicator"
           size="small"
@@ -60,8 +61,7 @@ const PlayerSlider = (props) => {
             },
           }}
         />
-        <span style={{position:'absolute',left:'0.5rem',bottom:'0.3rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(currentTime)}</span>
-        <span style={{position:'absolute',right:'0.5rem',bottom:'0.3rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(allTime)}</span>
+        <span style={{width:'4rem',color:'#fff',fontSize: '0.8rem',textAlign:'right'}}>{convertSecondsToTime(allTime)}</span>
         </div>
         );
 };
