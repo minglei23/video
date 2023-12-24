@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Typography, Link } from "@mui/material";
 import "swiper/css";
+
 import NavBar from "../components/NavBar";
+import money1 from '../assets/image/money1.png'
+import money2 from '../assets/image/money2.png'
 import "./Store.css";
 const Store = () => {
   const navigate = useNavigate();
@@ -65,16 +68,33 @@ const Store = () => {
           <div className="card-content">
             <Swiper
               className="subs-swiper"
-              spaceBetween={6}
+              spaceBetween={10}
               slidesPerView="auto"
               centeredSlides
             >
               <SwiperSlide className="subs-swiper-slide">
                 <div
-                  className="subscriptions-item"
-                  style={{ backgroundColor: "pink" }}
+                  className="subscriptions-item purple"
                 >
-                  1
+                  <div className="subscript-discount">
+                      +120<small>%</small>
+                  </div>
+                  <div className="subscriptions-item-content flex">
+                    <div className="subscriptions-item-info">
+                      <div className="subscriptions-item-total">
+                        <span className="">3025</span> in total/week
+                      </div>
+                      <div className="subscriptions-item-coins flex">
+                        <img className="money-icon" src={money1} alt="money"/>
+                        Obtain <span>1800 Coins</span> (instantly)
+                      </div>
+                      <div className="subscriptions-item-bouns flex">
+                      <img className="money-icon" src={money2} alt="money"/>
+                        Obtain <span>1225 Bonus</span> (daily check-in)
+                      </div>
+                    </div>
+                    <div className="subscriptions-item-price"></div>
+                  </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide className="subs-swiper-slide">

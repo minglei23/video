@@ -17,16 +17,37 @@
 }
 .store-page .subs-swiper{
     width: 100%;
+    overflow: visible;
 }
 .store-page .subs-swiper-slide{
     width: calc(100% - 24px);
 }
 .store-page .subs-swiper-slide:first-child {
-    margin-left: -18px;
+    margin-left: -16px;
 }
 .store-page .subscriptions-item{
+    position: relative;
     width: 100%;
-    height: 120px;
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+.store-page .subscriptions-item .subscript-discount{
+    position: absolute;
+    top: -16px;
+    left: -12px;
+    width: 48px;
+    height: 48px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 48px;
+    transform: rotate(-45deg);
+    color: #fff;
+    background: url('../assets/image/discount.png') no-repeat;
+    background-size: 100% 100%;
+}
+.store-page .subscriptions-item.purple {
+    background: linear-gradient(to right, #65326A, #3D2477);
 }
 .store-page .recharge-content {
     display: flex;
@@ -34,6 +55,15 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.store-page .subscriptions .money-icon{
+    width: 20px;
+}
+/* .store-page .subscriptions-item-content, .subscriptions-item-coins, .subscriptions-item-bouns{
+   display: flex;
+   align-items: center;
+} */
+
+
 /* recharge */
 .store-page .recharge-item {
     position: relative;
