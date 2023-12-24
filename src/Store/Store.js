@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Typography, Link } from "@mui/material";
+import { Typography, Link, Modal } from "@mui/material";
+import CheckoutBox from "../CheckoutBox";
 import "swiper/css";
 
 import NavBar from "../components/NavBar";
@@ -58,12 +59,31 @@ const Store = () => {
     },
   ]);
 
-  const handleClose = () => {
+  const [visible, setVisible] = useState(false);
+  const [buyInfo, setBuyInfo] = useState({
+    content1: "",
+    content2: "",
+    content3: "",
+  });
+
+  const handleOnBack = () => {
     navigate(-1);
+  };
+  const handleOpen = (content1, content2, content3) => {
+    setBuyInfo({
+      content1,
+      content2,
+      content3,
+    });
+    setVisible(true);
+  };
+
+  const handleClose = () => {
+    setVisible(false);
   };
   return (
     <div className="store-page">
-      <NavBar title="Store" onBack={handleClose} />
+      <NavBar title="Store" onBack={handleOnBack} />
       <main className="store-main">
         <div className="store-card subscriptions">
           <div className="card-title">Subscriptions</div>
@@ -75,7 +95,12 @@ const Store = () => {
               centeredSlides
             >
               <SwiperSlide className="subs-swiper-slide">
-                <div className="subscriptions-item purple">
+                <div
+                  className="subscriptions-item purple"
+                  onClick={() =>
+                    handleOpen("1800 Coins + ", "1225 Bonus", "$14.99")
+                  }
+                >
                   <div className="subscript-discount">
                     +120<small>%</small>
                   </div>
@@ -117,7 +142,12 @@ const Store = () => {
                   </div>
                 </div>
               </SwiperSlide>
-              <SwiperSlide className="subs-swiper-slide">
+              <SwiperSlide
+                className="subs-swiper-slide"
+                onClick={() =>
+                  handleOpen("3600 Coins + ", "2700 Bonus", "$25.99")
+                }
+              >
                 <div className="subscriptions-item bg-gradient-to-r from-[#7A2B58] to-[#610F3A]">
                   <div className="subscript-discount">
                     +142<small>%</small>
@@ -161,26 +191,40 @@ const Store = () => {
                 </div>
               </SwiperSlide>
               <SwiperSlide className="subs-swiper-slide">
-              <div className="subscriptions-item bg-[#D9B385]">
+                <div
+                  className="subscriptions-item bg-[#D9B385]"
+                  onClick={() =>
+                    handleOpen(
+                      "All mini-series for free for",
+                      " 1 month",
+                      "$49.99"
+                    )
+                  }
+                >
                   <div className="w-28 absolute -top-2 left-0">
-                   <img src={freeAccess} alt="freeAccess"/>
+                    <img src={freeAccess} alt="freeAccess" />
                   </div>
-                  
+
                   <div className="subscriptions-item-content flex px-4 py-5 justify-between items-center">
                     <div className="subscriptions-item-info flex">
-                      <img className="vip-icon mt-[4px] mr-[6px]" src={vipImg} alt="vip"/>
+                      <img
+                        className="vip-icon mt-[4px] mr-[6px]"
+                        src={vipImg}
+                        alt="vip"
+                      />
                       <div className="subscriptions-item-total text-sm text-left font-light">
                         <span className="text-lg text-[#5D360E] font-semibold">
-                        All mini-series for free for 1 month(s)
+                          All mini-series for free for 1 month(s)
                         </span>
-
                       </div>
                     </div>
                     <div className="subscriptions-item-right">
                       <div className="subscriptions-item-price shrink-0 w-28 font-semibold leading-8 text-sm text-white rounded-full bg-gradient-to-r from-[#4A3E36] to-[#322A24]">
-                        US$25.99<small>/M</small>
+                        US$49.99<small>/M</small>
                       </div>
-                      <span className="text-sm text-[#7B6143] line-through">US$109</span>
+                      <span className="text-sm text-[#7B6143] line-through">
+                        US$109
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -198,6 +242,9 @@ const Store = () => {
                     index === 0 ? "recharge-item active" : "recharge-item"
                   }
                   key={item.id}
+                  onClick={() =>
+                    handleOpen(`${item.coins} Coins`, `${item.bonus ? '+ ' + item.bonus + ' Bonus' : ''}`, `$${item.amount}`)
+                  }
                 >
                   {item.discount && (
                     <span className="discount-num">+{item.discount}%</span>
@@ -222,6 +269,15 @@ const Store = () => {
             })}
           </div>
         </div>
+
+        <Modal
+          open={visible}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <CheckoutBox {...buyInfo} />
+        </Modal>
 
         <footer className="store-footer">
           <Typography
