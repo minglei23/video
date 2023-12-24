@@ -1,6 +1,7 @@
 import React, { useState, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import './assets/styles/tailwind.css'
 // import Layout from './layout';
 import Home from './Home';
 import Player from './Player';
