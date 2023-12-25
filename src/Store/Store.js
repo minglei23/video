@@ -17,42 +17,42 @@ const Store = () => {
   const [rechargeType] = useState([
     {
       id: 1,
-      amount: "17.99",
+      amount: 17.99,
       coins: "1800",
       bonus: "540",
       discount: "30",
     },
     {
       id: 2,
-      amount: "9.99",
+      amount: 9.99,
       coins: "1000",
       bonus: "",
       discount: "",
     },
     {
       id: 3,
-      amount: "14.99",
+      amount: 14.99,
       coins: "1500",
       bonus: "225",
       discount: "15",
     },
     {
       id: 4,
-      amount: "23.99",
+      amount: 23.99,
       coins: "2400",
       bonus: "600",
       discount: "25",
     },
     {
       id: 5,
-      amount: "29.99",
+      amount: 29.99,
       coins: "3000",
       bonus: "1200",
       discount: "40",
     },
     {
       id: 6,
-      amount: "49.99",
+      amount: 49.99,
       coins: "5000",
       bonus: "2500",
       discount: "50",
@@ -65,15 +65,23 @@ const Store = () => {
     content2: "",
     content3: "",
   });
+  const [stripeParams, setStripeParams] = useState({});
 
   const handleOnBack = () => {
     navigate(-1);
   };
-  const handleOpen = (content1, content2, content3) => {
+  const handleOpen = (coins, bonus, amount) => {
     setBuyInfo({
-      content1,
-      content2,
-      content3,
+      content1: `${coins} Coins`,
+      content2: bonus ? ` + ${bonus} Bonus` : '',
+      content3: `$${amount}`,
+    });
+    setStripeParams({
+      ID: 1,
+      Amount: amount,
+      ProductID: "price_1OQqxYLvs8YNyX8sRMRaBbcN",
+      SuccessURL: "http://localhost:3000/store",
+      CancelURL: "http://localhost:3000/store",
     });
     setVisible(true);
   };
@@ -98,7 +106,7 @@ const Store = () => {
                 <div
                   className="subscriptions-item purple"
                   onClick={() =>
-                    handleOpen("1800 Coins + ", "1225 Bonus", "$14.99")
+                    handleOpen(1800, 1225, 14.99)
                   }
                 >
                   <div className="subscript-discount">
@@ -145,7 +153,7 @@ const Store = () => {
               <SwiperSlide
                 className="subs-swiper-slide"
                 onClick={() =>
-                  handleOpen("3600 Coins + ", "2700 Bonus", "$25.99")
+                  handleOpen(3600, 2700, 25.99)
                 }
               >
                 <div className="subscriptions-item bg-gradient-to-r from-[#7A2B58] to-[#610F3A]">
@@ -243,7 +251,11 @@ const Store = () => {
                   }
                   key={item.id}
                   onClick={() =>
-                    handleOpen(`${item.coins} Coins`, `${item.bonus ? '+ ' + item.bonus + ' Bonus' : ''}`, `$${item.amount}`)
+                    handleOpen(
+                      item.coins,
+                      item.bonus,
+                      item.amount
+                    )
                   }
                 >
                   {item.discount && (
@@ -276,7 +288,7 @@ const Store = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <CheckoutBox {...buyInfo} />
+          <CheckoutBox {...buyInfo} stripeParams={stripeParams} />
         </Modal>
 
         <footer className="store-footer">
@@ -322,7 +334,7 @@ const Store = () => {
               variant="body2"
               color="#676767"
               onClick={() => {
-                navigate('/termsofService')
+                navigate("/termsofService");
               }}
             >
               Terms of Service
@@ -333,7 +345,7 @@ const Store = () => {
               variant="body2"
               color="#676767"
               onClick={() => {
-                navigate('/privacyPolicy')
+                navigate("/privacyPolicy");
               }}
             >
               Privacy Policy

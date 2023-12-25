@@ -5,12 +5,20 @@ import { loadStripe } from '@stripe/stripe-js';
 // Test public key
 const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
 
-const CheckoutBox = ({ content1, content2, content3 }) => {
+const CheckoutBox = ({ content1, content2, content3, stripeParams }) => {
 
   const handleCheckout = async () => {
+    
     try {
       const stripe = await stripePromise;
-      const response = await fetch('http://18.188.120.153:8080/create-checkout-session', { method: 'POST' });
+      // create-checkout-session
+      const response = await fetch('http://18.188.120.153:8080/create-stripe-payment', { 
+        method: 'POST', 
+        body: JSON.stringify(stripeParams), 
+        headers: {
+          "Content-type": "application/json"
+        }
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not OK');
