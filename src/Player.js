@@ -125,7 +125,7 @@ const Player = () => {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      height: '100%',
       width: '100%',
       zIndex: 20,
       backgroundColor: '#111',
@@ -138,15 +138,16 @@ const Player = () => {
         onTimeUpdate={handleTimeUpdate}
         ref={videoRef}
         style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
+          width: '100%',
+          height: '100%',
           objectFit: 'contain',
+          flex: '1'
         }}
       />}
       {video && <StopIcons stop={play} click={onVideo} />}
-      {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
+      {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} onBack={() => navigate(-1)}/>}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
-      {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} bottom="1rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} backgroundColor="transparent" bottom="1.5rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
       {/* {showPlayerIcons && <Menu />} */}
       <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)} />
       <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />

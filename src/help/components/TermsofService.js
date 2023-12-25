@@ -7,7 +7,7 @@ const TermsofService = () => {
 
   return(
     <div style={{height:'100vh',display: 'flex',flexDirection: 'column'}}>
-        <NavBar title={'Terms of Service'} onBack={()=>{navigate('/help')}}/>
+        <NavBar title={'Terms of Service'} onBack={()=>{navigate(-1)}}/>
       <div style={{ flex:1,overflow:'auto',padding: '0 0.8rem',paddingBottom:'3rem'}}>
         <p>FunTV is an online platform offering online videos. The services, including but not limited to the mobile application, websites and associated software and content as well as the services provided therein (collectively, “FunTV” or "Services"), are provided by FunTV.<br />
 

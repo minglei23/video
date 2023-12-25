@@ -322,7 +322,7 @@ const Store = () => {
               variant="body2"
               color="#676767"
               onClick={() => {
-                console.info("I'm a button.");
+                navigate('/termsofService')
               }}
             >
               Terms of Service
@@ -333,7 +333,7 @@ const Store = () => {
               variant="body2"
               color="#676767"
               onClick={() => {
-                console.info("I'm a button.");
+                navigate('/privacyPolicy')
               }}
             >
               Privacy Policy

@@ -18,6 +18,8 @@ import NewSeries from "./NewSeries";
 // import Menu from "./Menu";
 import Store from './Store/Store';
 
+import './assets/styles/common.css'
+
 const UserContext = createContext();
 
 function PlayerWrapper() {
@@ -40,7 +42,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
-        <div style={{ fontFamily: 'Poppins', backgroundColor: '#111', color: 'white' }}>
+        <div style={{ fontFamily: 'Poppins', backgroundColor: '#111', color: 'white', height: '100%' }}>
           <Routes>
             <Route path="/" element={<Layout/>} >
               <Route path="/" element={<Navigate to='/home' />} />

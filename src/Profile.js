@@ -42,7 +42,7 @@ const Profile = () => {
             </ListItem>
           )}
           {!user.VIP && (
-            <ListItem onClick={() => console.log('Become VIP')}>
+            <ListItem onClick={() => {navigate('/store')}}>
               <MonetizationOnIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Become VIP" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />

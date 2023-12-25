@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
 
   return(
     <div style={{height:'100vh',display: 'flex',flexDirection: 'column'}}>
-        <NavBar title={'Privacy Policy'} onBack={()=>{navigate('/help')}}/>
+        <NavBar title={'Privacy Policy'} onBack={()=>{navigate(-1)}}/>
       <div style={{ flex:1,overflow:'auto',padding: '0 0.8rem',paddingBottom:'3rem'}}>
         <p>Privacy Policy for FunTV<br />
 In the course of and for the performance of our service of “FunTV” (the “Service”, the “Company”, “we”, “our” or, “us”) processes various information about our customers who use the Service (“Customer”, “you”, or “your”). FunTV recognizes the importance of the data protection for our Customers and establishes this Privacy Policy for the Service (the “Policy”) to provide you with our data protection policy and your rights concerning your Personal Data (as defined below). Please read this Policy carefully to understand our views and practices regarding your Personal Data and click a button to show your consent to this Policy to agree to our processing of your Personal Data.<br />

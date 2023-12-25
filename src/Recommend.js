@@ -87,6 +87,7 @@ const Recommend = () => {
       alignItems: 'center',
       height: '100%',
       width: '100%',
+      overflowX: 'hidden',
       zIndex: 20,
       backgroundColor: '#111',
     }}>
@@ -98,9 +99,10 @@ const Recommend = () => {
         onTimeUpdate={handleTimeUpdate}
         ref={videoRef}
         style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
+          width: '100%',
+          height: '100%',
           objectFit: 'contain',
+          flex: '1'
         }}
       />}
       {video && <StopIcons stop={play} click={onVideo} />}

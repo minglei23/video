@@ -20,7 +20,7 @@ const Layout = () => {
     onResolve()
   }
   return (
-    <div style={{ width: "100%", height: "100vh"}} className="flex flex-col">
+    <div style={{ width: "100%", height: "100%"}} className="flex flex-col">
       <div className="flex-1 overflow-y-auto">
         <SwitchTransition>
         <CSSTransition key={location.pathname} timeout={300} classNames={direction? 'layout-slide-right' : 'layout-slide-left'}>
