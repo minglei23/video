@@ -106,8 +106,8 @@ const Recommend = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
-      {video && <div style={{display:showPlayerIcons?'block':'none'}}> <PlayerSlider currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
-      {showPlayerIcons && <Menu />}
+      {video && <div style={{display:showPlayerIcons?'block':'none'}}> <PlayerSlider bottom="0" currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      {/* {showPlayerIcons && <Menu />} */}
     </div>
   );
 };

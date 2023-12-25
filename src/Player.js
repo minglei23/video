@@ -8,7 +8,7 @@ import PlayerIcons from './PlayerIcons.js';
 import PlayerSlider from './PlayerSlider.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
-import Menu from './Menu.js';
+// import Menu from './Menu.js';
 import LastEpisodeModal from './LastEpisodeModal.js';
 import VipEpisodeModal from './VipEpisodeModal.js';
 
@@ -146,8 +146,8 @@ const Player = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
-      {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
-      {showPlayerIcons && <Menu />}
+      {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} bottom="1rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      {/* {showPlayerIcons && <Menu />} */}
       <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)} />
       <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
     </div>
