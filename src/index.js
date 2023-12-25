@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route, useParams, Navigate } from 'react-router-dom';
 import './assets/styles/tailwindcss.css'
-import Layout from './Layout';
+import Layout from './layout';
 import Home from './Home';
 import Player from './Player';
 import Profile from './Profile';
