@@ -5,7 +5,7 @@ import { GetUser, SetHistory } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
-import Menu from './Menu.js';
+// import Menu from './Menu.js';
 import PlayerSlider from './PlayerSlider.js';
 
 const Recommend = () => {
@@ -80,12 +80,12 @@ const Recommend = () => {
 
   return (
     <div {...handlers} style={{
-      position: 'fixed',
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh',
+      height: '100%',
       width: '100%',
       zIndex: 20,
       backgroundColor: '#111',

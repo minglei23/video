@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Modal, Box, Button } from '@mui/material';
 import VipButton from './VipButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CoinIcon from '@mui/icons-material/MonetizationOn';
 
 const VipEpisodeModal = ({ open, onClose }) => {
+  const navigate = useNavigate()
   return (
     <Modal
       open={open}
@@ -32,6 +34,9 @@ const VipEpisodeModal = ({ open, onClose }) => {
           top: 30,
           right: 35,
           color: '#fff',
+        }}
+        onClick={() => {
+          navigate('/store')
         }}
         >
           <CoinIcon style={{ color: '#fa0', width: '20px', marginRight: '5px' }} />

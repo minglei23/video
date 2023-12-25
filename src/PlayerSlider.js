@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Slider from '@mui/material/Slider';
 
 const PlayerSlider = (props) => {
-  const {currentTime = 0, allTime = 0, onChangeTime} = props
+  const {currentTime = 0, allTime = 0, onChangeTime, bottom = '4rem'} = props
     const theme = useTheme();
     const duration = 100; // seconds
     const [position, setPosition] = useState(0);
@@ -26,7 +26,7 @@ const PlayerSlider = (props) => {
       setPosition(value)
     }
     return (
-      <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:'4rem',boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
+      <div style={{width: '100%',height:'3rem',position:'absolute',padding:'0 1rem',left:'0',bottom:bottom,boxSizing:'border-box',backgroundColor:'rgba(0,0,0,0.4)',display:'flex',alignItems:'center',justifyContent:'space-around'}}>
         <span style={{width:'4rem',color:'#fff',fontSize: '0.8rem'}}>{convertSecondsToTime(currentTime)}</span>
         <Slider
           aria-label="time-indicator"
