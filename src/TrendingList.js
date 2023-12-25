@@ -19,7 +19,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
       {seriesList.map((seriesItem, i) => (
-        <div style={{ display: 'inline-block', width: '140px', padding: '0 10px', position: 'relative', }} key={seriesItem.id}>
+        <div style={{ display: 'inline-block', width: '140px', padding: '0 10px', position: 'relative', }} key={seriesItem.ID}>
           <div style={{
             position: 'absolute',
             top: 0,

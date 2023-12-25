@@ -6,7 +6,7 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
-        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px', position: 'relative' }} key={seriesItem.id}>
+        <div style={{ flex: '1 0 calc(50% - 10px)', maxWidth: 'calc(50% - 10px)', margin: '0 5px', position: 'relative' }} key={seriesItem.ID}>
           {seriesItem.Hot && <div style={{
             position: 'absolute',
             top: 0,
