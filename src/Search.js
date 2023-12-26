@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Modal, Box } from '@mui/material';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { SearchSeries } from './service';
 import { GetUser } from './cache';
 import SeriesInfo from './SeriesInfo';
@@ -9,6 +10,7 @@ import SearchBar from './SearchBar';
 
 const Search = () => {
   const { searchTerm } = useParams();
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [currentSeries, setCurrentSeries] = useState(null);
   const [user, setUser] = useState(null);
@@ -36,14 +38,22 @@ const Search = () => {
     setOpenModal(false);
     setCurrentSeries(null);
   };
+  const onBack = () => {
+    navigate(-1)
+  }
 
   return (
-    <div style={{ height: '100vh', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
+    <div className='flex flex-col' style={{ height: '100%', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
-      <SearchBar />
-
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Search Results</h3>
-      <SeriesList seriesList={seriesList} handleSeriesClick={handleSeriesClick} />
+     <div className='h-[44px] flex items-center px-4'>
+        <ArrowBackIosIcon onClick={onBack} fontSize="small" />
+        <div className='flex-1'><SearchBar /></div>
+      </div> 
+      <main className='flex-1 pb-4'>
+        <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Search Results</h3>
+       <SeriesList seriesList={seriesList} handleSeriesClick={handleSeriesClick} />
+      </main>
+      
 
       <Modal
         open={openModal}

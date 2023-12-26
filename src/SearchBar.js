@@ -19,12 +19,13 @@ export default function SearchBar() {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ height: '50px' }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ height: '44px', display: 'flex', alignItems: 'center' }}>
       <TextField
         fullWidth
         variant="outlined"
         placeholder="Search Series ..."
         value={searchTerm}
+        size="small"
         onChange={handleSearchChange}
         InputProps={{
           startAdornment: (

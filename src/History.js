@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getHistory } from './service.js';
 import { GetUser } from './cache';
 import HistoryRows from './HistoryRows';
+import NavBar from "./components/NavBar";
 
 const History = () => {
   const [list, setList] = useState([]);
@@ -27,14 +27,17 @@ const History = () => {
   const handleSeriesClick = (seriesItem) => {
     navigate(`/player/${seriesItem.ID}/${seriesItem.Episode}`);
   };
+  const handleOnBack = () => {
+    navigate(-1);
+  };
 
   return (
-    <div style={{ position: 'fixed', height: '100vh', width: '100%', overflowY: 'auto', backgroundColor: '#111' }}>
-      <Typography id="list-modal-title" variant="h6" component="h2" align="center" margin={"10px"}>
-        History
-      </Typography>
-      {list && <HistoryRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
-      <div style={{ height: '20vh'}}></div>
+    <div className='h-full flex flex-col'>
+      <NavBar title="History" onBack={handleOnBack} />
+      <div className='flex-1 overflow-y-auto overflow-x-hidden'>
+        {list && <HistoryRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
+      </div>
+      <div style={{ height: '4vh'}}></div>
     </div>
   );
 };

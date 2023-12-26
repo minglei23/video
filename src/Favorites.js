@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getFavorites } from './service.js';
 import { GetUser, GetHistory } from './cache';
 import FavoritesRows from './FavoritesRows';
+import NavBar from "./components/NavBar";
 
 const Favorites = () => {
   const [list, setList] = useState([]);
@@ -32,14 +32,16 @@ const Favorites = () => {
       navigate(`/player/${seriesItem.ID}/1`);
     }
   };
-
+  const handleOnBack = () => {
+    navigate(-1);
+  };
   return (
-    <div style={{ position: 'fixed', height: '100vh', width: '100%', overflowY: 'auto', backgroundColor: '#111'}}>
-      <Typography id="list-modal-title" variant="h6" component="h2" align="center" margin={"10px"}>
-        Favorites
-      </Typography>
-      {list && <FavoritesRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
-      <div style={{ height: '20vh' }}></div>
+    <div className='h-full flex flex-col'>
+      <NavBar title="Favorites" onBack={handleOnBack} />
+      <div className='flex-1 overflow-y-auto overflow-x-hidden'>
+        {list && <FavoritesRows seriesList={list} handleSeriesClick={handleSeriesClick} />}
+      </div>
+      <div style={{ height: '4vh'}}></div>
     </div>
   );
 };
