@@ -5,7 +5,7 @@ import VipButton from './VipButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CoinIcon from '@mui/icons-material/MonetizationOn';
 
-const VipEpisodeModal = ({ open, onClose }) => {
+const VipEpisodeModal = ({ open, onClose, bottom = 0 }) => {
   const navigate = useNavigate()
   return (
     <Modal
@@ -16,7 +16,7 @@ const VipEpisodeModal = ({ open, onClose }) => {
     >
       <Box sx={{
         position: 'absolute',
-        bottom: 0,
+        bottom: bottom,
         left: '50%',
         transform: 'translateX(-50%)',
         width: '100%',

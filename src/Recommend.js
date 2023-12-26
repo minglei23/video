@@ -81,7 +81,7 @@ const Recommend = () => {
   }
 
   return (
-    <div {...handlers} style={{
+    <div {...handlers} className="recommend" style={{
       position: 'relative',
       display: 'flex',
       flexDirection: 'column',
@@ -109,9 +109,9 @@ const Recommend = () => {
       />}
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
-      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
+      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} seriesInfoBottom="68px" showVipMotal={() => setVipEpisodeModal(true)} />}
       {video && <div style={{display:showPlayerIcons?'block':'none'}}> <PlayerSlider bottom="0" currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
-      <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
+      <VipEpisodeModal open={vipEpisodeModal} bottom="68px" onClose={() => setVipEpisodeModal(false)} />
       {/* {showPlayerIcons && <Menu />} */}
     </div>
   );

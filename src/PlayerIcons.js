@@ -8,7 +8,7 @@ import SeriesInfo from './SeriesInfo';
 import FavoritesIcon from './FavoritesIcon';
 import copy from 'copy-to-clipboard';
 
-const PlayerIcons = ({ seriesId, showVipMotal }) => {
+const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [series, setSeries] = useState(null);
@@ -75,17 +75,21 @@ const PlayerIcons = ({ seriesId, showVipMotal }) => {
       >
         <Box sx={{
           position: 'absolute',
-          bottom: 0,
+          bottom: seriesInfoBottom,
           left: '50%',
           transform: 'translateX(-50%)',
           width: '100%',
           maxHeight: '50vh',
-          overflowY: 'auto',
+          // overflowY: 'auto',
           bgcolor: '#333',
           p: 3,
           borderRadius: '50px 50px 0 0',
+          display: 'flex',
+          flexDirection: 'column'
         }}>
+          <div className='flex-1 overflow-y-auto overflow-x-hidden'>
           <SeriesInfo user={user} series={series} showVipMotal={showVipMotal} />
+          </div>
         </Box>
       </Modal>
     </div>
