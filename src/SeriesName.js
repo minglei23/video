@@ -1,6 +1,6 @@
 import React from 'react';
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-const SeriesName = ({ name, onBack }) => {
+const SeriesName = ({ name, isShowBack = false, onBack }) => {
   return (
     <div style={{
       position: 'absolute',
@@ -12,7 +12,7 @@ const SeriesName = ({ name, onBack }) => {
       alignItems: 'center',
     }}>
       <div onClick={() => onBack && onBack()}>
-      <ArrowBackIosIcon fontSize="small"/>
+      {isShowBack && <ArrowBackIosIcon fontSize="small"/>}
       </div>
       <h3 className='max-w-80 flex-1 overflow-hidden whitespace-nowrap text-ellipsis'>
         {name}

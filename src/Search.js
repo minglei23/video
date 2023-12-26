@@ -39,7 +39,7 @@ const Search = () => {
     setCurrentSeries(null);
   };
   const onBack = () => {
-    navigate(-1)
+    navigate('/home')
   }
 
   return (

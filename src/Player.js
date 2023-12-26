@@ -145,7 +145,7 @@ const Player = () => {
         }}
       />}
       {video && <StopIcons stop={play} click={onVideo} />}
-      {video && showPlayerIcons && <SeriesName name={`${video.Name} - ${episode}`} onBack={() => navigate('/home')}/>}
+      {video && showPlayerIcons && <SeriesName isShowBack name={`${video.Name} - ${episode}`} onBack={() => navigate('/home')}/>}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
       {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} backgroundColor="transparent" bottom="1.5rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
       {/* {showPlayerIcons && <Menu />} */}

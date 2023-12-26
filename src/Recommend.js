@@ -7,6 +7,7 @@ import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
 // import Menu from './Menu.js';
 import PlayerSlider from './PlayerSlider.js';
+import VipEpisodeModal from './VipEpisodeModal.js';
 
 const Recommend = () => {
   const [url, setUrl] = useState("");
@@ -16,6 +17,7 @@ const Recommend = () => {
 
   const videoRef = useRef(null)
   const [play, setPlay] = useState(true);
+  const [vipEpisodeModal, setVipEpisodeModal] = useState(false);
 
   const onVideo = () => {
     if (play) {
@@ -107,8 +109,9 @@ const Recommend = () => {
       />}
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
-      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} />}
+      {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
       {video && <div style={{display:showPlayerIcons?'block':'none'}}> <PlayerSlider bottom="0" currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
       {/* {showPlayerIcons && <Menu />} */}
     </div>
   );
