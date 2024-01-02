@@ -58,11 +58,11 @@ const Player = () => {
     }
   };
 
-  const cacheNextVideo = async () => {
+  const cacheNextVideo = async (series) => {
     localStorage.setItem('download-complete', 'false');
     try {
-      if (video) {
-        FetchAndCacheVideo(video, parseInt(episode) + 1);
+      if (series) {
+        FetchAndCacheVideo(series, parseInt(episode) + 1);
       }
     } catch (error) {
       console.error('Error fetching next video:', error);
@@ -78,7 +78,7 @@ const Player = () => {
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
         await checkAndSetVideo();
-        cacheNextVideo();
+        cacheNextVideo(series);
         setShowPlayerIcons(true);
         SetHistory(series.ID, episode);
         if (user) {
