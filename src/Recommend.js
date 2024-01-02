@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { GetRecommendSeries, RecordHistory } from './service';
-import { GetUser, SetHistory } from './cache';
+import { GetUser, SetHistory, FetchAndCacheVideo } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
-// import Menu from './Menu.js';
 import PlayerSlider from './PlayerSlider.js';
 import VipEpisodeModal from './VipEpisodeModal.js';
 
@@ -35,23 +34,54 @@ const Recommend = () => {
     setShowPlayerIcons(!showPlayerIcons);
   }
 
-  const fetchRecommend = async () => {
+  const checkAndSetVideo = async () => {
+    const recommendUrl = localStorage.getItem('cache-url');
+    const recommendVideo = localStorage.getItem('cache-video');
+    const isDownloadComplete = localStorage.getItem('download-complete');
+    try {
+      if (recommendUrl && isDownloadComplete === 'true') {
+        setUrl(recommendUrl);
+        setVideo(JSON.parse(recommendVideo));
+      } else {
+        const series = await GetRecommendSeries();
+        if (series) {
+          setUrl(`${series.BaseURL}/1.mp4`);
+          setVideo(series);
+        }
+      }
+    } catch (error) {
+      console.error('Error processing recommend:', error);
+    }
+  };
+
+  const cacheNextVideo = async () => {
+    localStorage.setItem('download-complete', 'false');
     try {
       const series = await GetRecommendSeries();
       if (series) {
-        setUrl(`${series.BaseURL}/1.mp4`);
-        setVideo(series);
+        FetchAndCacheVideo(series, 1);
+      }
+    } catch (error) {
+      console.error('Error fetching next recommend:', error);
+    }
+  };
+
+  const fetchRecommend = async () => {
+    try {
+      await checkAndSetVideo();
+      cacheNextVideo();
+      videoRef.current.play().then(() => {
+        setPlay(true);
+      }).catch(() => {
+        setPlay(false);
+      });
+      if (video) {
         setShowPlayerIcons(true);
-        SetHistory(series.ID, 1);
-        const user = GetUser()
+        SetHistory(video.ID, 1);
+        const user = GetUser();
         if (user) {
-          RecordHistory(user.ID, parseInt(series.ID), 1)
+          RecordHistory(user.ID, parseInt(video.ID), 1);
         }
-        videoRef.current.play().then(() => {
-          setPlay(true);
-        }).catch(() => {
-          setPlay(false);
-        });
       }
     } catch (error) {
       console.error('Error fetching recommend:', error);
@@ -110,7 +140,7 @@ const Recommend = () => {
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && <SeriesName name={video.Name} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} seriesInfoBottom="68px" showVipMotal={() => setVipEpisodeModal(true)} />}
-      {video && <div style={{display:showPlayerIcons?'block':'none'}}> <PlayerSlider bottom="0" currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      {video && <div style={{ display: showPlayerIcons ? 'block' : 'none' }}> <PlayerSlider bottom="0" currentTime={currentTime} allTime={video.TotalNumber} onChangeTime={handleOnChangeTime} /></div>}
       <VipEpisodeModal open={vipEpisodeModal} bottom="68px" onClose={() => setVipEpisodeModal(false)} />
       {/* {showPlayerIcons && <Menu />} */}
     </div>

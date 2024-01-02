@@ -104,3 +104,20 @@ export const GetCache = (key) => {
   return item.value;
 };
 
+export const FetchAndCacheVideo = async (series, episode) => {
+  const videoUrl = `${series.BaseURL}/${episode}.mp4`;
+  fetch(videoUrl)
+    .then(response => response.blob())
+    .then(blob => {
+      const localUrl = URL.createObjectURL(blob);
+      localStorage.setItem('cache-url', localUrl);
+      localStorage.setItem('cache-video', JSON.stringify(series));
+      localStorage.setItem('cache-episode', episode);
+      localStorage.setItem('download-complete', 'true');
+    })
+    .catch(error => {
+      console.error('Error caching video:', error);
+      localStorage.setItem('download-complete', 'false');
+    });
+};
+

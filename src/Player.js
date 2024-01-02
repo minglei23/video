@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GetSeries, RecordHistory } from './service';
-import { SetHistory } from './cache';
+import { SetHistory, FetchAndCacheVideo } from './cache';
 import { useSwipeable } from 'react-swipeable';
 import { GetUser } from './cache';
 import PlayerIcons from './PlayerIcons.js';
 import PlayerSlider from './PlayerSlider.js';
 import SeriesName from './SeriesName.js';
 import StopIcons from './StopIcons.js';
-// import Menu from './Menu.js';
 import LastEpisodeModal from './LastEpisodeModal.js';
 import VipEpisodeModal from './VipEpisodeModal.js';
 
@@ -42,6 +41,34 @@ const Player = () => {
     setShowPlayerIcons(!showPlayerIcons);
   }
 
+  const checkAndSetVideo = async () => {
+    const cacheUrl = localStorage.getItem('cache-url');
+    const cacheVideo = localStorage.getItem('cache-video');
+    const cacheEpisode = localStorage.getItem('cache-episode');
+    const isDownloadComplete = localStorage.getItem('download-complete');
+    try {
+      if (cacheUrl && isDownloadComplete === 'true') {
+        const cache = JSON.parse(cacheVideo)
+        if (parseInt(cache.ID) === parseInt(seriesId) && parseInt(cacheEpisode) === parseInt(episode)) {
+          setUrl(cacheUrl);
+        }
+      }
+    } catch (error) {
+      console.error('Error processing cache video:', error);
+    }
+  };
+
+  const cacheNextVideo = async () => {
+    localStorage.setItem('download-complete', 'false');
+    try {
+      if (video) {
+        FetchAndCacheVideo(video, parseInt(episode) + 1);
+      }
+    } catch (error) {
+      console.error('Error fetching next video:', error);
+    }
+  };
+
   const fetchVideo = useCallback(async () => {
     try {
       const user = GetUser();
@@ -50,7 +77,8 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
-        console.log('series',series);
+        await checkAndSetVideo();
+        cacheNextVideo();
         setShowPlayerIcons(true);
         SetHistory(series.ID, episode);
         if (user) {
@@ -145,9 +173,9 @@ const Player = () => {
         }}
       />}
       {video && <StopIcons stop={play} click={onVideo} />}
-      {video && showPlayerIcons && <SeriesName isShowBack name={`${video.Name} - ${episode}`} onBack={() => navigate('/home')}/>}
+      {video && showPlayerIcons && <SeriesName isShowBack name={`${video.Name} - ${episode}`} onBack={() => navigate('/home')} />}
       {video && showPlayerIcons && <PlayerIcons seriesId={video.ID} showVipMotal={() => setVipEpisodeModal(true)} />}
-      {video && <div style={{display:showPlayerIcons?'block':'none'}}><PlayerSlider currentTime={currentTime} backgroundColor="transparent" bottom="1.5rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime}/></div>}
+      {video && <div style={{ display: showPlayerIcons ? 'block' : 'none' }}><PlayerSlider currentTime={currentTime} backgroundColor="transparent" bottom="1.5rem" allTime={video.TotalNumber} onChangeTime={handleOnChangeTime} /></div>}
       {/* {showPlayerIcons && <Menu />} */}
       <LastEpisodeModal open={lastEpisodeModal} onClose={() => setLastEpisodeModal(false)} />
       <VipEpisodeModal open={vipEpisodeModal} onClose={() => setVipEpisodeModal(false)} />
