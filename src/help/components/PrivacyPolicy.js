@@ -9,8 +9,8 @@ const PrivacyPolicy = () => {
     <div style={{height:'100vh',display: 'flex',flexDirection: 'column'}}>
         <NavBar title={'Privacy Policy'} onBack={()=>{navigate(-1)}}/>
       <div style={{ flex:1,overflow:'auto',padding: '0 0.8rem',paddingBottom:'3rem'}}>
-        <p>Privacy Policy for FunTV<br />
-In the course of and for the performance of our service of “FunTV” (the “Service”, the “Company”, “we”, “our” or, “us”) processes various information about our customers who use the Service (“Customer”, “you”, or “your”). FunTV recognizes the importance of the data protection for our Customers and establishes this Privacy Policy for the Service (the “Policy”) to provide you with our data protection policy and your rights concerning your Personal Data (as defined below). Please read this Policy carefully to understand our views and practices regarding your Personal Data and click a button to show your consent to this Policy to agree to our processing of your Personal Data.<br />
+        <p>Privacy Policy for RealShort<br />
+In the course of and for the performance of our service of “RealShort” (the “Service”, the “Company”, “we”, “our” or, “us”) processes various information about our customers who use the Service (“Customer”, “you”, or “your”). RealShort recognizes the importance of the data protection for our Customers and establishes this Privacy Policy for the Service (the “Policy”) to provide you with our data protection policy and your rights concerning your Personal Data (as defined below). Please read this Policy carefully to understand our views and practices regarding your Personal Data and click a button to show your consent to this Policy to agree to our processing of your Personal Data.<br />
 
 1. Information We Collect<br />
 We collect information that identifies, relates to, describes, references, and is capable of being associated with, or could reasonably be linked, directly or indirectly, with a particular Customer or Customer’s device (“Personal Data”). In particular, we will collect, and have collected in the last twelve (12) months, the following categories of Personal Data:<br />
