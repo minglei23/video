@@ -52,8 +52,8 @@ export default function Carousel({ handleSeriesClick }) {
         backgroundColor: 'rgba(0, 0, 0, 0.1)'
       }}>
         <Grid container alignItems="center" spacing={0} >
-          <Grid item marginLeft={2} marginRight={1}>
-            <Typography style={{ fontWeight: 'bold', color: '#fc5' }}>MoReel</Typography>
+          <Grid item marginLeft={1} marginRight={1}>
+            <Typography style={{ fontWeight: 'bold', color: '#fc5' }}>RealShort</Typography>
           </Grid>
           <Grid item xs style={{ flexGrow: 1, flexShrink: 1 }}>
             <InputBase
