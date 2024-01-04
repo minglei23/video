@@ -4,21 +4,27 @@ import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
 
 const LoginGoogle = () => {
-
   const clientId = "493751355482-fb7ivmgcvirq81f3jg8gkf2p7d8ak5ol.apps.googleusercontent.com";
 
   useEffect(() => {
     const initClient = () => {
       gapi.client.init({
         clientId: clientId,
-        scope: ''
+        scope: 'profile email'
       });
     };
     gapi.load('client:auth2', initClient);
-  });
+  }, []);
 
   const responseGoogle = (response) => {
-    console.log('google', response);
+    const googleId = response.profileObj.googleId;
+    const email = response.profileObj.email;
+    const accessToken = response.accessToken;
+
+    console.log(`Google ID: ${googleId}`);
+    console.log(`Email: ${email}`);
+    console.log(`Access Token: ${accessToken}`);
+
   }
 
   return (
