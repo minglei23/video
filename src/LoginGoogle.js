@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Grid } from '@mui/material';
 import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script';
 
 const LoginGoogle = () => {
+
+  const clientId = "493751355482-fb7ivmgcvirq81f3jg8gkf2p7d8ak5ol.apps.googleusercontent.com";
+
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ''
+      });
+    };
+    gapi.load('client:auth2', initClient);
+  });
+
   const responseGoogle = (response) => {
     console.log('google', response);
   }
@@ -10,7 +24,7 @@ const LoginGoogle = () => {
   return (
     <Grid item>
       <GoogleLogin
-        clientId="YOUR_CLIENT_ID"
+        clientId={clientId}
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}
