@@ -37,8 +37,9 @@ const LoginFacebook = () => {
       {showFacebookLogin && (
         <FacebookLogin
           appId="616758257243323"
-          autoLoad={true}
+          autoLoad={false}
           callback={responseFacebook}
+          disableMobileRedirect={true}
         />
       )}
     </Grid>
