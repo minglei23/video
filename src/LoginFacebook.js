@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Grid } from '@mui/material';
 import FacebookLogin from 'react-facebook-login';
+import { cologin } from './service';
+import { UserContext } from './index.js'
+import { SetUser } from './cache';
 
 const LoginFacebook = () => {
   const [showFacebookLogin, setShowFacebookLogin] = useState(false);
+  const { setUser } = useContext(UserContext);
 
-  const responseFacebook = (response) => {
-    console.log('facebook', response);
-    if (response.accessToken && response.userID) {
-      console.log('User ID:', response.userID);
-      console.log('Access Token:', response.accessToken);
-    } else {
-      console.log('User did not fully authorize.');
+  const responseFacebook = async (response) => {
+    if (!response.userID || !response.accessToken) {
+      console.error('facebook response error');
+      return
     }
-  };
+    try {
+      const userData = await cologin(response.userID, response.accessToken, 2, response.name);
+      setUser(userData);
+      SetUser(userData);
+    } catch (error) {
+      console.error('facebook login failed:', error);
+    }
+  }
 
   const handleFacebookLoginClick = () => {
     setShowFacebookLogin(true);

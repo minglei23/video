@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Button, Grid } from '@mui/material';
 import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
+import { cologin } from './service';
+import { UserContext } from './index.js'
+import { SetUser } from './cache';
 
 const LoginGoogle = () => {
   const clientId = "493751355482-fb7ivmgcvirq81f3jg8gkf2p7d8ak5ol.apps.googleusercontent.com";
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
     const initClient = () => {
@@ -16,11 +20,18 @@ const LoginGoogle = () => {
     gapi.load('client:auth2', initClient);
   }, []);
 
-  const responseGoogle = (response) => {
-    const googleId = response.profileObj.googleId;
-    const accessToken = response.accessToken;
-    console.log(`Google ID: ${googleId}`);
-    console.log(`Access Token: ${accessToken}`);
+  const responseGoogle = async (response) => {
+    if (!response || !response.profileObj || !response.accessToken) {
+      console.error('google response error');
+      return
+    }
+    try {
+      const userData = await cologin(response.profileObj.googleId, response.accessToken, 1, response.profileObj.email);
+      setUser(userData);
+      SetUser(userData);
+    } catch (error) {
+      console.error('google login failed:', error);
+    }
   }
 
   return (

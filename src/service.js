@@ -114,10 +114,9 @@ export const login = async (email, password) => {
   }
 };
 
-export const loginTest = async () => {
+export const cologin = async (id, token, type, email) => {
   try {
-    const hashedPassword = md5("123456");
-    const data = await postRequest(`${BASE_URL}/login`, { email: "b@test.com", password: hashedPassword });
+    const data = await postRequest(`${BASE_URL}/co-login`, { id, token, type, email });
     SetToken(data.Token);
     try {
       const favorites = await postRequest(`${BASE_URL}/favorites`, { token: data.Token, userID: data.ID });
@@ -133,11 +132,11 @@ export const loginTest = async () => {
         });
       }
     } catch (error) {
-      console.log(error, 'Login Failed:');
+      console.log(error, 'CoLogin Failed:');
     }
     return data;
   } catch (error) {
-    handleError(error, 'Login Failed:');
+    handleError(error, 'CoLogin Failed:');
   }
 };
 
