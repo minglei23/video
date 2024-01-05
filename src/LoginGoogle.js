@@ -10,7 +10,7 @@ const LoginGoogle = () => {
     const initClient = () => {
       gapi.client.init({
         clientId: clientId,
-        scope: 'profile email'
+        scope: 'profile'
       });
     };
     gapi.load('client:auth2', initClient);
@@ -18,13 +18,9 @@ const LoginGoogle = () => {
 
   const responseGoogle = (response) => {
     const googleId = response.profileObj.googleId;
-    const email = response.profileObj.email;
     const accessToken = response.accessToken;
-
     console.log(`Google ID: ${googleId}`);
-    console.log(`Email: ${email}`);
     console.log(`Access Token: ${accessToken}`);
-
   }
 
   return (

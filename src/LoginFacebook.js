@@ -7,10 +7,12 @@ const LoginFacebook = () => {
 
   const responseFacebook = (response) => {
     console.log('facebook', response);
-  }
-
-  const componentClicked = () => {
-    console.log('Facebook button clicked');
+    if (response.accessToken && response.userID) {
+      console.log('User ID:', response.userID);
+      console.log('Access Token:', response.accessToken);
+    } else {
+      console.log('User did not fully authorize.');
+    }
   };
 
   const handleFacebookLoginClick = () => {
@@ -28,8 +30,6 @@ const LoginFacebook = () => {
         <FacebookLogin
           appId="616758257243323"
           autoLoad={true}
-          fields="email"
-          onClick={componentClicked}
           callback={responseFacebook}
         />
       )}
