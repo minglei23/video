@@ -52,7 +52,7 @@ const VipButton = ({ border, color, coins, bonus, price }) => {
           }}
         >
           <h3 style={{ margin: '0', color: '#fff' }}>
-            {`$${price}`}
+            {`$${price}.00`}
           </h3>
         </div>
       </Button>

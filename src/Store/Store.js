@@ -17,44 +17,44 @@ const Store = () => {
   const [rechargeType] = useState([
     {
       id: 1,
-      amount: 9.99,
-      coins: 1000,
-      bonus: 200,
+      amount: 5,
+      coins: 250,
+      bonus: 50,
       discount: 20,
     },
     {
       id: 2,
-      amount: 4.99,
-      coins: 500,
-      bonus: 50,
+      amount: 2,
+      coins: 100,
+      bonus: 10,
       discount: 10,
     },
     {
       id: 3,
-      amount: 19.99,
-      coins: 2000,
-      bonus: 40,
+      amount: 10,
+      coins: 500,
+      bonus: 100,
       discount: 20,
     },
     {
       id: 4,
-      amount: 29.99,
-      coins: 3000,
-      bonus: 900,
-      discount: 30,
+      amount: 15,
+      coins: 750,
+      bonus: 150,
+      discount: 20,
     },
     {
       id: 5,
-      amount: 39.99,
-      coins: 4000,
-      bonus: 1200,
+      amount: 20,
+      coins: 1000,
+      bonus: 300,
       discount: 30,
     },
     {
       id: 6,
-      amount: 49.99,
-      coins: 5000,
-      bonus: 2500,
+      amount: 30,
+      coins: 1500,
+      bonus: 750,
       discount: 50,
     },
   ]);
@@ -273,8 +273,7 @@ const Store = () => {
                     )}
                   </div>
                   <div className="recharge-item-bottom">
-                    US<small>$</small>
-                    {item.amount}
+                    {`US $${item.amount}.00`}
                   </div>
                 </div>
               );

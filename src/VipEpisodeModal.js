@@ -49,8 +49,8 @@ const VipEpisodeModal = ({ open, onClose, bottom = 0 }) => {
         <h5 style={{ margin: '3px 20px' }}>
           Balance: 0 Coins
         </h5>
-        <VipButton border={'2px solid #c70'} color={'#c70'} coins={500} bonus={50} price={4.99} />
-        <VipButton border={'2px solid #fa0'} color={'#fa0'} coins={1000} bonus={200} price={9.99} />
+        <VipButton border={'2px solid #c70'} color={'#c70'} coins={100} bonus={10} price={2.00} />
+        <VipButton border={'2px solid #fa0'} color={'#fa0'} coins={250} bonus={50} price={5.00} />
       </Box>
     </Modal>
   );

@@ -91,7 +91,7 @@ const CheckoutBox = ({ coins, bonus, price, stripeParams }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
-      <h5>{`$${price} pay by`}</h5>
+      <h5>{`$${price}.00 pay by`}</h5>
       <Button onClick={handleCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
     </Box>
