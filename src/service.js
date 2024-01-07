@@ -151,6 +151,14 @@ export const register = async (email, password) => {
   }
 };
 
+export const createStripePayment = async (id, amount, productID, successURL, cancelURL) => {
+  try {
+    return await postRequest(`${BASE_URL}/create-stripe-payment`, {id, amount, productID, successURL, cancelURL});
+  } catch (error) {
+    handleError(error, 'Stripe Failed:');
+  }
+};
+
 export const recordFavorites = async (userID, videoID) => {
   try {
     const token = GetToken();

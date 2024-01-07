@@ -65,23 +65,15 @@ const Store = () => {
     bonus: 0,
     price: 0,
   });
-  const [stripeParams, setStripeParams] = useState({});
 
   const handleOnBack = () => {
-    navigate(-1);
+    navigate('/profile')
   };
   const handleOpen = (coins, bonus, amount) => {
     setBuyInfo({
       coins: coins,
       bonus: bonus,
       price: amount,
-    });
-    setStripeParams({
-      ID: 1,
-      Amount: amount,
-      ProductID: "price_1OQqxYLvs8YNyX8sRMRaBbcN",
-      SuccessURL: "http://localhost:3000/store",
-      CancelURL: "http://localhost:3000/store",
     });
     setVisible(true);
   };
@@ -287,7 +279,7 @@ const Store = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <CheckoutBox {...buyInfo} stripeParams={stripeParams} />
+          <CheckoutBox {...buyInfo} />
         </Modal>
 
         <footer className="store-footer">

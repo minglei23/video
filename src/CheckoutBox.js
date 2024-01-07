@@ -1,40 +1,30 @@
 import React, { useEffect } from 'react';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
+import { createStripePayment } from './service';
+import { GetUser } from './cache';
 
 // Test public key
 const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
+const product = "price_1OQqxYLvs8YNyX8sRMRaBbcN";
+const url = "https://realshort.tv/profile"
 
-const CheckoutBox = ({ coins, bonus, price, stripeParams }) => {
+const CheckoutBox = ({ coins, bonus, price }) => {
 
-  const handleCheckout = async () => {
-    
+  const handleStripeCheckout = async () => {
     try {
+      const id = GetUser().ID;
       const stripe = await stripePromise;
-      // create-checkout-session
-      const response = await fetch('http://18.188.120.153:8080/create-stripe-payment', { 
-        method: 'POST', 
-        body: JSON.stringify(stripeParams), 
-        headers: {
-          "Content-type": "application/json"
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not OK');
-      }
-
-      const { sessionId } = await response.json();
-
+      const response = await createStripePayment(id, coins, product, url, url);
+      const sessionId = response.SessionId;
       const result = await stripe.redirectToCheckout({
         sessionId,
       });
-
       if (result.error) {
         alert(result.error.message);
       }
     } catch (error) {
-      console.error('There was a problem with the fetch operation:', error);
+      console.error('Stripe Payment Error:', error);
     }
   };
 
@@ -92,7 +82,7 @@ const CheckoutBox = ({ coins, bonus, price, stripeParams }) => {
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
       <h5>{`$${price}.00 pay by`}</h5>
-      <Button onClick={handleCheckout} style={buttonStyle}>Stripe</Button>
+      <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
     </Box>
   );
