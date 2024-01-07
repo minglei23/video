@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 // Test public key
 const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
 
-const CheckoutBox = ({ content1, content2, content3, stripeParams }) => {
+const CheckoutBox = ({ coins, bonus, price, stripeParams }) => {
 
   const handleCheckout = async () => {
     
@@ -79,7 +79,7 @@ const CheckoutBox = ({ content1, content2, content3, stripeParams }) => {
     background: '#6772e5',
     borderRadius: '4px',
     color: '#fff',
-    top: '0',
+    top: '5px',
     left: '0',
     width: '100%',
     height: '35px',
@@ -90,8 +90,8 @@ const CheckoutBox = ({ content1, content2, content3, stripeParams }) => {
 
   return (
     <Box sx={modalStyle}>
-      <h5>{`${content1} ${content2}`}</h5>
-      <h5>{`${content3} pay by`}</h5>
+      <h5>{`${coins} coins + ${bonus} bonus`}</h5>
+      <h5>{`$${price} pay by`}</h5>
       <Button onClick={handleCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
     </Box>

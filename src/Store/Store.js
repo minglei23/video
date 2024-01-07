@@ -17,53 +17,53 @@ const Store = () => {
   const [rechargeType] = useState([
     {
       id: 1,
-      amount: 17.99,
-      coins: "1800",
-      bonus: "540",
-      discount: "30",
+      amount: 9.99,
+      coins: 1000,
+      bonus: 200,
+      discount: 20,
     },
     {
       id: 2,
-      amount: 9.99,
-      coins: "1000",
-      bonus: "",
-      discount: "",
+      amount: 4.99,
+      coins: 500,
+      bonus: 50,
+      discount: 10,
     },
     {
       id: 3,
-      amount: 14.99,
-      coins: "1500",
-      bonus: "225",
-      discount: "15",
+      amount: 19.99,
+      coins: 2000,
+      bonus: 40,
+      discount: 20,
     },
     {
       id: 4,
-      amount: 23.99,
-      coins: "2400",
-      bonus: "600",
-      discount: "25",
+      amount: 29.99,
+      coins: 3000,
+      bonus: 900,
+      discount: 30,
     },
     {
       id: 5,
-      amount: 29.99,
-      coins: "3000",
-      bonus: "1200",
-      discount: "40",
+      amount: 39.99,
+      coins: 4000,
+      bonus: 1200,
+      discount: 30,
     },
     {
       id: 6,
       amount: 49.99,
-      coins: "5000",
-      bonus: "2500",
-      discount: "50",
+      coins: 5000,
+      bonus: 2500,
+      discount: 50,
     },
   ]);
 
   const [visible, setVisible] = useState(false);
   const [buyInfo, setBuyInfo] = useState({
-    content1: "",
-    content2: "",
-    content3: "",
+    coins: 0,
+    bonus: 0,
+    price: 0,
   });
   const [stripeParams, setStripeParams] = useState({});
 
@@ -72,9 +72,9 @@ const Store = () => {
   };
   const handleOpen = (coins, bonus, amount) => {
     setBuyInfo({
-      content1: `${coins} Coins`,
-      content2: bonus ? ` + ${bonus} Bonus` : '',
-      content3: `$${amount}`,
+      coins: coins,
+      bonus: bonus,
+      price: amount,
     });
     setStripeParams({
       ID: 1,
@@ -258,7 +258,7 @@ const Store = () => {
                     )
                   }
                 >
-                  {item.discount && (
+                  {item.discount !== 0 && (
                     <span className="discount-num">+{item.discount}%</span>
                   )}
                   <div className="recharge-item-content">
@@ -266,7 +266,7 @@ const Store = () => {
                       <span className="recharge-coins-num">{item.coins}</span>{" "}
                       Coins
                     </div>
-                    {item.bonus && (
+                    {item.bonus !== 0 && (
                       <span className="recharge-bonus">
                         +{item.bonus} Bonus
                       </span>

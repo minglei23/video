@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from '@mui/material';
 import CheckoutBox from './CheckoutBox';
 
-const VipButton = ({ border, color, content1, content2, content3 }) => {
+const VipButton = ({ border, color, coins, bonus, price }) => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -34,10 +34,10 @@ const VipButton = ({ border, color, content1, content2, content3 }) => {
           }}
         >
           <h4 style={{ margin: '8px 0 0 0', color: '#fff', lineHeight: '1.2' }}>
-            {content1}
+            {`${coins} coins`}
           </h4>
           <h5 style={{ margin: '0', color: color, lineHeight: '1.2' }}>
-            {content2}
+            {`+ ${bonus} bonus`}
           </h5>
         </div>
         <div
@@ -52,7 +52,7 @@ const VipButton = ({ border, color, content1, content2, content3 }) => {
           }}
         >
           <h3 style={{ margin: '0', color: '#fff' }}>
-            {content3}
+            {`$${price}`}
           </h3>
         </div>
       </Button>
@@ -62,7 +62,7 @@ const VipButton = ({ border, color, content1, content2, content3 }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <CheckoutBox content1={content1} content2={content2} content3={content3} />
+        <CheckoutBox coins={coins} bonus={bonus} price={price} />
       </Modal>
     </>
   );
