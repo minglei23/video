@@ -34,19 +34,23 @@ const CheckoutBox = ({ coins, bonus, price }) => {
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: '1.99'
-            }
-          }]
+              value: price
+            },
+            custom_id: GetUser().ID
+          }],
+          application_context: {
+            return_url: url,
+            cancel_url: url
+          }
         });
       },
       onApprove: (data, actions) => {
         return actions.order.capture().then((details) => {
-          alert('Transaction completed by ' + details.payer.name.given_name);
-          // Handle post-transaction logic here
+          alert('Payment successful! Thank you for your purchase.');
         });
       }
     }).render('#paypal-button-container');
-  }, []);
+  }, [price]);
 
   const modalStyle = {
     fontFamily: 'Poppins',
