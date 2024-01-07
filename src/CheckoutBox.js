@@ -7,7 +7,7 @@ import { GetUser } from './cache';
 // Test public key
 const stripePromise = loadStripe("pk_test_51OFXw4Lvs8YNyX8swQOIbwVtntvw5BaZ36VFC6mIOMqk8jZdnl6DuhdiQn87b8BvP04UfqNzjI00KIwGV4scCZEk00IdJ7Htan");
 const product = "price_1OQqxYLvs8YNyX8sRMRaBbcN";
-const url = "https://realshort.tv/profile"
+const url = "https://realshort.tv/store"
 
 const CheckoutBox = ({ coins, bonus, price }) => {
 
