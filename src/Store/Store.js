@@ -1,16 +1,16 @@
 // import { Typography } from '@mui/material';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 import { Typography, Link, Modal } from "@mui/material";
 import CheckoutBox from "../CheckoutBox";
 import "swiper/css";
 
 import NavBar from "../components/NavBar";
-import money1 from "../assets/image/money1.png";
-import money2 from "../assets/image/money2.png";
-import freeAccess from "../assets/image/free-access.png";
-import vipImg from "../assets/image/vip.png";
+// import money1 from "../assets/image/money1.png";
+// import money2 from "../assets/image/money2.png";
+// import freeAccess from "../assets/image/free-access.png";
+// import vipImg from "../assets/image/vip.png";
 import "./Store.css";
 const Store = () => {
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ const Store = () => {
     <div className="store-page">
       <NavBar title="Store" onBack={handleOnBack} />
       <main className="store-main">
-        <div className="store-card subscriptions">
+        {/* <div className="store-card subscriptions">
           <div className="card-title">Subscriptions</div>
           <div className="card-content">
             <Swiper
@@ -239,7 +239,7 @@ const Store = () => {
               </SwiperSlide>
             </Swiper>
           </div>
-        </div>
+        </div> */}
         <div className="store-card recharge">
           <div className="card-title">Recharge</div>
           <div className="card-content recharge-content">
