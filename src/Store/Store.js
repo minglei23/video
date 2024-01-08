@@ -24,9 +24,9 @@ const Store = () => {
     },
     {
       id: 2,
-      amount: 2,
-      coins: 100,
-      bonus: 10,
+      amount: 0.2,
+      coins: 10,
+      bonus: 1,
       discount: 10,
     },
     {
