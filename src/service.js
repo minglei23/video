@@ -206,13 +206,8 @@ export const getHistory = async (userID) => {
 
 export const GetPoints = async (userID) => {
   try {
-    const cached = GetCache("points");
-    if (cached) {
-      return cached.Points;
-    }
     const token = GetToken();
     const points = await postRequest(`${BASE_URL}/points`, { token, userID });
-    SetCache("points", points);
     return points.Points
   } catch (error) {
     handleError(error, 'Get Points Failed:');
