@@ -1,7 +1,7 @@
 import md5 from 'js-md5';
 import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory } from './cache';
 
-const BASE_URL = 'http://159.138.133.138:8080';
+const BASE_URL = 'https://api.realshort.tv';
 
 // Utility function to fetch data with caching
 const fetchDataWithCache = async (url, cacheKey, expiryTime = 3600000) => {
