@@ -1,7 +1,7 @@
 import md5 from 'js-md5';
 import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory } from './cache';
 
-const BASE_URL = 'https://api.realshort.tv';
+const BASE_URL = 'http://159.138.133.138:8080';
 
 // Utility function to fetch data with caching
 const fetchDataWithCache = async (url, cacheKey, expiryTime = 3600000) => {
@@ -31,7 +31,7 @@ const handleError = (error, message) => {
 export const GetSeriesList = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
-    const seriesByType = { type3: [], type5: [], type6: [], type7: [] };
+    const seriesByType = { type1: [], type2: [], type3: [], type4: [], type5: [], type6: [], type7: [], type8: [], type9: [] };
     if (data.VideoList) {
       data.VideoList.forEach(video => {
         const typeKey = `type${video.Type}`;
@@ -153,7 +153,7 @@ export const register = async (email, password) => {
 
 export const createStripePayment = async (id, amount, productID, successURL, cancelURL) => {
   try {
-    return await postRequest(`${BASE_URL}/create-stripe-payment`, {id, amount, productID, successURL, cancelURL});
+    return await postRequest(`${BASE_URL}/create-stripe-payment`, { id, amount, productID, successURL, cancelURL });
   } catch (error) {
     handleError(error, 'Stripe Failed:');
   }

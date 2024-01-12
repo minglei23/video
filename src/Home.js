@@ -12,10 +12,15 @@ export default function Home() {
   const navigate = useNavigate();
 
   const [seriesByType, setSeriesByType] = useState({
+    type1: [],
+    type2: [],
     type3: [],
+    type4: [],
     type5: [],
     type6: [],
     type7: [],
+    type8: [],
+    type9: [],
   });
 
   useEffect(() => {
@@ -65,9 +70,16 @@ export default function Home() {
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Action & Kung Fu</h3>
       <PopularList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
 
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Love & Family</h3>
+      <PopularList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
-      <SeriesRows seriesList={[...seriesByType['type3'], ...seriesByType['type5']]} handleSeriesClick={handleSeriesClick} />
+      <SeriesRows seriesList={[
+        ...seriesByType['type1'],
+        ...seriesByType['type2'],
+        ...seriesByType['type4'],
+        ...seriesByType['type8'],
+      ]} handleSeriesClick={handleSeriesClick} />
 
       <div style={{ height: '8vh' }}></div>
     </div>
