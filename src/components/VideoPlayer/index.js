@@ -20,7 +20,7 @@ import VipEpisodeModal from "../../VipEpisodeModal.js";
 import "./index.css";
 
 const VideoPlayer = (props) => {
-  const { videoInfo, isActive } = props;
+  const { videoInfo, isActive, isShowBack, onBack } = props;
 //   console.log('视频信息',videoInfo );
   const navigate = useNavigate();
   const url = videoInfo.videoUrl;
@@ -124,7 +124,7 @@ const VideoPlayer = (props) => {
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && (
-        <SeriesName isShowBack name={video.Name} onBack={() => navigate(-1)} />
+        <SeriesName isShowBack={isShowBack} name={video.Name} onBack={() => onBack && onBack()} />
       )}
       {video && showPlayerIcons && (
         <PlayerIcons

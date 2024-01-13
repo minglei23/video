@@ -5,7 +5,7 @@ import VideoPlayer from "../VideoPlayer";
 import "./index.css";
 
 const VideoSwiper = (props) => {
-  const { videoList = [], preloadVideo } = props;
+  const { videoList = [], preloadVideo, isShowBack, onBack } = props;
   const [activeKey, setActiveKey] = useState(0);
   const [allVideoRecord, setAllVideoRecord] = useState([]);
 
@@ -44,6 +44,8 @@ const VideoSwiper = (props) => {
               <VideoPlayer
                 videoInfo={{ ...item }}
                 isActive={activeKey === index}
+                isShowBack={isShowBack}
+                onBack={onBack}
               />
             </SwiperSlide>
           );
