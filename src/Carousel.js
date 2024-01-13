@@ -6,31 +6,9 @@ import "slick-carousel/slick/slick-theme.css";
 import SearchIcon from '@mui/icons-material/Search';
 import { Grid, Button, Box, Typography, InputBase } from '@mui/material';
 
-export default function Carousel({ handleSeriesClick }) {
+export default function Carousel({ seriesList, handleSeriesClick }) {
 
   const navigate = useNavigate();
-  const seriesList = [
-    {
-      ID: 6,
-      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/6',
-      Name: 'Lord, Your Princess'
-    },
-    {
-      ID: 7,
-      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/7',
-      Name: 'Unparalleled Crown Princess'
-    },
-    {
-      ID: 12,
-      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/12',
-      Name: 'Cinderella Running Away'
-    },
-    {
-      ID: 13,
-      BaseURL: 'https://dc4ef1i295q51.cloudfront.net/13',
-      Name: 'Please Come Into My Lovesickness'
-    },
-  ]
 
   const settings = {
     infinite: true,
