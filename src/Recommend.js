@@ -94,7 +94,13 @@ const Recommend = () => {
         const data = series.map(item => {
           return {
             ...item,
-            videoUrl: `${item.BaseURL}/1.mp4`
+            videoUrl: `${item.BaseURL}/1.mp4`,
+            vttList: (item.Subtitle || []).map(value => {
+              return {
+                ...value,
+                url: `${item.BaseURL}/${value.Type}/1.vtt`
+              }
+            })
           }
         })
         setVideoList(data)
