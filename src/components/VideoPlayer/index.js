@@ -21,11 +21,11 @@ import "./index.css";
 
 const VideoPlayer = (props) => {
   const { videoInfo, isActive, isShowBack, onBack } = props;
-//   console.log('视频信息',videoInfo );
-  const navigate = useNavigate();
+//   console.log('视频信息',isActive );
+//   const navigate = useNavigate();
   const url = videoInfo.videoUrl;
   const video = videoInfo;
-  const subtitle = videoInfo.Subtitle || [];
+//   const subtitle = videoInfo.Subtitle || [];
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -46,6 +46,13 @@ const VideoPlayer = (props) => {
           setPlay(false);
         });
       addHistoryRecord();
+      return
+    } 
+    // 隐藏时停止播放
+    if(!isActive && videoRef.current) {
+        videoRef.current.pause()
+        setPlay(false);
+      setShowPlayerIcons(true);
     }
   }, [isActive, videoRef]);
 
@@ -124,7 +131,7 @@ const VideoPlayer = (props) => {
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
       {video && showPlayerIcons && (
-        <SeriesName isShowBack={isShowBack} name={video.Name} onBack={() => onBack && onBack()} />
+        <SeriesName isShowBack={isShowBack} name={`${video.Name} - ${video.episode}`} onBack={() => onBack && onBack()} />
       )}
       {video && showPlayerIcons && (
         <PlayerIcons
@@ -180,7 +187,7 @@ const VideoPlayer = (props) => {
                 name="row-radio-buttons-group"
                 onChange={handleCaptionsChange}
               >
-                {subtitle.map((item) => {
+                {(video.vttList || []).map((item) => {
                   return (
                     <FormControlLabel
                       className="text-[#fff]"
