@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
 
-      <Carousel handleSeriesClick={handleSeriesClick} />
+      <Carousel seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
@@ -53,7 +53,7 @@ export default function Home() {
         <EmojiEventsIcon style={{ color: '#fda' }} />
         <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>Trending</h3>
       </div>
-      <TrendingList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
+      <TrendingList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Popular</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
