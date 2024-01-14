@@ -273,7 +273,7 @@ const Player = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom: "68px",
+            bottom: "0s",
             left: "50%",
             transform: "translateX(-50%)",
             width: "100%",
