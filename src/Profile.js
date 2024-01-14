@@ -34,17 +34,10 @@ const Profile = () => {
       <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh'}}>
         <Points user={user} />
         <List>
-          {!user.Activated && (
-            <ListItem onClick={() => console.log('Verify Email')}>
-              <EmailIcon style={{ marginRight: '10px' }} />
-              <ListItemText primary="Verify Email" />
-            <ArrowForwardIosIcon style={{ width: '15px' }} />
-            </ListItem>
-          )}
           {!user.VIP && (
             <ListItem onClick={() => {navigate('/store')}}>
               <MonetizationOnIcon style={{ marginRight: '10px' }} />
-              <ListItemText primary="Become VIP" />
+              <ListItemText primary="Get Coins" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}

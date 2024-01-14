@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment } from './service';
+import { createStripePayment, getCoinsTest } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -10,6 +11,17 @@ const product = "price_1OW6LHLvs8YNyX8svyQwfJas";
 const url = "https://realshort.tv/profile"
 
 const CheckoutBox = ({ coins, bonus, price }) => {
+  const navigate = useNavigate()
+
+  const handleTest = async () => {
+    try {
+      const id = GetUser().ID;
+      const response = await getCoinsTest(id, coins+bonus);
+    } catch (error) {
+      console.error('Get Coins:', error);
+    }
+    navigate('/profile')
+  };
 
   const handleStripeCheckout = async () => {
     try {
@@ -86,6 +98,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
       <h5>{`$${price}.00 pay by`}</h5>
+      <Button onClick={handleTest} style={buttonStyle}>Get Coins Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
     </Box>

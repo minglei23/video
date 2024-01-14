@@ -169,6 +169,15 @@ export const recordFavorites = async (userID, videoID) => {
   }
 };
 
+export const getCoinsTest = async (userID, number) => {
+  try {
+    const token = GetToken();
+    return await postRequest(`${BASE_URL}/get-coins-test`, { token, userID, number });
+  } catch (error) {
+    handleError('Get Coins Test Failed:', error);
+  }
+};
+
 export const removeFavorites = async (userID, videoID) => {
   try {
     const token = GetToken();

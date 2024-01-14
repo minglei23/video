@@ -3,23 +3,30 @@ import { useNavigate } from 'react-router-dom'
 import { Typography, Button, Grid } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import { GetPoints } from './service.js';
+import { GetPoints, GetIfChecked, Checkin } from './service.js';
 
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
+  const [checked, setChecked] = useState(true);
   const navigate = useNavigate()
 
   useEffect(() => {
     const loadData = async () => {
       const points = await GetPoints(user.ID);
+      const checked = await GetIfChecked(user.ID);
       setPoints(points);
+      setChecked(checked);
     };
 
     loadData();
   }, [user.ID]);
 
   const handleCheckin = async () => {
-    console.log('go to rewards')
+    if (!checked) {
+      const newPoints = await Checkin(user.ID);
+      setPoints(newPoints);
+      setChecked(true);
+    }
   };
 
   return (
@@ -34,9 +41,9 @@ const Points = ({ user }) => {
         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
           <MonetizationOnIcon style={{ color: '#fa0' }} />
           <Typography variant="h6" style={{ color: '#fa0', marginLeft: '5px', marginRight: '20px' }}>{points}</Typography>
-          <Button variant="contained" onClick={handleCheckin} style={{ backgroundColor: '#fa0', color: '#000', fontSize: '0.8rem', padding: '3px 6px' }}>
+          {!checked && <Button variant="contained" onClick={handleCheckin} style={{ backgroundColor: '#fa0', color: '#000', fontSize: '0.8rem', padding: '3px 6px' }}>
             Rewards
-          </Button>
+          </Button>}
           <Button variant="contained" onClick={() => {navigate('/store')}} style={{ backgroundColor: '#fa0', color: '#000', marginLeft: '10px',  fontSize: '0.8rem', padding: '3px 6px' }}>
             TOP UP
           </Button>
