@@ -43,7 +43,7 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
             />
           </Grid>
           <Grid item style={{ flexGrow: 0, flexShrink: 0 }}>
-            <Button onClick={() => navigate('/rewards')} style={{ minWidth: 0, padding: 0, margin: 10 }} >
+            <Button onClick={() => navigate('/profile')} style={{ minWidth: 0, padding: 0, margin: 10 }} >
               <img src="/image/coin.gif" alt="Coin" style={{ width: 24, height: 24 }} />
             </Button>
           </Grid>

@@ -12,6 +12,7 @@ import copy from "copy-to-clipboard";
 const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptions }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(0);
   const [series, setSeries] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -20,6 +21,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
       try {
         const user = GetUser();
         setUser(user);
+        setUserId(user.ID)
         const fetchedSeries = await GetSeries(seriesId);
         setSeries(fetchedSeries);
       } catch (error) {
@@ -42,7 +44,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
 
 
   const handleShareClick = () => {
-    const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: http://18.188.120.153/player/${seriesId}/1`;
+    const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: https://realshort.tv/player/${seriesId}/1?from=${userId}`;
     copy(linkToCopy);
     alert("Link copied to clipboard!");
   };
