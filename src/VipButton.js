@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
-import { Button, Modal } from '@mui/material';
-import CheckoutBox from './CheckoutBox';
+import React from 'react';
+import { Button } from '@mui/material';
 
-const VipButton = ({ border, color, coins, bonus, price }) => {
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+const VipButton = ({ click, words }) => {
 
   return (
     <>
-      <Button onClick={handleOpen}
+      <Button onClick={click}
         style={{
           margin: '10px 20px',
           display: 'flex',
           alignItems: 'stretch',
-          border: border,
+          border: '2px solid #c70',
           borderRadius: '10px',
           padding: 0,
         }}
@@ -29,21 +19,19 @@ const VipButton = ({ border, color, coins, bonus, price }) => {
           style={{
             width: '70%',
             display: 'flex',
-            flexDirection: 'column',
-            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '45px',
           }}
         >
-          <h4 style={{ margin: '8px 0 0 0', color: '#fff', lineHeight: '1.2' }}>
-            {`${coins} coins`}
+          <h4 style={{ margin: '0', color: '#fff'}}>
+            {words}
           </h4>
-          <h5 style={{ margin: '0', color: color, lineHeight: '1.2' }}>
-            {`+ ${bonus} bonus`}
-          </h5>
         </div>
         <div
           style={{
             width: '30%',
-            backgroundColor: color,
+            backgroundColor: '#c70',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -52,18 +40,10 @@ const VipButton = ({ border, color, coins, bonus, price }) => {
           }}
         >
           <h3 style={{ margin: '0', color: '#fff' }}>
-            {`$${price}.00`}
+            1 Coins
           </h3>
         </div>
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <CheckoutBox coins={coins} bonus={bonus} price={price} />
-      </Modal>
     </>
   );
 };

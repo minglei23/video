@@ -10,7 +10,7 @@ import {
   Box,
 } from "@mui/material";
 import { GetSeries, RecordHistory } from "./service";
-import { SetHistory, FetchAndCacheVideo } from "./cache";
+import { SetHistory, FetchAndCacheVideo, GetEpisode } from "./cache";
 import { useSwipeable } from "react-swipeable";
 import { GetUser } from "./cache";
 import PlayerIcons from "./PlayerIcons.js";
@@ -33,6 +33,7 @@ const Player = () => {
   const [vttList, setVttList] = useState([]);
   const [vttType, setVttType] = useState("CN");
   const [captionsModalVisible, setCaptionsModalVisible] = useState(false);
+  const [paid, setPaid] = useState([]);
 
   const videoRef = useRef(null);
   const [play, setPlay] = useState(true);
@@ -127,8 +128,11 @@ const Player = () => {
   };
 
   useEffect(() => {
-    const user = GetUser();
-    if (parseInt(episode) <= 5 || (user && user.VIP)) {
+    const paidEpisode = GetEpisode(parseInt(seriesId))
+    if (paidEpisode) {
+      setPaid(paidEpisode)
+    }
+    if (parseInt(episode) <= 5 || paidEpisode.includes(parseInt(episode))) {
       fetchVideo();
     } else {
       navigate("/profile");
@@ -157,7 +161,7 @@ const Player = () => {
           navigateToEpisode(episodeNumber + 1);
         } else {
           const user = GetUser();
-          if (user && user.VIP) {
+          if (user && paid.includes(episodeNumber + 1)) {
             navigateToEpisode(episodeNumber + 1);
           } else {
             setVipEpisodeModal(true);
@@ -255,6 +259,8 @@ const Player = () => {
         onClose={() => setLastEpisodeModal(false)}
       />
       <VipEpisodeModal
+        videoId={parseInt(seriesId)}
+        episode={parseInt(episode) + 1}
         open={vipEpisodeModal}
         onClose={() => setVipEpisodeModal(false)}
       />

@@ -61,6 +61,22 @@ export const GetHistory = (key) => {
   return item.value;
 };
 
+export const SetEpisode = (key, value) => {
+  const item = {
+    value: value
+  };
+  localStorage.setItem("episode" + key, JSON.stringify(item));
+};
+
+export const GetEpisode = (key) => {
+  const itemStr = localStorage.getItem("episode" + key);
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  return item.value;
+};
+
 export const SetFavorites = (key) => {
   const item = {
     value: true

@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode } from './cache';
 
 const BASE_URL = 'https://api.realshort.tv';
 
@@ -132,6 +132,12 @@ export const cologin = async (id, token, type, email) => {
           SetHistory(item.ID, item.Episode);
         });
       }
+      const episode = await postRequest(`${BASE_URL}/episodes`, { token: data.Token, userID: data.ID });
+      if (episode.VideoEpisodeList) {
+        episode.VideoEpisodeList.forEach(item => {
+          SetEpisode(item.VideoID, item.Episode);
+        });
+      }
     } catch (error) {
       console.log(error, 'CoLogin Failed:');
     }
@@ -175,6 +181,15 @@ export const getCoinsTest = async (userID, number) => {
     return await postRequest(`${BASE_URL}/get-coins-test`, { token, userID, number });
   } catch (error) {
     handleError('Get Coins Test Failed:', error);
+  }
+};
+
+export const unlockEpisode = async (userID, videoID, episode) => {
+  try {
+    const token = GetToken();
+    return await postRequest(`${BASE_URL}/unlock-episode`, { token, userID, videoID, episode });
+  } catch (error) {
+    handleError('Unlock Episode Failed:', error);
   }
 };
 
