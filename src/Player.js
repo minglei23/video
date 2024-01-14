@@ -196,7 +196,7 @@ const Player = () => {
         height: "100%",
         width: "100%",
         zIndex: 20,
-        padding: "48px 0",
+        // padding: "48px 0",
         backgroundColor: "#111",
       }}
     >
