@@ -19,6 +19,7 @@ import NewSeries from "./NewSeries";
 import Store from './Store/Store';
 
 import './assets/styles/common.css'
+import Referral from './Referral';
 
 const UserContext = createContext();
 
@@ -35,6 +36,11 @@ function SearchWrapper() {
 function SeriesWrapper() {
   let { seriesId = 0 } = useParams();
   return <NewSeries seriesId={seriesId} />;
+}
+
+function ReferralWrapper() {
+  let { referralId = 0 } = useParams();
+  return <Referral referralId={referralId} />;
 }
 
 function App() {
@@ -63,6 +69,7 @@ function App() {
             <Route path="/search" element={<SearchWrapper />} />
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/referral/:referralId" element={<ReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}
         </div>

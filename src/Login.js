@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Typography, Container, Box, Grid, Snackbar } from '@mui/material';
 import AuthForm from './AuthForm';
 import LoginGoogle from './LoginGoogle';
@@ -8,15 +8,7 @@ const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);
   const [error, setError] = useState('');
 
-  const [referral, setReferral] = useState(0);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const fromParam = queryParams.get('referral');
-    if (fromParam) {
-      setReferral(parseInt(fromParam))
-    }
-  }, []);
+  const referral = 0;
 
   const toggleView = () => {
     setIsLoginView(!isLoginView);
