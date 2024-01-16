@@ -6,7 +6,7 @@ import { cologin } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
 
-const LoginGoogle = () => {
+const LoginGoogle = ({referral}) => {
   const clientId = "493751355482-fb7ivmgcvirq81f3jg8gkf2p7d8ak5ol.apps.googleusercontent.com";
   const { setUser } = useContext(UserContext);
 
@@ -26,7 +26,7 @@ const LoginGoogle = () => {
       return
     }
     try {
-      const userData = await cologin(response.profileObj.googleId, response.accessToken, 1, response.profileObj.email);
+      const userData = await cologin(response.profileObj.googleId, response.accessToken, 1, response.profileObj.email, referral);
       setUser(userData);
       SetUser(userData);
     } catch (error) {

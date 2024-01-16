@@ -5,7 +5,7 @@ import { cologin } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
 
-const LoginFacebook = () => {
+const LoginFacebook = ({referral}) => {
   const [showFacebookLogin, setShowFacebookLogin] = useState(false);
   const { setUser } = useContext(UserContext);
 
@@ -15,7 +15,7 @@ const LoginFacebook = () => {
       return
     }
     try {
-      const userData = await cologin(response.userID, response.accessToken, 2, response.name);
+      const userData = await cologin(response.userID, response.accessToken, 2, response.name, referral);
       setUser(userData);
       SetUser(userData);
     } catch (error) {

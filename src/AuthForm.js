@@ -4,7 +4,7 @@ import { login, register } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
 
-const AuthForm = ({ isLogin, setError }) => {
+const AuthForm = ({ isLogin, setError, referral }) => {
   const [email, setEmail] = useState('');
   const { setUser } = useContext(UserContext);
   const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ const AuthForm = ({ isLogin, setError }) => {
     if (!validateForm()) return;
 
     try {
-      const userData = isLogin ? await login(email, password) : await register(email, password);
+      const userData = isLogin ? await login(email, password) : await register(email, password, referral);
       setUser(userData);
       SetUser(userData);
     } catch (error) {

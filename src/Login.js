@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, Container, Box, Grid, Snackbar } from '@mui/material';
 import AuthForm from './AuthForm';
 import LoginGoogle from './LoginGoogle';
@@ -7,6 +7,16 @@ import LoginFacebook from './LoginFacebook';
 const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);
   const [error, setError] = useState('');
+
+  const [referral, setReferral] = useState(0);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const fromParam = queryParams.get('referral');
+    if (fromParam) {
+      setReferral(parseInt(fromParam))
+    }
+  }, []);
 
   const toggleView = () => {
     setIsLoginView(!isLoginView);
@@ -18,7 +28,7 @@ const Login = () => {
       <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '92vh' }}>
         <Box textAlign="center" marginTop={8}>
           <Typography variant="h5" margin={"25px"}>{isLoginView ? 'Login' : 'Sign Up'}</Typography>
-          <AuthForm isLogin={isLoginView} setError={setError} />
+          <AuthForm isLogin={isLoginView} setError={setError} referral={referral} />
           <Grid container justifyContent="center" style={{ marginTop: 20 }}>
             <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#fff', borderColor: '#fa0' }}>
               {isLoginView ? 'Go to Sign Up' : 'Go to Login'}
@@ -36,8 +46,8 @@ const Login = () => {
             or continue with
           </Typography>
           <Grid container >
-            <LoginGoogle />
-            <LoginFacebook />
+            <LoginGoogle referral={referral} />
+            <LoginFacebook referral={referral} />
           </Grid>
         </Box>
       </Container>

@@ -115,9 +115,9 @@ export const login = async (email, password) => {
   }
 };
 
-export const cologin = async (id, token, type, email) => {
+export const cologin = async (id, token, type, email, referral) => {
   try {
-    const data = await postRequest(`${BASE_URL}/co-login`, { id, token, type, email });
+    const data = await postRequest(`${BASE_URL}/co-login`, { id, token, type, email, referral });
     SetToken(data.Token);
     try {
       const favorites = await postRequest(`${BASE_URL}/favorites`, { token: data.Token, userID: data.ID });
@@ -147,10 +147,10 @@ export const cologin = async (id, token, type, email) => {
   }
 };
 
-export const register = async (email, password) => {
+export const register = async (email, password, referral) => {
   try {
     const hashedPassword = md5(password);
-    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword });
+    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword, referral});
     SetToken(data.Token);
     return data;
   } catch (error) {
