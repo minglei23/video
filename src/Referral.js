@@ -21,7 +21,7 @@ const Referral = () => {
     if (user || storedUser) {
       navigate('/profile')
     }
-  }, [referralId, setUser]);
+  }, [referralId, setUser, user]);
 
   return (
     <div style={{ backgroundImage: 'url("/image/login.png")', backgroundSize: 'cover' }}>
