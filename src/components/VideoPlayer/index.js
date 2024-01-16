@@ -33,7 +33,9 @@ const VideoPlayer = (props) => {
   const [play, setPlay] = useState(true);
   const [vipEpisodeModal, setVipEpisodeModal] = useState(false);
   const [captionsModalVisible, setCaptionsModalVisible] = useState(false);
-  const [vttType, setVttType] = useState(videoInfo.vttList[0] ? videoInfo.vttList[0].Type : 'CN');
+  const vttList = [{Type: '', Name: '无字幕', url: ''}, ...videoInfo.vttList]
+  const [vttType, setVttType] = useState('');
+  const [currentVtt, setCurrentVtt] = useState(null)
 
   useEffect(() => {
     if (isActive && videoRef.current) {
@@ -87,8 +89,9 @@ const VideoPlayer = (props) => {
     videoRef.current.currentTime = value;
   };
   const handleCaptionsChange = (e) => {
-    console.log(e.target.value);
-    setVttType(e.target.value)
+    const value = e.target.value
+    setVttType(value)
+    setCurrentVtt(vttList.find(item => item.Type === value))
   };
 
   return (
@@ -123,10 +126,13 @@ const VideoPlayer = (props) => {
             objectFit: "contain",
             flex: "1",
           }}
+          crossOrigin="anonymous"
         >
-          {(video.vttList || []).map((item) => {
-            return <track key={item.Type} default={vttType === item.Type} kind="captions" src={item.url} />;
-          })}
+           {currentVtt && <track
+                default
+                kind="captions"
+                src={currentVtt.url}
+              />}
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -187,13 +193,13 @@ const VideoPlayer = (props) => {
                 name="row-radio-buttons-group"
                 onChange={handleCaptionsChange}
               >
-                {(video.vttList || []).map((item) => {
+                {(vttList || []).map((item) => {
                   return (
                     <FormControlLabel
-                      className="text-[#fff]"
+                      classes={{root: 'text-[#fff]'}}
                       key={item.Type}
                       value={item.Type}
-                      control={<Radio />}
+                      control={<Radio classes={{root: 'vtt-radio'}}/>}
                       label={item.Name}
                     />
                   );

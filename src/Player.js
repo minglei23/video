@@ -31,7 +31,8 @@ const Player = () => {
   const [vipEpisodeModal, setVipEpisodeModal] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [vttList, setVttList] = useState([]);
-  const [vttType, setVttType] = useState("CN");
+  const [vttType, setVttType] = useState("");
+  const [currentVtt, setCurrentVtt] = useState(null)
   const [captionsModalVisible, setCaptionsModalVisible] = useState(false);
   const [paid, setPaid] = useState([]);
 
@@ -93,14 +94,13 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
-        setVttList(
-          (series.Subtitle || []).map((item) => {
-            return {
-              ...item,
-              url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
-            };
-          })
-        );
+        const tempVttList = (series.Subtitle || []).map((item) => {
+          return {
+            ...item,
+            url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
+          };
+        })
+        setVttList([{Type: '', Name: '无字幕', url: ''}, ...tempVttList])
         await checkAndSetVideo();
         cacheNextVideo(series);
         setShowPlayerIcons(true);
@@ -180,7 +180,9 @@ const Player = () => {
   };
   const handleCaptionsChange = (e) => {
     console.log(e.target.value);
-    setVttType(e.target.value);
+    let value = e.target.value;
+    setVttType(value);
+    setCurrentVtt(vttList.find(item => item.Type === value))
   };
 
   return (
@@ -214,17 +216,13 @@ const Player = () => {
             objectFit: "contain",
             flex: "1",
           }}
+          crossOrigin="anonymous"
         >
-          {(vttList || []).map((item) => {
-            return (
-              <track
-                key={item.Type}
-                default={vttType === item.Type}
+        {currentVtt && <track
+                default
                 kind="captions"
-                src={item.url}
-              />
-            );
-          })}
+                src={currentVtt.url}
+              />}
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -300,7 +298,7 @@ const Player = () => {
                       className="text-[#fff]"
                       key={item.Type}
                       value={item.Type}
-                      control={<Radio />}
+                      control={<Radio classes={{root: 'vtt-radio'}}/>}
                       label={item.Name}
                     />
                   );
