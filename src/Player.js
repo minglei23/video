@@ -137,6 +137,12 @@ const Player = () => {
     } else {
       navigate("/profile");
     }
+
+    return () => {
+      setUrl('')
+      setCurrentVtt(null)
+      setVttType('')
+    }
   }, [seriesId, episode, navigate, fetchVideo]);
 
   const navigateToEpisode = useCallback(

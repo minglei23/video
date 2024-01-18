@@ -20,7 +20,7 @@ const PlayerSlider = (props) => {
     },[currentTime, allTime])
 
     const handleChange = (value) => {
-      console.log('进度条', value);
+      // console.log('进度条', value);
       const slideTimer = value / duration * allTime
       onChangeTime(slideTimer)
       setPosition(value)

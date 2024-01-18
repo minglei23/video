@@ -23,7 +23,7 @@ const VideoPlayer = (props) => {
   const { videoInfo, isActive, isShowBack, onBack } = props;
 //   console.log('视频信息',isActive );
 //   const navigate = useNavigate();
-  const url = videoInfo.videoUrl;
+  let url = videoInfo.videoUrl;
   const video = videoInfo;
 //   const subtitle = videoInfo.Subtitle || [];
   const [showPlayerIcons, setShowPlayerIcons] = useState(true);
@@ -55,6 +55,14 @@ const VideoPlayer = (props) => {
         videoRef.current.pause()
         setPlay(false);
       setShowPlayerIcons(true);
+      setVttType('')
+      setCurrentVtt(null)
+    }
+
+    return () => {
+      url = "";
+      setVttType('')
+      setCurrentVtt(null)
     }
   }, [isActive, videoRef]);
 
