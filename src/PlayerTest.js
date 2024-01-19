@@ -26,10 +26,8 @@ const PlayerTest = () => {
       >
         <track
           default
-          kind="subtitles"
+          kind="captions"
           src="https://series-store.obs.ap-southeast-1.myhuaweicloud.com/13002/CN/1.vtt"
-          srclang="zh-CN"
-          label="简体中文"
         />
       </video>
     </div>
