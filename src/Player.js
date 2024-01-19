@@ -201,8 +201,8 @@ const Player = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
-        width: "100%",
+        height: "90%",
+        width: "90%",
         zIndex: 20,
         // padding: "48px 0",
         backgroundColor: "#111",
@@ -217,8 +217,8 @@ const Player = () => {
           onTimeUpdate={handleTimeUpdate}
           ref={videoRef}
           style={{
-            width: "100%",
-            height: "100%",
+            width: "90%",
+            height: "90%",
             objectFit: "contain",
             flex: "1",
           }}
