@@ -100,7 +100,7 @@ const Player = () => {
             url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
           };
         })
-        setVttList([{Type: '', Name: '无字幕', url: ''}, ...tempVttList])
+        setVttList([{ Type: '', Name: '无字幕', url: '' }, ...tempVttList])
         await checkAndSetVideo();
         cacheNextVideo(series);
         setShowPlayerIcons(true);
@@ -224,11 +224,13 @@ const Player = () => {
           }}
           crossOrigin="anonymous"
         >
-        {currentVtt && <track
-                default
-                kind="captions"
-                src={currentVtt.url}
-              />}
+          <track
+            default
+            kind="subtitles"
+            src="https://series-store.obs.ap-southeast-1.myhuaweicloud.com/13002/CN/1.vtt"
+            srclang="zh-CN" 
+            label="简体中文"
+          />
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -293,7 +295,7 @@ const Player = () => {
                       className="text-[#fff]"
                       key={item.Type}
                       value={item.Type}
-                      control={<Radio classes={{root: 'vtt-radio'}}/>}
+                      control={<Radio classes={{ root: 'vtt-radio' }} />}
                       label={item.Name}
                     />
                   );
