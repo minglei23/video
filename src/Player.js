@@ -201,8 +201,8 @@ const Player = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "90%",
-        width: "90%",
+        height: "100%",
+        width: "100%",
         zIndex: 20,
         // padding: "48px 0",
         backgroundColor: "#111",
@@ -217,20 +217,18 @@ const Player = () => {
           onTimeUpdate={handleTimeUpdate}
           ref={videoRef}
           style={{
-            width: "90%",
-            height: "90%",
+            width: "100%",
+            height: "100%",
             objectFit: "contain",
             flex: "1",
           }}
           crossOrigin="anonymous"
         >
-          <track
+          {currentVtt && <track
             default
-            kind="subtitles"
-            src="https://series-store.obs.ap-southeast-1.myhuaweicloud.com/13002/CN/1.vtt"
-            srclang="zh-CN" 
-            label="简体中文"
-          />
+            kind="captions"
+            src={currentVtt.url}
+          />}
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -247,6 +245,17 @@ const Player = () => {
           showVipMotal={() => setVipEpisodeModal(true)}
           clickCaptions={() => setCaptionsModalVisible(true)}
         />
+      )}
+      {video && (
+        <div style={{ display: showPlayerIcons ? "block" : "none" }}>
+          <PlayerSlider
+            currentTime={currentTime}
+            backgroundColor="transparent"
+            bottom="0.5rem"
+            allTime={video.TotalNumber}
+            onChangeTime={handleOnChangeTime}
+          />
+        </div>
       )}
       {/* {showPlayerIcons && <Menu />} */}
       <LastEpisodeModal
