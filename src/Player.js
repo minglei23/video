@@ -100,7 +100,7 @@ const Player = () => {
             url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
           };
         })
-        setVttList([{ Type: '', Name: '无字幕', url: '' }, ...tempVttList])
+        setVttList([{Type: '', Name: '无字幕', url: ''}, ...tempVttList])
         await checkAndSetVideo();
         cacheNextVideo(series);
         setShowPlayerIcons(true);
@@ -224,12 +224,11 @@ const Player = () => {
           }}
           crossOrigin="anonymous"
         >
-          <track
-            default
-            kind="subtitles"
-            srclang="zh-CN"
-            src={currentVtt?.url}
-          />
+        {currentVtt && <track
+                default
+                kind="captions"
+                src={currentVtt.url}
+              />}
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -305,7 +304,7 @@ const Player = () => {
                       className="text-[#fff]"
                       key={item.Type}
                       value={item.Type}
-                      control={<Radio classes={{ root: 'vtt-radio' }} />}
+                      control={<Radio classes={{root: 'vtt-radio'}}/>}
                       label={item.Name}
                     />
                   );
