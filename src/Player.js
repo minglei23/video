@@ -94,12 +94,20 @@ const Player = () => {
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
-        const tempVttList = (series.Subtitle || []).map((item) => {
+        const tempVttList = await Promise.all((series.Subtitle || []).map(async (item) => {
+          const response = await fetch(`${series.BaseURL}/${item.Type}/${episode}.vtt`);
+          if (!response.ok) {
+            throw new Error(`Failed to fetch VTT: ${response.statusText}`);
+          }
+          const text = await response.text();
+          const blob = new Blob([text], { type: 'text/vtt' });
+          const localUrl = URL.createObjectURL(blob);
+        
           return {
             ...item,
-            url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
+            url: localUrl,
           };
-        })
+        }));        
         setVttList([{ Type: '', Name: '无字幕', url: '' }, ...tempVttList])
         await checkAndSetVideo();
         cacheNextVideo(series);
@@ -201,8 +209,8 @@ const Player = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
-        width: "100%",
+        height: "90%",
+        width: "90%",
         zIndex: 20,
         // padding: "48px 0",
         backgroundColor: "#111",
@@ -217,8 +225,8 @@ const Player = () => {
           onTimeUpdate={handleTimeUpdate}
           ref={videoRef}
           style={{
-            width: "100%",
-            height: "100%",
+            width: "90%",
+            height: "90%",
             objectFit: "contain",
             flex: "1",
           }}
