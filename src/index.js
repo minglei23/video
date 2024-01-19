@@ -5,6 +5,7 @@ import './assets/styles/tailwindcss.css'
 import Layout from './layout';
 import Home from './Home';
 import Player from './Player';
+import PlayerTest from './PlayerTest';
 import Profile from './Profile';
 import Help from './help/Help';
 import TermsofService from './help/components/TermsofService';
@@ -59,6 +60,7 @@ function App() {
             <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />
+            <Route path="/test" element={<PlayerTest />} />
             <Route path="/help" element={<Help />} />
             <Route path="/termsofService" element={<TermsofService />} />
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
