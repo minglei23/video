@@ -20,8 +20,10 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
     const fetchSeries = async () => {
       try {
         const user = GetUser();
-        setUser(user);
-        setUserId(user.ID)
+        if (user) {
+          setUser(user);
+          setUserId(user.ID)
+        }
         const fetchedSeries = await GetSeries(seriesId);
         setSeries(fetchedSeries);
       } catch (error) {
@@ -107,7 +109,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
           </div>
         </Box>
       </Modal>
-     
+
     </div>
   );
 };
