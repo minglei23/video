@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SearchIcon from '@mui/icons-material/Search';
-import { Grid, Button, Box, Typography, InputBase } from '@mui/material';
+import { Grid, Button, Box, InputBase } from '@mui/material';
 
 export default function Carousel({ seriesList, handleSeriesClick }) {
 
