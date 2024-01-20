@@ -27,13 +27,15 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
         zIndex: 1,
         width: '100%',
         backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(0, 0, 0, 0.1)'
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        paddingTop: '5px',
+        paddingBottom: '5px'
       }}>
-        <Grid container alignItems="center" spacing={0} >
-          <Grid item marginLeft={1} marginRight={1}>
-            <Typography style={{ fontWeight: 'bold', color: '#fc5' }}>RealShort</Typography>
+        <Grid container alignItems="center" spacing={0.5} style={{ width: '100%' }}>
+          <Grid item style={{ flexBasis: '25%', flexGrow: 0, flexShrink: 0 }}>
+            <img src="/image/RealShort.png" alt="RealShort" style={{ maxHeight: '30px', borderRadius: '5px', paddingLeft: '5px' }} />
           </Grid>
-          <Grid item xs style={{ flexGrow: 1, flexShrink: 1 }}>
+          <Grid item style={{ flexBasis: '65%', flexGrow: 0, flexShrink: 0 }}>
             <InputBase
               fullWidth
               placeholder="    Search"
@@ -42,9 +44,9 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
               endAdornment={<SearchIcon style={{ color: '#ddd', cursor: 'pointer' }} />}
             />
           </Grid>
-          <Grid item style={{ flexGrow: 0, flexShrink: 0 }}>
-            <Button onClick={() => navigate('/profile')} style={{ minWidth: 0, padding: 0, margin: 10 }} >
-              <img src="/image/coin.gif" alt="Coin" style={{ width: 24, height: 24 }} />
+          <Grid item style={{ flexBasis: '10%', flexGrow: 0, flexShrink: 0 }}>
+            <Button onClick={() => navigate('/profile')} style={{ minWidth: 0, padding: 0 }}>
+              <img src="/image/coin.gif" alt="Coin" style={{ maxHeight: '24px', paddingLeft: '5px' }} />
             </Button>
           </Grid>
         </Grid>
