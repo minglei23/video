@@ -285,18 +285,6 @@ const Player = () => {
           clickCaptions={() => setCaptionsModalVisible(true)}
         />
       )}
-      {video && (
-        <div style={{ display: showPlayerIcons ? "block" : "none" }}>
-          <PlayerSlider
-            currentTime={currentTime}
-            backgroundColor="transparent"
-            bottom="0.5rem"
-            allTime={video.TotalNumber}
-            onChangeTime={handleOnChangeTime}
-            subtitles={subtitles}
-          />
-        </div>
-      )}
       <LastEpisodeModal
         open={lastEpisodeModal}
         onClose={() => setLastEpisodeModal(false)}
