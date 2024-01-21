@@ -135,12 +135,6 @@ const Player = () => {
     } else {
       navigate("/profile");
     }
-
-    return () => {
-      setUrl('')
-      setSubtitles([])
-      setVttType('')
-    }
   }, [seriesId, episode, navigate, fetchVideo]);
 
   const navigateToEpisode = useCallback(
@@ -266,6 +260,7 @@ const Player = () => {
             objectFit: "contain",
             flex: "1",
           }}
+          crossOrigin="anonymous"
         >
         </video>
       )}
