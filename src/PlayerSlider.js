@@ -70,7 +70,7 @@ const PlayerSlider = ({ currentTime = 0, allTime = 0, onChangeTime, bottom = '4r
         }}
       />
       <span style={{ width: '4rem', color: '#fff', fontSize: '0.8rem', textAlign: 'right' }}>{convertSecondsToTime(allTime)}</span>
-      {currentSubtitle && <div style={{ position: 'absolute', bottom: '9.5rem', width: '100%', textAlign: 'center', color: 'white', backdropFilter: 'blur(10px)', background: 'rgba(0, 0, 0, 0.1)', fontSize: '1.2rem', padding: '0.7rem 0' }}>
+      {currentSubtitle && <div style={{ position: 'absolute', bottom: '6rem', width: '100%', textAlign: 'center', color: 'white', fontSize: '1.2rem' }}>
         {currentSubtitle}
       </div>}
     </div>
