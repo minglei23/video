@@ -313,44 +313,6 @@ const Player = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "0",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100%",
-            maxHeight: "50vh",
-            bgcolor: "#333",
-            p: 3,
-            borderRadius: "50px 50px 0 0",
-          }}
-        >
-          <div className="h-[40vh] overflow-y-auto overflow-x-hidden">
-            <FormControl component="fieldset">
-              <div className="text-[#fff]">Captions</div>
-              <RadioGroup
-                row
-                value={vttType}
-                aria-label="gender"
-                name="row-radio-buttons-group"
-                onChange={handleCaptionsChange}
-              >
-                {vttList.map((item) => {
-                  return (
-                    <FormControlLabel
-                      className="text-[#fff]"
-                      key={item.Type}
-                      value={item.Type}
-                      control={<Radio classes={{ root: 'vtt-radio' }} />}
-                      label={item.Name}
-                    />
-                  );
-                })}
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </Box>
       </Modal>
     </div>
   );
