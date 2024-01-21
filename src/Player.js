@@ -307,13 +307,6 @@ const Player = () => {
         open={vipEpisodeModal}
         onClose={() => setVipEpisodeModal(false)}
       />
-      <Modal
-        open={captionsModalVisible}
-        onClose={() => setCaptionsModalVisible(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-      </Modal>
     </div>
   );
 };
