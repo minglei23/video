@@ -126,6 +126,8 @@ const Player = () => {
   };
 
   useEffect(() => {
+    setVttType('')
+    setSubtitles([])
     const paidEpisode = GetEpisode(parseInt(seriesId))
     if (paidEpisode) {
       setPaid(paidEpisode)
