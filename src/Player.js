@@ -266,7 +266,6 @@ const Player = () => {
             objectFit: "contain",
             flex: "1",
           }}
-          crossOrigin="anonymous"
         >
         </video>
       )}
@@ -285,6 +284,18 @@ const Player = () => {
           clickCaptions={() => setCaptionsModalVisible(true)}
         />
       )}
+      {video && (
+        <div style={{ display: showPlayerIcons ? "block" : "none" }}>
+          <PlayerSlider
+            currentTime={currentTime}
+            backgroundColor="transparent"
+            bottom="0.5rem"
+            allTime={video.TotalNumber}
+            onChangeTime={handleOnChangeTime}
+            subtitles={subtitles}
+          />
+        </div>
+      )}
       <LastEpisodeModal
         open={lastEpisodeModal}
         onClose={() => setLastEpisodeModal(false)}
@@ -295,6 +306,51 @@ const Player = () => {
         open={vipEpisodeModal}
         onClose={() => setVipEpisodeModal(false)}
       />
+      <Modal
+        open={captionsModalVisible}
+        onClose={() => setCaptionsModalVisible(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "0",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            maxHeight: "50vh",
+            bgcolor: "#333",
+            p: 3,
+            borderRadius: "50px 50px 0 0",
+          }}
+        >
+          <div className="h-[40vh] overflow-y-auto overflow-x-hidden">
+            <FormControl component="fieldset">
+              <div className="text-[#fff]">Captions</div>
+              <RadioGroup
+                row
+                value={vttType}
+                aria-label="gender"
+                name="row-radio-buttons-group"
+                onChange={handleCaptionsChange}
+              >
+                {vttList.map((item) => {
+                  return (
+                    <FormControlLabel
+                      className="text-[#fff]"
+                      key={item.Type}
+                      value={item.Type}
+                      control={<Radio classes={{ root: 'vtt-radio' }} />}
+                      label={item.Name}
+                    />
+                  );
+                })}
+              </RadioGroup>
+            </FormControl>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
 };
