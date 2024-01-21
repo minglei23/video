@@ -6,7 +6,6 @@ import {
   Modal,
   FormControlLabel,
   FormControl,
-  //   FormLabel,
   Box,
 } from "@mui/material";
 import { GetSeries, RecordHistory } from "./service";
@@ -32,7 +31,7 @@ const Player = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [vttList, setVttList] = useState([]);
   const [vttType, setVttType] = useState("");
-  const [currentVtt, setCurrentVtt] = useState(null)
+  const [subtitles, setSubtitles] = useState([])
   const [captionsModalVisible, setCaptionsModalVisible] = useState(false);
   const [paid, setPaid] = useState([]);
 
@@ -123,7 +122,6 @@ const Player = () => {
   }, [seriesId, episode]);
 
   const handleTimeUpdate = () => {
-    // console.log('当前播放时间', videoRef.current.currentTime);
     setCurrentTime(videoRef.current.currentTime);
   };
 
@@ -140,7 +138,7 @@ const Player = () => {
 
     return () => {
       setUrl('')
-      setCurrentVtt(null)
+      setSubtitles([])
       setVttType('')
     }
   }, [seriesId, episode, navigate, fetchVideo]);
@@ -180,15 +178,62 @@ const Player = () => {
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
-  // change currenttime
+
   const handleOnChangeTime = (value) => {
     videoRef.current.currentTime = value;
   };
-  const handleCaptionsChange = (e) => {
-    console.log(e.target.value);
+
+  function parseVTT(vttString) {
+    const lines = vttString.split('\n');
+    const subtitles = [];
+    let currentSubtitle = null;
+
+    lines.forEach(line => {
+      if (line.includes('-->')) {
+        const times = line.split(' --> ');
+        if (times.length === 2) {
+          currentSubtitle = {
+            start: timeStringToSeconds(times[0].trim()),
+            end: timeStringToSeconds(times[1].trim()),
+            text: ''
+          };
+          subtitles.push(currentSubtitle);
+        }
+      } else if (currentSubtitle && line.trim()) {
+        if (currentSubtitle.text) {
+          currentSubtitle.text += '\n';
+        }
+        currentSubtitle.text += line.trim();
+      }
+    });
+
+    return subtitles;
+  }
+
+  function timeStringToSeconds(timeString) {
+    const parts = timeString.split(':');
+    const hours = parseInt(parts[0], 10);
+    const minutes = parseInt(parts[1], 10);
+    const seconds = parseFloat(parts[2].replace(',', '.'));
+    return (hours * 3600) + (minutes * 60) + seconds;
+  }
+
+  const handleCaptionsChange = async (e) => {
     let value = e.target.value;
     setVttType(value);
-    setCurrentVtt(vttList.find(item => item.Type === value))
+    const vtt = vttList.find(item => item.Type === value)
+    if (vtt) {
+      try {
+        const vttUrl = vtt.url;
+        const response = await fetch(vttUrl);
+        const vttText = await response.text();
+        const parsedSubtitles = parseVTT(vttText);
+        setSubtitles(parsedSubtitles);
+      } catch (error) {
+        console.error('Error fetching or parsing VTT file:', error);
+        setSubtitles([]);
+      }
+    }
   };
 
   return (
@@ -204,7 +249,6 @@ const Player = () => {
         height: "100%",
         width: "100%",
         zIndex: 20,
-        // padding: "48px 0",
         backgroundColor: "#111",
       }}
     >
@@ -224,11 +268,6 @@ const Player = () => {
           }}
           crossOrigin="anonymous"
         >
-          {currentVtt && <track
-            default
-            kind="captions"
-            src={currentVtt.url}
-          />}
         </video>
       )}
       {video && <StopIcons stop={play} click={onVideo} />}
@@ -254,10 +293,10 @@ const Player = () => {
             bottom="0.5rem"
             allTime={video.TotalNumber}
             onChangeTime={handleOnChangeTime}
+            subtitles={subtitles}
           />
         </div>
       )}
-      {/* {showPlayerIcons && <Menu />} */}
       <LastEpisodeModal
         open={lastEpisodeModal}
         onClose={() => setLastEpisodeModal(false)}
@@ -282,7 +321,6 @@ const Player = () => {
             transform: "translateX(-50%)",
             width: "100%",
             maxHeight: "50vh",
-            // overflowY: 'auto',
             bgcolor: "#333",
             p: 3,
             borderRadius: "50px 50px 0 0",
