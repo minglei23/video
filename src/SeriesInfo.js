@@ -17,12 +17,11 @@ export default function SeriesInfo({ user, series, showVipMotal }) {
   if (!series?.TotalNumber) return null;
 
   return (
-    <Box style={{ maxHeight: '50vh', padding: '20px' }}>
-      <Grid container alignItems="center" spacing={1}>
+    <Box style={{ maxHeight: '50vh' }}>
+      <Grid container alignItems="center" spacing={2} style={{ padding: '15px' }}>
         <Grid item>
           <img src={series.BaseURL + '/image.jpg'} alt="Series" style={{ maxHeight: '120px', maxWidth: '120px' }} />
         </Grid>
-
         <Grid item xs>
           <Typography variant="h6" marginBottom="10px" color={'#fff'}>
             {series && series.Name}
@@ -35,7 +34,7 @@ export default function SeriesInfo({ user, series, showVipMotal }) {
         </Grid>
       </Grid>
 
-      <Grid container spacing={1} justifyContent="flex-start" style={{ marginTop: '20px' }}>
+      <Grid container spacing={1} justifyContent="center" >
         {series && Array.from({ length: series.TotalNumber }).map((_, index) => {
           const isAccessible = user?.VIP || index < 5;
           return (

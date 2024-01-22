@@ -93,7 +93,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
             width: "100%",
             maxHeight: "50vh",
             bgcolor: "#333",
-            p: 3,
+            p: 1,
             borderRadius: "10px 10px 0 0",
             display: "flex",
             flexDirection: "column",
