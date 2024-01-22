@@ -9,7 +9,7 @@ import SeriesInfo from "./SeriesInfo";
 import FavoritesIcon from "./FavoritesIcon";
 import copy from "copy-to-clipboard";
 
-const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptions }) => {
+const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptions, paid }) => {
   const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(0);
@@ -104,6 +104,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, seriesInfoBottom = 0, clickCaptio
               user={user}
               series={series}
               showVipMotal={showVipMotal}
+              paid={paid}
             />
           </div>
         </Box>

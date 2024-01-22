@@ -233,6 +233,7 @@ const Player = () => {
           seriesId={video.ID}
           showVipMotal={() => setVipEpisodeModal(true)}
           clickCaptions={() => setSubtitlesModal(true)}
+          paid={paid}
         />
       )}
       {video && (

@@ -2,15 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography, Box, Paper } from '@mui/material';
 
-export default function SeriesInfo({ user, series, showVipMotal }) {
+export default function SeriesInfo({ series, showVipMotal, paid }) {
 
   const navigate = useNavigate();
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if ((user && user.VIP) || episodeNumber <= 5) {
+    if (paid.includes(episodeNumber) || episodeNumber < 5) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
-    } else {
-      showVipMotal();
     }
   };
 
@@ -36,7 +34,7 @@ export default function SeriesInfo({ user, series, showVipMotal }) {
 
       <Grid container spacing={1} justifyContent="center" >
         {series && Array.from({ length: series.TotalNumber }).map((_, index) => {
-          const isAccessible = user?.VIP || index < 5;
+          const isAccessible = paid.includes(index + 1) || index < 5;
           return (
             <Grid item key={index} style={{ display: 'flex', justifyContent: 'center' }}>
               <Button
