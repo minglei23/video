@@ -17,7 +17,7 @@ export default function SeriesInfo({ user, series, showVipMotal }) {
   if (!series?.TotalNumber) return null;
 
   return (
-    <Box style={{ maxHeight: '50vh', padding: '15px' }}>
+    <Box style={{ maxHeight: '50vh', padding: '15px 0' }}>
       <Grid container alignItems="center" spacing={1}>
         <Grid item>
           <img src={series.BaseURL + '/image.jpg'} alt="Series" style={{ maxHeight: '120px', maxWidth: '120px' }} />
