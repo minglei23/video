@@ -68,9 +68,8 @@ export const GetRecommendSeries = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
     if (data.VideoList && data.VideoList.length > 0) {
-      // const randomIndex = Math.floor(Math.random() * data.VideoList.length);
-      // return data.VideoList[randomIndex];
-      return data.VideoList
+      const randomIndex = Math.floor(Math.random() * data.VideoList.length);
+      return data.VideoList[randomIndex];
     }
     return null;
   } catch (error) {
