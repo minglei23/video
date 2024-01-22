@@ -122,7 +122,7 @@ const Player = () => {
     if (paidEpisode) {
       setPaid(paidEpisode)
     }
-    if (parseInt(episode) <= 5 || paidEpisode.includes(parseInt(episode))) {
+    if (parseInt(episode) <= 5 || (paidEpisode && paidEpisode.includes(parseInt(episode)))) {
       fetchVideo();
     } else {
       navigate("/profile");

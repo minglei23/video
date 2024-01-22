@@ -3,7 +3,7 @@ import { RecordHistory, GetRecommendSeries } from "./service";
 import { parseVTT } from "./vtt";
 import { SetHistory, FetchAndCacheVideo } from "./cache";
 import { useSwipeable } from "react-swipeable";
-import { GetUser } from "./cache";
+import { GetUser, GetEpisode } from "./cache";
 import PlayerIcons from "./PlayerIcons.js";
 import PlayerSlider from "./PlayerSlider.js";
 import SeriesName from "./SeriesName.js";
@@ -21,6 +21,7 @@ const Recommend = () => {
   const [subtitlesModal, setSubtitlesModal] = useState(false);
   const videoRef = useRef(null);
   const [play, setPlay] = useState(true);
+  const [paid, setPaid] = useState([]);
 
   const onVideo = () => {
     if (play) {
@@ -99,6 +100,10 @@ const Recommend = () => {
         const user = GetUser();
         if (user) {
           RecordHistory(user.ID, parseInt(video.ID), 1);
+          const paidEpisode = GetEpisode(parseInt(video.ID))
+          if (paidEpisode) {
+            setPaid(paidEpisode)
+          }
         }
       }
     } catch (error) {
@@ -185,6 +190,7 @@ const Recommend = () => {
         <PlayerIcons
           seriesId={video.ID}
           clickCaptions={() => setSubtitlesModal(true)}
+          paid={paid}
         />
       )}
       {video && (
@@ -192,7 +198,7 @@ const Recommend = () => {
           <PlayerSlider
             currentTime={currentTime}
             backgroundColor="transparent"
-            bottom="0.5rem"
+            bottom="3rem"
             allTime={video.TotalNumber}
             onChangeTime={handleOnChangeTime}
             subtitles={subtitles}
