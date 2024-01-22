@@ -48,12 +48,20 @@ const Recommend = () => {
         const series = JSON.parse(recommendVideo)
         setVideo(series);
         setSubtitlesIcon(series)
+        const paidEpisode = GetEpisode(parseInt(series.ID))
+        if (paidEpisode) {
+          setPaid(paidEpisode)
+        }
       } else {
         const series = await GetRecommendSeries();
         if (series) {
           setUrl(`${series.BaseURL}/1.mp4`);
           setVideo(series);
           setSubtitlesIcon(series)
+          const paidEpisode = GetEpisode(parseInt(series.ID))
+          if (paidEpisode) {
+            setPaid(paidEpisode)
+          }
         }
       }
     } catch (error) {
@@ -100,10 +108,6 @@ const Recommend = () => {
         const user = GetUser();
         if (user) {
           RecordHistory(user.ID, parseInt(video.ID), 1);
-          const paidEpisode = GetEpisode(parseInt(video.ID))
-          if (paidEpisode) {
-            setPaid(paidEpisode)
-          }
         }
       }
     } catch (error) {

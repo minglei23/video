@@ -7,7 +7,7 @@ export default function SeriesInfo({ series, showVipMotal, paid }) {
   const navigate = useNavigate();
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if (paid.includes(episodeNumber) || episodeNumber < 5) {
+    if (paid.includes(episodeNumber) || episodeNumber <= 5) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
     }
   };
