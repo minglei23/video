@@ -18,7 +18,7 @@ const LastEpisodeModal = ({ open, onClose }) => {
         maxHeight: '50vh',
         bgcolor: '#333',
         p: 3,
-        borderRadius: '50px 50px 0 0',
+        borderRadius: '10px 10px 0 0',
       }}>
         <h5 style={{ fontFamily: 'Poppins', color: '#fff', textAlign: 'center' }}>
           This is the last episode of the series.

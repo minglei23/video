@@ -20,7 +20,7 @@ const SubtitlesModal = ({ open, onClose, vttType, vttList, handleSubtitlesChange
           maxHeight: "50vh",
           bgcolor: "#333",
           p: 3,
-          borderRadius: "50px 50px 0 0",
+          borderRadius: "10px 10px 0 0",
         }}
       >
         <div className="h-[40vh] overflow-y-auto overflow-x-hidden">
