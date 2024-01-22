@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import {
-  Radio,
-  RadioGroup,
-  Modal,
-  FormControlLabel,
-  FormControl,
-  Box,
-} from "@mui/material";
 import { GetSeries, RecordHistory } from "./service";
+import { parseVTT } from "./vtt";
 import { SetHistory, FetchAndCacheVideo, GetEpisode } from "./cache";
 import { useSwipeable } from "react-swipeable";
 import { GetUser } from "./cache";
@@ -18,6 +11,7 @@ import SeriesName from "./SeriesName.js";
 import StopIcons from "./StopIcons.js";
 import LastEpisodeModal from "./LastEpisodeModal.js";
 import VipEpisodeModal from "./VipEpisodeModal.js";
+import SubtitlesModal from "./SubtitlesModal.js";
 
 const Player = () => {
   const navigate = useNavigate();
@@ -32,9 +26,8 @@ const Player = () => {
   const [vttList, setVttList] = useState([]);
   const [vttType, setVttType] = useState("");
   const [subtitles, setSubtitles] = useState([])
-  const [captionsModalVisible, setCaptionsModalVisible] = useState(false);
+  const [subtitlesModal, setSubtitlesModal] = useState(false);
   const [paid, setPaid] = useState([]);
-
   const videoRef = useRef(null);
   const [play, setPlay] = useState(true);
 
@@ -99,7 +92,7 @@ const Player = () => {
             url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
           };
         })
-        setVttList([{ Type: '', Name: '无字幕', url: '' }, ...tempVttList])
+        setVttList([{ Type: '', Name: 'No Subtitles', url: '' }, ...tempVttList])
         await checkAndSetVideo();
         cacheNextVideo(series);
         setShowPlayerIcons(true);
@@ -107,14 +100,11 @@ const Player = () => {
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
-        videoRef.current
-          .play()
-          .then(() => {
-            setPlay(true);
-          })
-          .catch(() => {
-            setPlay(false);
-          });
+        videoRef.current.play().then(() => {
+          setPlay(true);
+        }).catch(() => {
+          setPlay(false);
+        });
       }
     } catch (error) {
       console.error("Error fetching video:", error);
@@ -179,42 +169,7 @@ const Player = () => {
     videoRef.current.currentTime = value;
   };
 
-  function parseVTT(vttString) {
-    const lines = vttString.split('\n');
-    const subtitles = [];
-    let currentSubtitle = null;
-
-    lines.forEach(line => {
-      if (line.includes('-->')) {
-        const times = line.split(' --> ');
-        if (times.length === 2) {
-          currentSubtitle = {
-            start: timeStringToSeconds(times[0].trim()),
-            end: timeStringToSeconds(times[1].trim()),
-            text: ''
-          };
-          subtitles.push(currentSubtitle);
-        }
-      } else if (currentSubtitle && line.trim()) {
-        if (currentSubtitle.text) {
-          currentSubtitle.text += '\n';
-        }
-        currentSubtitle.text += line.trim();
-      }
-    });
-
-    return subtitles;
-  }
-
-  function timeStringToSeconds(timeString) {
-    const parts = timeString.split(':');
-    const hours = parseInt(parts[0], 10);
-    const minutes = parseInt(parts[1], 10);
-    const seconds = parseFloat(parts[2].replace(',', '.'));
-    return (hours * 3600) + (minutes * 60) + seconds;
-  }
-
-  const handleCaptionsChange = async (e) => {
+  const handleSubtitlesChange = async (e) => {
     let value = e.target.value;
     setVttType(value);
     const vtt = vttList.find(item => item.Type === value)
@@ -262,7 +217,6 @@ const Player = () => {
             objectFit: "contain",
             flex: "1",
           }}
-          crossOrigin="anonymous"
         >
         </video>
       )}
@@ -278,7 +232,7 @@ const Player = () => {
         <PlayerIcons
           seriesId={video.ID}
           showVipMotal={() => setVipEpisodeModal(true)}
-          clickCaptions={() => setCaptionsModalVisible(true)}
+          clickCaptions={() => setSubtitlesModal(true)}
         />
       )}
       {video && (
@@ -303,51 +257,13 @@ const Player = () => {
         open={vipEpisodeModal}
         onClose={() => setVipEpisodeModal(false)}
       />
-      <Modal
-        open={captionsModalVisible}
-        onClose={() => setCaptionsModalVisible(false)}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: "0",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100%",
-            maxHeight: "50vh",
-            bgcolor: "#333",
-            p: 3,
-            borderRadius: "50px 50px 0 0",
-          }}
-        >
-          <div className="h-[40vh] overflow-y-auto overflow-x-hidden">
-            <FormControl component="fieldset">
-              <div className="text-[#fff]">Captions</div>
-              <RadioGroup
-                row
-                value={vttType}
-                aria-label="gender"
-                name="row-radio-buttons-group"
-                onChange={handleCaptionsChange}
-              >
-                {vttList.map((item) => {
-                  return (
-                    <FormControlLabel
-                      className="text-[#fff]"
-                      key={item.Type}
-                      value={item.Type}
-                      control={<Radio classes={{ root: 'vtt-radio' }} />}
-                      label={item.Name}
-                    />
-                  );
-                })}
-              </RadioGroup>
-            </FormControl>
-          </div>
-        </Box>
-      </Modal>
+      <SubtitlesModal
+        open={subtitlesModal}
+        onClose={() => setSubtitlesModal(false)}
+        vttType={vttType}
+        vttList={vttList}
+        handleSubtitlesChange={handleSubtitlesChange}
+      />
     </div>
   );
 };
