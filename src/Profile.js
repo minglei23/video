@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { Container, List, ListItem, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import EmailIcon from '@mui/icons-material/Email';
+// import EmailIcon from '@mui/icons-material/Email';
 import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -29,16 +29,21 @@ const Profile = () => {
     navigate(path);
   };
 
+  const signOut = () => {
+    setUser(null);
+    localStorage.clear();
+  }
+
   const renderUserProfile = () => (
     <div>
-      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh'}}>
+      <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh' }}>
         <Points user={user} />
         <List>
           {!user.VIP && (
-            <ListItem onClick={() => {navigate('/store')}}>
+            <ListItem onClick={() => { navigate('/store') }}>
               <MonetizationOnIcon style={{ marginRight: '10px' }} />
               <ListItemText primary="Get Coins" />
-            <ArrowForwardIosIcon style={{ width: '15px' }} />
+              <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}
           <ListItem onClick={() => navigateTo('/history')}>
@@ -61,7 +66,7 @@ const Profile = () => {
             <ListItemText primary="Help" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
-          <ListItem onClick={() => console.log('Sign Out')}>
+          <ListItem onClick={signOut}>
             <ExitToAppIcon style={{ marginRight: '10px' }} />
             <ListItemText primary="Sign Out" />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
