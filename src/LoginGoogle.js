@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Button, Grid } from '@mui/material';
 import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
@@ -6,9 +6,10 @@ import { cologin } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
 
-const LoginGoogle = ({referral}) => {
+const LoginGoogle = ({ referral }) => {
   const clientId = "493751355482-fb7ivmgcvirq81f3jg8gkf2p7d8ak5ol.apps.googleusercontent.com";
   const { setUser } = useContext(UserContext);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const initClient = () => {
@@ -23,6 +24,7 @@ const LoginGoogle = ({referral}) => {
   const responseGoogle = async (response) => {
     if (!response || !response.profileObj || !response.accessToken) {
       console.error('google response error');
+      setError(response);
       return
     }
     try {
@@ -31,11 +33,13 @@ const LoginGoogle = ({referral}) => {
       SetUser(userData);
     } catch (error) {
       console.error('google login failed:', error);
+      setError(error);
     }
   }
 
   return (
     <Grid item>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
       <GoogleLogin
         clientId={clientId}
         buttonText="Login"
