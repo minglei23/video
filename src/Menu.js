@@ -20,12 +20,9 @@ const Menu = (props) => {
   }).then(() => {
     navigate(pathname)
   })
-    
-    // console.log(pathname);
-    
  }
   return (
-    <BottomNavigation showLabels style={{ height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none', zIndex: 9999 }}>
+    <BottomNavigation showLabels style={{ height: '8vh', width: '100%', backgroundColor: '#111', color: 'white', borderTop: 'none', boxShadow: 'none', zIndex: 9999, position: 'fixed', bottom: 0}}>
       <BottomNavigationAction label="Home" style={{ color: 'white' }} icon={<HomeIcon />} onClick={() => handleClick(1, '/home')}/>
       <BottomNavigationAction label="Recommend" style={{ color: 'white' }} icon={<PlayCircleOutlineIcon />}  onClick={() => handleClick(2, '/recommend')}/>
       <BottomNavigationAction label="Profile" style={{ color: 'white' }} icon={<PersonOutlineIcon />}  onClick={() => handleClick(3, '/profile')}/>

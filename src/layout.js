@@ -9,10 +9,6 @@ const Layout = () => {
   const location =  useLocation()
   const [menuKey, setMenuKey] = useState(1);
   const [direction, setDirection] = useState(false)
-  useEffect(() => {
-    console.log('location', location);      
-
-  }, [location])
 
   const handleChangeMenu = (key, onResolve) => {
     setDirection(key > menuKey)
