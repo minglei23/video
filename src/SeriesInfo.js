@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Grid, Typography, Box, Paper } from '@mui/material';
+import { Button, Grid, Typography, Box, Paper, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
 
-export default function SeriesInfo({ series, showVipMotal, paid }) {
+export default function SeriesInfo({ series, showVipMotal, setUnlockEpisode, paid }) {
 
   const navigate = useNavigate();
+
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
     if (paid.includes(episodeNumber) || episodeNumber <= 5) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
+    } else if (paid.includes(episodeNumber - 1) || episodeNumber === 6) {
+      setUnlockEpisode(episodeNumber);
+      showVipMotal();
+    } else {
+      setOpenDialog(true);
     }
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   if (!series?.TotalNumber) return null;
@@ -68,6 +79,29 @@ export default function SeriesInfo({ series, showVipMotal, paid }) {
           );
         })}
       </Grid>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          '& .MuiPaper-root': {
+            backgroundColor: '#333',
+            color: '#fa0'
+          },
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description" sx={{ color: '#fff' }}>
+            Previous episodes are not unlocked
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="inherit" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }

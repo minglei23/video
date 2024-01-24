@@ -30,6 +30,7 @@ const Player = () => {
   const [paid, setPaid] = useState([]);
   const videoRef = useRef(null);
   const [play, setPlay] = useState(true);
+  const [unlockEpisode, setUnlockEpisode] = useState(0);
 
   const onVideo = () => {
     if (play) {
@@ -97,6 +98,7 @@ const Player = () => {
         cacheNextVideo(series);
         setShowPlayerIcons(true);
         SetHistory(series.ID, episode);
+        setUnlockEpisode(parseInt(episode)+1);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
@@ -232,6 +234,7 @@ const Player = () => {
         <PlayerIcons
           seriesId={video.ID}
           showVipMotal={() => setVipEpisodeModal(true)}
+          setUnlockEpisode={setUnlockEpisode}
           clickCaptions={() => setSubtitlesModal(true)}
           paid={paid}
         />
@@ -254,7 +257,7 @@ const Player = () => {
       />
       <VipEpisodeModal
         videoId={parseInt(seriesId)}
-        episode={parseInt(episode) + 1}
+        episode={unlockEpisode}
         open={vipEpisodeModal}
         onClose={() => setVipEpisodeModal(false)}
       />
