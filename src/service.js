@@ -105,6 +105,12 @@ export const login = async (email, password) => {
           SetHistory(item.ID, item.Episode);
         });
       }
+      const episode = await postRequest(`${BASE_URL}/episodes`, { token: data.Token, userID: data.ID });
+      if (episode.VideoEpisodeList) {
+        episode.VideoEpisodeList.forEach(item => {
+          SetEpisode(item.VideoID, item.Episode);
+        });
+      }
     } catch (error) {
       console.log(error, 'Login Failed:');
     }
