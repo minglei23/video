@@ -7,10 +7,9 @@ import { GetUser } from './cache';
 
 // Test public key
 const stripePromise = loadStripe("pk_live_51OFXw4Lvs8YNyX8sfVvnRljrcKEH6Mn9iDlZk9hbby4dAdNxCet4rjqIkJku2nQ6KHydOXluv1qTWyhHDPb2LJh100FDkMQqVf");
-const product = "price_1OW6LHLvs8YNyX8svyQwfJas";
 const url = "https://realshort.tv/profile"
 
-const VIPCheckoutBox = ({ id, amount, word }) => {
+const VIPCheckoutBox = ({ product, amount, word }) => {
   const navigate = useNavigate()
 
   const handleTest = async () => {
@@ -27,7 +26,7 @@ const VIPCheckoutBox = ({ id, amount, word }) => {
     try {
       const id = GetUser().ID;
       const stripe = await stripePromise;
-      const response = await createStripePayment(id, 100, product, url, url);
+      const response = await createStripePayment(id, 1, product, url, url);
       const sessionId = response.SessionId;
       const result = await stripe.redirectToCheckout({
         sessionId,
@@ -46,9 +45,10 @@ const VIPCheckoutBox = ({ id, amount, word }) => {
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: 1
+              value: amount
             },
-            custom_id: GetUser().ID
+            custom_id: GetUser().ID,
+            custom_type: 2
           }],
           application_context: {
             return_url: url,

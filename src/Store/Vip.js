@@ -12,25 +12,25 @@ const Vip = () => {
   const navigate = useNavigate();
   const [rechargeType] = useState([
     {
-      id: 1,
+      product: "price_1OdRalLvs8YNyX8skej1FWVd",
       amount: 12,
       word: "1 Week VIP",
       save: 25,
     },
     {
-      id: 2,
+      product: "price_1OdRbPLvs8YNyX8sf5u3XhBx",
       amount: 32,
       word: "1 Month VIP",
       save: 50,
     },
     {
-      id: 3,
+      product: "price_1OdRbvLvs8YNyX8sYz5h1QXH",
       amount: 75,
       word: "3 Month VIP",
       save: 60,
     },
     {
-      id: 4,
+      product: "price_1OdRcNLvs8YNyX8sCTLZBMXD",
       amount: 96,
       word: "6 Month VIP",
       save: 75,
@@ -39,17 +39,17 @@ const Vip = () => {
 
   const [visible, setVisible] = useState(false);
   const [buyInfo, setBuyInfo] = useState({
-    coins: 0,
-    bonus: 0,
-    price: 0,
+    product: "",
+    amount: 0,
+    word: "",
   });
 
   const handleOnBack = () => {
     navigate('/profile')
   };
-  const handleOpen = (id, amount, word) => {
+  const handleOpen = (product, amount, word) => {
     setBuyInfo({
-      id: id,
+      product: product,
       amount: amount,
       word: word,
     });
@@ -72,10 +72,10 @@ const Vip = () => {
                   className={
                     index === 0 ? "recharge-item active" : "recharge-item"
                   }
-                  key={item.id}
+                  key={item.product}
                   onClick={() =>
                     handleOpen(
-                      item.id,
+                      item.product,
                       item.amount,
                       item.word
                     )
