@@ -8,6 +8,15 @@ export const SetUser = (value) => {
   localStorage.setItem("user", JSON.stringify(item));
 };
 
+export const SetUserVIP = () => {
+  const itemStr = localStorage.getItem("user");
+  if (itemStr) {
+    const item = JSON.parse(itemStr);
+    item.value.VIP = true;
+    localStorage.setItem("user", JSON.stringify(item));
+  }
+};
+
 export const GetUser = () => {
   const itemStr = localStorage.getItem("user");
   if (!itemStr) {

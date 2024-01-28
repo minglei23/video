@@ -18,6 +18,7 @@ import Search from "./Search";
 import NewSeries from "./NewSeries";
 // import Menu from "./Menu";
 import Store from './Store/Store';
+import Vip from './Store/Vip';
 
 import './assets/styles/common.css'
 import Referral from './Referral';
@@ -71,6 +72,7 @@ function App() {
             <Route path="/search" element={<SearchWrapper />} />
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
             <Route path="/store" element={<Store />} />
+            <Route path="/vip" element={<Vip />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}

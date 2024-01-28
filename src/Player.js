@@ -83,7 +83,6 @@ const Player = () => {
       const user = GetUser();
       const series = await GetSeries(seriesId);
       if (series) {
-        console.log("series", series);
         setUrl(`${series.BaseURL}/${episode}.mp4`);
         setTotalEpisodes(series.TotalNumber);
         setVideo(series);
@@ -124,10 +123,11 @@ const Player = () => {
     if (paidEpisode) {
       setPaid(paidEpisode)
     }
-    if (parseInt(episode) <= 5 || (paidEpisode && paidEpisode.includes(parseInt(episode)))) {
+    const user = GetUser()
+    if (parseInt(episode) <= 5 || (user && user.VIP) || (paidEpisode && paidEpisode.includes(parseInt(episode)))) {
       fetchVideo();
     } else {
-      navigate("/profile");
+      navigate(`/player/${seriesId}/1`);;
     }
   }, [seriesId, episode, navigate, fetchVideo]);
 
@@ -153,7 +153,7 @@ const Player = () => {
           navigateToEpisode(episodeNumber + 1);
         } else {
           const user = GetUser();
-          if (user && paid.includes(episodeNumber + 1)) {
+          if (user && (user.VIP || paid.includes(episodeNumber + 1))) {
             navigateToEpisode(episodeNumber + 1);
           } else {
             setVipEpisodeModal(true);

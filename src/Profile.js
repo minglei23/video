@@ -40,9 +40,9 @@ const Profile = () => {
         <Points user={user} />
         <List>
           {!user.VIP && (
-            <ListItem onClick={() => { navigate('/store') }}>
+            <ListItem onClick={() => { navigate('/vip') }}>
               <MonetizationOnIcon style={{ marginRight: '10px' }} />
-              <ListItemText primary="Get Coins" />
+              <ListItemText primary="Become VIP" />
               <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}

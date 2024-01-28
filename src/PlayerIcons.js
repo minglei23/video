@@ -101,7 +101,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, setUnlockEpisode, seriesInfoBotto
         >
           <div className="flex-1 overflow-y-auto overflow-x-hidden">
             <SeriesInfo
-              user={user}
+              vip={user && user.VIP}
               series={series}
               showVipMotal={showVipMotal}
               setUnlockEpisode={setUnlockEpisode}

@@ -189,6 +189,15 @@ export const getCoinsTest = async (userID, number) => {
   }
 };
 
+export const vipTest = async (userID, number) => {
+  try {
+    const token = GetToken();
+    return await postRequest(`${BASE_URL}/vip-test`, { token, userID, number });
+  } catch (error) {
+    handleError('VIP Test Failed:', error);
+  }
+};
+
 export const unlockEpisode = async (userID, videoID, episode) => {
   try {
     const token = GetToken();
@@ -238,7 +247,7 @@ export const GetPoints = async (userID) => {
   try {
     const token = GetToken();
     const points = await postRequest(`${BASE_URL}/points`, { token, userID });
-    return points.Points
+    return points
   } catch (error) {
     handleError(error, 'Get Points Failed:');
   }

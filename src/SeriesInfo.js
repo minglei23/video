@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Grid, Typography, Box, Paper, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
 
-export default function SeriesInfo({ series, showVipMotal, setUnlockEpisode, paid }) {
+export default function SeriesInfo({ vip, series, showVipMotal, setUnlockEpisode, paid }) {
 
   const navigate = useNavigate();
 
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleEpisodeClick = (seriesId, episodeNumber) => {
-    if (paid.includes(episodeNumber) || episodeNumber <= 5) {
+    if (paid.includes(episodeNumber) || episodeNumber <= 5 || vip) {
       navigate(`/player/${seriesId}/${episodeNumber}`);
     } else if (paid.includes(episodeNumber - 1) || episodeNumber === 6) {
       setUnlockEpisode(episodeNumber);
@@ -45,7 +45,7 @@ export default function SeriesInfo({ series, showVipMotal, setUnlockEpisode, pai
 
       <Grid container spacing={1} justifyContent="center" >
         {series && Array.from({ length: series.TotalNumber }).map((_, index) => {
-          const isAccessible = paid.includes(index + 1) || index < 5;
+          const isAccessible = paid.includes(index + 1) || index < 5 || vip;
           return (
             <Grid item key={index} style={{ display: 'flex', justifyContent: 'center' }}>
               <Button

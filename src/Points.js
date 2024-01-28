@@ -4,6 +4,7 @@ import { Typography, Button, Grid } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { GetPoints, GetIfChecked, Checkin } from './service.js';
+import { SetUserVIP } from './cache.js';
 
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
@@ -12,9 +13,12 @@ const Points = ({ user }) => {
 
   useEffect(() => {
     const loadData = async () => {
-      const points = await GetPoints(user.ID);
+      const response = await GetPoints(user.ID);
       const checked = await GetIfChecked(user.ID);
-      setPoints(points);
+      if (!user.VIP && response.VIP) {
+        SetUserVIP()
+      }
+      setPoints(response.Points);
       setChecked(checked);
     };
 
