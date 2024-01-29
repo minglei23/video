@@ -13,25 +13,29 @@ const Vip = () => {
   const [rechargeType] = useState([
     {
       product: "price_1OdRalLvs8YNyX8skej1FWVd",
-      amount: 1,
-      word: "1 Day VIP",
+      amount: 12,
+      day: 7,
+      word: "1 Week VIP",
       save: 25,
     },
     {
       product: "price_1OdRbPLvs8YNyX8sf5u3XhBx",
       amount: 32,
+      day: 31,
       word: "1 Month VIP",
       save: 50,
     },
     {
       product: "price_1OdRbvLvs8YNyX8sYz5h1QXH",
       amount: 75,
+      day: 93,
       word: "3 Month VIP",
       save: 60,
     },
     {
       product: "price_1OdRcNLvs8YNyX8sCTLZBMXD",
       amount: 96,
+      day: 186,
       word: "6 Month VIP",
       save: 75,
     }
@@ -41,16 +45,18 @@ const Vip = () => {
   const [buyInfo, setBuyInfo] = useState({
     product: "",
     amount: 0,
+    day: 0,
     word: "",
   });
 
   const handleOnBack = () => {
     navigate('/profile')
   };
-  const handleOpen = (product, amount, word) => {
+  const handleOpen = (product, amount, day, word) => {
     setBuyInfo({
       product: product,
       amount: amount,
+      day: day,
       word: word,
     });
     setVisible(true);
@@ -77,6 +83,7 @@ const Vip = () => {
                     handleOpen(
                       item.product,
                       item.amount,
+                      item.day,
                       item.word
                     )
                   }

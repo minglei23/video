@@ -48,8 +48,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
             amount: {
               value: price
             },
-            custom_id: GetUser().ID,
-            custom_type: "1"
+            custom_id: `${GetUser().ID}+0`
           }],
           application_context: {
             return_url: url,
