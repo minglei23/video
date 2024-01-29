@@ -13,8 +13,8 @@ const Vip = () => {
   const [rechargeType] = useState([
     {
       product: "price_1OdRalLvs8YNyX8skej1FWVd",
-      amount: 12,
-      word: "1 Week VIP",
+      amount: 1,
+      word: "1 Day VIP",
       save: 25,
     },
     {

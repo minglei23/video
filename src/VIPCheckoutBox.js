@@ -48,7 +48,7 @@ const VIPCheckoutBox = ({ product, amount, word }) => {
               value: amount
             },
             custom_id: GetUser().ID,
-            custom_type: 2
+            custom_type: "2"
           }],
           application_context: {
             return_url: url,
