@@ -31,8 +31,17 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
                   alt={seriesItem.Name}
                 />
               </div>
-              <CardContent style={{ padding: '0px' }}>
-                <h3>{seriesItem.Name}</h3>
+              <CardContent style={{ padding: '5px' }}>
+                <h5 style={{
+                  whiteSpace: 'normal',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  textAlign: 'left',
+                  margin: '0'
+                }}>{seriesItem.Name}</h5>
               </CardContent>
             </CardActionArea>
           </Card>

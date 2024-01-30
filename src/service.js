@@ -3,6 +3,29 @@ import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEp
 
 const BASE_URL = 'https://api.realshort.tv';
 
+const parseVideo = (video) => {
+  const namesParts = video.Name.split(',');
+  const names = namesParts.map(part => {
+    const [type, name] = part.split('|');
+    return { Type: type, Name: name };
+  });
+  video.Name = names[1].Name;
+  if (video.Subtitle) {
+    const subtitlesParts = video.Subtitle.split(',');
+    const subtitles = subtitlesParts.map(part => {
+      const [type, name] = part.split('|');
+      return { Type: type, Name: name };
+    });
+    video.Subtitle = subtitles;
+  }
+}
+
+const parseVideoList = (videoList) => {
+  videoList.forEach(video => {
+    parseVideo(video);
+  });
+}
+
 // Utility function to fetch data with caching
 const fetchDataWithCache = async (url, cacheKey, expiryTime = 3600000) => {
   let data = {};
@@ -34,6 +57,7 @@ export const GetSeriesList = async () => {
     const seriesByType = { type1: [], type2: [], type3: [], type4: [], type5: [], type6: [], type7: [], type8: [], type9: [] };
     if (data.VideoList) {
       data.VideoList.forEach(video => {
+        parseVideo(video);
         const typeKey = `type${video.Type}`;
         if (seriesByType[typeKey]) {
           seriesByType[typeKey].push(video);
@@ -58,6 +82,11 @@ export const GetSeries = async (id) => {
 export const SearchSeries = async (name) => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
+    if (data.VideoList) {
+      data.VideoList.forEach(video => {
+        parseVideo(video);
+      });
+    }
     return data.VideoList.filter(video => video.Name.toLowerCase().includes(name)) || [];
   } catch (error) {
     handleError(error, 'Search Series Failed:');
@@ -155,7 +184,7 @@ export const cologin = async (id, token, type, email, referral) => {
 export const register = async (email, password, referral) => {
   try {
     const hashedPassword = md5(password);
-    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword, referral});
+    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword, referral });
     SetToken(data.Token);
     return data;
   } catch (error) {
