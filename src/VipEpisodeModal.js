@@ -16,7 +16,7 @@ const VipEpisodeModal = ({ videoId, episode, open, onClose, bottom = 0 }) => {
       const user = GetUser()
       if (user) {
         const point = await GetPoints(user.ID);
-        setPoints(point)
+        setPoints(point.Points)
       }
     };
 

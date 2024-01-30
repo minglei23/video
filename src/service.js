@@ -21,9 +21,11 @@ const parseVideo = (video) => {
 }
 
 const parseVideoList = (videoList) => {
-  videoList.forEach(video => {
-    parseVideo(video);
-  });
+  if (videoList) {
+    videoList.forEach(video => {
+      parseVideo(video);
+    });
+  }
 }
 
 // Utility function to fetch data with caching
@@ -73,7 +75,11 @@ export const GetSeriesList = async () => {
 export const GetSeries = async (id) => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
-    return data.VideoList.find(video => String(id) === String(video.ID)) || null;
+    const series = data.VideoList.find(video => String(id) === String(video.ID)) || null;
+    if (series) {
+      parseVideo(series);
+    }
+    return series
   } catch (error) {
     handleError(error, 'Get Series Failed:');
   }
@@ -257,7 +263,9 @@ export const RecordHistory = async (userID, videoID, episode) => {
 export const getFavorites = async (userID) => {
   try {
     const token = GetToken();
-    return await postRequest(`${BASE_URL}/favorites`, { token, userID });
+    const response = await postRequest(`${BASE_URL}/favorites`, { token, userID });
+    parseVideoList(response.FavoritesList)
+    return response.FavoritesList
   } catch (error) {
     handleError(error, 'Favorites Failed:');
   }
@@ -266,7 +274,9 @@ export const getFavorites = async (userID) => {
 export const getHistory = async (userID) => {
   try {
     const token = GetToken();
-    return await postRequest(`${BASE_URL}/history`, { token, userID });
+    const response = await postRequest(`${BASE_URL}/history`, { token, userID });
+    parseVideoList(response.HistoryList)
+    return response.HistoryList
   } catch (error) {
     handleError(error, 'History Failed:');
   }

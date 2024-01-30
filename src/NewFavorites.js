@@ -15,7 +15,7 @@ const NewFavorites = () => {
       if (user) {
         try {
           const response = await getFavorites(user.ID);
-          setList(response.FavoritesList);
+          setList(response);
         } catch (error) {
           console.error('Error fetching favorites:', error);
         }

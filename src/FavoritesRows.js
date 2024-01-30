@@ -27,7 +27,16 @@ export default function FavoritesRows({ seriesList, handleSeriesClick }) {
                 />
               </div>
               <CardContent style={{ padding: '0' }}>
-                <h5 style={{ margin: '5px 0', lineHeight: '1.2' }}>{seriesItem.Name}</h5>
+                <h5 style={{
+                  whiteSpace: 'normal',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 3,
+                  WebkitBoxOrient: 'vertical',
+                  textAlign: 'left',
+                  margin: '0'
+                }}>{seriesItem.Name}</h5>
                 <h5 style={{ margin: '5px 0', lineHeight: '1.2', color: '#aaa' }}>{toAddOn(seriesItem)}</h5>
               </CardContent>
             </CardActionArea>

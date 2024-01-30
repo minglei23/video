@@ -15,7 +15,7 @@ const History = () => {
       if (user) {
         try {
           const response = await getHistory(user.ID);
-          setList(response.HistoryList);
+          setList(response);
         } catch (error) {
           console.error('Error fetching history:', error);
         }
