@@ -13,7 +13,7 @@ export const GetLanguage = () => {
 
 export const trending = () => {
     switch (GetLanguage()) {
-        case 'CN': return '热播榜';
+        case 'CN': return '熱播榜';
         case 'VN': return 'Danh sách nóng';
         case 'TH': return 'รายการยอดนิยม';
         case 'TL': return 'Mainit na listahan ng broadcast';
@@ -26,7 +26,7 @@ export const trending = () => {
 
 export const popular = () => {
     switch (GetLanguage()) {
-        case 'CN': return '最受欢迎';
+        case 'CN': return '受喜愛的';
         case 'VN': return 'Yêu thích';
         case 'TH': return 'ชื่นชอบ';
         case 'TL': return 'Popular';
@@ -39,7 +39,7 @@ export const popular = () => {
 
 export const revenge = () => {
     switch (GetLanguage()) {
-        case 'CN': return '复仇与逆袭';
+        case 'CN': return '復仇與反擊';
         case 'VN': return 'Trả thù và phản công';
         case 'TH': return 'แก้แค้นและโต้กลับ';
         case 'TL': return 'tack';
@@ -65,7 +65,7 @@ export const ancient = () => {
 
 export const billionaires = () => {
     switch (GetLanguage()) {
-        case 'CN': return '霸道总裁';
+        case 'CN': return '億萬富翁和大亨';
         case 'VN': return 'Tỷ phú và Tycoon';
         case 'TH': return 'มหาเศรษฐีและผู้ประกอบการ';
         case 'TL': return 'Bilyonaryo at Tycoons';
@@ -78,7 +78,7 @@ export const billionaires = () => {
 
 export const action = () => {
     switch (GetLanguage()) {
-        case 'CN': return '武打与功夫';
+        case 'CN': return '動作與功夫';
         case 'VN': return 'Hành động và Kung Fu';
         case 'TH': return 'การกระทำและกังฟู';
         case 'TL': return 'Action & Kung Fu';
@@ -91,7 +91,7 @@ export const action = () => {
 
 export const love = () => {
     switch (GetLanguage()) {
-        case 'CN': return '爱与家庭';
+        case 'CN': return '愛與家庭';
         case 'VN': return 'Tình yêu và gia đình';
         case 'TH': return 'ความรักและครอบครัว';
         case 'TL': return 'Love & Family';
@@ -117,7 +117,7 @@ export const short = () => {
 
 export const home = () => {
     switch (GetLanguage()) {
-        case 'CN': return '首页';
+        case 'CN': return '首頁';
         case 'VN': return 'Trang chủ';
         case 'TH': return 'หน้าหลัก';
         case 'TL': return 'home page';
@@ -130,7 +130,7 @@ export const home = () => {
 
 export const recommend = () => {
     switch (GetLanguage()) {
-        case 'CN': return '推荐';
+        case 'CN': return '推薦';
         case 'VN': return 'Giới thiệu';
         case 'TH': return 'คำแนะนำ';
         case 'TL': return 'recommend';
@@ -143,7 +143,7 @@ export const recommend = () => {
 
 export const profile = () => {
     switch (GetLanguage()) {
-        case 'CN': return '个人';
+        case 'CN': return '個人資料';
         case 'VN': return 'Thông tin cá nhân';
         case 'TH': return 'ข้อมูลส่วนตัว';
         case 'TL': return 'personal data';
@@ -156,7 +156,7 @@ export const profile = () => {
 
 export const search = () => {
     switch (GetLanguage()) {
-        case 'CN': return '    搜索';
+        case 'CN': return '    蒐索';
         case 'VN': return '    Tìm kiếm';
         case 'TH': return '    ค้นหา';
         case 'TL': return '    search';
@@ -182,7 +182,7 @@ export const subtitles = () => {
 
 export const login = () => {
     switch (GetLanguage()) {
-        case 'CN': return '登录';
+        case 'CN': return '登入';
         case 'VN': return 'Đăng nhập';
         case 'TH': return 'เข้าสู่ระบบ';
         case 'TL': return 'Login';
@@ -195,7 +195,7 @@ export const login = () => {
 
 export const email = () => {
     switch (GetLanguage()) {
-        case 'CN': return '邮件';
+        case 'CN': return '電子郵件';
         case 'VN': return 'Thư điện tử';
         case 'TH': return 'อีเมล์';
         case 'TL': return 'email';
@@ -208,7 +208,7 @@ export const email = () => {
 
 export const password = () => {
     switch (GetLanguage()) {
-        case 'CN': return '密码';
+        case 'CN': return '密碼';
         case 'VN': return 'Mật khẩu';
         case 'TH': return 'รหัสผ่าน';
         case 'TL': return 'password';
@@ -221,7 +221,7 @@ export const password = () => {
 
 export const gotosignup = () => {
     switch (GetLanguage()) {
-        case 'CN': return '前往注册';
+        case 'CN': return '去注册';
         case 'VN': return 'Đăng ký';
         case 'TH': return 'ไปที่ลงทะเบียน';
         case 'TL': return 'mag-sign up';
@@ -234,7 +234,7 @@ export const gotosignup = () => {
 
 export const orcontinuewith = () => {
     switch (GetLanguage()) {
-        case 'CN': return '其他登录方式';
+        case 'CN': return '其他管道登入';
         case 'VN': return 'Cách đăng nhập khác';
         case 'TH': return 'เข้าสู่ระบบด้วยวิธีอื่น';
         case 'TL': return 'Iba pang mga paraan ng login';
@@ -260,7 +260,7 @@ export const signUp = () => {
 
 export const getcoins = () => {
     switch (GetLanguage()) {
-        case 'CN': return '获取硬币';
+        case 'CN': return '獲取硬幣';
         case 'VN': return 'Nhận tiền xu';
         case 'TH': return 'รับเหรียญ';
         case 'TL': return 'kumuha ng mga barya';
@@ -273,7 +273,7 @@ export const getcoins = () => {
 
 export const history = () => {
     switch (GetLanguage()) {
-        case 'CN': return '我的历史';
+        case 'CN': return '歷史';
         case 'VN': return 'Lịch sử';
         case 'TH': return 'ประวัติความเป็นมา';
         case 'TL': return 'kasaysayan';
@@ -286,7 +286,7 @@ export const history = () => {
 
 export const favorites = () => {
     switch (GetLanguage()) {
-        case 'CN': return '我的收藏';
+        case 'CN': return '我的最愛';
         case 'VN': return 'Yêu thích';
         case 'TH': return 'รายการโปรด';
         case 'TL': return 'paborito';
@@ -299,7 +299,7 @@ export const favorites = () => {
 
 export const help = () => {
     switch (GetLanguage()) {
-        case 'CN': return '帮助';
+        case 'CN': return '幫助';
         case 'VN': return 'Trợ giúp';
         case 'TH': return 'ความช่วยเหลือ';
         case 'TL': return 'tulong';
@@ -351,7 +351,7 @@ export const signout = () => {
 
 export const dailybonus = () => {
     switch (GetLanguage()) {
-        case 'CN': return '每日奖励';
+        case 'CN': return '每日獎金';
         case 'VN': return 'Tiền thưởng hàng ngày';
         case 'TH': return 'โบนัสรายวัน';
         case 'TL': return 'araw-araw na bonus';
@@ -390,7 +390,7 @@ export const recharge = () => {
 
 export const coins = () => {
     switch (GetLanguage()) {
-        case 'CN': return '硬币';
+        case 'CN': return '硬幣';
         case 'VN': return 'Tiền xu';
         case 'TH': return 'เหรียญ';
         case 'TL': return 'coins';
@@ -403,7 +403,7 @@ export const coins = () => {
 
 export const bonus = () => {
     switch (GetLanguage()) {
-        case 'CN': return '奖励';
+        case 'CN': return '獎金';
         case 'VN': return 'Tiền thưởng';
         case 'TH': return 'โบนัส';
         case 'TL': return 'bonus';
@@ -429,7 +429,7 @@ export const payby = () => {
 
 export const termsofservice = () => {
     switch (GetLanguage()) {
-        case 'CN': return '服务条款';
+        case 'CN': return '服務條款';
         case 'VN': return 'Điều khoản dịch vụ';
         case 'TH': return 'เงื่อนไขการให้บริการ';
         case 'TL': return 'mga tuntunin ng serbisyo';
@@ -442,7 +442,7 @@ export const termsofservice = () => {
 
 export const privacypolicy = () => {
     switch (GetLanguage()) {
-        case 'CN': return '隐私政策';
+        case 'CN': return '隱私政策';
         case 'VN': return 'Chính sách bảo mật';
         case 'TH': return 'นโยบายความเป็นส่วนตัว';
         case 'TL': return 'patakaran ng pribado';
