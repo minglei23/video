@@ -14,6 +14,7 @@ import NavBar from "../components/NavBar";
 
 import "./Store.css";
 import StoreFoot from "./StoreFoot";
+import { bonus, coins, recharge } from "../word";
 
 const Store = () => {
   const navigate = useNavigate();
@@ -236,7 +237,7 @@ const Store = () => {
           </div>
         </div> */}
         <div className="store-card recharge">
-          <div className="card-title">Recharge</div>
+          <div className="card-title">{recharge()}</div>
           <div className="card-content recharge-content">
             {rechargeType.map((item, index) => {
               return (
@@ -259,11 +260,11 @@ const Store = () => {
                   <div className="recharge-item-content">
                     <div className="recharge-coins">
                       <span className="recharge-coins-num">{item.coins}</span>{" "}
-                      Coins
+                      {coins()}
                     </div>
                     {item.bonus !== 0 && (
                       <span className="recharge-bonus">
-                        +{item.bonus} Bonus
+                        +{item.bonus} {bonus()}
                       </span>
                     )}
                   </div>

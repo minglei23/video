@@ -13,6 +13,7 @@ import Login from './Login';
 import Points from './Points';
 import { UserContext } from './index.js';
 import { GetUser } from './cache';
+import { become, favorites, help, history, language, signout } from './word.js';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -42,33 +43,33 @@ const Profile = () => {
           {!user.VIP && (
             <ListItem onClick={() => { navigate('/vip') }}>
               <MonetizationOnIcon style={{ marginRight: '10px' }} />
-              <ListItemText primary="Become VIP" />
+              <ListItemText primary={become()} />
               <ArrowForwardIosIcon style={{ width: '15px' }} />
             </ListItem>
           )}
           <ListItem onClick={() => navigateTo('/history')}>
             <HistoryIcon style={{ marginRight: '10px' }} />
-            <ListItemText primary="History" />
+            <ListItemText primary={history()} />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => navigateTo('/favorites')}>
             <StarIcon style={{ marginRight: '10px' }} />
-            <ListItemText primary="Favorites" />
+            <ListItemText primary={favorites()} />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => navigateTo('/language')}>
             <SettingsIcon style={{ marginRight: '10px' }} />
-            <ListItemText primary="Language" />
+            <ListItemText primary={language()} />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={() => navigateTo('/help')}>
             <HelpIcon style={{ marginRight: '10px' }} />
-            <ListItemText primary="Help" />
+            <ListItemText primary={help()} />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
           <ListItem onClick={signOut}>
             <ExitToAppIcon style={{ marginRight: '10px' }} />
-            <ListItemText primary="Sign Out" />
+            <ListItemText primary={signout()} />
             <ArrowForwardIosIcon style={{ width: '15px' }} />
           </ListItem>
         </List>

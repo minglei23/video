@@ -7,7 +7,7 @@ import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { trending } from './word';
+import { action, ancient, billionaires, love, popular, revenge, short, trending } from './word';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -56,25 +56,25 @@ export default function Home() {
       </div>
       <TrendingList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Popular</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{popular()}</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Revenge & Counterattack</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{revenge()}</h3>
       <PopularList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Ancient Times</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{ancient()}</h3>
       <PopularList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Billionaires & Tycoons</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{billionaires()}</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Action & Kung Fu</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{action()}</h3>
       <PopularList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Love & Family</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{love()}</h3>
       <PopularList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>Short Series</h3>
+      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{short()}</h3>
       <SeriesRows seriesList={[
         ...seriesByType['type1'],
         ...seriesByType['type2'],

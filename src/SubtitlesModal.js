@@ -1,5 +1,6 @@
 import React from "react";
 import { Radio, RadioGroup, Modal, FormControlLabel, FormControl, Box } from "@mui/material";
+import { subtitles } from "./word";
 
 const SubtitlesModal = ({ open, onClose, vttType, vttList, handleSubtitlesChange }) => {
 
@@ -25,7 +26,7 @@ const SubtitlesModal = ({ open, onClose, vttType, vttList, handleSubtitlesChange
       >
         <div className="h-[40vh] overflow-y-auto overflow-x-hidden">
           <FormControl component="fieldset">
-            <div className="text-[#fff]">Subtitles</div>
+            <div className="text-[#fff]">{subtitles()}</div>
             <RadioGroup
               row
               value={vttType}

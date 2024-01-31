@@ -156,14 +156,14 @@ export const profile = () => {
 
 export const search = () => {
     switch (GetLanguage()) {
-        case 'CN': return '搜索';
-        case 'VN': return 'Tìm kiếm';
-        case 'TH': return 'ค้นหา';
-        case 'TL': return 'search';
-        case 'AE': return 'بحث .';
-        case 'ID': return 'Cari';
-        case 'MS': return 'Cari';
-        default: return 'search'
+        case 'CN': return '    搜索';
+        case 'VN': return '    Tìm kiếm';
+        case 'TH': return '    ค้นหา';
+        case 'TL': return '    search';
+        case 'AE': return '    بحث .';
+        case 'ID': return '    Cari';
+        case 'MS': return '    Cari';
+        default: return '    search'
     }
 }
 
@@ -280,7 +280,7 @@ export const history = () => {
         case 'AE': return 'تاريخ';
         case 'ID': return 'sejarah';
         case 'MS': return 'sejarah';
-        default: return 'history'
+        default: return 'History'
     }
 }
 
@@ -293,7 +293,7 @@ export const favorites = () => {
         case 'AE': return 'المفضلة';
         case 'ID': return 'Kegemaran saya';
         case 'MS': return 'Kegemaran saya';
-        default: return 'favorites'
+        default: return 'Favorites'
     }
 }
 
@@ -306,7 +306,33 @@ export const help = () => {
         case 'AE': return 'ساعد';
         case 'ID': return 'Bantuan';
         case 'MS': return 'Bantuan';
-        default: return 'help'
+        default: return 'Help'
+    }
+}
+
+export const language = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '语言';
+        case 'VN': return 'Ngôn ngữ';
+        case 'TH': return 'ภาษา';
+        case 'TL': return 'Wika';
+        case 'AE': return 'لغة';
+        case 'ID': return 'Bahasa';
+        case 'MS': return 'ഭാഷ';
+        default: return 'Language'
+    }
+}
+
+export const become = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '成为VIP';
+        case 'VN': return 'Trở thành VIP';
+        case 'TH': return 'กลายเป็นวีไอพี';
+        case 'TL': return 'Maging VIP';
+        case 'AE': return 'تصبح VIP';
+        case 'ID': return 'Menjadi VIP';
+        case 'MS': return 'VIP ആകുക';
+        default: return 'Become VIP'
     }
 }
 
@@ -319,9 +345,8 @@ export const signout = () => {
         case 'AE': return 'سحب';
         case 'ID': return 'tanda keluar';
         case 'MS': return 'tandatangan keluar';
-        default: return 'sign out'
+        default: return 'Sign Out'
     }
-
 }
 
 export const dailybonus = () => {

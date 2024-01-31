@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SearchIcon from '@mui/icons-material/Search';
 import { Grid, Button, Box, InputBase } from '@mui/material';
+import { search } from './word';
 
 export default function Carousel({ seriesList, handleSeriesClick }) {
 
@@ -38,7 +39,7 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
           <Grid item style={{ flexBasis: '65%', flexGrow: 0, flexShrink: 0 }}>
             <InputBase
               fullWidth
-              placeholder="    Search"
+              placeholder={search()}
               onClick={() => navigate('/search')}
               style={{ backgroundColor: 'rgba(255, 255, 255, 0.3)', padding: '2px', paddingRight: '10px', borderRadius: '20px', color: '#fff', height: '26px', fontSize: '13px' }}
               endAdornment={<SearchIcon style={{ color: '#ddd', cursor: 'pointer' }} />}

@@ -5,6 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { GetPoints, GetIfChecked, Checkin } from './service.js';
 import { SetUserVIP } from './cache.js';
+import { dailybonus, topup } from './word.js';
 
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
@@ -46,10 +47,10 @@ const Points = ({ user }) => {
           <MonetizationOnIcon style={{ color: '#fa0' }} />
           <Typography variant="h6" style={{ color: '#fa0', marginLeft: '5px', marginRight: '20px' }}>{points}</Typography>
           {!checked && <Button variant="contained" onClick={handleCheckin} style={{ backgroundColor: '#fa0', color: '#000', fontSize: '0.8rem', padding: '3px 6px' }}>
-            Daily Bonus
+            {dailybonus()}
           </Button>}
           <Button variant="contained" onClick={() => {navigate('/store')}} style={{ backgroundColor: '#fa0', color: '#000', marginLeft: '10px',  fontSize: '0.8rem', padding: '3px 6px' }}>
-            TOP UP
+            {topup()}
           </Button>
         </Grid>
       </Grid>
