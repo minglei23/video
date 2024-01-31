@@ -9,12 +9,13 @@ const parseVideo = (video) => {
   const namesParts = video.Name.split(',');
   namesParts.map(part => {
     const [type, name] = part.split('|');
-    if (type == language) {
+    if (type === "EN") {
       video.Name = name;
-      if (name == "CN") {
-        video.Name = "EN";
-      }
     }
+    if (type === language && type !== "CN") {
+      video.Name = name;
+    }
+    return name
   });
   if (video.Subtitle) {
     const subtitlesParts = video.Subtitle.split(',');
