@@ -7,7 +7,7 @@ const Language = () => {
   const navigate = useNavigate();
   const languages = {
     "English": "EN",
-    "简体中文": "CN",
+    "繁体中文": "CN",
     "Tiếng Việt": "VN",
     "แบบไทย": "TH",
     "Filipino": "TL",

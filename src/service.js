@@ -11,6 +11,9 @@ const parseVideo = (video) => {
     const [type, name] = part.split('|');
     if (type == language) {
       video.Name = name;
+      if (name == "CN") {
+        video.Name = "EN";
+      }
     }
   });
   if (video.Subtitle) {
