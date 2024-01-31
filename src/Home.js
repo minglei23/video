@@ -7,6 +7,7 @@ import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { trending } from './word';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function Home() {
         margin: '10px 0'
       }}>
         <EmojiEventsIcon style={{ color: '#fda' }} />
-        <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>Trending</h3>
+        <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>{trending()}</h3>
       </div>
       <TrendingList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 

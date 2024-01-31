@@ -22,6 +22,7 @@ import Vip from './Store/Vip';
 
 import './assets/styles/common.css'
 import Referral from './Referral';
+import Language from './Language';
 
 const UserContext = createContext();
 
@@ -67,6 +68,7 @@ function App() {
             <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/history" element={<History />} />
+            <Route path="/language" element={<Language />} />
             <Route path="/video" element={<Video />} />
             <Route path="/search/:searchTerm" element={<SearchWrapper />} />
             <Route path="/search" element={<SearchWrapper />} />
