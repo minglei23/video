@@ -24,7 +24,65 @@ export default function Home() {
     type9: [],
   });
 
+  const getCountryCodeFromIP = async () => {
+    try {
+      const response = await fetch('https://api.ip.sb/geoip', {
+        headers: {
+          'Accept': 'application/json',
+        }
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log(data)
+      return data.country_code;
+    } catch (error) {
+      console.error('Error fetching user country code:', error);
+      return null;
+    }
+  };
+
+  const setLanguage = async () => {
+    let language = localStorage.getItem("language");
+    if (!language) {
+      const countryCode = await getCountryCodeFromIP() || "EN";
+      switch (countryCode) {
+        case "CN":
+        case "TW":
+        case "HK":
+          language = "CN";
+          break;
+        case "VN":
+          language = "VN";
+          break;
+        case "TH":
+          language = "TH";
+          break;
+        case "PH":
+          language = "TL";
+          break;
+        case "AE":
+          language = "AE";
+          break;
+        case "ID":
+          language = "ID";
+          break;
+        case "MY":
+          language = "MS";
+          break;
+        case "CA":
+          language = "CN";
+          break;
+        default:
+          language = "EN";
+      }
+      localStorage.setItem("language", language);
+    }
+  };
+
   useEffect(() => {
+    setLanguage()
     GetSeriesList().then(data => {
       setSeriesByType(data);
     });
