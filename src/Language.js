@@ -17,12 +17,12 @@ const Language = () => {
   }
 
   const handleOnBack = () => {
-    navigate('/profile');
+    navigate(-1);
   };
 
   const handleClick = (value) => {
     SetLanguage(value)
-    navigate('/profile');
+    navigate(-1);
   };
 
   return (
