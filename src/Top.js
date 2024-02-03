@@ -29,7 +29,7 @@ export default function Top() {
         />
       </Grid>
       <Grid item style={{ flexBasis: '10%', flexGrow: 0, flexShrink: 0 }}>
-        <Button onClick={handleOpen} style={{ minWidth: 0, padding: 0, color: '#fff' }}>
+        <Button onClick={handleOpen} style={{ minWidth: 0, padding: 0, color: '#fff', paddingLeft: '5px' }}>
           {GetLanguage()}
         </Button>
       </Grid>
