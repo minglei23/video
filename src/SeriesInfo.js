@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Grid, Typography, Box, Paper, Dialog, DialogActions, DialogContent, DialogContentText } from '@mui/material';
+import { Button, Grid, Typography, Box, Paper } from '@mui/material';
+import Notice from './Notice';
 
 export default function SeriesInfo({ vip, series, showVipMotal, setUnlockEpisode, paid }) {
 
@@ -79,29 +80,7 @@ export default function SeriesInfo({ vip, series, showVipMotal, setUnlockEpisode
           );
         })}
       </Grid>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{
-          '& .MuiPaper-root': {
-            backgroundColor: '#333',
-            color: '#fa0'
-          },
-        }}
-      >
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description" sx={{ color: '#fff' }}>
-            Previous episodes are not unlocked
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="inherit" autoFocus>
-            OK
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Notice open={openDialog} onClose={handleCloseDialog} word="Previous episodes are not unlocked" />
     </Box>
   )
 }
