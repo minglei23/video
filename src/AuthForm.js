@@ -3,6 +3,7 @@ import { Button, TextField } from '@mui/material';
 import { login, register } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
+import { emailWord, loginword, passwordWord, signupWord } from './word.js';
 
 const AuthForm = ({ isLogin, setError, referral }) => {
   const [email, setEmail] = useState('');
@@ -39,7 +40,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
   return (
     <form onSubmit={handleSubmit}>
       <TextField
-        label="Email"
+        label={emailWord()}
         type="email"
         fullWidth
         margin="normal"
@@ -49,7 +50,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         InputProps={{ style: { color: '#fff' } }}
       />
       <TextField
-        label="Password"
+        label={passwordWord()}
         type="password"
         fullWidth
         margin="normal"
@@ -70,7 +71,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
           backgroundColor: '#fa0',
         }}
       >
-        {isLogin ? 'Login' : 'Sign Up'}
+        {isLogin ? loginword() : signupWord()}
       </Button>
     </form>
   );

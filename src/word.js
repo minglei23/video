@@ -180,7 +180,7 @@ export const subtitles = () => {
     }
 }
 
-export const login = () => {
+export const loginword = () => {
     switch (GetLanguage()) {
         case 'CN': return '登入';
         case 'VN': return 'Đăng nhập';
@@ -193,7 +193,7 @@ export const login = () => {
     }
 }
 
-export const email = () => {
+export const emailWord = () => {
     switch (GetLanguage()) {
         case 'CN': return '電子郵件';
         case 'VN': return 'Thư điện tử';
@@ -206,7 +206,20 @@ export const email = () => {
     }
 }
 
-export const password = () => {
+export const enteremail = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '輸入電子郵寄地址';
+        case 'VN': return 'Nhập địa chỉ email';
+        case 'TH': return 'ป้อนที่อยู่อีเมล';
+        case 'TL': return 'ipasok ang email address';
+        case 'AE': return 'أدخل عنوان البريد الإلكتروني';
+        case 'ID': return 'masukkan alamat email';
+        case 'MS': return 'masukkan alamat e-mel';
+        default: return 'enter an email address'
+    }
+}
+
+export const passwordWord = () => {
     switch (GetLanguage()) {
         case 'CN': return '密碼';
         case 'VN': return 'Mật khẩu';
@@ -216,6 +229,19 @@ export const password = () => {
         case 'ID': return 'sandi';
         case 'MS': return 'Katalaluan';
         default: return 'password'
+    }
+}
+
+export const gotologin = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '轉到登入';
+        case 'VN': return 'Đăng nhập';
+        case 'TH': return 'เข้าสู่ระบบ';
+        case 'TL': return 'pumunta sa login';
+        case 'AE': return 'الذهاب إلى تسجيل الدخول';
+        case 'ID': return 'pergi ke login';
+        case 'MS': return 'pergi ke log masuk';
+        default: return 'go to login'
     }
 }
 
@@ -245,7 +271,7 @@ export const orcontinuewith = () => {
     }
 }
 
-export const signUp = () => {
+export const signupWord = () => {
     switch (GetLanguage()) {
         case 'CN': return '注册';
         case 'VN': return 'Đăng ký';
