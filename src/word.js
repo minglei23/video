@@ -11,6 +11,19 @@ export const GetLanguage = () => {
     return "EN";
 };
 
+export const languageName = (type) => {
+    switch (type) {
+        case 'CN': return '繁体中文';
+        case 'VN': return 'Tiếng Việt';
+        case 'TH': return 'แบบไทย';
+        case 'TL': return 'Filipino';
+        case 'AE': return 'عربي';
+        case 'ID': return 'bahasa Indonesia';
+        case 'MS': return 'മലേഷ്യൻ';
+        default: return 'English'
+    }
+}
+
 export const trending = () => {
     switch (GetLanguage()) {
         case 'CN': return '熱播榜';

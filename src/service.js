@@ -1,6 +1,6 @@
 import md5 from 'js-md5';
 import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode } from './cache';
-import { GetLanguage } from './word';
+import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://api.realshort.tv';
 
@@ -20,8 +20,7 @@ const parseVideo = (video) => {
   if (video.Subtitle) {
     const subtitlesParts = video.Subtitle.split(',');
     const subtitles = subtitlesParts.map(part => {
-      const [type, name] = part.split('|');
-      return { Type: type, Name: name };
+      return { Type: part, Name: languageName(part) };
     });
     video.Subtitle = subtitles;
   }
