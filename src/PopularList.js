@@ -21,7 +21,7 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
           }}>
             HOT
           </div>}
-          <Card style={{ backgroundColor: '#111', color: 'white' }}>
+          <Card style={{ backgroundColor: '#112', color: 'white' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
                 component="img"

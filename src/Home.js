@@ -113,25 +113,25 @@ export default function Home() {
       </div>
       <TrendingList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{popular()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{popular()}</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{revenge()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{revenge()}</h3>
       <PopularList seriesList={seriesByType['type3']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{ancient()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{ancient()}</h3>
       <PopularList seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{billionaires()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{billionaires()}</h3>
       <PopularList seriesList={seriesByType['type6']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{action()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{action()}</h3>
       <PopularList seriesList={seriesByType['type7']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{love()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{love()}</h3>
       <PopularList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 
-      <h3 style={{ fontWeight: 'bold', marginLeft: '10px' }}>{short()}</h3>
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{short()}</h3>
       <SeriesRows seriesList={[
         ...seriesByType['type1'],
         ...seriesByType['type2'],
