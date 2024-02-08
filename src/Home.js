@@ -106,7 +106,7 @@ export default function Home() {
         backgroundImage: 'url("/image/popular.png")',
         backgroundSize: 'cover',
         padding: '10px',
-        margin: '10px 0'
+        marginTop: '10px'
       }}>
         <img src="/image/cup.png" style={{ maxHeight: '17px', paddingLeft: '5px' }} />
         <h3 style={{ fontWeight: 'bold', margin: '0 10px' }}>{trending()}</h3>
