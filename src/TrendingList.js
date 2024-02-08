@@ -34,7 +34,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
           }}>
             {i + 1}
           </div>
-          <Card style={{ backgroundColor: '#112', color: 'white' }}>
+          <Card style={{ backgroundColor: '#101015', color: 'white' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <CardMedia
                 component="img"

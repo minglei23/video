@@ -115,7 +115,7 @@ const VideoPlayer = (props) => {
         width: "100%",
         overflowX: "hidden",
         zIndex: 20,
-        backgroundColor: "#111",
+        backgroundColor: "#101015",
       }}
     >
       {url && (

@@ -35,7 +35,7 @@ const Search = () => {
   }
 
   return (
-    <div className='flex flex-col' style={{ height: '100%', overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
+    <div className='flex flex-col' style={{ height: '100%', overflowY: 'auto', backgroundColor: '#101015', color: 'white' }}>
       <div className='h-[44px] flex items-center px-4'>
         <ArrowBackIosIcon onClick={onBack} fontSize="small" />
         <div className='flex-1'><SearchBar /></div>

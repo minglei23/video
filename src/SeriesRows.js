@@ -21,7 +21,7 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
           }}>
             TOP
           </div>}
-          <Card style={{ backgroundColor: '#112', color: 'white', height: '100%' }}>
+          <Card style={{ backgroundColor: '#101015', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
                 <CardMedia

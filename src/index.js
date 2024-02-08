@@ -51,7 +51,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
-        <div style={{ fontFamily: 'Poppins', backgroundColor: '#111', color: 'white', height: '100%' }}>
+        <div style={{ fontFamily: 'Poppins', backgroundColor: '#101015', color: 'white', height: '100%' }}>
           <Routes>
             <Route path="/" element={<Layout/>} >
               <Route path="/" element={<Navigate to='/home' />} />

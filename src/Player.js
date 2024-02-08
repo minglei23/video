@@ -202,7 +202,7 @@ const Player = () => {
         height: "100%",
         width: "100%",
         zIndex: 20,
-        backgroundColor: "#111",
+        backgroundColor: "#101015",
       }}
     >
       {url && (

@@ -7,7 +7,7 @@ export default function HistoryRows({ seriesList, handleSeriesClick }) {
     <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 10px' }}>
       {seriesList.map((seriesItem) => (
         <div style={{ flex: '1 0 calc(33% - 10px)', maxWidth: 'calc(33% - 10px)', margin: '0 5px' }} key={seriesItem.id}>
-          <Card style={{ backgroundColor: '#111', color: 'white', height: '100%' }}>
+          <Card style={{ backgroundColor: '#101015', color: 'white', height: '100%' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
               <div style={{ position: 'relative', height: 0, paddingTop: '145%' }}>
                 <CardMedia

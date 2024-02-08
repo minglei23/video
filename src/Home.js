@@ -96,14 +96,14 @@ export default function Home() {
   };
 
   return (
-    <div style={{ overflowY: 'auto', backgroundColor: '#112', color: 'white' }}>
+    <div style={{ overflowY: 'auto', backgroundColor: '#101015', color: 'white' }}>
 
       <Carousel seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        backgroundImage: 'url("/image/popular.png")',
+        backgroundImage: `linear-gradient(rgba(16, 16, 21, 0) 0%, #101015 100%), url("/image/popular.png")`,
         backgroundSize: 'cover',
         padding: '10px',
         marginTop: '10px'

@@ -32,7 +32,7 @@ const Menu = (props) => {
       style={{
         height: '8vh',
         width: '100%',
-        backgroundColor: '#112',
+        backgroundColor: '#101015',
         color: 'white',
         borderTop: 'none',
         boxShadow: 'none',

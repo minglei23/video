@@ -14,7 +14,7 @@ const PlayerTest = () => {
   };
 
   return (
-    <div style={{ position: "fixed", height: "100%", width: "100%", backgroundColor: "#111" }}>
+    <div style={{ position: "fixed", height: "100%", width: "100%", backgroundColor: "#101015" }}>
       <video
         ref={videoRef}
         src="https://series-store.obs.ap-southeast-1.myhuaweicloud.com/13002/1.mp4"
