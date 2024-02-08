@@ -67,7 +67,7 @@ export default function Top() {
       </Grid>
       <Grid item style={{ flexBasis: '10%', flexGrow: 0, flexShrink: 0 }}>
         <Button onClick={handleOpenDialog} style={{ minWidth: 0, padding: 0 }}>
-          <img src="/image/coin.gif" alt="Coin" style={{ maxHeight: '24px' }} />
+          <img src="/image/coin.png" alt="Coin" style={{ maxHeight: '17px' }} />
         </Button>
       </Grid>
       <LanguageModal open={open} onClose={handleClose} />

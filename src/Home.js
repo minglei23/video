@@ -6,7 +6,6 @@ import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { action, ancient, billionaires, love, popular, revenge, short, trending } from './word';
 
 export default function Home() {
@@ -97,19 +96,20 @@ export default function Home() {
   };
 
   return (
-    <div style={{ overflowY: 'auto', backgroundColor: '#111', color: 'white' }}>
+    <div style={{ overflowY: 'auto', backgroundColor: '#112', color: 'white' }}>
 
       <Carousel seriesList={seriesByType['type5']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(#444, #111)',
+        backgroundImage: 'url("/image/popular.png")',
+        backgroundSize: 'cover',
         padding: '10px',
         margin: '10px 0'
       }}>
-        <EmojiEventsIcon style={{ color: '#fda' }} />
-        <h3 style={{ fontWeight: 'bold', color: '#fda', margin: '0 10px' }}>{trending()}</h3>
+        <img src="/image/cup.png" style={{ maxHeight: '17px', paddingLeft: '5px' }} />
+        <h3 style={{ fontWeight: 'bold', margin: '0 10px' }}>{trending()}</h3>
       </div>
       <TrendingList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
 

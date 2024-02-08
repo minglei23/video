@@ -18,15 +18,15 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
   };
 
   return (
-    <Box>
+    <Box sx={{ position: 'relative' }}>
       <Box sx={{
-        position: 'absolute',
+        position: 'relative',
         zIndex: 1,
         width: '100%',
-        backdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-        paddingTop: '5px',
-        paddingBottom: '5px'
+        backgroundImage: 'url("/image/top.png")',
+        backgroundSize: 'cover',
+        paddingTop: '10px',
+        paddingBottom: '10px'
       }}>
         <Top />
       </Box>
