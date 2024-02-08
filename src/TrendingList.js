@@ -44,7 +44,7 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
               />
               <SeriesCardContent name={seriesItem.Name} />
               <div style={{ display: 'flex' }}>
-                <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.2em', marginRight: '5px' }} />
+                <LocalFireDepartmentIcon style={{ color: '#f35', fontSize: '1.2em', marginRight: '5px' }} />
                 <span style={{ fontSize: '0.8em' }}>{formatViews(i)}</span>
               </div>
             </CardActionArea>

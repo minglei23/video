@@ -10,16 +10,16 @@ export default function PopularList({ seriesList, handleSeriesClick }) {
           {seriesItem.Hot && <div style={{
             position: 'absolute',
             top: 0,
-            left: 10,
-            backgroundColor: 'red',
+            right: 10,
+            backgroundColor: '#f35',
             color: 'white',
-            padding: '4px 8px',
-            fontSize: '12px',
+            padding: '2px 4px',
+            fontSize: '13px',
             fontWeight: 'bold',
             zIndex: 1,
-            borderRadius: '6px'
+            borderRadius: '2px'
           }}>
-            HOT
+            TOP
           </div>}
           <Card style={{ backgroundColor: '#112', color: 'white' }}>
             <CardActionArea onClick={() => handleSeriesClick(seriesItem)}>
