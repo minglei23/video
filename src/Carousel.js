@@ -34,8 +34,7 @@ export default function Carousel({ seriesList, handleSeriesClick }) {
         {seriesList.map((seriesItem) => (
           <div key={seriesItem.ID} style={{ textAlign: 'center', padding: '10px' }}>
             <div onClick={() => handleSeriesClick(seriesItem)} style={{ cursor: 'pointer' }}>
-              <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '340px', objectFit: 'cover' }} />
-              <h4 style={{ margin: '10px 10px 0px 10px' }}>{seriesItem.Name}</h4>
+              <img src={seriesItem.BaseURL + '/image.jpg'} alt={seriesItem.Name} style={{ width: '100%', height: '300px', objectFit: 'cover' }} />
             </div>
           </div>
         ))}
