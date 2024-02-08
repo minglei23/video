@@ -5,7 +5,7 @@ export default function SeriesCardContent({ name }) {
   return (
     <CardContent style={{
       padding: '0px',
-      height: '4.5em',
+      height: '4em',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-start'
@@ -18,7 +18,8 @@ export default function SeriesCardContent({ name }) {
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',
         textAlign: 'left',
-        margin: '0'
+        margin: '0',
+        fontSize: '0.9em'
       }}>
         {name}
       </h3>

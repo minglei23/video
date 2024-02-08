@@ -40,7 +40,8 @@ export default function SeriesRows({ seriesList, handleSeriesClick }) {
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
                   textAlign: 'left',
-                  margin: '0'
+                  margin: '0',
+                  fontSize: '0.9em'
                 }}>{seriesItem.Name}</h5>
               </CardContent>
             </CardActionArea>

@@ -6,7 +6,7 @@ import SeriesCardContent from './SeriesCardContent';
 export default function TrendingList({ seriesList, handleSeriesClick }) {
   const getBackgroundColor = (index) => {
     switch (index) {
-      case 0: return '#fa0';
+      case 0: return '#fc0';
       case 1: return '#999';
       default: return '#c73';
     }
@@ -43,9 +43,9 @@ export default function TrendingList({ seriesList, handleSeriesClick }) {
                 alt={seriesItem.Name}
               />
               <SeriesCardContent name={seriesItem.Name} />
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.5em', marginRight: '5px' }} />
-                <span>{formatViews(i)}</span>
+              <div style={{ display: 'flex' }}>
+                <LocalFireDepartmentIcon style={{ color: '#f30', fontSize: '1.2em', marginRight: '5px' }} />
+                <span style={{ fontSize: '0.8em' }}>{formatViews(i)}</span>
               </div>
             </CardActionArea>
           </Card>
