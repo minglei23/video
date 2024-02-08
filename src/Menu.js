@@ -26,8 +26,7 @@ const Menu = (props) => {
     <BottomNavigation showLabels style={{
       height: '8vh',
       width: '100%',
-      backdropFilter: 'blur(10px)',
-      backgroundColor: 'rgba(16, 16, 32, 0.75)',
+      backgroundColor: '#112',
       color: 'white',
       borderTop: 'none',
       boxShadow: 'none',
