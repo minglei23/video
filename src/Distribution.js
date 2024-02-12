@@ -17,10 +17,10 @@ export default function Distribution() {
         setUser(storedUser);
       }
       if (user) {
+        setLink(`https://realshort.tv/referral/${user.ID}`);
         try {
           const response = await GetDistribution(user.ID);
           setList(response);
-          setLink(`https://realshort.tv/referral/${user.ID}`);
         } catch (error) {
           console.error('Error fetching distribution:', error);
         }
