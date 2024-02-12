@@ -302,6 +302,23 @@ export const GetPoints = async (userID) => {
   }
 };
 
+export const GetDistribution = async (userID) => {
+  try {
+    // const token = GetToken();
+    // const distribution = await postRequest(`${BASE_URL}/distribution`, { token, userID });
+    const distribution = [
+      { 'email': "a@test.com", 'spend': 100, 'date': '2024-1-1', 'distributor': 'root@test.com', 'commission': 0.3, 'withdrawn': true },
+      { 'email': "b@test.com", 'spend': 200, 'date': '2024-1-2', 'distributor': 'root@test.com', 'commission': 0.3, 'withdrawn': false },
+      { 'email': "c@test.com", 'spend': 100, 'date': '2024-1-3', 'distributor': 'a@test.com', 'commission': 0.1, 'withdrawn': false },
+      { 'email': "d@test.com", 'spend': 200, 'date': '2024-1-4', 'distributor': 'b@test.com', 'commission': 0.1, 'withdrawn': false },
+      { 'email': "e@test.com", 'spend': 100, 'date': '2024-1-5', 'distributor': 'b@test.com', 'commission': 0.1, 'withdrawn': false },
+    ]
+    return distribution
+  } catch (error) {
+    handleError(error, 'Get Distribution Failed:');
+  }
+};
+
 export const GetIfChecked = async (userID) => {
   try {
     const cached = GetCache("ifChecked");

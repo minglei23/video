@@ -23,6 +23,7 @@ import Vip from './Store/Vip';
 import './assets/styles/common.css'
 import Referral from './Referral';
 import Language from './Language';
+import Distribution from './Distribution';
 
 const UserContext = createContext();
 
@@ -75,6 +76,7 @@ function App() {
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
             <Route path="/store" element={<Store />} />
             <Route path="/vip" element={<Vip />} />
+            <Route path="/distribution" element={<Distribution />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}
