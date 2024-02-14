@@ -55,23 +55,19 @@ export default function Distribution() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Email</TableCell>
+            <TableCell>User</TableCell>
             <TableCell>Spend</TableCell>
             <TableCell>Date</TableCell>
-            <TableCell>Distributor</TableCell>
             <TableCell>Commission</TableCell>
-            <TableCell>Withdrawn</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {list.map((item, index) => (
+          {list && list.map((item, index) => (
             <TableRow key={index}>
-              <TableCell>{item.email}</TableCell>
-              <TableCell>${item.spend}</TableCell>
-              <TableCell>{item.date}</TableCell>
-              <TableCell>{item.distributor}</TableCell>
-              <TableCell>{item.commission * 100}%</TableCell>
-              <TableCell>{item.withdrawn ? 'Yes' : 'No'}</TableCell>
+              <TableCell>{item.UserID}</TableCell>
+              <TableCell>${item.Spend}</TableCell>
+              <TableCell>{item.Date}</TableCell>
+              <TableCell>{item.Commission * 100}%</TableCell>
             </TableRow>
           ))}
         </TableBody>

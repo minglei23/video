@@ -305,8 +305,8 @@ export const GetPoints = async (userID) => {
 export const GetDistribution = async (userID) => {
   try {
     const token = GetToken();
-    const distribution = await postRequest(`${BASE_URL}/distribution`, { token, userID });
-    return distribution.distributionList
+    const response = await postRequest(`${BASE_URL}/distribution`, { token, userID });
+    return response.DistributionList
   } catch (error) {
     handleError(error, 'Get Distribution Failed:');
   }
