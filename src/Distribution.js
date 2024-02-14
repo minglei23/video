@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Paper, Container, Typography, TextField } from "@mui/material";
+import { Button, Paper, Container, Typography, TextField } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -7,6 +7,7 @@ import { GetDistribution } from './service';
 import { GetUser } from './cache';
 import { UserContext } from './index.js';
 import Login from './Login';
+import DistributionList from './DistributionList.js';
 
 export default function Distribution() {
   const [list, setList] = useState([]);
@@ -87,28 +88,7 @@ export default function Distribution() {
             renderInput={(params) => <TextField {...params} />}
           />
         </div>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>User ID</TableCell>
-              <TableCell>Spend</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Commission</TableCell>
-              <TableCell>Amount</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredlist.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell>{item.UserID}</TableCell>
-                <TableCell>{item.Spend.toFixed(2)}</TableCell>
-                <TableCell>{item.Date}</TableCell>
-                <TableCell>{(item.Commission * 100).toFixed(2)}%</TableCell>
-                <TableCell>{(item.Spend * item.Commission).toFixed(2)}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <DistributionList filteredlist={filteredlist} />
       </Container>
     </LocalizationProvider>
   );
