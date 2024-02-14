@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow, Paper, Container, Typography } from "@mui/material";
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Paper, Container, Typography, TextField } from "@mui/material";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { GetDistribution } from './service';
 import { GetUser } from './cache';
 import { UserContext } from './index.js';
@@ -7,7 +10,10 @@ import Login from './Login';
 
 export default function Distribution() {
   const [list, setList] = useState([]);
+  const [filteredlist, setFilteredlist] = useState([]);
   const [link, setLink] = useState("");
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
   const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -29,52 +35,82 @@ export default function Distribution() {
     fetchDistribution();
   }, [user, setUser]);
 
+  useEffect(() => {
+    const filtered = list.filter(item => {
+      const itemDate = new Date(item.Date);
+      const from = fromDate ? new Date(fromDate) : null;
+      const to = toDate ? new Date(toDate) : null;
+      return (!from || itemDate >= from) && (!to || itemDate <= to);
+    });
+    setFilteredlist(filtered);
+  }, [list, fromDate, toDate]);
+
   const handleWithdrawClick = (email) => {
     console.log('Withdraw');
   };
 
   const renderDistribution = () => (
-    <Container maxWidth="lg" style={{ backgroundColor: 'white', height: '100vh', padding: '20px' }}>
-      <Paper style={{ padding: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ flexGrow: 1 }}>
-          <Typography variant="h5" component="h2" style={{ textAlign: 'left' }}>
-            {user.Email}
-          </Typography>
-          <Typography variant="body1" style={{ textAlign: 'left' }}>
-            Invitation Link: {link}
-          </Typography>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <Container maxWidth="lg" style={{ backgroundColor: 'white', height: '100vh', padding: '20px' }}>
+        <Paper style={{ padding: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ flexGrow: 1 }}>
+            <Typography variant="h5" component="h2" style={{ textAlign: 'left' }}>
+              {user.Email}
+            </Typography>
+            <Typography variant="body1" style={{ textAlign: 'left' }}>
+              Invitation Link: {link}
+            </Typography>
+          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleWithdrawClick}
+          >
+            Withdraw
+          </Button>
+        </Paper>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <DatePicker
+            label="From"
+            value={fromDate}
+            onChange={(newValue) => {
+              setFromDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
+          <DatePicker
+            label="To"
+            value={toDate}
+            onChange={(newValue) => {
+              setToDate(newValue);
+            }}
+            renderInput={(params) => <TextField {...params} />}
+          />
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleWithdrawClick}
-        >
-          Withdraw
-        </Button>
-      </Paper>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>User ID</TableCell>
-            <TableCell>Spend</TableCell>
-            <TableCell>Date</TableCell>
-            <TableCell>Commission</TableCell>
-            <TableCell>Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {list && list.map((item, index) => (
-            <TableRow key={index}>
-              <TableCell>{item.UserID}</TableCell>
-              <TableCell>{item.Spend.toFixed(2)}</TableCell>
-              <TableCell>{item.Date}</TableCell>
-              <TableCell>{item.Commission * 100}%</TableCell>
-              <TableCell>{(item.Spend * item.Commission).toFixed(2)}</TableCell>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>User ID</TableCell>
+              <TableCell>Spend</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Commission</TableCell>
+              <TableCell>Amount</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Container>
+          </TableHead>
+          <TableBody>
+            {filteredlist.map((item, index) => (
+              <TableRow key={index}>
+                <TableCell>{item.UserID}</TableCell>
+                <TableCell>{item.Spend.toFixed(2)}</TableCell>
+                <TableCell>{item.Date}</TableCell>
+                <TableCell>{(item.Commission * 100).toFixed(2)}%</TableCell>
+                <TableCell>{(item.Spend * item.Commission).toFixed(2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Container>
+    </LocalizationProvider>
   );
 
   return <div>{user ? renderDistribution() : <Login />}</div>;
