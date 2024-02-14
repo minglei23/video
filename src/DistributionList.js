@@ -19,7 +19,7 @@ export default function DistributionList({filteredlist}) {
             <TableCell>{item.UserID}</TableCell>
             <TableCell>{item.Spend.toFixed(2)}</TableCell>
             <TableCell>{item.Date}</TableCell>
-            <TableCell>{(item.Commission * 100).toFixed(2)}%</TableCell>
+            <TableCell>{(item.Commission * 100)}%</TableCell>
             <TableCell>{(item.Spend * item.Commission).toFixed(2)}</TableCell>
           </TableRow>
         ))}
