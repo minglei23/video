@@ -23,7 +23,7 @@ const Login = () => {
           <img src="/image/RealShort.png" alt="RealShort" style={{ width: '150px', display: 'block', margin: 'auto' }} />
           <AuthForm isLogin={isLoginView} setError={setError} referral={referral} />
           <Grid container justifyContent="center" style={{ marginTop: 20 }}>
-            <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#f35', borderColor: '#f35', width: '90%' }}>
+            <Button variant="outlined" onClick={toggleView} style={{ color: '#f35', borderColor: '#f35', width: '90%' }}>
               {isLoginView ? gotosignup() : gotologin()}
             </Button>
           </Grid>
