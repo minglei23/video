@@ -38,7 +38,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{marginTop: '30px'}}>
       <TextField
         label={emailWord()}
         type="email"
@@ -48,6 +48,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{ style: { color: '#fff' } }}
         InputProps={{ style: { color: '#fff' } }}
+        style={{ width: '94%',height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
       <TextField
         label={passwordWord()}
@@ -58,6 +59,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         onChange={(e) => setPassword(e.target.value)}
         InputLabelProps={{ style: { color: '#fff' } }}
         InputProps={{ style: { color: '#fff' } }}
+        style={{ width: '94%',height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
       <Button
         type="submit"
@@ -65,10 +67,11 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         color="primary"
         fullWidth
         style={{
-          marginTop: 30,
+          marginTop: 25,
           color: '#fff',
-          width: '90%',
+          width: '94%',
           backgroundColor: '#f35',
+          borderRadius: '12px'
         }}
       >
         {isLogin ? loginword() : signupWord()}

@@ -19,11 +19,11 @@ const Login = () => {
   return (
     <div style={{ backgroundImage: 'url("/image/login.png")', backgroundSize: 'cover' }}>
       <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '92vh', alignItems: 'center' }}>
-        <Box textAlign="center" marginTop={7}>
+        <Box textAlign="center" marginTop={8}>
           <img src="/image/RealShort.png" alt="RealShort" style={{ width: '150px', display: 'block', margin: 'auto' }} />
           <AuthForm isLogin={isLoginView} setError={setError} referral={referral} />
           <Grid container justifyContent="center" style={{ marginTop: 20 }}>
-            <Button variant="outlined" onClick={toggleView} style={{ color: '#f35', borderColor: '#f35', width: '90%' }}>
+            <Button variant="outlined" onClick={toggleView} style={{ color: '#f35', borderColor: '#f35', width: '94%', borderRadius: '12px' }}>
               {isLoginView ? gotosignup() : gotologin()}
             </Button>
           </Grid>
@@ -35,7 +35,7 @@ const Login = () => {
               message={error}
             />
           )}
-          <Typography variant="body2" style={{ margin: '50px 0 20px 0', color: '#777' }}>
+          <Typography variant="body2" style={{ margin: '60px 0 15px 0', color: '#777' }}>
             {orcontinuewith()}
           </Typography>
           <Grid container justifyContent="center" spacing={2}>
