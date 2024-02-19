@@ -3,7 +3,7 @@ import { Button, Typography, Container, Box, Grid, Snackbar } from '@mui/materia
 import AuthForm from './AuthForm';
 import LoginGoogle from './LoginGoogle';
 import LoginFacebook from './LoginFacebook';
-import { gotologin, gotosignup, loginword, orcontinuewith, signupWord } from './word';
+import { gotologin, gotosignup, orcontinuewith } from './word';
 
 const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);
@@ -18,12 +18,12 @@ const Login = () => {
 
   return (
     <div style={{ backgroundImage: 'url("/image/login.png")', backgroundSize: 'cover' }}>
-      <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '92vh' }}>
-        <Box textAlign="center" marginTop={8}>
-          <Typography variant="h5" margin={"25px"}>{isLoginView ? loginword() : signupWord()}</Typography>
+      <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '92vh', alignItems: 'center' }}>
+        <Box textAlign="center" marginTop={7}>
+          <img src="/image/RealShort.png" alt="RealShort" style={{ width: '150px', display: 'block', margin: 'auto' }} />
           <AuthForm isLogin={isLoginView} setError={setError} referral={referral} />
           <Grid container justifyContent="center" style={{ marginTop: 20 }}>
-            <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#fff', borderColor: '#fa0' }}>
+            <Button variant="outlined" onClick={toggleView} style={{ width: '200px', color: '#f35', borderColor: '#f35', width: '90%' }}>
               {isLoginView ? gotosignup() : gotologin()}
             </Button>
           </Grid>
@@ -35,10 +35,10 @@ const Login = () => {
               message={error}
             />
           )}
-          <Typography variant="body2" style={{ margin: '50px 0px 5px 15px', textAlign: 'left' }}>
+          <Typography variant="body2" style={{ margin: '50px 0 20px 0', color: '#777' }}>
             {orcontinuewith()}
           </Typography>
-          <Grid container >
+          <Grid container justifyContent="center" spacing={2}>
             <LoginGoogle referral={referral} />
             <LoginFacebook referral={referral} />
           </Grid>

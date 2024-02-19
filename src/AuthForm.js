@@ -67,8 +67,8 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         style={{
           marginTop: 30,
           color: '#fff',
-          width: '200px',
-          backgroundColor: '#fa0',
+          width: '90%',
+          backgroundColor: '#f35',
         }}
       >
         {isLogin ? loginword() : signupWord()}
