@@ -30,7 +30,7 @@ export default function Distribution() {
         setLink(`https://realshort.tv/referral/${user.ID}`);
         try {
           const l = await GetDistribution(user.ID);
-          const a = l.reduce(function(sum, item) {
+          const a = l.reduce(function (sum, item) {
             return sum + (item.Spend * item.Commission);
           }, 0);
           setList(l);
@@ -64,14 +64,16 @@ export default function Distribution() {
       <Container maxWidth="lg" style={{ backgroundColor: 'white', height: '100vh', padding: '20px' }}>
         <Paper style={{ padding: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ flexGrow: 1 }}>
-            <Typography variant="h5" component="h2" style={{ textAlign: 'left' }}>
+            <Typography variant="h6" component="h2" style={{ textAlign: 'left', fontWeight: 'bold' }}>
               {user.Email}
             </Typography>
-            <Typography variant="body1" style={{ textAlign: 'left' }}>
-              Invitation Link: {link}
+            <Typography variant="body1" style={{ textAlign: 'left', fontWeight: 'bold' }}>
+              Invitation Link: <span style={{ color: '#26c' }}>{link}</span>
             </Typography>
             <Typography variant="body1" style={{ textAlign: 'left' }}>
-              Total: {amount.toFixed(2)}, Withdraw: {withdraw.toFixed(2)}, Balance: {balance.toFixed(2)}
+              <span style={{ fontWeight: 'bold' }}>Total:</span> <span style={{ color: '#26c' }}>{amount.toFixed(2)}</span>,
+              <span style={{ fontWeight: 'bold' }}> Withdraw:</span> <span style={{ color: '#26c' }}>{withdraw.toFixed(2)}</span>,
+              <span style={{ fontWeight: 'bold' }}> Balance:</span> <span style={{ color: '#26c' }}>{balance.toFixed(2)}</span>
             </Typography>
           </div>
           <Button
