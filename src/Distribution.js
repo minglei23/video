@@ -27,7 +27,7 @@ export default function Distribution() {
         setUser(storedUser);
       }
       if (user) {
-        setLink(`https://realshort.tv/referral/${user.ID}`);
+        setLink(`https://dev.realshort.tv/referral/${user.ID}`);
         try {
           const l = await GetDistribution(user.ID);
           const a = l.reduce(function (sum, item) {
