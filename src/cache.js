@@ -146,3 +146,51 @@ export const FetchAndCacheVideo = async (series, episode) => {
     });
 };
 
+export const SetDistributor = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("distributor", JSON.stringify(item));
+  console.log('1', JSON.stringify(item))
+
+};
+
+export const GetDistributor = () => {
+  const itemStr = localStorage.getItem("distributor");
+  console.log('2', itemStr)
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("distributor");
+    return null;
+  }
+  return item.value;
+};
+
+export const SetDiToken = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("ditoken", JSON.stringify(item));
+};
+
+export const GetDiToken = () => {
+  const itemStr = localStorage.getItem("ditoken");
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("ditoken");
+    return null;
+  }
+  return item.value;
+};

@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://api.realshort.tv';
@@ -339,3 +339,24 @@ export const Checkin = async (userID) => {
   }
 };
 
+export const dilogin = async (email, password) => {
+  try {
+    const hashedPassword = md5(password);
+    const data = await postRequest(`${BASE_URL}/di-login`, { email, password: hashedPassword });
+    SetDiToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'DiLogin Failed:');
+  }
+};
+
+export const diregister = async (email, password, paypal, telegram, verification) => {
+  try {
+    const hashedPassword = md5(password);
+    const data = await postRequest(`${BASE_URL}/di-register`, { email, password: hashedPassword, paypal, telegram, verification });
+    SetDiToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'DiRegister Failed:');
+  }
+};

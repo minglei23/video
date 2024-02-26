@@ -1,35 +1,36 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { Button, Paper, Container, Typography, TextField } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { GetDistribution } from './service';
-import { GetUser } from './cache';
-import { UserContext } from './index.js';
-import Login from './Login';
+import { GetDistributor } from './cache';
+import DistributorLogin from './DistributorLogin';
 import DistributionList from './DistributionList.js';
 
+const DistributorContext = createContext();
+
 export default function Distribution() {
+  const [distributor, setDistributor] = useState(null);
   const [list, setList] = useState([]);
   const [filteredlist, setFilteredlist] = useState([]);
   const [link, setLink] = useState("");
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
-  const { user, setUser } = useContext(UserContext);
   const [amount, setAmount] = useState(0);
   const [withdraw, setWithdraw] = useState(0);
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     const fetchDistribution = async () => {
-      if (!user) {
-        const storedUser = GetUser();
-        setUser(storedUser);
+      if (!distributor) {
+        const storedDistributor = GetDistributor();
+        setDistributor(storedDistributor);
       }
-      if (user) {
-        setLink(`https://dev.realshort.tv/referral/${user.ID}`);
+      if (distributor) {
+        setLink(`https://dev.realshort.tv/referral/${distributor.ID}`);
         try {
-          const l = await GetDistribution(user.ID);
+          const l = await GetDistribution(distributor.ID);
           const a = l.reduce(function (sum, item) {
             return sum + (item.Spend * item.Commission);
           }, 0);
@@ -43,7 +44,7 @@ export default function Distribution() {
       }
     };
     fetchDistribution();
-  }, [user, setUser]);
+  }, [distributor, setDistributor]);
 
   useEffect(() => {
     const filtered = list.filter(item => {
@@ -65,7 +66,7 @@ export default function Distribution() {
         <Paper style={{ padding: '20px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ flexGrow: 1 }}>
             <Typography variant="h6" component="h2" style={{ textAlign: 'left', fontWeight: 'bold' }}>
-              {user.Email}
+              {distributor.Email}
             </Typography>
             <Typography variant="body1" style={{ textAlign: 'left', fontWeight: 'bold' }}>
               Invitation Link: <span style={{ color: '#26c' }}>{link}</span>
@@ -107,5 +108,11 @@ export default function Distribution() {
     </LocalizationProvider>
   );
 
-  return <div>{user ? renderDistribution() : <Login />}</div>;
+  return (
+    <DistributorContext.Provider value={{ distributor, setDistributor }}>
+      {distributor ? renderDistribution() : <DistributorLogin />}
+    </DistributorContext.Provider>
+  )
 }
+
+export { DistributorContext };
