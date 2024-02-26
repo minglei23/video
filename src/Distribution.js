@@ -20,6 +20,9 @@ export default function Distribution() {
   const [amount, setAmount] = useState(0);
   const [withdraw, setWithdraw] = useState(0);
   const [balance, setBalance] = useState(0);
+  const [start, setStart] = useState(null);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   useEffect(() => {
     const fetchDistribution = async () => {
@@ -34,10 +37,12 @@ export default function Distribution() {
           const a = l.reduce(function (sum, item) {
             return sum + (item.Spend * item.Commission);
           }, 0);
+          const s = new Date(distributor.Time)
           setList(l);
           setAmount(a);
           setWithdraw(0);
           setBalance(a);
+          setStart(s);
         } catch (error) {
           console.error('Error fetching distribution:', error);
         }
@@ -92,14 +97,24 @@ export default function Distribution() {
             onChange={(newValue) => {
               setFromDate(newValue);
             }}
+            minDate={start}
+            maxDate={today}
             renderInput={(params) => <TextField {...params} />}
           />
           <DatePicker
             label="To"
             value={toDate}
             onChange={(newValue) => {
-              setToDate(newValue);
+              if (newValue) {
+                const adjustedDate = new Date(newValue);
+                adjustedDate.setHours(23, 59, 59, 999);
+                setToDate(adjustedDate);
+              } else {
+                setToDate(null);
+              }
             }}
+            minDate={fromDate || start}
+            maxDate={today}
             renderInput={(params) => <TextField {...params} />}
           />
         </div>
