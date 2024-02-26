@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://api.realshort.tv';
@@ -304,7 +304,7 @@ export const GetPoints = async (userID) => {
 
 export const GetDistribution = async (userID) => {
   try {
-    const token = GetToken();
+    const token = GetDiToken();
     const response = await postRequest(`${BASE_URL}/distribution`, { token, userID });
     return response.DistributionList
   } catch (error) {

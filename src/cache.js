@@ -153,13 +153,11 @@ export const SetDistributor = (value) => {
     expiry: now.getTime() + 24 * 60 * 60 * 1000,
   };
   localStorage.setItem("distributor", JSON.stringify(item));
-  console.log('1', JSON.stringify(item))
 
 };
 
 export const GetDistributor = () => {
   const itemStr = localStorage.getItem("distributor");
-  console.log('2', itemStr)
   if (!itemStr) {
     return null;
   }
