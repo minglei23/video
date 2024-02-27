@@ -40,13 +40,11 @@ const Profile = () => {
       <Container style={{ display: 'flex', flexDirection: 'column', height: '92vh' }}>
         <Points user={user} />
         <List>
-          {!user.VIP && (
-            <ListItem onClick={() => { navigate('/vip') }}>
-              <MonetizationOnIcon style={{ marginRight: '10px' }} />
-              <ListItemText primary={become()} />
-              <ArrowForwardIosIcon style={{ width: '15px' }} />
-            </ListItem>
-          )}
+          <ListItem onClick={() => { navigate('/vip') }}>
+            <MonetizationOnIcon style={{ marginRight: '10px' }} />
+            <ListItemText primary={become()} />
+            <ArrowForwardIosIcon style={{ width: '15px' }} />
+          </ListItem>
           <ListItem onClick={() => navigateTo('/history')}>
             <HistoryIcon style={{ marginRight: '10px' }} />
             <ListItemText primary={history()} />

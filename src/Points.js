@@ -10,14 +10,20 @@ import { dailybonus, topup } from './word.js';
 const Points = ({ user }) => {
   const [points, setPoints] = useState(0);
   const [checked, setChecked] = useState(true);
+  const [vip, setVip] = useState("");
+  const [endTime, setEndTime] = useState("");
   const navigate = useNavigate()
 
   useEffect(() => {
     const loadData = async () => {
       const response = await GetPoints(user.ID);
       const checked = await GetIfChecked(user.ID);
-      if (!user.VIP && response.VIP) {
-        SetUserVIP()
+      if (response.VIP) {
+        setVip("VIP")
+        setEndTime(response.EndTime.split(' ')[0]);
+        if (!user.VIP) {
+          SetUserVIP()
+        }
       }
       setPoints(response.Points);
       setChecked(checked);
@@ -40,8 +46,13 @@ const Points = ({ user }) => {
         <Grid item>
           <AccountCircleIcon style={{ color: '#fa5', fontSize: '3rem' }} />
         </Grid>
-        <Grid item>
+        <Grid item container direction="column" justifyContent="space-between" alignItems="center">
           <Typography variant="h6">{user.Email}</Typography>
+          {vip && (
+            <Typography variant="body2" style={{ color: '#fa5' }}>
+              {`${vip} to ${endTime}`}
+            </Typography>
+          )}
         </Grid>
         <Grid item style={{ display: 'flex', alignItems: 'center' }}>
           <MonetizationOnIcon style={{ color: '#fa5' }} />
@@ -49,7 +60,7 @@ const Points = ({ user }) => {
           {!checked && <Button variant="contained" onClick={handleCheckin} style={{ backgroundColor: '#fa5', color: '#000', fontSize: '0.8rem', padding: '3px 6px' }}>
             {dailybonus()}
           </Button>}
-          <Button variant="contained" onClick={() => {navigate('/store')}} style={{ backgroundColor: '#fa5', color: '#000', marginLeft: '10px',  fontSize: '0.8rem', padding: '3px 6px' }}>
+          <Button variant="contained" onClick={() => { navigate('/store') }} style={{ backgroundColor: '#fa5', color: '#000', marginLeft: '10px', fontSize: '0.8rem', padding: '3px 6px' }}>
             {topup()}
           </Button>
         </Grid>
