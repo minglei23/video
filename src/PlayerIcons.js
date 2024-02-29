@@ -46,7 +46,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, setUnlockEpisode, seriesInfoBotto
 
 
   const handleShareClick = () => {
-    const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: https://realshort.tv/player/${seriesId}/1\nReferral: https://realshort.tv/referral/${userId}`;
+    const linkToCopy = `Click to watch the exciting series!\n${series?.Name}\nLink: https://dev.realshort.tv/player/${seriesId}/1`;
     copy(linkToCopy);
     alert("Link copied to clipboard!");
   };
