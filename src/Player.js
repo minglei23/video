@@ -97,7 +97,7 @@ const Player = () => {
         cacheNextVideo(series);
         setShowPlayerIcons(true);
         SetHistory(series.ID, episode);
-        setUnlockEpisode(parseInt(episode)+1);
+        setUnlockEpisode(parseInt(episode) + 1);
         if (user) {
           RecordHistory(user.ID, parseInt(series.ID), parseInt(episode));
         }
@@ -138,6 +138,24 @@ const Player = () => {
     [seriesId, navigate]
   );
 
+  const handleVideoEnd = () => {
+    const episodeNumber = parseInt(episode);
+    if (episodeNumber < totalEpisodes) {
+      if (episodeNumber < 5) {
+        navigateToEpisode(episodeNumber + 1);
+      } else {
+        const user = GetUser();
+        if (user && (user.VIP || paid.includes(episodeNumber + 1))) {
+          navigateToEpisode(episodeNumber + 1);
+        } else {
+          setVipEpisodeModal(true);
+        }
+      }
+    } else {
+      setLastEpisodeModal(true);
+    }
+  };
+
   const handlers = useSwipeable({
     onSwiped: () => setShowPlayerIcons(false),
     onSwipedDown: () => {
@@ -147,21 +165,7 @@ const Player = () => {
       }
     },
     onSwipedUp: () => {
-      const episodeNumber = parseInt(episode);
-      if (episodeNumber < totalEpisodes) {
-        if (episodeNumber < 5) {
-          navigateToEpisode(episodeNumber + 1);
-        } else {
-          const user = GetUser();
-          if (user && (user.VIP || paid.includes(episodeNumber + 1))) {
-            navigateToEpisode(episodeNumber + 1);
-          } else {
-            setVipEpisodeModal(true);
-          }
-        }
-      } else {
-        setLastEpisodeModal(true);
-      }
+      handleVideoEnd();
     },
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
@@ -208,10 +212,11 @@ const Player = () => {
       {url && (
         <video
           src={url}
-          loop
+          loop={false}
           playsInline
           onClick={onIcons}
           onTimeUpdate={handleTimeUpdate}
+          onEnded={handleVideoEnd}
           ref={videoRef}
           style={{
             width: "100%",
