@@ -7,6 +7,7 @@ import { GetDistribution } from './service';
 import { GetDistributor } from './cache';
 import DistributorLogin from './DistributorLogin';
 import DistributionList from './DistributionList.js';
+import QRCode from 'react-qr-code';
 
 const DistributorContext = createContext();
 
@@ -77,6 +78,9 @@ export default function Distribution() {
             </Typography>
             <Typography variant="body1" style={{ textAlign: 'left', fontWeight: 'bold' }}>
               Invitation Link: <span style={{ color: '#26c' }}>{link}</span>
+              <div style={{ margin: '10px' }}>
+                <QRCode value={link} size={64} level={"H"} />
+              </div>
             </Typography>
             <Typography variant="body1" style={{ textAlign: 'left' }}>
               <span style={{ fontWeight: 'bold' }}>Total:</span> <span style={{ color: '#26c' }}>{amount.toFixed(2)}</span>,
