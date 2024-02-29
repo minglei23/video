@@ -22,6 +22,11 @@ const DistributorAuthForm = ({ isLogin, setError }) => {
       setError('Invalid email format');
       return false;
     }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setError('Password must contain at least a uppercase letter, a lowercase letter, a number, and it must be at least 6 characters long');
+      return false;
+    }
     return true;
   };
 
@@ -34,7 +39,6 @@ const DistributorAuthForm = ({ isLogin, setError }) => {
       const distributor = isLogin ? await dilogin(email, password) : await diregister(email, password, paypal, telegram, verification);
       setDistributor(distributor);
       SetDistributor(distributor);
-      console.log('0', distributor)
     } catch (error) {
       setError(error.message);
       console.error(isLogin ? 'login failed:' : 'register failed:', error);

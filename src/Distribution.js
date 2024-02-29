@@ -34,15 +34,17 @@ export default function Distribution() {
         setLink(`https://dev.realshort.tv/referral/${distributor.ID}`);
         try {
           const l = await GetDistribution(distributor.ID);
-          const a = l.reduce(function (sum, item) {
-            return sum + (item.Spend * item.Commission);
-          }, 0);
-          const s = new Date(distributor.Time)
-          setList(l);
-          setAmount(a);
-          setWithdraw(0);
-          setBalance(a);
-          setStart(s);
+          if (l) {
+            const a = l.reduce(function (sum, item) {
+              return sum + (item.Spend * item.Commission);
+            }, 0);
+            const s = new Date(distributor.Time)
+            setList(l);
+            setAmount(a);
+            setWithdraw(0);
+            setBalance(a);
+            setStart(s);
+          }
         } catch (error) {
           console.error('Error fetching distribution:', error);
         }

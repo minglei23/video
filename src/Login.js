@@ -33,6 +33,7 @@ const Login = () => {
               autoHideDuration={6000}
               onClose={() => setError('')}
               message={error}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             />
           )}
           <Typography variant="body2" style={{ margin: '60px 0 15px 0', color: '#777' }}>

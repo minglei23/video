@@ -19,6 +19,11 @@ const AuthForm = ({ isLogin, setError, referral }) => {
       setError('Invalid email format');
       return false;
     }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setError('Password must contain at least one uppercase letter, one lowercase letter, one number, and it must be at least 6 characters long');
+      return false;
+    }
     return true;
   };
 
@@ -38,7 +43,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{marginTop: '30px'}}>
+    <form onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
       <TextField
         label={emailWord()}
         type="email"
@@ -48,7 +53,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{ style: { color: '#fff' } }}
         InputProps={{ style: { color: '#fff' } }}
-        style={{ width: '94%',height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
+        style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
       <TextField
         label={passwordWord()}
@@ -59,7 +64,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         onChange={(e) => setPassword(e.target.value)}
         InputLabelProps={{ style: { color: '#fff' } }}
         InputProps={{ style: { color: '#fff' } }}
-        style={{ width: '94%',height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
+        style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
       <Button
         type="submit"
