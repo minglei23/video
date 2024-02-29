@@ -171,10 +171,11 @@ const Recommend = () => {
     >
       {url && (<video
         src={url}
-        loop
+        loop={false}
         playsInline
         onClick={onIcons}
         onTimeUpdate={handleTimeUpdate}
+        onEnded={fetchRecommend}
         ref={videoRef}
         style={{
           width: "100%",
