@@ -8,6 +8,7 @@ import { GetUser } from "./cache";
 import SeriesInfo from "./SeriesInfo";
 import FavoritesIcon from "./FavoritesIcon";
 import copy from "copy-to-clipboard";
+import { share, collect, seriesInfo, subtitles } from './word.js';
 
 const PlayerIcons = ({ seriesId, showVipMotal, setUnlockEpisode, seriesInfoBottom = 0, clickCaptions, paid }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -61,7 +62,7 @@ const PlayerIcons = ({ seriesId, showVipMotal, setUnlockEpisode, seriesInfoBotto
         style={{
           position: "absolute",
           right: 10,
-          bottom: 240,
+          bottom: 150,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -70,13 +71,17 @@ const PlayerIcons = ({ seriesId, showVipMotal, setUnlockEpisode, seriesInfoBotto
         <IconButton onClick={handleShareClick}>
           <ShareIcon style={{ fontSize: "1.5em", color: "#fff" }} />
         </IconButton>
+        <div style={{ fontSize: "12px", marginBottom: "1em" }}>{share()}</div>
         <FavoritesIcon seriesId={seriesId} user={user} />
+        <div style={{ fontSize: "12px", marginBottom: "1em" }}>{collect()}</div>
         <IconButton onClick={handleOpenModal}>
           <StorageIcon style={{ fontSize: "1.5em", color: "#fff" }} />
         </IconButton>
+        <div style={{ fontSize: "12px", marginBottom: "1em" }}>{seriesInfo()}</div>
         <IconButton onClick={() => clickCaptions && clickCaptions()}>
           <ArticleIcon style={{ fontSize: "1.5em", color: "#fff" }} />
         </IconButton>
+        <div style={{ fontSize: "12px", marginBottom: "1em" }}>{subtitles()}</div>
       </div>
       <Modal
         open={openModal}

@@ -492,3 +492,41 @@ export const privacypolicy = () => {
     }
 }
 
+export const share = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '分享';
+        case 'VN': return 'Chia sẻ';
+        case 'TH': return 'แบ่งปัน';
+        case 'TL': return 'Ibahagi';
+        case 'AE': return 'يشارك';
+        case 'ID': return 'Membagikan';
+        case 'MS': return 'anjara';
+        default: return 'Share'
+    }
+}
+
+export const collect = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '收藏';
+        case 'VN': return 'Sưu tầm';
+        case 'TH': return 'เก็บรวบรวม';
+        case 'TL': return 'Mangolekta';
+        case 'AE': return 'يجمع';
+        case 'ID': return 'Mengumpulkan';
+        case 'MS': return 'manangona';
+        default: return 'Collect'
+    }
+}
+
+export const seriesInfo = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '剧集';
+        case 'VN': return 'Loạt';
+        case 'TH': return 'ชุด';
+        case 'TL': return 'Serye';
+        case 'AE': return 'مسلسل';
+        case 'ID': return 'Seri';
+        case 'MS': return 'andian-tantara';
+        default: return 'Series'
+    }
+}
