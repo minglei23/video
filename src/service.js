@@ -197,10 +197,19 @@ export const cologin = async (id, token, type, email, referral) => {
   }
 };
 
-export const register = async (email, password, referral) => {
+export const sendVerification = async (email) => {
+  try {
+    const data = await postRequest(`${BASE_URL}/send-code`, { email });
+    return data;
+  } catch (error) {
+    handleError(error, 'Send Verification Failed:');
+  }
+};
+
+export const register = async (email, password, verification, referral) => {
   try {
     const hashedPassword = md5(password);
-    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword, referral });
+    const data = await postRequest(`${BASE_URL}/register`, { email, password: hashedPassword, verification, referral });
     SetToken(data.Token);
     return data;
   } catch (error) {

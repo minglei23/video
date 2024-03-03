@@ -1,14 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Button, TextField } from '@mui/material';
-import { login, register } from './service';
+import { login, register, sendVerification } from './service';
 import { UserContext } from './index.js'
 import { SetUser } from './cache';
 import { emailWord, loginword, passwordWord, signupWord } from './word.js';
 
 const AuthForm = ({ isLogin, setError, referral }) => {
-  const [email, setEmail] = useState('');
   const { setUser } = useContext(UserContext);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [verification, setVerification] = useState('');
 
   const validateForm = () => {
     if (!email || !password) {
@@ -27,13 +28,22 @@ const AuthForm = ({ isLogin, setError, referral }) => {
     return true;
   };
 
+  const sendCode = async (event) => {
+    event.preventDefault();
+    if (!validateForm()) return;
+    try {
+      await sendVerification(email);
+    } catch (error) {
+      setError(error.message);
+      console.error('send verification code failed.');
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (!validateForm()) return;
-
     try {
-      const userData = isLogin ? await login(email, password) : await register(email, password, referral);
+      const userData = isLogin ? await login(email, password) : await register(email, password, verification, referral);
       setUser(userData);
       SetUser(userData);
     } catch (error) {
@@ -43,7 +53,7 @@ const AuthForm = ({ isLogin, setError, referral }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
+    <form onSubmit={handleSubmit} style={{ marginTop: '16px' }}>
       <TextField
         label={emailWord()}
         type="email"
@@ -66,6 +76,17 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         InputProps={{ style: { color: '#fff' } }}
         style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
+      {!isLogin && <TextField
+        label="verification code"
+        type="text"
+        fullWidth
+        margin="normal"
+        value={verification}
+        onChange={(e) => setVerification(e.target.value)}
+        InputLabelProps={{ style: { color: '#fff' } }}
+        InputProps={{ style: { color: '#fff' } }}
+        style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
+      />}
       <Button
         type="submit"
         variant="contained"
