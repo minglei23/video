@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
-import { Button, TextField } from '@mui/material';
+import React, { useState, useContext, useEffect } from 'react';
+import { Button, TextField, Grid } from '@mui/material';
 import { login, register, sendVerification } from './service';
-import { UserContext } from './index.js'
+import { UserContext } from './index.js';
 import { SetUser } from './cache';
 import { emailWord, loginword, passwordWord, signupWord } from './word.js';
 
@@ -10,6 +10,17 @@ const AuthForm = ({ isLogin, setError, referral }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [verification, setVerification] = useState('');
+  const [countdown, setCountdown] = useState(0);
+
+  useEffect(() => {
+    let interval;
+    if (countdown > 0) {
+      interval = setInterval(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [countdown]);
 
   const validateForm = () => {
     if (!email || !password) {
@@ -30,7 +41,8 @@ const AuthForm = ({ isLogin, setError, referral }) => {
 
   const sendCode = async (event) => {
     event.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm() || countdown > 0) return;
+    setCountdown(60);
     try {
       await sendVerification(email);
     } catch (error) {
@@ -76,17 +88,32 @@ const AuthForm = ({ isLogin, setError, referral }) => {
         InputProps={{ style: { color: '#fff' } }}
         style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
       />
-      {!isLogin && <TextField
-        label="verification code"
-        type="text"
-        fullWidth
-        margin="normal"
-        value={verification}
-        onChange={(e) => setVerification(e.target.value)}
-        InputLabelProps={{ style: { color: '#fff' } }}
-        InputProps={{ style: { color: '#fff' } }}
-        style={{ width: '94%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
-      />}
+      {!isLogin && (
+        <Grid container spacing={1} alignItems="center" style={{ width: '94%', margin: '8px 0' }}>
+          <Grid item xs={7}>
+            <TextField
+              label="verification code"
+              type="text"
+              fullWidth
+              value={verification}
+              onChange={(e) => setVerification(e.target.value)}
+              InputLabelProps={{ style: { color: '#fff' } }}
+              InputProps={{ style: { color: '#fff' } }}
+              style={{  width: '100%', height: '45px', backgroundColor: 'rgba(100, 100, 100, 0.5)', borderRadius: '6px' }}
+            />
+          </Grid>
+          <Grid item xs={5}>
+            <Button
+              variant="outlined"
+              onClick={sendCode}
+              disabled={countdown > 0}
+              style={{ color: '#f35', borderColor: '#f35', width: '100%', height: '40px', borderRadius: '12px' }}
+            >
+              {countdown > 0 ? `${countdown}s` : 'Send Code'}
+            </Button>
+          </Grid>
+        </Grid>
+      )}
       <Button
         type="submit"
         variant="contained"
