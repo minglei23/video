@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment, vipTest } from './service';
+import { createStripePayment, getFFpayLink, vipTest } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -16,6 +16,17 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     try {
       const id = GetUser().ID;
       const response = await vipTest(id, 1);
+    } catch (error) {
+      console.error('Become VIP:', error);
+    }
+    navigate('/profile')
+  };
+
+  const handleFFpay = async () => {
+    try {
+      const id = GetUser().ID;
+      const response = await getFFpayLink(id, 1, 10);
+      console.log(response)
     } catch (error) {
       console.error('Become VIP:', error);
     }
@@ -97,6 +108,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     <Box sx={modalStyle}>
       <h5>{word}</h5>
       <h5>{`$${amount}.00 pay by`}</h5>
+      <Button onClick={handleFFpay} style={buttonStyle}>FF Pay Test</Button>
       <Button onClick={handleTest} style={buttonStyle}>1 Day VIP Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>

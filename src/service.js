@@ -369,3 +369,38 @@ export const diregister = async (email, password, paypal, telegram, verification
     handleError(error, 'DiRegister Failed:');
   }
 };
+
+function encrypt(data) {
+  const sortedKeys = Object.keys(data).sort();
+  const queryString = sortedKeys.map(key => `${key}=${data[key]}`).join('&');
+  const stringSignTemp = `${queryString}&key=1c9f2952e09a4b3d9e5b8de0a185b11f`;
+  const sign = md5(stringSignTemp).toLowerCase();
+  return sign;
+}
+
+export const getFFpayLink = async (userID, productID, amount) => {
+  const timestamp = Date.now();
+  const data = {
+    'version': '1.0',
+    'mch_id': '999500111',
+    'notify_url': 'https://api.realshort.tv',
+    'mch_order_no': `${userID}-${productID}-${timestamp}`,
+    'pay_type': '1720',
+    'trade_amount': amount.toString(),
+    'order_date': new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+    'goods_name': 'TEST',
+  };
+  const sign = encrypt(data);
+  data['sign_type'] = 'MD5';
+  data['sign'] = sign;
+  const formData = new URLSearchParams(data).toString();
+  const response = await fetch('https://api.ffpays.com/pay/web', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formData,
+  });
+  if (!response.ok) throw new Error('Network response was not ok.');
+  return await response.json();
+};
