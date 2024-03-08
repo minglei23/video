@@ -25,7 +25,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const handleFFpay = async () => {
     try {
       const id = GetUser().ID;
-      const response = await getFFpayLink(id, 1, 10);
+      const response = await getFFpayLink(id, 1, 30000);
       console.log(response)
     } catch (error) {
       console.error('Become VIP:', error);
