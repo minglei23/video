@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment, getFFpayLink, getSpringLink, vipTest } from './service';
+import { createStripePayment, getThPayLink, getInPayLink, getMaPayLink, vipTest } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -22,22 +22,33 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     navigate('/profile')
   };
 
-  const handleFFpay = async () => {
+  const handleInPay = async () => {
     try {
       const id = GetUser().ID;
-      const response = await getFFpayLink(id, 1, 30000);
-      console.log(response)
+      const link = await getInPayLink(id, 1, 30000);
+      window.open(link, '_blank');
     } catch (error) {
       console.error('Become VIP:', error);
     }
     navigate('/profile')
   };
 
-  const handleSpringpay = async () => {
+  const handleThPay = async () => {
     try {
       const id = GetUser().ID;
-      const response = await getSpringLink(id, 1, 100);
-      console.log(response)
+      const link = await getThPayLink(id, 1, 100);
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Become VIP:', error);
+    }
+    navigate('/profile')
+  };
+
+  const handleMaPay = async () => {
+    try {
+      const id = GetUser().ID;
+      const link = await getMaPayLink(id, 1, 100);
+      window.open(link, '_blank');
     } catch (error) {
       console.error('Become VIP:', error);
     }
@@ -119,8 +130,9 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     <Box sx={modalStyle}>
       <h5>{word}</h5>
       <h5>{`$${amount}.00 pay by`}</h5>
-      <Button onClick={handleFFpay} style={buttonStyle}>FF Pay Test</Button>
-      <Button onClick={handleSpringpay} style={buttonStyle}>Spring Pay Test</Button>
+      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay</Button>
+      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay</Button>
+      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay</Button>
       <Button onClick={handleTest} style={buttonStyle}>1 Day VIP Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
