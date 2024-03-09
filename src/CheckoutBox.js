@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment, getCoinsTest } from './service';
+import { createStripePayment, getCoinsTest, getInPayLink, getThPayLink, getMaPayLink } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -12,6 +12,39 @@ const url = "https://dev.realshort.tv/profile"
 
 const CheckoutBox = ({ coins, bonus, price }) => {
   const navigate = useNavigate()
+
+  const handleInPay = async () => {
+    try {
+      const id = GetUser().ID;
+      const link = await getInPayLink(id, 1, 30000);
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Get Coins:', error);
+    }
+    navigate('/profile')
+  };
+
+  const handleThPay = async () => {
+    try {
+      const id = GetUser().ID;
+      const link = await getThPayLink(id, 1, 100);
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Get Coins:', error);
+    }
+    navigate('/profile')
+  };
+
+  const handleMaPay = async () => {
+    try {
+      const id = GetUser().ID;
+      const link = await getMaPayLink(id, 1, 100);
+      window.open(link, '_blank');
+    } catch (error) {
+      console.error('Get Coins:', error);
+    }
+    navigate('/profile')
+  };
 
   const handleTest = async () => {
     try {
@@ -98,6 +131,9 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
       <h5>{`$${price}.00 pay by`}</h5>
+      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay</Button>
+      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay</Button>
+      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay</Button>
       <Button onClick={handleTest} style={buttonStyle}>Get Coins Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
