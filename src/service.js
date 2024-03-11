@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://apidev.realshort.tv';
@@ -321,6 +321,16 @@ export const GetDistribution = async (userID) => {
   }
 };
 
+export const GetPartnerList = async (userID) => {
+  try {
+    const token = GetPaToken();
+    const response = await postRequest(`${BASE_URL}/partner`, { token, userID });
+    return response.PartnerList
+  } catch (error) {
+    handleError(error, 'Get Partner Failed:');
+  }
+};
+
 export const GetIfChecked = async (userID) => {
   try {
     const cached = GetCache("ifChecked");
@@ -356,6 +366,17 @@ export const dilogin = async (email, password) => {
     return data;
   } catch (error) {
     handleError(error, 'DiLogin Failed:');
+  }
+};
+
+export const palogin = async (email, password) => {
+  try {
+    const hashedPassword = md5(password);
+    const data = await postRequest(`${BASE_URL}/pa-login`, { email, password: hashedPassword });
+    SetPaToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'PaLogin Failed:');
   }
 };
 

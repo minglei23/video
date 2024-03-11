@@ -153,7 +153,6 @@ export const SetDistributor = (value) => {
     expiry: now.getTime() + 24 * 60 * 60 * 1000,
   };
   localStorage.setItem("distributor", JSON.stringify(item));
-
 };
 
 export const GetDistributor = () => {
@@ -165,6 +164,29 @@ export const GetDistributor = () => {
   const now = new Date();
   if (now.getTime() > item.expiry) {
     localStorage.removeItem("distributor");
+    return null;
+  }
+  return item.value;
+};
+
+export const SetPartner = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("partner", JSON.stringify(item));
+};
+
+export const GetPartner = () => {
+  const itemStr = localStorage.getItem("partner");
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("partner");
     return null;
   }
   return item.value;
@@ -188,6 +210,29 @@ export const GetDiToken = () => {
   const now = new Date();
   if (now.getTime() > item.expiry) {
     localStorage.removeItem("ditoken");
+    return null;
+  }
+  return item.value;
+};
+
+export const SetPaToken = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("patoken", JSON.stringify(item));
+};
+
+export const GetPaToken = () => {
+  const itemStr = localStorage.getItem("patoken");
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("patoken");
     return null;
   }
   return item.value;

@@ -24,6 +24,7 @@ import './assets/styles/common.css'
 import Referral from './Referral';
 import Language from './Language';
 import Distribution from './Distribution';
+import Partner from './Partner';
 
 const UserContext = createContext();
 
@@ -77,6 +78,7 @@ function App() {
             <Route path="/store" element={<Store />} />
             <Route path="/vip" element={<Vip />} />
             <Route path="/distribution" element={<Distribution />} />
+            <Route path="/partner" element={<Partner />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}
