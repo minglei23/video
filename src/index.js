@@ -86,7 +86,7 @@ function App() {
             <Route path="/distribution" element={<Distribution />} />
             <Route path="/partner" element={<Partner />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
-            <Route path="/partnerreferral/:referralId" element={<PartnerReferralWrapper />} />
+            <Route path="/partner-invite/:referralId" element={<PartnerReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}
         </div>

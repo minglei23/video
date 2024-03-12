@@ -3,11 +3,10 @@ import { Button, Paper, Container, Typography, TextField } from "@mui/material";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { GetPartnerList } from './service';
+import { GetPartnerList, InviteDistributor } from './service';
 import { GetPartner } from './cache';
 import PartnerLogin from './PartnerLogin';
 import PartnerList from './PartnerList.js';
-import QRCode from 'react-qr-code';
 
 const PartnerContext = createContext();
 
@@ -15,7 +14,7 @@ export default function Partner() {
   const [partner, setPartner] = useState(null);
   const [list, setList] = useState([]);
   const [filteredlist, setFilteredlist] = useState([]);
-  const [link, setLink] = useState("");
+  const [email, setEmail] = useState("");
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [amount, setAmount] = useState(0);
@@ -32,7 +31,6 @@ export default function Partner() {
         setPartner(storedPartner);
       }
       if (partner) {
-        setLink(`https://dev.realshort.tv/referral/${partner.ID}`);
         try {
           const l = await GetPartnerList(partner.ID);
           if (l) {
@@ -64,8 +62,15 @@ export default function Partner() {
     setFilteredlist(filtered);
   }, [list, fromDate, toDate]);
 
-  const handleWithdrawClick = (email) => {
-    console.log('Withdraw');
+  const handleClick = async () => {
+    if (email && email.includes('@')) {
+      console.log(email);
+      try {
+        const r = await InviteDistributor(email, partner.ID);
+      } catch (error) {
+        console.error('Error invite distributor:', error);
+      }
+    }
   };
 
   const renderPartner = () => (
@@ -76,13 +81,16 @@ export default function Partner() {
             <Typography variant="h6" component="h2" style={{ textAlign: 'left', fontWeight: 'bold' }}>
               {partner.Email}
             </Typography>
-            <Typography variant="body1" style={{ textAlign: 'left', fontWeight: 'bold' }}>
-              Invitation Link: <span style={{ color: '#26c' }}>{link}</span>
-              <div style={{ margin: '10px' }}>
-                <QRCode value={link} size={64} level={"H"} />
-              </div>
-            </Typography>
-            <Typography variant="body1" style={{ textAlign: 'left' }}>
+            <TextField
+              label="email"
+              type="email"
+              fullWidth
+              margin="normal"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ width: '50%', borderRadius: '6px' }}
+            />
+            <Typography variant="body1" style={{ textAlign: 'left', marginTop: '10px' }}>
               <span style={{ fontWeight: 'bold' }}>Total:</span> <span style={{ color: '#26c' }}>{amount.toFixed(2)}</span>,
               <span style={{ fontWeight: 'bold' }}> Withdraw:</span> <span style={{ color: '#26c' }}>{withdraw.toFixed(2)}</span>,
               <span style={{ fontWeight: 'bold' }}> Balance:</span> <span style={{ color: '#26c' }}>{balance.toFixed(2)}</span>
@@ -91,9 +99,9 @@ export default function Partner() {
           <Button
             variant="contained"
             color="primary"
-            onClick={handleWithdrawClick}
+            onClick={handleClick}
           >
-            Withdraw
+            Invite
           </Button>
         </Paper>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>

@@ -9,8 +9,6 @@ import DistributorLogin from './DistributorLogin';
 import DistributionList from './DistributionList.js';
 import QRCode from 'react-qr-code';
 
-const DistributorContext = createContext();
-
 export default function Distribution() {
   const [distributor, setDistributor] = useState(null);
   const [list, setList] = useState([]);
@@ -22,6 +20,7 @@ export default function Distribution() {
   const [withdraw, setWithdraw] = useState(0);
   const [balance, setBalance] = useState(0);
   const [start, setStart] = useState(null);
+  const [refresh, setRefresh] = useState(0);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
@@ -52,7 +51,7 @@ export default function Distribution() {
       }
     };
     fetchDistribution();
-  }, [distributor, setDistributor]);
+  }, [distributor, setDistributor, refresh, setRefresh]);
 
   useEffect(() => {
     const filtered = list.filter(item => {
@@ -128,12 +127,5 @@ export default function Distribution() {
       </Container>
     </LocalizationProvider>
   );
-
-  return (
-    <DistributorContext.Provider value={{ distributor, setDistributor }}>
-      {distributor ? renderDistribution() : <DistributorLogin />}
-    </DistributorContext.Provider>
-  )
+  return <div>{distributor ? renderDistribution() : <DistributorLogin refresh={refresh} setRefresh={setRefresh}/>}</div>;
 }
-
-export { DistributorContext };

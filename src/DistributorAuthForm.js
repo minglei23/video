@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 import { dilogin, diregister } from './service';
-import { DistributorContext } from './Distribution.js'
 import { SetDistributor } from './cache';
 import { emailWord, loginword, passwordWord, signupWord } from './word.js';
 
-const DistributorAuthForm = ({ isLogin, setError, partner, refresh, setRefesh }) => {
-  const { setDistributor } = useContext(DistributorContext);
+const DistributorAuthForm = ({ isLogin, setError, partner, refresh, setRefresh }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [paypal, setPaypal] = useState('');
@@ -37,9 +35,8 @@ const DistributorAuthForm = ({ isLogin, setError, partner, refresh, setRefesh })
 
     try {
       const distributor = isLogin ? await dilogin(email, password) : await diregister(email, password, paypal, telegram, verification, partner);
-      setDistributor(distributor);
       SetDistributor(distributor);
-      setRefesh(refresh);
+      setRefresh(refresh + 1);
     } catch (error) {
       setError(error.message);
       console.error(isLogin ? 'login failed:' : 'register failed:', error);

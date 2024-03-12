@@ -18,14 +18,14 @@ const PartnerReferral = () => {
     if (storedUser) {
       navigate('/distribution')
     }
-  }, [referralId, refresh]);
+  }, [referralId, refresh, setRefresh]);
 
   return (
     <div style={{ backgroundImage: 'url("/image/login.png")', backgroundSize: 'cover' }}>
       <Container maxWidth="sm" style={{ display: 'flex', flexDirection: 'column', height: '100vh', alignItems: 'center' }}>
         <Box textAlign="center" marginTop={8}>
           <img src="/image/RealShort.png" alt="RealShort" style={{ width: '150px', display: 'block', margin: 'auto' }} />
-          <DistributorAuthForm isLogin={false} setError={setError} partner={referral} refresh={refresh} setRefesh={setRefresh}/>
+          <DistributorAuthForm isLogin={false} setError={setError} partner={referral} refresh={refresh} setRefresh={setRefresh}/>
           {error && (
             <Snackbar
               open={Boolean(error)}

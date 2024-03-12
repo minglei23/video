@@ -321,6 +321,16 @@ export const GetDistribution = async (userID) => {
   }
 };
 
+export const InviteDistributor = async (email, userID) => {
+  try {
+    const token = GetPaToken();
+    const response = await postRequest(`${BASE_URL}/partner-invite`, { email, token, userID });
+    return response.DistributionList
+  } catch (error) {
+    handleError(error, 'Invite Partner Failed:');
+  }
+};
+
 export const GetPartnerList = async (userID) => {
   try {
     const token = GetPaToken();
