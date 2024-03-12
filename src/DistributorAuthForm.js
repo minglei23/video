@@ -5,7 +5,7 @@ import { DistributorContext } from './Distribution.js'
 import { SetDistributor } from './cache';
 import { emailWord, loginword, passwordWord, signupWord } from './word.js';
 
-const DistributorAuthForm = ({ isLogin, setError, partner }) => {
+const DistributorAuthForm = ({ isLogin, setError, partner, refresh, setRefesh }) => {
   const { setDistributor } = useContext(DistributorContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +39,7 @@ const DistributorAuthForm = ({ isLogin, setError, partner }) => {
       const distributor = isLogin ? await dilogin(email, password) : await diregister(email, password, paypal, telegram, verification, partner);
       setDistributor(distributor);
       SetDistributor(distributor);
+      setRefesh(refresh);
     } catch (error) {
       setError(error.message);
       console.error(isLogin ? 'login failed:' : 'register failed:', error);
