@@ -25,6 +25,7 @@ import Referral from './Referral';
 import Language from './Language';
 import Distribution from './Distribution';
 import Partner from './Partner';
+import PartnerReferral from './PartnerReferral';
 
 const UserContext = createContext();
 
@@ -46,6 +47,11 @@ function SeriesWrapper() {
 function ReferralWrapper() {
   let { referralId = 0 } = useParams();
   return <Referral referralId={referralId} />;
+}
+
+function PartnerReferralWrapper() {
+  let { referralId = 0 } = useParams();
+  return <PartnerReferral referralId={referralId} />;
 }
 
 function App() {
@@ -80,6 +86,7 @@ function App() {
             <Route path="/distribution" element={<Distribution />} />
             <Route path="/partner" element={<Partner />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
+            <Route path="/partnerreferral/:referralId" element={<PartnerReferralWrapper />} />
           </Routes>
           {/* <Menu /> */}
         </div>

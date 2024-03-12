@@ -325,7 +325,7 @@ export const GetPartnerList = async (userID) => {
   try {
     const token = GetPaToken();
     const response = await postRequest(`${BASE_URL}/partner`, { token, userID });
-    return response.PartnerList
+    return response.DistributionList
   } catch (error) {
     handleError(error, 'Get Partner Failed:');
   }
@@ -380,10 +380,10 @@ export const palogin = async (email, password) => {
   }
 };
 
-export const diregister = async (email, password, paypal, telegram, verification) => {
+export const diregister = async (email, password, paypal, telegram, verification, partner) => {
   try {
     const hashedPassword = md5(password);
-    const data = await postRequest(`${BASE_URL}/di-register`, { email, password: hashedPassword, paypal, telegram, verification });
+    const data = await postRequest(`${BASE_URL}/di-register`, { email, password: hashedPassword, paypal, telegram, verification, partner });
     SetDiToken(data.Token);
     return data;
   } catch (error) {
