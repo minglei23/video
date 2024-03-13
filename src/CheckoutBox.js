@@ -16,7 +16,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   const handleInPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getInPayLink(id, 1, 30000);
+      const link = await getInPayLink(id, 0, price * 7500);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Get Coins:', error);
@@ -27,7 +27,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   const handleThPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getThPayLink(id, 1, 100);
+      const link = await getThPayLink(id, 0, price * 18);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Get Coins:', error);
@@ -38,7 +38,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   const handleMaPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getMaPayLink(id, 1, 100);
+      const link = await getMaPayLink(id, 0, price * 2.3);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Get Coins:', error);
@@ -49,7 +49,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   const handleTest = async () => {
     try {
       const id = GetUser().ID;
-      const response = await getCoinsTest(id, coins+bonus);
+      const response = await getCoinsTest(id, coins + bonus);
     } catch (error) {
       console.error('Get Coins:', error);
     }
@@ -131,9 +131,9 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
       <h5>{`$${price}.00 pay by`}</h5>
-      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay</Button>
-      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay</Button>
-      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay</Button>
+      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay (${price / 2})</Button>
+      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${price / 2})</Button>
+      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay (${price / 2})</Button>
       <Button onClick={handleTest} style={buttonStyle}>Get Coins Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>

@@ -25,7 +25,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const handleInPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getInPayLink(id, 1, 30000);
+      const link = await getInPayLink(id, day, amount * 7500);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Become VIP:', error);
@@ -36,7 +36,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const handleThPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getThPayLink(id, 1, 100);
+      const link = await getThPayLink(id, day, amount * 18);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Become VIP:', error);
@@ -47,7 +47,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const handleMaPay = async () => {
     try {
       const id = GetUser().ID;
-      const link = await getMaPayLink(id, 1, 100);
+      const link = await getMaPayLink(id, day, amount * 2.3);
       window.open(link, '_blank');
     } catch (error) {
       console.error('Become VIP:', error);
@@ -130,9 +130,9 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     <Box sx={modalStyle}>
       <h5>{word}</h5>
       <h5>{`$${amount}.00 pay by`}</h5>
-      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay</Button>
-      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay</Button>
-      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay</Button>
+      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay (${amount / 2})</Button>
+      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${amount / 2})</Button>
+      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay (${amount / 2})</Button>
       <Button onClick={handleTest} style={buttonStyle}>1 Day VIP Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
       <div id="paypal-button-container"></div>
