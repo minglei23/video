@@ -422,7 +422,7 @@ export const getInPayLink = async (userID, productID, amount) => {
     'mch_id': '200888029',
     'notify_url': 'https://apidev.realshort.tv/in-webhook',
     'mch_order_no': `${userID}-${productID}-${timestamp}`,
-    'pay_type': '223',
+    'pay_type': '203',
     'trade_amount': amount.toString(),
     'order_date': new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
     'goods_name': 'RealShort VIP'
