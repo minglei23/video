@@ -404,7 +404,7 @@ export const diregister = async (email, password, paypal, telegram, verification
 function inEncrypt(data) {
   const sortedKeys = Object.keys(data).sort();
   const queryString = sortedKeys.map(key => `${key}=${data[key]}`).join('&');
-  const stringSignTemp = `${queryString}&key=8d140e6a034a4b09b296aade9cbfa41d`;
+  const stringSignTemp = `${queryString}&key=2bb798dfd8b34978b0f518897de00f8c`;
   const sign = md5(stringSignTemp).toLowerCase();
   return sign;
 }
@@ -419,14 +419,13 @@ export const getInPayLink = async (userID, productID, amount) => {
   const timestamp = Date.now();
   const data = {
     'version': '1.0',
-    'mch_id': '999200111',
+    'mch_id': '200888029',
     'notify_url': 'https://apidev.realshort.tv/in-webhook',
     'mch_order_no': `${userID}-${productID}-${timestamp}`,
     'pay_type': '223',
     'trade_amount': amount.toString(),
     'order_date': new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
-    'goods_name': 'TEST',
-    'bank_code': 'BCA',
+    'goods_name': 'RealShort VIP'
   };
   const sign = inEncrypt(data);
   data['sign_type'] = 'MD5';
@@ -441,6 +440,7 @@ export const getInPayLink = async (userID, productID, amount) => {
   });
   if (!response.ok) throw new Error('Network response was not ok.');
   const responseJson = await response.json();
+  console.log('test', responseJson)
   return responseJson.payInfo
 };
 
@@ -449,7 +449,7 @@ export const getMaPayLink = async (userID, productID, amount) => {
   const data = {
     'merchant_no': `3110017`,
     'timestamp': timestamp,
-    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"TNG","amount":"${amount}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
+    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"TNG","amount":"${Math.floor(amount)}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
   };
   const sign = encrypt(data, "2006b99ba7567f451b1b952146e26f45");
   data['sign_type'] = 'MD5';
@@ -473,7 +473,7 @@ export const getThPayLink = async (userID, productID, amount) => {
   const data = {
     'merchant_no': `130117`,
     'timestamp': timestamp,
-    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"TrueH5","amount":"${amount}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
+    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"ThaiQR","amount":"${Math.floor(amount)}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
   };
   const sign = encrypt(data, "a7670921b7392170b81481b777a0dddf");
   data['sign_type'] = 'MD5';
