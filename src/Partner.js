@@ -15,6 +15,7 @@ export default function Partner() {
   const [list, setList] = useState([]);
   const [filteredlist, setFilteredlist] = useState([]);
   const [email, setEmail] = useState("");
+  const [lastSentEmail, setLastSentEmail] = useState("");
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [amount, setAmount] = useState(0);
@@ -63,8 +64,8 @@ export default function Partner() {
   }, [list, fromDate, toDate]);
 
   const handleClick = async () => {
-    if (email && email.includes('@')) {
-      console.log(email);
+    if (email && email.includes('@') && email !== lastSentEmail) {
+      setLastSentEmail(email);
       try {
         const r = await InviteDistributor(email, partner.ID);
       } catch (error) {
