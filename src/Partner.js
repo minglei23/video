@@ -91,9 +91,13 @@ export default function Partner() {
               style={{ width: '50%', borderRadius: '6px' }}
             />
             <Typography variant="body1" style={{ textAlign: 'left', marginTop: '10px' }}>
-              <span style={{ fontWeight: 'bold' }}>Total:</span> <span style={{ color: '#26c' }}>{amount.toFixed(2)}</span>,
-              <span style={{ fontWeight: 'bold' }}> Withdraw:</span> <span style={{ color: '#26c' }}>{withdraw.toFixed(2)}</span>,
+              <span style={{ fontWeight: 'bold' }}>Total:</span> <span style={{ color: '#26c' }}>{amount.toFixed(2)}</span>
+              <span style={{ fontWeight: 'bold' }}> Withdraw:</span> <span style={{ color: '#26c' }}>{withdraw.toFixed(2)}</span>
               <span style={{ fontWeight: 'bold' }}> Balance:</span> <span style={{ color: '#26c' }}>{balance.toFixed(2)}</span>
+            </Typography>
+            <Typography variant="body1" style={{ textAlign: 'left', marginTop: '10px' }}>
+              <span style={{ fontWeight: 'bold' }}>Your commission:</span> <span style={{ color: '#26c' }}>20% </span>
+              <span style={{ fontWeight: 'bold' }}>Your distrubutor commission:</span> <span style={{ color: '#26c' }}>20%</span>
             </Typography>
           </div>
           <Button

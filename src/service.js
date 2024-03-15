@@ -420,7 +420,7 @@ export const getInPayLink = async (userID, productID, amount) => {
   const data = {
     'version': '1.0',
     'mch_id': '999200111',
-    'notify_url': 'https://api.realshort.tv/in-webhook',
+    'notify_url': 'https://apidev.realshort.tv/in-webhook',
     'mch_order_no': `${userID}-${productID}-${timestamp}`,
     'pay_type': '223',
     'trade_amount': amount.toString(),
