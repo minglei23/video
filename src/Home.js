@@ -6,7 +6,7 @@ import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
-import { action, ancient, billionaires, love, popular, revenge, short, trending } from './word';
+import { SetLanguage, action, ancient, billionaires, love, popular, revenge, short, trending } from './word';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -42,41 +42,59 @@ export default function Home() {
   };
 
   const setLanguage = async () => {
-    let language = localStorage.getItem("language");
-    if (!language) {
-      const countryCode = await getCountryCodeFromIP() || "EN";
-      switch (countryCode) {
-        case "CN":
-        case "TW":
-        case "HK":
-          language = "CN";
-          break;
-        case "VN":
-          language = "VN";
-          break;
-        case "TH":
-          language = "TH";
-          break;
-        case "PH":
-          language = "TL";
-          break;
-        case "AE":
-          language = "AE";
-          break;
-        case "ID":
-          language = "ID";
-          break;
-        case "MY":
-          language = "MS";
-          break;
-        case "CA":
-          language = "CN";
-          break;
-        default:
-          language = "EN";
+    const getCookie = (name) => {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
       }
-      localStorage.setItem("language", language);
+      return null;
+    };
+
+    let language = localStorage.getItem("language");
+    if (language) {
+      return
     }
+
+    language = getCookie("language");
+    if (language) {
+      localStorage.setItem("language", language);
+      return
+    }
+    const countryCode = await getCountryCodeFromIP() || "EN";
+    switch (countryCode) {
+      case "CN":
+      case "TW":
+      case "HK":
+        language = "CN";
+        break;
+      case "VN":
+        language = "VN";
+        break;
+      case "TH":
+        language = "TH";
+        break;
+      case "PH":
+        language = "TL";
+        break;
+      case "AE":
+        language = "AE";
+        break;
+      case "ID":
+        language = "ID";
+        break;
+      case "MY":
+        language = "MS";
+        break;
+      case "CA":
+        language = "CN";
+        break;
+      default:
+        language = "EN";
+    }
+    SetLanguage(language);
   };
 
   useEffect(() => {

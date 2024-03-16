@@ -1,6 +1,10 @@
 
 export const SetLanguage = (value) => {
     localStorage.setItem("language", value);
+    const d = new Date();
+    d.setTime(d.getTime() + (365*24*60*60*1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = "language=" + value + ";" + expires + ";path=/";
 };
 
 export const GetLanguage = () => {
@@ -8,6 +12,21 @@ export const GetLanguage = () => {
     if (language) {
         return language;
     }
+    const name = "language=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+            language = c.substring(name.length, c.length);
+            localStorage.setItem("language", language);
+            return language;
+        }
+    }
+    localStorage.setItem("language", "EN");
     return "EN";
 };
 
