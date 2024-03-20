@@ -6,6 +6,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { GetPartnerList, InviteDistributor } from './service';
 import { GetPartner } from './cache';
 import PartnerLogin from './PartnerLogin';
+import EmailModal from './EmailModal';
 import PartnerList from './PartnerList.js';
 
 const PartnerContext = createContext();
@@ -24,6 +25,8 @@ export default function Partner() {
   const [start, setStart] = useState(null);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const [emailSendOpen, setEmailSendOpen] = useState(false);
+  const [emailSend, setEmailSend] = useState("");
 
   useEffect(() => {
     const fetchPartner = async () => {
@@ -64,12 +67,26 @@ export default function Partner() {
   }, [list, fromDate, toDate]);
 
   const handleClick = async () => {
+    setEmailSendOpen(true);
+    setEmailSend("Server is sending the email.");
     if (email && email.includes('@') && email !== lastSentEmail) {
       setLastSentEmail(email);
       try {
-        const r = await InviteDistributor(email, partner.ID);
+        const code = await InviteDistributor(email, partner.ID);
+        if (code == 1) {
+          setEmailSend("Server successfully sent the invitation email!");
+        } else {
+          setEmailSend("Server failed to send the email.");
+        }
       } catch (error) {
         console.error('Error invite distributor:', error);
+        setEmailSend("Server failed to send the email.");
+      }
+    } else {
+      if (email && email.includes('@')) {
+        setEmailSend("Server cannot send the email repeatedly.");
+      } else {
+        setEmailSend("The email address is incorrect.");
       }
     }
   };
@@ -139,6 +156,7 @@ export default function Partner() {
         </div>
         <PartnerList filteredlist={filteredlist} />
       </Container>
+      <EmailModal open={emailSendOpen} onClose={() => setEmailSendOpen(false)} message={emailSend} />
     </LocalizationProvider>
   );
 
