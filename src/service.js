@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken, SetAdminToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://apidev.realshort.tv';
@@ -387,6 +387,16 @@ export const palogin = async (email, password) => {
     return data;
   } catch (error) {
     handleError(error, 'PaLogin Failed:');
+  }
+};
+
+export const adminlogin = async (admin) => {
+  try {
+    const data = await postRequest(`${BASE_URL}/admin-login`, { admin });
+    SetAdminToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'AdminLogin Failed:');
   }
 };
 

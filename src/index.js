@@ -26,6 +26,7 @@ import Language from './Language';
 import Distribution from './Distribution';
 import Partner from './Partner';
 import PartnerReferral from './PartnerReferral';
+import Admin from './Admin';
 
 const UserContext = createContext();
 
@@ -85,6 +86,7 @@ function App() {
             <Route path="/vip" element={<Vip />} />
             <Route path="/distribution" element={<Distribution />} />
             <Route path="/partner" element={<Partner />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/referral/:referralId" element={<ReferralWrapper />} />
             <Route path="/partner-invite/:referralId" element={<PartnerReferralWrapper />} />
           </Routes>

@@ -215,6 +215,29 @@ export const GetDiToken = () => {
   return item.value;
 };
 
+export const SetAdminToken = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("admintoken", JSON.stringify(item));
+};
+
+export const GetAdminToken = () => {
+  const itemStr = localStorage.getItem("admintoken");
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("admintoken");
+    return null;
+  }
+  return item.value;
+};
+
 export const SetPaToken = (value) => {
   const now = new Date();
   const item = {
