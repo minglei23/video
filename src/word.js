@@ -8,7 +8,7 @@ export const SetLanguage = (value) => {
 };
 
 export const GetLanguage = () => {
-    const language = localStorage.getItem("language");
+    var language = localStorage.getItem("language");
     if (language) {
         return language;
     }
@@ -118,6 +118,19 @@ export const action = () => {
         case 'ID': return 'Aksi & Kung Fu';
         case 'MS': return 'Tindakan & Kung Fu';
         default: return 'Action & Kung Fu'
+    }
+}
+
+export const westernDrama = () => {
+    switch (GetLanguage()) {
+        case 'CN': return '西洋戲劇';
+        case 'VN': return 'kịch phương Tây';
+        case 'TH': return 'ละครตะวันตก';
+        case 'TL': return 'Western drama';
+        case 'AE': return 'الدراما الغربية';
+        case 'ID': return 'Drama Barat';
+        case 'MS': return 'Drama Barat';
+        default: return 'Western Drama'
     }
 }
 

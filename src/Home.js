@@ -6,7 +6,7 @@ import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
-import { SetLanguage, action, ancient, billionaires, love, popular, revenge, short, trending } from './word';
+import { SetLanguage, action, ancient, billionaires, love, popular, revenge, short, trending, westernDrama } from './word';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ export default function Home() {
     type7: [],
     type8: [],
     type9: [],
+    type10: [],
   });
 
   const getCountryCodeFromIP = async () => {
@@ -116,7 +117,7 @@ export default function Home() {
   return (
     <div style={{ overflowY: 'auto', backgroundColor: '#101015', color: 'white' }}>
 
-      <Carousel seriesList={seriesByType['type6'].slice(-10)} handleSeriesClick={handleSeriesClick} />
+      <Carousel seriesList={seriesByType['type10']} handleSeriesClick={handleSeriesClick} />
 
       <div style={{
         display: 'flex',
@@ -148,6 +149,9 @@ export default function Home() {
 
       <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{love()}</h3>
       <PopularList seriesList={seriesByType['type9']} handleSeriesClick={handleSeriesClick} />
+
+      <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{westernDrama()}</h3>
+      <PopularList seriesList={seriesByType['type10']} handleSeriesClick={handleSeriesClick} />
 
       <h3 style={{ fontWeight: 'bold', padding: '10px' }}>{short()}</h3>
       <SeriesRows seriesList={[

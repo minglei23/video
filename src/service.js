@@ -62,7 +62,7 @@ const handleError = (error, message) => {
 export const GetSeriesList = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');
-    const seriesByType = { type1: [], type2: [], type3: [], type4: [], type5: [], type6: [], type7: [], type8: [], type9: [] };
+    const seriesByType = { type1: [], type2: [], type3: [], type4: [], type5: [], type6: [], type7: [], type8: [], type9: [], type10: [] };
     if (data.VideoList) {
       data.VideoList.forEach(video => {
         parseVideo(video);
