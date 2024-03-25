@@ -132,7 +132,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
       <h5>{`$${price}.00 pay by`}</h5>
       <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay (${price / 2})</Button>
-      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${price / 2})</Button>
+      {price > 7 && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${price / 2})</Button>}
       <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay (${price / 2})</Button>
       <Button onClick={handleTest} style={buttonStyle}>Get Coins Test</Button>
       <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
