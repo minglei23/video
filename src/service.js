@@ -459,7 +459,7 @@ export const getMaPayLink = async (userID, productID, amount) => {
   const data = {
     'merchant_no': `3110017`,
     'timestamp': timestamp,
-    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"TNG","amount":"${Math.floor(amount)}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
+    'params': `{"merchant_ref":"${userID}-${productID}-${timestamp}","product":"RMQuickPay","amount":"${Math.floor(amount)}","extra":{"user_id":"${userID}"},"extend_params":"${productID}"}`,
   };
   const sign = encrypt(data, "2006b99ba7567f451b1b952146e26f45");
   data['sign_type'] = 'MD5';
