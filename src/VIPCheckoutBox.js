@@ -26,7 +26,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     try {
       const id = GetUser().ID;
       const link = await getInPayLink(id, day, amount * 7500);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Become VIP:', error);
     }
@@ -37,7 +37,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     try {
       const id = GetUser().ID;
       const link = await getThPayLink(id, day, amount * 18);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Become VIP:', error);
     }
@@ -48,7 +48,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     try {
       const id = GetUser().ID;
       const link = await getMaPayLink(id, day, amount * 2.3);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Become VIP:', error);
     }

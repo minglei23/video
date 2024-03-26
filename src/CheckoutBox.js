@@ -17,7 +17,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     try {
       const id = GetUser().ID;
       const link = await getInPayLink(id, 0, price * 7500);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Get Coins:', error);
     }
@@ -28,7 +28,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     try {
       const id = GetUser().ID;
       const link = await getThPayLink(id, 0, price * 18);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Get Coins:', error);
     }
@@ -39,7 +39,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     try {
       const id = GetUser().ID;
       const link = await getMaPayLink(id, 0, price * 2.3);
-      window.open(link, '_blank');
+      window.open(link, '_self');
     } catch (error) {
       console.error('Get Coins:', error);
     }
