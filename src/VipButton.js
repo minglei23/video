@@ -40,7 +40,7 @@ const VipButton = ({ click, words }) => {
           }}
         >
           <h3 style={{ margin: '0', color: '#fff' }}>
-            1 Coins
+            25 Coins
           </h3>
         </div>
       </Button>

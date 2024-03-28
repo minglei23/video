@@ -85,8 +85,8 @@ const VipEpisodeModal = ({ videoId, episode, open, onClose, bottom = 0 }) => {
         <h5 style={{ margin: '3px 20px' }}>
           Balance: {points} Coins
         </h5>
-        {points < 2 && <VipButton click={getCoins} words={'Get More Coins'} />}
-        {points >= 2 && <VipButton click={unlock} words={'Buy this Episode'} />}
+        {points < 25 && <VipButton click={getCoins} words={'Get More Coins'} />}
+        {points >= 25 && <VipButton click={unlock} words={'Buy this Episode'} />}
       </Box>
     </Modal>
   );
