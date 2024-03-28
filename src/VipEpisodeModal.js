@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { Modal, Box, Button } from '@mui/material';
 import VipButton from './VipButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -8,40 +8,42 @@ import { GetEpisode, GetUser, SetEpisode } from "./cache";
 import { GetPoints, unlockEpisode } from './service.js';
 
 const VipEpisodeModal = ({ videoId, episode, open, onClose, bottom = 0 }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [points, setPoints] = useState(0);
+  const [reload, setReload] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
-      const user = GetUser()
+      const user = GetUser();
       if (user) {
         const point = await GetPoints(user.ID);
-        setPoints(point.Points)
+        setPoints(point.Points);
       }
     };
 
     loadData();
-  }, []);
+  }, [reload]);
 
   const getCoins = () => {
-    navigate('/profile')
-  }
+    navigate('/profile');
+  };
 
   const unlock = async () => {
-    const user = GetUser()
+    const user = GetUser();
     if (user) {
       try {
-        const response = await unlockEpisode(user.ID, videoId, episode)
-        const list = GetEpisode(videoId) || []
-        const newList = [...list, episode]
-        SetEpisode(videoId, newList)
-        navigate(`/player/${videoId}/${episode}`)
-        onClose()
+        await unlockEpisode(user.ID, videoId, episode);
+        const list = GetEpisode(videoId) || [];
+        const newList = [...list, episode];
+        SetEpisode(videoId, newList);
+        setReload(!reload);
+        navigate(`/player/${videoId}/${episode}`);
+        onClose();
       } catch (error) {
         console.error('Error Unlock:', error);
       }
     }
-  }
+  };
 
   return (
     <Modal
@@ -72,7 +74,7 @@ const VipEpisodeModal = ({ videoId, episode, open, onClose, bottom = 0 }) => {
           color: '#fff',
         }}
           onClick={() => {
-            navigate('/store')
+            navigate('/store');
           }}
         >
           <CoinIcon style={{ color: '#fa0', width: '20px', marginRight: '5px' }} />
