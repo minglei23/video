@@ -39,6 +39,7 @@ export const languageName = (type) => {
         case 'AE': return 'عربي';
         case 'ID': return 'bahasa Indonesia';
         case 'MS': return 'മലേഷ്യൻ';
+        case 'ES': return 'español';
         default: return 'English'
     }
 }
