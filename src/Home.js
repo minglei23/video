@@ -89,9 +89,6 @@ export default function Home() {
       case "MY":
         language = "MS";
         break;
-      case "CA":
-        language = "CN";
-        break;
       default:
         language = "EN";
     }

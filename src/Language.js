@@ -14,6 +14,7 @@ const Language = () => {
     "عربي": "AE",
     "bahasa Indonesia": "ID",
     "മലേഷ്യൻ": "MS",
+    "español": "ES",
   }
 
   const handleOnBack = () => {

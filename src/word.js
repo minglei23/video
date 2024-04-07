@@ -53,6 +53,7 @@ export const trending = () => {
         case 'AE': return 'قائمة البث';
         case 'ID': return 'Daftar siaran panas';
         case 'MS': return 'Senarai siaran panas';
+        case 'ES': return 'Tendencia';
         default: return 'Trending'
     }
 }
@@ -66,6 +67,7 @@ export const popular = () => {
         case 'AE': return 'محبوب';
         case 'ID': return 'Popular';
         case 'MS': return 'Popular';
+        case 'ES': return 'Querido';
         default: return 'Popular'
     }
 }
@@ -79,6 +81,7 @@ export const revenge = () => {
         case 'AE': return 'الانتقام و الهجوم المضاد';
         case 'ID': return 'Balas dendam dan Kontratak';
         case 'MS': return 'Balas dendam dan lawan';
+        case 'ES': return 'Venganza y contraataque';
         default: return 'Revenge & Counterattack'
     }
 }
@@ -92,6 +95,7 @@ export const ancient = () => {
         case 'AE': return 'قديم';
         case 'ID': return 'Masa Lama';
         case 'MS': return 'Masa Lama';
+        case 'ES': return 'Antiguo';
         default: return 'Ancient Times'
     }
 }
@@ -105,6 +109,7 @@ export const billionaires = () => {
         case 'AE': return 'الملياردير و قطب';
         case 'ID': return 'Billionaire & Tycoons';
         case 'MS': return 'Billioner & Tycoons';
+        case 'ES': return 'Multimillonarios y magnates';
         default: return 'Billionaires & Tycoons'
     }
 }
@@ -118,6 +123,7 @@ export const action = () => {
         case 'AE': return 'العمل مع الكونغ فو';
         case 'ID': return 'Aksi & Kung Fu';
         case 'MS': return 'Tindakan & Kung Fu';
+        case 'ES': return 'Acción y kung fu';
         default: return 'Action & Kung Fu'
     }
 }
@@ -131,6 +137,7 @@ export const westernDrama = () => {
         case 'AE': return 'الدراما الغربية';
         case 'ID': return 'Drama Barat';
         case 'MS': return 'Drama Barat';
+        case 'ES': return 'Western Drama';
         default: return 'Western Drama'
     }
 }
@@ -144,6 +151,7 @@ export const love = () => {
         case 'AE': return 'الحب والأسرة';
         case 'ID': return 'Cinta & Keluarga';
         case 'MS': return 'Cinta & Keluarga';
+        case 'ES': return 'Amor y familia';
         default: return 'Love & Family'
     }
 }
@@ -157,6 +165,7 @@ export const short = () => {
         case 'AE': return 'سلسلة قصيرة';
         case 'ID': return 'Seri pendek';
         case 'MS': return 'Seri pendek';
+        case 'ES': return 'Serie corta';
         default: return 'Short Series'
     }
 }
@@ -170,6 +179,7 @@ export const home = () => {
         case 'AE': return 'الصفحة الرئيسية';
         case 'ID': return 'halaman rumah';
         case 'MS': return 'halaman rumah';
+        case 'ES': return 'Casa';
         default: return 'home'
     }
 }
@@ -183,6 +193,7 @@ export const recommend = () => {
         case 'AE': return 'التوصية';
         case 'ID': return 'merekomendasikan';
         case 'MS': return 'sarankan';
+        case 'ES': return 'Recomendación';
         default: return 'recommend'
     }
 }
@@ -196,6 +207,7 @@ export const profile = () => {
         case 'AE': return 'البيانات الشخصية';
         case 'ID': return 'data pribadi';
         case 'MS': return 'data peribadi';
+        case 'ES': return 'Silueta';
         default: return 'profile'
     }
 }
@@ -209,6 +221,7 @@ export const search = () => {
         case 'AE': return '    بحث .';
         case 'ID': return '    Cari';
         case 'MS': return '    Cari';
+        case 'ES': return '    Buscar';
         default: return '    search'
     }
 }
@@ -222,6 +235,7 @@ export const subtitles = () => {
         case 'AE': return 'ترجمات';
         case 'ID': return 'subtitle';
         case 'MS': return 'Subtajuk';
+        case 'ES': return 'Subtítulos';
         default: return 'Subtitles'
     }
 }
@@ -235,6 +249,7 @@ export const loginword = () => {
         case 'AE': return 'سجل';
         case 'ID': return 'Login';
         case 'MS': return 'Login';
+        case 'ES': return 'Iniciar sesión';
         default: return 'Login'
     }
 }
@@ -248,6 +263,7 @@ export const emailWord = () => {
         case 'AE': return 'البريد الإلكتروني';
         case 'ID': return 'email';
         case 'MS': return 'email';
+        case 'ES': return 'Correo electrónico';
         default: return 'email'
     }
 }
@@ -261,6 +277,7 @@ export const enteremail = () => {
         case 'AE': return 'أدخل عنوان البريد الإلكتروني';
         case 'ID': return 'masukkan alamat email';
         case 'MS': return 'masukkan alamat e-mel';
+        case 'ES': return 'Introduzca la dirección de correo electrónico';
         default: return 'enter an email address'
     }
 }
@@ -274,6 +291,7 @@ export const passwordWord = () => {
         case 'AE': return 'كلمة السر';
         case 'ID': return 'sandi';
         case 'MS': return 'Katalaluan';
+        case 'ES': return 'Palabras clave';
         default: return 'password'
     }
 }
@@ -287,6 +305,7 @@ export const gotologin = () => {
         case 'AE': return 'الذهاب إلى تسجيل الدخول';
         case 'ID': return 'pergi ke login';
         case 'MS': return 'pergi ke log masuk';
+        case 'ES': return 'Ir a iniciar sesión';
         default: return 'go to login'
     }
 }
@@ -300,6 +319,7 @@ export const gotosignup = () => {
         case 'AE': return 'الذهاب للتسجيل';
         case 'ID': return 'pergi untuk mendaftar';
         case 'MS': return 'pergi untuk mendaftar';
+        case 'ES': return 'Ir a registrarse';
         default: return 'go to sign up'
     }
 }
@@ -313,6 +333,7 @@ export const orcontinuewith = () => {
         case 'AE': return 'طرق أخرى لتسجيل الدخول';
         case 'ID': return 'Metode daftar masuk lainnya';
         case 'MS': return 'Kaedah log masuk lain';
+        case 'ES': return 'O continuar';
         default: return 'or continue with'
     }
 }
@@ -326,6 +347,7 @@ export const signupWord = () => {
         case 'AE': return 'التسجيل';
         case 'ID': return 'Tandatangan';
         case 'MS': return 'Tandatangan';
+        case 'ES': return 'Registro';
         default: return 'Sign Up'
     }
 }
@@ -339,6 +361,7 @@ export const getcoins = () => {
         case 'AE': return 'الحصول على العملة';
         case 'ID': return 'mendapatkan koin';
         case 'MS': return 'dapatkan koin';
+        case 'ES': return 'Obtener monedas';
         default: return 'get coins'
     }
 }
@@ -352,6 +375,7 @@ export const history = () => {
         case 'AE': return 'تاريخ';
         case 'ID': return 'sejarah';
         case 'MS': return 'sejarah';
+        case 'ES': return 'Historia';
         default: return 'History'
     }
 }
@@ -365,6 +389,7 @@ export const favorites = () => {
         case 'AE': return 'المفضلة';
         case 'ID': return 'Kegemaran saya';
         case 'MS': return 'Kegemaran saya';
+        case 'ES': return 'Colección';
         default: return 'Favorites'
     }
 }
@@ -378,6 +403,7 @@ export const help = () => {
         case 'AE': return 'ساعد';
         case 'ID': return 'Bantuan';
         case 'MS': return 'Bantuan';
+        case 'ES': return 'Ayudar';
         default: return 'Help'
     }
 }
@@ -391,6 +417,7 @@ export const language = () => {
         case 'AE': return 'لغة';
         case 'ID': return 'Bahasa';
         case 'MS': return 'ഭാഷ';
+        case 'ES': return 'Language';
         default: return 'Language'
     }
 }
@@ -404,6 +431,7 @@ export const become = () => {
         case 'AE': return 'تصبح VIP';
         case 'ID': return 'Menjadi VIP';
         case 'MS': return 'VIP ആകുക';
+        case 'ES': return 'Become VIP';
         default: return 'Become VIP'
     }
 }
@@ -417,6 +445,7 @@ export const signout = () => {
         case 'AE': return 'سحب';
         case 'ID': return 'tanda keluar';
         case 'MS': return 'tandatangan keluar';
+        case 'ES': return 'Salida';
         default: return 'Sign Out'
     }
 }
@@ -430,6 +459,7 @@ export const dailybonus = () => {
         case 'AE': return 'مكافأة يومية';
         case 'ID': return 'bonus harian';
         case 'MS': return 'bonus sehari';
+        case 'ES': return 'Bonificación diaria';
         default: return 'daily bonus'
     }
 }
@@ -443,6 +473,7 @@ export const topup = () => {
         case 'AE': return 'شحن';
         case 'ID': return 'Isi ulang';
         case 'MS': return 'Muat Semula';
+        case 'ES': return 'Llenar';
         default: return 'top up'
     }
 }
@@ -456,6 +487,7 @@ export const recharge = () => {
         case 'AE': return 'شحن';
         case 'ID': return 'Isi ulang';
         case 'MS': return 'Muat Semula';
+        case 'ES': return 'Carga';
         default: return 'recharge'
     }
 }
@@ -469,6 +501,7 @@ export const coins = () => {
         case 'AE': return 'عملة معدنية';
         case 'ID': return 'koin';
         case 'MS': return 'koin';
+        case 'ES': return 'Monedas';
         default: return 'coins'
     }
 }
@@ -482,6 +515,7 @@ export const bonus = () => {
         case 'AE': return 'مكافأة';
         case 'ID': return 'bonus';
         case 'MS': return 'bonus';
+        case 'ES': return 'Bonificación';
         default: return 'bonus'
     }
 }
@@ -495,6 +529,7 @@ export const payby = () => {
         case 'AE': return 'طريقة الدفع';
         case 'ID': return 'bayar oleh';
         case 'MS': return 'bayar dengan';
+        case 'ES': return 'Método de pago';
         default: return 'pay by'
     }
 }
@@ -508,19 +543,21 @@ export const termsofservice = () => {
         case 'AE': return 'شروط الخدمة';
         case 'ID': return 'istilah layanan';
         case 'MS': return 'terma perkhidmatan';
+        case 'ES': return 'Cláusulas de servicio';
         default: return 'terms of service'
     }
 }
 
 export const privacypolicy = () => {
     switch (GetLanguage()) {
-        case 'CN': return '隱私政策';
+        case 'CN': return 'Política de privacidad';
         case 'VN': return 'Chính sách bảo mật';
         case 'TH': return 'นโยบายความเป็นส่วนตัว';
         case 'TL': return 'patakaran ng pribado';
         case 'AE': return 'سياسة الخصوصية';
         case 'ID': return 'kebijakan privasi';
         case 'MS': return 'polisi privasi';
+        case 'ES': return 'Popular';
         default: return 'privacy policy'
     }
 }
@@ -534,6 +571,7 @@ export const share = () => {
         case 'AE': return 'يشارك';
         case 'ID': return 'Membagikan';
         case 'MS': return 'anjara';
+        case 'ES': return 'Comunión';
         default: return 'Share'
     }
 }
@@ -547,6 +585,7 @@ export const collect = () => {
         case 'AE': return 'يجمع';
         case 'ID': return 'Mengumpulkan';
         case 'MS': return 'manangona';
+        case 'ES': return 'Recogida';
         default: return 'Collect'
     }
 }
@@ -560,6 +599,7 @@ export const seriesInfo = () => {
         case 'AE': return 'مسلسل';
         case 'ID': return 'Seri';
         case 'MS': return 'andian-tantara';
+        case 'ES': return 'Serie dramática';
         default: return 'Series'
     }
 }
