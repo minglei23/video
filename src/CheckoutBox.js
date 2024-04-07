@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment, getCoinsTest, getInPayLink, getThPayLink, getMaPayLink } from './service';
+import { createStripePayment, getCoinsTest, getInPayLink, getThPayLink, getMaPayLink, getCountryCodeFromIP } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -12,6 +12,7 @@ const url = "https://dev.realshort.tv/profile"
 
 const CheckoutBox = ({ coins, bonus, price }) => {
   const navigate = useNavigate()
+  const [country, setCountry] = useState("");
 
   const handleInPay = async () => {
     try {
@@ -46,15 +47,18 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     navigate('/profile')
   };
 
-  const handleTest = async () => {
-    try {
-      const id = GetUser().ID;
-      const response = await getCoinsTest(id, coins + bonus);
-    } catch (error) {
-      console.error('Get Coins:', error);
-    }
-    navigate('/profile')
-  };
+  useEffect(() => {
+    const getCountry = async () => {
+      try {
+        const countryCode = await getCountryCodeFromIP() || "EN";
+        console.log(countryCode)
+        setCountry(countryCode);
+      } catch (error) {
+        console.error('Error get country:', error);
+      }
+    };
+    getCountry();
+  }, []);
 
   const handleStripeCheckout = async () => {
     try {
@@ -130,13 +134,13 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
-      <h5>{`$${price}.00 pay by`}</h5>
-      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay (${price / 2})</Button>
-      {price > 7 && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${price / 2})</Button>}
-      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay (${price / 2})</Button>
-      <Button onClick={handleTest} style={buttonStyle}>Get Coins Test</Button>
-      <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
-      <div id="paypal-button-container"></div>
+      {country !== "ID" && country !== "MY" && country !== "TH" && <h5>{`$${price}.00 pay by`}</h5>}
+      {(country === "ID" || country === "MY" || country === "TH") && <h5>{`$${price / 2} pay by`}</h5>}
+      {country === "ID" && <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay </Button>}
+      {price > 7 && country === "MY" && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay </Button>}
+      {country === "TH" && <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay </Button>}
+      {country !== "ID" && country !== "MY" && country !== "TH" && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
+      {country !== "ID" && country !== "MY" && country !== "TH" && <div id="paypal-button-container"></div>}
     </Box>
   );
 };

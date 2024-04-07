@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { loadStripe } from '@stripe/stripe-js';
-import { createStripePayment, getThPayLink, getInPayLink, getMaPayLink, vipTest } from './service';
+import { createStripePayment, getThPayLink, getInPayLink, getMaPayLink, vipTest, getCountryCodeFromIP } from './service';
 import { GetUser } from './cache';
 
 // Test public key
@@ -11,6 +11,7 @@ const url = "https://dev.realshort.tv/profile"
 
 const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const navigate = useNavigate()
+  const [country, setCountry] = useState("");
 
   const handleTest = async () => {
     try {
@@ -73,6 +74,18 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   };
 
   useEffect(() => {
+    const getCountry = async () => {
+      try {
+        const countryCode = await getCountryCodeFromIP() || "EN";
+        setCountry(countryCode);
+      } catch (error) {
+        console.error('Error get country:', error);
+      }
+    };
+    getCountry();
+  }, []);
+
+  useEffect(() => {
     window.paypal.Buttons({
       createOrder: (data, actions) => {
         return actions.order.create({
@@ -129,13 +142,13 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{word}</h5>
-      <h5>{`$${amount}.00 pay by`}</h5>
-      <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay (${amount / 2})</Button>
-      <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay (${amount / 2})</Button>
-      <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay (${amount / 2})</Button>
-      <Button onClick={handleTest} style={buttonStyle}>1 Day VIP Test</Button>
-      <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>
-      <div id="paypal-button-container"></div>
+      {country !== "ID" && country !== "MY" && country !== "TH" && <h5>{`$${amount}.00 pay by`}</h5>}
+      {(country === "ID" || country === "MY" || country === "TH") && <h5>{`$${amount / 2} pay by`}</h5>}
+      {country === "ID" && <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay </Button>}
+      {country === "MY" && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay </Button>}
+      {country === "TH" && <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay </Button>}
+      {country !== "ID" && country !== "MY" && country !== "TH" && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
+      {country !== "ID" && country !== "MY" && country !== "TH" && <div id="paypal-button-container"></div>}
     </Box>
   );
 };

@@ -59,6 +59,24 @@ const handleError = (error, message) => {
   throw error;
 };
 
+export const getCountryCodeFromIP = async () => {
+  try {
+    const response = await fetch('https://api.ip.sb/geoip', {
+      headers: {
+        'Accept': 'application/json',
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.country_code;
+  } catch (error) {
+    console.error('Error fetching user country code:', error);
+    return null;
+  }
+};
+
 export const GetSeriesList = async () => {
   try {
     const data = await fetchDataWithCache(`${BASE_URL}/video-list`, 'seriesListCache');

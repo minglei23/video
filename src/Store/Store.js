@@ -1,9 +1,10 @@
 // import { Typography } from '@mui/material';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 // import { Swiper, SwiperSlide } from "swiper/react";
 import { Modal } from "@mui/material";
 import CheckoutBox from "../CheckoutBox";
+import { getCountryCodeFromIP } from '../service';
 import "swiper/css";
 
 import NavBar from "../components/NavBar";
@@ -18,6 +19,7 @@ import { bonus, coins, recharge } from "../word";
 
 const Store = () => {
   const navigate = useNavigate();
+  const [country, setCountry] = useState("");
   const [rechargeType] = useState([
     {
       id: 1,
@@ -69,6 +71,18 @@ const Store = () => {
     bonus: 0,
     price: 0,
   });
+
+  useEffect(() => {
+    const getCountry = async () => {
+      try {
+        const countryCode = await getCountryCodeFromIP() || "EN";
+        setCountry(countryCode);
+      } catch (error) {
+        console.error('Error get country:', error);
+      }
+    };
+    getCountry();
+  }, []);
 
   const handleOnBack = () => {
     navigate('/profile')
@@ -269,7 +283,8 @@ const Store = () => {
                     )}
                   </div>
                   <div className="recharge-item-bottom">
-                    {`US $${item.amount}.00`}
+                    {country !== "ID" && country !== "MY" && country !== "TH" && `US $${item.amount}.00`}
+                    {(country === "ID" || country === "MY" || country === "TH") && `US $${item.amount/2}`}
                   </div>
                 </div>
               );

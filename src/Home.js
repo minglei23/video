@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetSeriesList } from './service';
+import { GetSeriesList, getCountryCodeFromIP } from './service';
 import { GetHistory } from './cache';
 import Carousel from './Carousel';
 import SeriesRows from './SeriesRows';
@@ -23,24 +23,6 @@ export default function Home() {
     type9: [],
     type10: [],
   });
-
-  const getCountryCodeFromIP = async () => {
-    try {
-      const response = await fetch('https://api.ip.sb/geoip', {
-        headers: {
-          'Accept': 'application/json',
-        }
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
-      return data.country_code;
-    } catch (error) {
-      console.error('Error fetching user country code:', error);
-      return null;
-    }
-  };
 
   const setLanguage = async () => {
     const getCookie = (name) => {

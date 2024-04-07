@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "@mui/material";
 import VIPCheckoutBox from "../VIPCheckoutBox";
+import { getCountryCodeFromIP } from '../service';
 import "swiper/css";
 
 import NavBar from "../components/NavBar";
@@ -10,6 +11,7 @@ import StoreFoot from "./StoreFoot";
 
 const Vip = () => {
   const navigate = useNavigate();
+  const [country, setCountry] = useState("");
   const [rechargeType] = useState([
     {
       product: "price_1OdRalLvs8YNyX8skej1FWVd",
@@ -40,6 +42,18 @@ const Vip = () => {
       save: 75,
     }
   ]);
+
+  useEffect(() => {
+    const getCountry = async () => {
+      try {
+        const countryCode = await getCountryCodeFromIP() || "EN";
+        setCountry(countryCode);
+      } catch (error) {
+        console.error('Error get country:', error);
+      }
+    };
+    getCountry();
+  }, []);
 
   const [visible, setVisible] = useState(false);
   const [buyInfo, setBuyInfo] = useState({
@@ -97,7 +111,8 @@ const Vip = () => {
                     </div>
                   </div>
                   <div className="recharge-item-bottom">
-                    {`US $${item.amount}.00`}
+                    {country !== "ID" && country !== "MY" && country !== "TH" && `US $${item.amount}.00`}
+                    {(country === "ID" || country === "MY" || country === "TH") && `US $${item.amount/2}`}
                   </div>
                 </div>
               );
