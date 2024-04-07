@@ -429,6 +429,17 @@ export const diregister = async (email, password, paypal, telegram, verification
   }
 };
 
+export const paregister = async (email, password, paypal, telegram) => {
+  try {
+    const hashedPassword = md5(password);
+    const data = await postRequest(`${BASE_URL}/pa-register`, { email, password: hashedPassword, paypal, telegram, verification: 'testtesttest' });
+    SetPaToken(data.Token);
+    return data;
+  } catch (error) {
+    handleError(error, 'PaRegister Failed:');
+  }
+};
+
 function inEncrypt(data) {
   const sortedKeys = Object.keys(data).sort();
   const queryString = sortedKeys.map(key => `${key}=${data[key]}`).join('&');
