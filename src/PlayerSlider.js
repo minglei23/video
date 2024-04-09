@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Slider from '@mui/material/Slider';
 import { useTheme } from '@mui/material/styles';
 
-const PlayerSlider = ({ currentTime = 0, allTime = 0, onChangeTime, bottom = '4rem', backgroundColor = 'rgba(0,0,0,0.4)', subtitles = [] }) => {
+const PlayerSlider = ({
+  currentTime = 0, allTime = 0, onChangeTime,
+  bottom = '4rem', backgroundColor = 'rgba(0,0,0,0.4)',
+  subtitles = [], subtitleBackgroundColor = 'rgba(64,64,64,0.9)' // 新增字幕背景颜色参数
+}) => {
   const theme = useTheme();
   const duration = 100; // seconds
   const [position, setPosition] = useState(0);
@@ -23,7 +27,6 @@ const PlayerSlider = ({ currentTime = 0, allTime = 0, onChangeTime, bottom = '4r
 
   // Effect to set the current subtitle
   useEffect(() => {
-    // Find and set the subtitle for the current time
     const subtitle = subtitles.find(s => currentTime >= s.start && currentTime <= s.end);
     setCurrentSubtitle(subtitle ? subtitle.text : '');
   }, [currentTime, subtitles]);
@@ -70,7 +73,7 @@ const PlayerSlider = ({ currentTime = 0, allTime = 0, onChangeTime, bottom = '4r
         }}
       />
       <span style={{ width: '4rem', color: '#fff', fontSize: '0.8rem', textAlign: 'right' }}>{convertSecondsToTime(allTime)}</span>
-      {currentSubtitle && <div style={{ position: 'absolute', bottom: '6rem', width: '100%', textAlign: 'center', color: 'white', fontSize: '1.2rem' }}>
+      {currentSubtitle && <div style={{ position: 'absolute', bottom: '6rem', width: '100%', textAlign: 'center', color: 'white', fontSize: '1.2rem', backgroundColor: subtitleBackgroundColor, padding: '10px', borderRadius: '4px' }}>
         {currentSubtitle}
       </div>}
     </div>
