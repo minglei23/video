@@ -2,7 +2,7 @@ import md5 from 'js-md5';
 import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken, SetAdminToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
-const BASE_URL = 'https://api.realshort.tv';
+const BASE_URL = 'https://apidev.realshort.tv';
 
 const parseVideo = (video) => {
   const language = GetLanguage();
@@ -459,7 +459,7 @@ export const getInPayLink = async (userID, productID, amount) => {
   const data = {
     'version': '1.0',
     'mch_id': '200888029',
-    'notify_url': 'https://api.realshort.tv/in-webhook',
+    'notify_url': 'https://apidev.realshort.tv/in-webhook',
     'mch_order_no': `${userID}-${productID}-${timestamp}`,
     'pay_type': '203',
     'trade_amount': amount.toString(),

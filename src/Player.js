@@ -89,7 +89,7 @@ const Player = () => {
         const tempVttList = (series.Subtitle || []).map((item) => {
           return {
             ...item,
-            url: `${series.BaseURL}/${item.Type}/${episode}.vtt`,
+            url: `${series.BaseURL}/${item.Type}/`,
           };
         })
         setVttList([{ Type: '', Name: 'No Subtitles', url: '' }, ...tempVttList])
@@ -117,17 +117,25 @@ const Player = () => {
   };
 
   useEffect(() => {
-    setVttType('')
-    setSubtitles([])
-    const paidEpisode = GetEpisode(parseInt(seriesId))
+    setVttType('');
+    setSubtitles([]);
+    const paidEpisode = GetEpisode(parseInt(seriesId));
     if (paidEpisode) {
-      setPaid(paidEpisode)
+      setPaid(paidEpisode);
     }
-    const user = GetUser()
+    const user = GetUser();
+    const savedSubtitleType = localStorage.getItem("selectedSubtitleType");  // 从 localStorage 中获取保存的字幕类型
+    if (savedSubtitleType) {
+      setVttType(savedSubtitleType);  // 设置保存的字幕类型
+    }
     if (parseInt(episode) <= 5 || (user && user.VIP) || (paidEpisode && paidEpisode.includes(parseInt(episode)))) {
-      fetchVideo();
+      fetchVideo().then(() => {
+        if (savedSubtitleType) {
+          handleSubtitlesChange({ target: { value: savedSubtitleType } });  // 自动应用保存的字幕设置
+        }
+      });
     } else {
-      navigate(`/player/${seriesId}/1`);;
+      navigate(`/player/${seriesId}/1`);
     }
   }, [seriesId, episode, navigate, fetchVideo]);
 
@@ -177,11 +185,13 @@ const Player = () => {
 
   const handleSubtitlesChange = async (e) => {
     let value = e.target.value;
-    setVttType(value);
+    setVttType(value)
+    localStorage.setItem("selectedSubtitleType", value);
     const vtt = vttList.find(item => item.Type === value)
+    setSubtitles([]);
     if (vtt) {
       try {
-        const vttUrl = vtt.url;
+        const vttUrl = vtt.url + `${episode}.vtt`;
         const response = await fetch(vttUrl);
         const vttText = await response.text();
         const parsedSubtitles = parseVTT(vttText);
