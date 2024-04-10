@@ -13,6 +13,7 @@ const url = "https://dev.realshort.tv/profile"
 const CheckoutBox = ({ coins, bonus, price }) => {
   const navigate = useNavigate()
   const [country, setCountry] = useState("");
+  const [half, setHalf] = useState("0");
 
   const handleInPay = async () => {
     try {
@@ -51,7 +52,9 @@ const CheckoutBox = ({ coins, bonus, price }) => {
     const getCountry = async () => {
       try {
         const countryCode = await getCountryCodeFromIP() || "EN";
-        console.log(countryCode)
+        if (countryCode === "ID" || countryCode === "MY" || countryCode === "TH") {
+          setHalf("1");
+        }
         setCountry(countryCode);
       } catch (error) {
         console.error('Error get country:', error);
@@ -85,7 +88,7 @@ const CheckoutBox = ({ coins, bonus, price }) => {
             amount: {
               value: price
             },
-            custom_id: `${GetUser().ID}+0`
+            custom_id: `${GetUser().ID}+0+${half}`
           }],
           application_context: {
             return_url: url,
@@ -134,13 +137,13 @@ const CheckoutBox = ({ coins, bonus, price }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{`${coins} coins + ${bonus} bonus`}</h5>
-      {country !== "ID" && country !== "MY" && country !== "TH" && <h5>{`$${price}.00 pay by`}</h5>}
-      {(country === "ID" || country === "MY" || country === "TH") && <h5>{`$${price / 2} pay by`}</h5>}
+      {!half && <h5>{`$${price}.00 pay by`}</h5>}
+      {half && <h5>{`$${price / 2} pay by`}</h5>}
       {country === "ID" && <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay </Button>}
       {price > 7 && country === "MY" && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay </Button>}
       {country === "TH" && <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay </Button>}
-      {country !== "ID" && country !== "MY" && country !== "TH" && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
-      {country !== "ID" && country !== "MY" && country !== "TH" && <div id="paypal-button-container"></div>}
+      {!half && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
+      <div id="paypal-button-container"></div>
     </Box>
   );
 };

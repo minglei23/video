@@ -12,6 +12,7 @@ const url = "https://dev.realshort.tv/profile"
 const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const navigate = useNavigate()
   const [country, setCountry] = useState("");
+  const [half, setHalf] = useState("0");
 
   const handleTest = async () => {
     try {
@@ -77,6 +78,9 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
     const getCountry = async () => {
       try {
         const countryCode = await getCountryCodeFromIP() || "EN";
+        if (countryCode === "ID" || countryCode === "MY" || countryCode === "TH") {
+          setHalf("1");
+        }
         setCountry(countryCode);
       } catch (error) {
         console.error('Error get country:', error);
@@ -93,7 +97,7 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
             amount: {
               value: amount
             },
-            custom_id: `${GetUser().ID}+${day}`
+            custom_id: `${GetUser().ID}+${day}+${half}`
           }],
           application_context: {
             return_url: url,
@@ -142,13 +146,13 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{word}</h5>
-      {country !== "ID" && country !== "MY" && country !== "TH" && <h5>{`$${amount}.00 pay by`}</h5>}
-      {(country === "ID" || country === "MY" || country === "TH") && <h5>{`$${amount / 2} pay by`}</h5>}
+      {!half && <h5>{`$${amount}.00 pay by`}</h5>}
+      {half && <h5>{`$${amount / 2} pay by`}</h5>}
       {country === "ID" && <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay </Button>}
       {country === "MY" && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay </Button>}
       {country === "TH" && <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay </Button>}
-      {country !== "ID" && country !== "MY" && country !== "TH" && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
-      {country !== "ID" && country !== "MY" && country !== "TH" && <div id="paypal-button-container"></div>}
+      {!half && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
+      <div id="paypal-button-container"></div>
     </Box>
   );
 };
