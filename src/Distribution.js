@@ -31,7 +31,7 @@ export default function Distribution() {
         setDistributor(storedDistributor);
       }
       if (distributor) {
-        setLink(`https://dev.realshort.tv/referral/${distributor.ID}`);
+        setLink(`https://realshort.tv/referral/${distributor.ID}`);
         try {
           const l = await GetDistribution(distributor.ID);
           if (l) {

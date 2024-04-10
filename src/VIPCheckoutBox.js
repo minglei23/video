@@ -7,7 +7,7 @@ import { GetUser } from './cache';
 
 // Test public key
 const stripePromise = loadStripe("pk_live_51OFXw4Lvs8YNyX8sfVvnRljrcKEH6Mn9iDlZk9hbby4dAdNxCet4rjqIkJku2nQ6KHydOXluv1qTWyhHDPb2LJh100FDkMQqVf");
-const url = "https://dev.realshort.tv/profile"
+const url = "https://realshort.tv/profile"
 
 const VIPCheckoutBox = ({ product, amount, day, word }) => {
   const navigate = useNavigate()
@@ -146,12 +146,12 @@ const VIPCheckoutBox = ({ product, amount, day, word }) => {
   return (
     <Box sx={modalStyle}>
       <h5>{word}</h5>
-      {!half && <h5>{`$${amount}.00 pay by`}</h5>}
-      {half && <h5>{`$${amount / 2} pay by`}</h5>}
+      {half === "0" && <h5>{`$${amount}.00 pay by`}</h5>}
+      {half === "1" && <h5>{`$${amount / 2} pay by`}</h5>}
       {country === "ID" && <Button onClick={handleInPay} style={buttonStyle}>Indonesia Pay </Button>}
       {country === "MY" && <Button onClick={handleMaPay} style={buttonStyle}>Malaysia Pay </Button>}
       {country === "TH" && <Button onClick={handleThPay} style={buttonStyle}>Thailand Pay </Button>}
-      {!half && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
+      {half === "0" && <Button onClick={handleStripeCheckout} style={buttonStyle}>Stripe</Button>}
       <div id="paypal-button-container"></div>
     </Box>
   );
