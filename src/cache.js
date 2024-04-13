@@ -192,6 +192,29 @@ export const GetPartner = () => {
   return item.value;
 };
 
+export const SetAdmin = (value) => {
+  const now = new Date();
+  const item = {
+    value: value,
+    expiry: now.getTime() + 24 * 60 * 60 * 1000,
+  };
+  localStorage.setItem("admin", JSON.stringify(item));
+};
+
+export const GetAdmin = () => {
+  const itemStr = localStorage.getItem("admin");
+  if (!itemStr) {
+    return null;
+  }
+  const item = JSON.parse(itemStr);
+  const now = new Date();
+  if (now.getTime() > item.expiry) {
+    localStorage.removeItem("admin");
+    return null;
+  }
+  return item.value;
+};
+
 export const SetDiToken = (value) => {
   const now = new Date();
   const item = {

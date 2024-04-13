@@ -1,5 +1,5 @@
 import md5 from 'js-md5';
-import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken, SetAdminToken } from './cache';
+import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken, SetAdminToken, GetAdminToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
 const BASE_URL = 'https://apidev.realshort.tv';
@@ -349,6 +349,16 @@ export const InviteDistributor = async (email, userID) => {
   }
 };
 
+export const InvitePartner = async (email) => {
+  try {
+    const token = GetAdminToken();
+    const response = await postRequest(`${BASE_URL}/admin-invite-partner`, { email, token });
+    return response.Code
+  } catch (error) {
+    handleError(error, 'Invite Partner Failed:');
+  }
+};
+
 export const GetPartnerList = async (userID) => {
   try {
     const token = GetPaToken();
@@ -408,9 +418,9 @@ export const palogin = async (email, password) => {
   }
 };
 
-export const adminlogin = async (admin) => {
+export const adminlogin = async (user, admin) => {
   try {
-    const data = await postRequest(`${BASE_URL}/admin-login`, { admin });
+    const data = await postRequest(`${BASE_URL}/admin-login`, { user, admin });
     SetAdminToken(data.Token);
     return data;
   } catch (error) {
