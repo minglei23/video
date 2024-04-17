@@ -33,3 +33,24 @@ export function timeStringToSeconds(timeString) {
   const seconds = parseFloat(parts[2].replace(',', '.'));
   return (hours * 3600) + (minutes * 60) + seconds;
 }
+
+export function encodeID(id) {
+  let result = '';
+  while (id > 0) {
+    let charCode = 65 + (id % 26);
+    result = String.fromCharCode(charCode) + result;
+    id = Math.floor(id / 26);
+  }
+  while (result.length < 4) {
+    result = 'A' + result;
+  }
+  return result;
+};
+
+export function decodeID(encoded) {
+  let id = 0;
+  for (let i = 0; i < encoded.length; i++) {
+    id = id * 26 + (encoded.charCodeAt(i) - 65);
+  }
+  return id;
+};

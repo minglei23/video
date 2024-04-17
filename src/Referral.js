@@ -6,6 +6,7 @@ import LoginGoogle from './LoginGoogle';
 import LoginFacebook from './LoginFacebook';
 import { UserContext } from './index.js';
 import { GetUser } from './cache';
+import { decodeID } from './vtt.js';
 
 const Referral = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Referral = () => {
   const [referral, setReferral] = useState(0);
 
   useEffect(() => {
-    setReferral(parseInt(referralId))
+    setReferral(decodeID(referralId))
     const storedUser = GetUser();
     if (user || storedUser) {
       navigate('/profile')

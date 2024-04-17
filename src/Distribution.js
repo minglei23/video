@@ -8,6 +8,7 @@ import { GetDistributor } from './cache';
 import DistributorLogin from './DistributorLogin';
 import DistributionList from './DistributionList.js';
 import QRCode from 'react-qr-code';
+import { encodeID } from './vtt.js';
 
 export default function Distribution() {
   const [distributor, setDistributor] = useState(null);
@@ -31,7 +32,7 @@ export default function Distribution() {
         setDistributor(storedDistributor);
       }
       if (distributor) {
-        setLink(`https://dev.realshort.tv/referral/${distributor.ID}`);
+        setLink(`https://dev.realshort.tv/referral/${encodeID(distributor.ID)}`);
         try {
           const l = await GetDistribution(distributor.ID);
           if (l) {
