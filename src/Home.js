@@ -7,6 +7,7 @@ import SeriesRows from './SeriesRows';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import { SetLanguage, action, ancient, billionaires, love, popular, revenge, short, trending, westernDrama } from './word';
+import PromotionIcon from './PromotionIcon';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -98,13 +99,15 @@ export default function Home() {
 
       <Carousel seriesList={seriesByType['type10']} handleSeriesClick={handleSeriesClick} />
 
+      <PromotionIcon />
+
       <div style={{
         display: 'flex',
         alignItems: 'center',
         backgroundImage: `linear-gradient(rgba(16, 16, 21, 0) 0%, #101015 100%), url("/image/popular.png")`,
         backgroundSize: 'cover',
         padding: '10px',
-        marginTop: '10px'
+        marginTop: '7px'
       }}>
         <img src="/image/cup.png" style={{ maxHeight: '17px', paddingLeft: '5px' }} />
         <h3 style={{ fontWeight: 'bold', margin: '0 10px' }}>{trending()}</h3>
