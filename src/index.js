@@ -28,6 +28,7 @@ import Partner from './Partner';
 import PartnerReferral from './PartnerReferral';
 import Admin from './Admin';
 import PartnerRegister from './PartnerRegister';
+import Promotion from './Store/Promotion';
 
 const UserContext = createContext();
 
@@ -85,6 +86,7 @@ function App() {
             <Route path="/series/:seriesId" element={<SeriesWrapper />} />
             <Route path="/store" element={<Store />} />
             <Route path="/vip" element={<Vip />} />
+            <Route path="/promotion" element={<Promotion />} />
             <Route path="/distribution" element={<Distribution />} />
             <Route path="/partner" element={<Partner />} />
             <Route path="/admin" element={<Admin />} />
