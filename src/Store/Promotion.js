@@ -21,25 +21,25 @@ const Promotion = () => {
       save: 25,
     },
     {
-      product: "price_1OdRbPLvs8YNyX8sf5u3XhBx",
-      amount: 32,
+      product: "price_1P71KuLvs8YNyX8se56ZcXhY",
+      amount: 23,
       day: 31,
       word: "1 Month VIP",
-      save: 50,
+      save: 65,
     },
     {
-      product: "price_1OdRbvLvs8YNyX8sYz5h1QXH",
-      amount: 75,
+      product: "price_1P71LcLvs8YNyX8s0cAeYyx8",
+      amount: 45,
       day: 93,
       word: "3 Month VIP",
-      save: 60,
+      save: 75,
     },
     {
-      product: "price_1OdRcNLvs8YNyX8sCTLZBMXD",
-      amount: 96,
+      product: "price_1P71MHLvs8YNyX8s30SqRrIa",
+      amount: 48,
       day: 186,
       word: "6 Month VIP",
-      save: 75,
+      save: 88,
     }
   ]);
 
