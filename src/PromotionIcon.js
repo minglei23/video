@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { GetUser } from './cache';
 
 export default function PromotionIcon() {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpen(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handlePromotionClick = () => {
     handleClose();
-    navigate(`/promotion`);
+    const storedUser = GetUser();
+    if (storedUser) {
+      navigate(`/promotion`);
+    } else {
+      navigate(`/profile`);
+    }
   };
 
   const style = {
@@ -25,7 +37,8 @@ export default function PromotionIcon() {
     bgcolor: 'transparent',
     border: 'none',
     boxShadow: 0,
-    p: 4
+    p: 4,
+    outline: 'none',
   };
 
   return (
