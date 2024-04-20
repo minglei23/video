@@ -8,6 +8,7 @@ import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import { SetLanguage, action, ancient, billionaires, love, popular, revenge, short, trending, westernDrama } from './word';
 import PromotionIcon from './PromotionIcon';
+import CheckIcon from './CheckIcon';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -100,6 +101,7 @@ export default function Home() {
       <Carousel seriesList={seriesByType['type10']} handleSeriesClick={handleSeriesClick} />
 
       <PromotionIcon />
+      <CheckIcon />
 
       <div style={{
         display: 'flex',
