@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { GetUser } from './cache';
 import { dailybonus } from './word';
+import { Checkin, GetIfChecked } from './service';
 
 export default function CheckIcon() {
   const navigate = useNavigate();
@@ -15,17 +16,33 @@ export default function CheckIcon() {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setOpen(true);
-    }, 1000);
-    return () => clearTimeout(timer);
+    let isMounted = true;
+    const checkUserStatus = async () => {
+      const storedUser = GetUser();
+      if (storedUser) {
+        const checked = await GetIfChecked(storedUser.ID);
+        if (!checked && isMounted) {
+          setOpen(true);
+        }
+      } else {
+        if (isMounted) {
+          setOpen(true);
+        }
+      }
+    };
+    const timer = setTimeout(checkUserStatus, 1000);
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
   }, []);
 
-  const handlePromotionClick = () => {
+  const handlePromotionClick = async () => {
     handleClose();
     const storedUser = GetUser();
     if (storedUser) {
-      navigate(`/promotion`);
+      await Checkin(storedUser.ID)
+      navigate(`/profile`);
     } else {
       navigate(`/profile`);
     }
