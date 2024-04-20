@@ -86,6 +86,20 @@ export default function CheckIcon() {
             >
               Check in today!
             </Button>
+            <div style={{
+              position: 'absolute',
+              top: 25,
+              left: 50,
+              backgroundColor: '#f35',
+              color: 'white',
+              padding: '3px 6px',
+              fontSize: '12px',
+              fontWeight: 'bold',
+              zIndex: 100,
+              borderRadius: '5px'
+            }}>
+              Get 10 Free Coins
+            </div>
           </div>
         </Box>
       </Modal>

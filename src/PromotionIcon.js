@@ -16,7 +16,7 @@ export default function PromotionIcon() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setOpen(true);
-    }, 1000);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
