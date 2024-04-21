@@ -5,8 +5,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import { GetUser } from './cache';
-import { dailybonus } from './word';
 import { Checkin, GetIfChecked } from './service';
 
 export default function CheckIcon() {
@@ -30,7 +30,7 @@ export default function CheckIcon() {
         }
       }
     };
-    const timer = setTimeout(checkUserStatus, 1000);
+    const timer = setTimeout(checkUserStatus, 510);
     return () => {
       isMounted = false;
       clearTimeout(timer);
@@ -95,7 +95,10 @@ export default function CheckIcon() {
             }}
             onClick={handlePromotionClick}
           >
-            <h1 style={{ margin: '10px', fontWeight: 'bold', fontSize: '18px', color: 'white' }}>Get 10 Free Coins</h1>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <MonetizationOnIcon style={{ color: '#fa7' }} />
+              <h1 style={{ margin: '10px', fontWeight: 'bold', fontSize: '18px', color: 'white' }}>Get 10 Free Coins</h1>
+            </div>
             <Button
               variant="outlined"
               onClick={handlePromotionClick}
