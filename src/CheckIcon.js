@@ -95,7 +95,7 @@ export default function CheckIcon() {
             }}
             onClick={handlePromotionClick}
           >
-            <h1 style={{ margin: '10px', fontWeight: 'bold', fontSize: '18px', color: 'white' }}>{dailybonus()}</h1>
+            <h1 style={{ margin: '10px', fontWeight: 'bold', fontSize: '18px', color: 'white' }}>Get 10 Free Coins</h1>
             <Button
               variant="outlined"
               onClick={handlePromotionClick}
@@ -109,13 +109,13 @@ export default function CheckIcon() {
               left: 50,
               backgroundColor: '#f35',
               color: 'white',
-              padding: '3px 6px',
-              fontSize: '12px',
+              padding: '3px 9px',
+              fontSize: '14px',
               fontWeight: 'bold',
               zIndex: 100,
               borderRadius: '5px'
             }}>
-              Get 10 Free Coins
+              Daily Bonus
             </div>
           </div>
         </Box>
