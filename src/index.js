@@ -33,8 +33,8 @@ import Promotion from './Store/Promotion';
 const UserContext = createContext();
 
 function PlayerWrapper() {
-  let { seriesId = 0, episode = 0 } = useParams();
-  return <Player seriesId={seriesId} episode={episode} />;
+  let { seriesId = 0, episode = 0, referralId = "n" } = useParams();
+  return <Player seriesId={seriesId} episode={episode} referralId={referralId} />;
 }
 
 function SearchWrapper() {
@@ -70,6 +70,7 @@ function App() {
               <Route path="/recommend" element={<Recommend />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
+            <Route path="/player/:seriesId/:episode/:referralId" element={<PlayerWrapper />} />
             <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />
             <Route path="/player/:seriesId" element={<PlayerWrapper />} />
             <Route path="/player" element={<PlayerWrapper />} />

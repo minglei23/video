@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Typography, Container, Box, Grid, Snackbar } from '@mui/material';
 import AuthForm from './AuthForm';
 import LoginGoogle from './LoginGoogle';
 import LoginFacebook from './LoginFacebook';
 import { gotologin, gotosignup, orcontinuewith } from './word';
+import { decodeID } from './vtt';
 
 const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);
   const [error, setError] = useState('');
 
-  const referral = 0;
+  const [referral, setReferral] = useState(0);
 
   const toggleView = () => {
     setIsLoginView(!isLoginView);
     setError('');
   };
+
+  useEffect(() => {
+    const storedReferral = localStorage.getItem("referral");
+    if (storedReferral) {
+      setReferral(decodeID(storedReferral))
+    }
+  }, []);
 
   return (
     <div style={{ backgroundImage: 'url("/image/login.png")', backgroundSize: 'cover' }}>

@@ -15,7 +15,7 @@ import SubtitlesModal from "./SubtitlesModal.js";
 
 const Player = () => {
   const navigate = useNavigate();
-  const { seriesId, episode } = useParams();
+  const { seriesId, episode, referralId } = useParams();
   const [url, setUrl] = useState("");
   const [video, setVideo] = useState(null);
   const [totalEpisodes, setTotalEpisodes] = useState(0);
@@ -117,6 +117,9 @@ const Player = () => {
   };
 
   useEffect(() => {
+    if (referralId != "n") {
+      localStorage.setItem("referral", referralId);
+    }
     setVttType('');
     setSubtitles([]);
     const paidEpisode = GetEpisode(parseInt(seriesId));
