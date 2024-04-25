@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { Button, Paper, Container, Typography, TextField } from "@mui/material";
+import { Button, Paper, Container, Typography, TextField, Box } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { GetHistoryList, GetUserList, InvitePartner } from './service';
@@ -61,7 +61,7 @@ export default function Admin() {
     }
   };
 
-  const handleHisotryClick = async () => {
+  const handleHistoryClick = async () => {
     const histories = await GetHistoryList();
     if (histories) {
       setHistoryList(histories)
@@ -94,6 +94,14 @@ export default function Admin() {
             Invite
           </Button>
         </Paper>
+        <Box display="flex" justifyContent="space-between" marginTop="20px">
+          <Button variant="contained" onClick={handleUserClick}>
+            User List
+          </Button>
+          <Button variant="contained" onClick={handleHistoryClick}>
+            History List
+          </Button>
+        </Box>
       </Container>
       <EmailModal open={emailSendOpen} onClose={() => setEmailSendOpen(false)} message={emailSend} />
     </LocalizationProvider>
