@@ -359,6 +359,26 @@ export const InvitePartner = async (email) => {
   }
 };
 
+export const GetUserList = async () => {
+  try {
+    const token = GetAdminToken();
+    const response = await postRequest(`${BASE_URL}/admin-get-user`, { token });
+    return response.UserList
+  } catch (error) {
+    handleError(error, 'GetUserList:');
+  }
+};
+
+export const GetHistoryList = async () => {
+  try {
+    const token = GetAdminToken();
+    const response = await postRequest(`${BASE_URL}/admin-get-history`, { token });
+    return response.HistoryList
+  } catch (error) {
+    handleError(error, 'GetHistoryList:');
+  }
+};
+
 export const GetPartnerList = async (userID) => {
   try {
     const token = GetPaToken();

@@ -2,7 +2,7 @@ import React, { useState, createContext, useEffect } from 'react';
 import { Button, Paper, Container, Typography, TextField } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { InvitePartner } from './service';
+import { GetHistoryList, GetUserList, InvitePartner } from './service';
 import { GetAdmin } from './cache';
 import AdminLogin from './AdminLogin';
 import EmailModal from './EmailModal';
@@ -15,6 +15,9 @@ export default function Admin() {
   const [lastSentEmail, setLastSentEmail] = useState("");
   const [emailSendOpen, setEmailSendOpen] = useState(false);
   const [emailSend, setEmailSend] = useState("");
+
+  const [userList, setUserList] = useState([]);
+  const [historyList, setHistoryList] = useState([]);
 
   useEffect(() => {
     const fetchAdmin = async () => {
@@ -48,6 +51,20 @@ export default function Admin() {
       } else {
         setEmailSend("The email address is incorrect.");
       }
+    }
+  };
+
+  const handleUserClick = async () => {
+    const users = await GetUserList();
+    if (users) {
+      setUserList(users)
+    }
+  };
+
+  const handleHisotryClick = async () => {
+    const histories = await GetHistoryList();
+    if (histories) {
+      setHistoryList(histories)
     }
   };
 
