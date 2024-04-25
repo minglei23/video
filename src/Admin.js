@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import { Button, Paper, Container, Typography, TextField, Box } from "@mui/material";
+import { Button, Paper, Container, Typography, TextField, Box, List, ListItem } from "@mui/material";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { GetHistoryList, GetUserList, InvitePartner } from './service';
@@ -57,14 +57,16 @@ export default function Admin() {
   const handleUserClick = async () => {
     const users = await GetUserList();
     if (users) {
-      setUserList(users)
+      setUserList(users);
+      setHistoryList([]);
     }
   };
 
   const handleHistoryClick = async () => {
     const histories = await GetHistoryList();
     if (histories) {
-      setHistoryList(histories)
+      setHistoryList(histories);
+      setUserList([]);
     }
   };
 
@@ -102,6 +104,28 @@ export default function Admin() {
             History List
           </Button>
         </Box>
+        {userList.length > 0 && (
+          <List>
+            {userList.map((user, index) => (
+              <ListItem key={index}>
+                <Typography variant="body1" color="textPrimary">
+                  {`${user.Id} ${user.Email} ${user.Points} points`}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        )}
+        {historyList.length > 0 && (
+          <List>
+            {historyList.map((user, index) => (
+              <ListItem key={index}>
+                <Typography variant="body1" color="textPrimary">
+                  {`user:${user.UserId} series:${user.VideoId} episode:${user.Episode} (${user.WatchTime})`}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        )}
       </Container>
       <EmailModal open={emailSendOpen} onClose={() => setEmailSendOpen(false)} message={emailSend} />
     </LocalizationProvider>
