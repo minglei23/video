@@ -32,7 +32,7 @@ export default function Distribution() {
         setDistributor(storedDistributor);
       }
       if (distributor) {
-        setLink(`https://dev.realshort.tv/player/$series/1/${encodeID(distributor.ID)}`);
+        setLink(`https://dev.realshort.vip/player/$series/1/${encodeID(distributor.ID)}`);
         try {
           const l = await GetDistribution(distributor.ID);
           if (l) {
