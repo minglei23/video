@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
+import {useParams} from 'react-router-dom'
 import { Container, List, ListItem, ListItemText } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 // import EmailIcon from '@mui/icons-material/Email';
 import StarIcon from '@mui/icons-material/Star';
 import HistoryIcon from '@mui/icons-material/History';
@@ -14,12 +15,15 @@ import Points from './Points';
 import { UserContext } from './index.js';
 import { GetUser } from './cache';
 import { become, favorites, help, history, language, signout } from './word.js';
-
 const Profile = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
+  const { referralId } = useParams();
 
   useEffect(() => {
+    if (referralId) {
+      localStorage.setItem("referral", referralId)
+    }
     const storedUser = GetUser();
     if (storedUser) {
       setUser(storedUser);
@@ -75,7 +79,7 @@ const Profile = () => {
     </div>
   );
 
-  return <div>{user ? renderUserProfile() : <Login />}</div>;
+  return <div>{user ? renderUserProfile() : <Login referralId={referralId} />}</div>;
 };
 
 export default Profile;

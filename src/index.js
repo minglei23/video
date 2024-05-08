@@ -56,6 +56,10 @@ function PartnerReferralWrapper() {
   let { referralId = 0 } = useParams();
   return <PartnerReferral referralId={referralId} />;
 }
+function ProfileReferralWrapper() {
+  let { referralId = 0 } = useParams();
+  return <Profile referralId={referralId} />;
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -68,7 +72,7 @@ function App() {
               <Route path="/" element={<Navigate to='/home' />} />
               <Route path="/home" element={<Home />} />
               <Route path="/recommend" element={<Recommend />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:referralId" element={<ProfileReferralWrapper />} />
             </Route>
             <Route path="/player/:seriesId/:episode/:referralId" element={<PlayerWrapper />} />
             <Route path="/player/:seriesId/:episode" element={<PlayerWrapper />} />

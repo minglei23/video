@@ -5,6 +5,7 @@ import LoginGoogle from './LoginGoogle';
 import LoginFacebook from './LoginFacebook';
 import { gotologin, gotosignup, orcontinuewith } from './word';
 import { decodeID } from './vtt';
+import { useParams } from 'react-router-dom';
 
 const Login = () => {
   const [isLoginView, setIsLoginView] = useState(true);

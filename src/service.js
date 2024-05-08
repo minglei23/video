@@ -2,7 +2,7 @@ import md5 from 'js-md5';
 import { SetToken, GetToken, SetCache, GetCache, SetFavorites, SetHistory, SetEpisode, SetDiToken, GetDiToken, SetPaToken, GetPaToken, SetAdminToken, GetAdminToken } from './cache';
 import { GetLanguage, languageName } from './word';
 
-const BASE_URL = 'https://apidev.realshort.tv';
+const BASE_URL = 'https://api.realshort.tv';
 
 const parseVideo = (video) => {
   const language = GetLanguage();

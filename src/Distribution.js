@@ -15,6 +15,8 @@ export default function Distribution() {
   const [list, setList] = useState([]);
   const [filteredlist, setFilteredlist] = useState([]);
   const [link, setLink] = useState("");
+  const [link2, setLink2] = useState("");
+
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [amount, setAmount] = useState(0);
@@ -32,7 +34,8 @@ export default function Distribution() {
         setDistributor(storedDistributor);
       }
       if (distributor) {
-        setLink(`https://dev.realshort.vip/player/$series/1/${encodeID(distributor.ID)}`);
+        setLink(`https://realshort.vip/player/$series/1/${encodeID(distributor.ID)}`);
+        setLink2(`https://realshort.vip/profile/${encodeID(distributor.ID)}`);
         try {
           const l = await GetDistribution(distributor.ID);
           if (l) {
@@ -80,6 +83,12 @@ export default function Distribution() {
               Invitation Link: <span style={{ color: '#26c' }}>{link}</span>
               <div style={{ margin: '10px' }}>
                 <QRCode value={link} size={64} level={"H"} />
+              </div>
+            </Typography>
+            <Typography variant="body1" style={{ textAlign: 'left', fontWeight: 'bold' }}>
+              Invitation Link2: <span style={{ color: '#26c' }}>{link2}</span>
+              <div style={{ margin: '10px' }}>
+                <QRCode value={link2} size={64} level={"H"} />
               </div>
             </Typography>
             <Typography variant="body1" style={{ textAlign: 'left' }}>
